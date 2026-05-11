@@ -81,6 +81,42 @@ function AdminBlogList() {
         </button>
       </div>
 
+      <div className="grid gap-3 rounded-xl border bg-card p-4 shadow-sm md:grid-cols-[1fr_auto_auto_auto_auto]">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar por título ou slug…"
+            className="w-full rounded-md border bg-background pl-9 pr-3 py-2 text-sm shadow-sm outline-none focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className={selectCls} aria-label="Filtrar por categoria">
+          <option value="todas">Todas as categorias</option>
+          {BLOG_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+        <select value={status} onChange={(e) => setStatus(e.target.value)} className={selectCls} aria-label="Filtrar por status">
+          <option value="todos">Todos os status</option>
+          <option value="publicado">Publicado</option>
+          <option value="rascunho">Rascunho</option>
+        </select>
+        <select value={featured} onChange={(e) => setFeatured(e.target.value)} className={selectCls} aria-label="Filtrar por destaque">
+          <option value="todos">Todos os destaques</option>
+          <option value="principal">Artigo principal</option>
+          <option value="destaque">Em destaque</option>
+          <option value="sem">Sem destaque</option>
+        </select>
+        <button
+          type="button"
+          onClick={clearFilters}
+          disabled={!hasFilters}
+          className="inline-flex items-center justify-center gap-1 rounded-md border px-3 py-2 text-sm font-medium hover:bg-muted disabled:opacity-50"
+        >
+          <X className="h-4 w-4" /> Limpar
+        </button>
+      </div>
+
       <div className="overflow-hidden rounded-xl border bg-card shadow-sm">
         {loading ? (
           <div className="p-8 text-center text-sm text-muted-foreground">Carregando…</div>
@@ -89,6 +125,10 @@ function AdminBlogList() {
         ) : posts.length === 0 ? (
           <div className="p-8 text-center text-sm text-muted-foreground">
             Nenhum artigo cadastrado. Clique em <strong>Novo artigo</strong> para começar.
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="p-8 text-center text-sm text-muted-foreground">
+            Nenhum artigo encontrado com os filtros atuais.
           </div>
         ) : (
           <table className="w-full text-sm">
@@ -103,7 +143,7 @@ function AdminBlogList() {
               </tr>
             </thead>
             <tbody>
-              {posts.map((p) => (
+              {filtered.map((p) => (
                 <tr key={p.id} className="border-t">
                   <td className="px-4 py-3">
                     <div className="font-medium">{p.title}</div>
