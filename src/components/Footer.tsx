@@ -46,7 +46,7 @@ export function Footer() {
               <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /> São Luís — MA, Brasil</li>
               <li className="flex gap-2"><MessageCircle className="h-4 w-4 mt-0.5 text-primary shrink-0" /> WhatsApp: (98) 0000-0000</li>
               <li><Link to="/contato" className="hover:text-primary">Fale conosco</Link></li>
-              <li><Link to="/trabalhe-conosco" className="hover:text-primary">Trabalhe Conosco</Link></li>
+              <li><a href="https://complexovalen.portaldetalentos.senior.com.br/jobs" target="_blank" rel="noreferrer" className="hover:text-primary">Trabalhe Conosco</a></li>
             </ul>
             <a
               href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA"
