@@ -252,7 +252,7 @@ function BlogPage() {
 
 /* -------------------- Cards -------------------- */
 
-function ArticleCardLarge({ post }: { post: typeof posts[number] }) {
+function ArticleCardLarge({ post }: { post: Post }) {
   return (
     <Link
       to="/blog/$slug"
@@ -284,7 +284,7 @@ function ArticleCardLarge({ post }: { post: typeof posts[number] }) {
   );
 }
 
-function ArticleCardSmall({ post }: { post: typeof posts[number] }) {
+function ArticleCardSmall({ post }: { post: Post }) {
   return (
     <Link
       to="/blog/$slug"
