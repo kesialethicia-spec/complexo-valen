@@ -122,6 +122,46 @@ function OValen() {
           </div>
         </div>
       </section>
+
+      {/* Trabalhe Conosco */}
+      <section className="py-20 bg-surface">
+        <div className="container-valen">
+          <div className="relative overflow-hidden rounded-3xl bg-card border border-border shadow-soft">
+            <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
+            <svg className="absolute inset-0 h-full w-full text-secondary/5" viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden>
+              <path d="M0,250 C200,180 400,320 800,200 L800,400 L0,400 Z" fill="currentColor" />
+            </svg>
+            <div className="relative grid gap-8 md:grid-cols-2 items-center p-8 md:p-14">
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Trabalhe Conosco
+                </span>
+                <h2 className="mt-4 text-3xl md:text-4xl font-display font-extrabold text-secondary text-balance">
+                  Faça parte de um time em movimento
+                </h2>
+                <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
+                  Quer crescer com o Valen? Acesse nossa plataforma de talentos, confira as vagas disponíveis e cadastre seu currículo.
+                </p>
+                <a
+                  href="https://complexovalen.portaldetalentos.senior.com.br/jobs"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-3.5 text-sm md:text-base font-bold text-primary-foreground shadow-glow hover:scale-[1.03] transition-transform"
+                >
+                  Ver vagas e cadastrar currículo <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+              <div className="relative flex justify-center md:justify-end">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="h-56 w-56 md:h-72 md:w-72 rounded-full bg-gradient-orange/20 blur-2xl" />
+                </div>
+                <img src={equipeImg} alt="Equipe Valen uniformizada" className="relative h-56 md:h-72 w-auto object-contain drop-shadow-xl" loading="lazy" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
