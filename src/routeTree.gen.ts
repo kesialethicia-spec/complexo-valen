@@ -27,7 +27,10 @@ import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
 import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
 import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin.blog.index'
+import { Route as AdminPromocoesNovoRouteImport } from './routes/admin.promocoes.novo'
+import { Route as AdminPromocoesIdRouteImport } from './routes/admin.promocoes.$id'
 import { Route as AdminBlogNovoRouteImport } from './routes/admin.blog.novo'
 import { Route as AdminBlogIdRouteImport } from './routes/admin.blog.$id'
 
@@ -122,9 +125,24 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AdminPromocoesIndexRoute = AdminPromocoesIndexRouteImport.update({
+  id: '/promocoes/',
+  path: '/promocoes/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBlogIndexRoute = AdminBlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPromocoesNovoRoute = AdminPromocoesNovoRouteImport.update({
+  id: '/promocoes/novo',
+  path: '/promocoes/novo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPromocoesIdRoute = AdminPromocoesIdRouteImport.update({
+  id: '/promocoes/$id',
+  path: '/promocoes/$id',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminBlogNovoRoute = AdminBlogNovoRouteImport.update({
@@ -159,7 +177,10 @@ export interface FileRoutesByFullPath {
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
+  '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
+  '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
+  '/admin/promocoes/': typeof AdminPromocoesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -181,7 +202,10 @@ export interface FileRoutesByTo {
   '/servicos': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
+  '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
+  '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
   '/admin/blog': typeof AdminBlogIndexRoute
+  '/admin/promocoes': typeof AdminPromocoesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -205,7 +229,10 @@ export interface FileRoutesById {
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
+  '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
+  '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
+  '/admin/promocoes/': typeof AdminPromocoesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -230,7 +257,10 @@ export interface FileRouteTypes {
     | '/servicos/'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
+    | '/admin/promocoes/$id'
+    | '/admin/promocoes/novo'
     | '/admin/blog/'
+    | '/admin/promocoes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -252,7 +282,10 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
+    | '/admin/promocoes/$id'
+    | '/admin/promocoes/novo'
     | '/admin/blog'
+    | '/admin/promocoes'
   id:
     | '__root__'
     | '/'
@@ -275,7 +308,10 @@ export interface FileRouteTypes {
     | '/servicos/'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
+    | '/admin/promocoes/$id'
+    | '/admin/promocoes/novo'
     | '/admin/blog/'
+    | '/admin/promocoes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -425,11 +461,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/admin/promocoes/': {
+      id: '/admin/promocoes/'
+      path: '/promocoes'
+      fullPath: '/admin/promocoes/'
+      preLoaderRoute: typeof AdminPromocoesIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/blog/': {
       id: '/admin/blog/'
       path: '/blog'
       fullPath: '/admin/blog/'
       preLoaderRoute: typeof AdminBlogIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/promocoes/novo': {
+      id: '/admin/promocoes/novo'
+      path: '/promocoes/novo'
+      fullPath: '/admin/promocoes/novo'
+      preLoaderRoute: typeof AdminPromocoesNovoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/promocoes/$id': {
+      id: '/admin/promocoes/$id'
+      path: '/promocoes/$id'
+      fullPath: '/admin/promocoes/$id'
+      preLoaderRoute: typeof AdminPromocoesIdRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/blog/novo': {
@@ -453,14 +510,20 @@ interface AdminRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
   AdminBlogNovoRoute: typeof AdminBlogNovoRoute
+  AdminPromocoesIdRoute: typeof AdminPromocoesIdRoute
+  AdminPromocoesNovoRoute: typeof AdminPromocoesNovoRoute
   AdminBlogIndexRoute: typeof AdminBlogIndexRoute
+  AdminPromocoesIndexRoute: typeof AdminPromocoesIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
   AdminBlogNovoRoute: AdminBlogNovoRoute,
+  AdminPromocoesIdRoute: AdminPromocoesIdRoute,
+  AdminPromocoesNovoRoute: AdminPromocoesNovoRoute,
   AdminBlogIndexRoute: AdminBlogIndexRoute,
+  AdminPromocoesIndexRoute: AdminPromocoesIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
