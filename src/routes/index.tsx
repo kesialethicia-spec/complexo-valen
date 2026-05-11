@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
@@ -11,6 +12,7 @@ import hotelImg from "@/assets/hotel.jpg";
 import foodImg from "@/assets/alimentacao.jpg";
 import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
+import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,6 +25,20 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
+  useEffect(() => {
+    void (async () => {
+      try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
+    })();
+  }, []);
+  const homePromos = useMemo(() => {
+    if (dbPromos.length === 0) return null;
+    return [...dbPromos].sort((a, b) => {
+      const bs = (b.show_on_home ? 2 : 0) + (b.featured ? 1 : 0);
+      const as = (a.show_on_home ? 2 : 0) + (a.featured ? 1 : 0);
+      return bs - as;
+    }).slice(0, 6);
+  }, [dbPromos]);
   return (
     <>
       {/* HERO */}
