@@ -12,11 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as OValenRouteImport } from './routes/o-valen'
 import { Route as LojasRouteImport } from './routes/lojas'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
 import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
@@ -39,6 +42,11 @@ const LojasRoute = LojasRouteImport.update({
   path: '/lojas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExperienciasRoute = ExperienciasRouteImport.update({
   id: '/experiencias',
   path: '/experiencias',
@@ -54,6 +62,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -63,6 +76,11 @@ const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/servicos/',
   path: '/servicos/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
   id: '/servicos/truck-center',
@@ -98,9 +116,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
+  '/login': typeof LoginRoute
   '/lojas': typeof LojasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
@@ -110,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +138,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
+  '/login': typeof LoginRoute
   '/lojas': typeof LojasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
@@ -126,14 +148,17 @@ export interface FileRoutesByTo {
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/admin': typeof AdminIndexRoute
   '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
+  '/login': typeof LoginRoute
   '/lojas': typeof LojasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
@@ -143,15 +168,18 @@ export interface FileRoutesById {
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/blog'
     | '/contato'
     | '/experiencias'
+    | '/login'
     | '/lojas'
     | '/o-valen'
     | '/promocoes'
@@ -161,6 +189,7 @@ export interface FileRouteTypes {
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/admin/'
     | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -168,6 +197,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contato'
     | '/experiencias'
+    | '/login'
     | '/lojas'
     | '/o-valen'
     | '/promocoes'
@@ -177,13 +207,16 @@ export interface FileRouteTypes {
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/admin'
     | '/servicos'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/blog'
     | '/contato'
     | '/experiencias'
+    | '/login'
     | '/lojas'
     | '/o-valen'
     | '/promocoes'
@@ -193,14 +226,17 @@ export interface FileRouteTypes {
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/admin/'
     | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   BlogRoute: typeof BlogRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   ExperienciasRoute: typeof ExperienciasRoute
+  LoginRoute: typeof LoginRoute
   LojasRoute: typeof LojasRoute
   OValenRoute: typeof OValenRoute
   PromocoesRoute: typeof PromocoesRoute
@@ -235,6 +271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LojasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/experiencias': {
       id: '/experiencias'
       path: '/experiencias'
@@ -256,6 +299,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -269,6 +319,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/servicos/'
       preLoaderRoute: typeof ServicosIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/servicos/truck-center': {
       id: '/servicos/truck-center'
@@ -315,6 +372,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
 }
@@ -327,9 +394,11 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   BlogRoute: BlogRouteWithChildren,
   ContatoRoute: ContatoRoute,
   ExperienciasRoute: ExperienciasRoute,
+  LoginRoute: LoginRoute,
   LojasRoute: LojasRoute,
   OValenRoute: OValenRoute,
   PromocoesRoute: PromocoesRoute,
@@ -343,3 +412,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
