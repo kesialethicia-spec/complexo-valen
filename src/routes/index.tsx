@@ -59,7 +59,7 @@ function Home() {
             de <span className="text-primary">movimento</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg md:text-xl text-white/85 leading-relaxed">
-            O Valen acompanha o ritmo de quem vive na estrada, reunindo serviços, conveniência, descanso, negócios e experiências em uma só parada.
+            Mais do que uma parada, o Valen é um ponto de apoio para quem está em movimento. Um complexo completo para caminhoneiros, empresas e pessoas que seguem em rota.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link to="/o-valen" className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold shadow-glow hover:scale-105 transition-transform">
@@ -69,8 +69,8 @@ function Home() {
               <MapPin className="h-4 w-4" /> Como chegar
             </a>
           </div>
-          <p className="mt-10 text-sm font-medium text-white/60">
-            Posto · Truck Center · Alimentação · Hotel · Lojas · Eventos · Estacionamento
+          <p className="mt-10 text-sm font-medium text-white/70">
+            350 mil m² de estrutura · +400 vagas · A 14 km do Porto do Itaqui
           </p>
         </div>
 
@@ -96,7 +96,7 @@ function Home() {
           <SectionHeader
             eyebrow="Sua jornada completa"
             title="Tudo que move sua jornada, em um só lugar"
-            subtitle="Do abastecimento ao descanso, da alimentação aos serviços, o Valen reúne tudo que você precisa para seguir em movimento."
+            subtitle="No Valen, o motorista faz a sua jornada completa. Oferecemos produtos de qualidade, estrutura diferenciada, conforto, segurança e serviços pensados para quem vive em movimento."
           />
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -200,27 +200,30 @@ function Home() {
             subtitle="Um complexo completo para caminhoneiros, empresas, viajantes e todos que vivem em movimento."
             center
           />
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[
-              { title: "Posto de Combustível", img: postoImg, desc: "Diesel S10, S500, gasolina e ARLA com estrutura completa.", to: "/servicos/posto" },
-              { title: "Truck Center", img: truckImg, desc: "Borracharia, peças, manutenção e produtos automotivos.", to: "/servicos/truck-center" },
-              { title: "Valen Porto Hotel", img: hotelImg, desc: "Hospedagem estratégica próxima ao Porto e Distrito Industrial.", to: "/servicos/hotel" },
-              { title: "Alimentação", img: foodImg, desc: "Restaurante, lanchonete, conveniência e café da manhã.", to: "/servicos/alimentacao" },
-              { title: "Estacionamento", img: parkImg, desc: "Pátio organizado, triagem e controle de fluxo.", to: "/servicos" },
-              { title: "Clube do Caminhoneiro", img: festaImg, desc: "Cinema, barbearia, banho, lavanderia e acolhimento.", to: "/servicos/clube-do-caminhoneiro" },
+              { title: "Posto de Combustível", desc: "Abastecimento com confiança e estrutura completa.", to: "/servicos/posto" as const, icon: Fuel },
+              { title: "ValenBen — Super Troca de Óleo", desc: "Troca de óleo especializada para leves e pesados.", to: "/servicos" as const, icon: Wrench },
+              { title: "Valen Center", desc: "Lojas e salas comerciais dentro do complexo.", to: "/lojas" as const, icon: ShoppingBag },
+              { title: "Valen Truck Center", desc: "Manutenção, borracharia e oficinas especializadas.", to: "/servicos/truck-center" as const, icon: Wrench },
+              { title: "ValenLog — Triagem e Estacionamento", desc: "Triagem, pátio e app para organização logística.", to: "/servicos" as const, icon: ParkingSquare },
+              { title: "Classificação de Grãos", desc: "Serviço exclusivo de apoio às operações agrícolas.", to: "/servicos" as const, icon: Sparkles },
+              { title: "Espaço Valentina", desc: "Acolhimento e cuidado para quem passa pelo Valen.", to: "/experiencias" as const, icon: Coffee },
+              { title: "Clube do Caminhoneiro", desc: "Convivência, lazer e bem-estar para o motorista.", to: "/servicos/clube-do-caminhoneiro" as const, icon: Sparkles },
+              { title: "Valen Porto Hotel", desc: "Hospedagem estratégica para descanso e negócios.", to: "/servicos/hotel" as const, icon: Bed },
+              { title: "ValenLub", desc: "Distribuidora de lubrificantes para a estrada.", to: "/servicos" as const, icon: Fuel },
+              { title: "Lotérica Valen", desc: "Serviços financeiros sem sair do complexo.", to: "/lojas" as const, icon: Tag },
+              { title: "Studio Valen", desc: "Conteúdo, comunicação e experiências do Valen.", to: "/blog" as const, icon: Newspaper },
             ].map((c) => (
-              <Link key={c.title} to={c.to} className="group overflow-hidden rounded-3xl border border-border bg-card hover:-translate-y-1 hover:shadow-glow transition-all">
-                <div className="relative h-52 overflow-hidden">
-                  <img src={c.img} alt={c.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent" />
-                  <h3 className="absolute bottom-4 left-5 text-2xl font-display font-extrabold text-white">{c.title}</h3>
+              <Link key={c.title} to={c.to} className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 hover:-translate-y-1 hover:shadow-glow hover:border-primary/40 transition-all flex flex-col">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-orange text-white shadow-glow">
+                  <c.icon className="h-6 w-6" />
                 </div>
-                <div className="p-6">
-                  <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
-                    Ver mais <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
+                <h3 className="mt-5 text-lg font-display font-bold text-secondary leading-snug">{c.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{c.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
+                  Ver mais <ArrowRight className="h-4 w-4" />
+                </span>
               </Link>
             ))}
           </div>
