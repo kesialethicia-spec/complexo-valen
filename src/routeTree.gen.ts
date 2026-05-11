@@ -9,38 +9,261 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrabalheConoscoRouteImport } from './routes/trabalhe-conosco'
+import { Route as PromocoesRouteImport } from './routes/promocoes'
+import { Route as OValenRouteImport } from './routes/o-valen'
+import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as LojasRouteImport } from './routes/lojas'
+import { Route as ExperienciasRouteImport } from './routes/experiencias'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
+import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
+import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
+import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
+import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
+import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
 
+const TrabalheConoscoRoute = TrabalheConoscoRouteImport.update({
+  id: '/trabalhe-conosco',
+  path: '/trabalhe-conosco',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PromocoesRoute = PromocoesRouteImport.update({
+  id: '/promocoes',
+  path: '/promocoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OValenRoute = OValenRouteImport.update({
+  id: '/o-valen',
+  path: '/o-valen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NoticiasRoute = NoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LojasRoute = LojasRouteImport.update({
+  id: '/lojas',
+  path: '/lojas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienciasRoute = ExperienciasRouteImport.update({
+  id: '/experiencias',
+  path: '/experiencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/servicos/',
+  path: '/servicos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
+  id: '/servicos/truck-center',
+  path: '/servicos/truck-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosPostoRoute = ServicosPostoRouteImport.update({
+  id: '/servicos/posto',
+  path: '/servicos/posto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosHotelRoute = ServicosHotelRouteImport.update({
+  id: '/servicos/hotel',
+  path: '/servicos/hotel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosClubeDoCaminhoneiroRoute =
+  ServicosClubeDoCaminhoneiroRouteImport.update({
+    id: '/servicos/clube-do-caminhoneiro',
+    path: '/servicos/clube-do-caminhoneiro',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicosAlimentacaoRoute = ServicosAlimentacaoRouteImport.update({
+  id: '/servicos/alimentacao',
+  path: '/servicos/alimentacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/experiencias': typeof ExperienciasRoute
+  '/lojas': typeof LojasRoute
+  '/noticias': typeof NoticiasRoute
+  '/o-valen': typeof OValenRoute
+  '/promocoes': typeof PromocoesRoute
+  '/trabalhe-conosco': typeof TrabalheConoscoRoute
+  '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
+  '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
+  '/servicos/hotel': typeof ServicosHotelRoute
+  '/servicos/posto': typeof ServicosPostoRoute
+  '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/experiencias': typeof ExperienciasRoute
+  '/lojas': typeof LojasRoute
+  '/noticias': typeof NoticiasRoute
+  '/o-valen': typeof OValenRoute
+  '/promocoes': typeof PromocoesRoute
+  '/trabalhe-conosco': typeof TrabalheConoscoRoute
+  '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
+  '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
+  '/servicos/hotel': typeof ServicosHotelRoute
+  '/servicos/posto': typeof ServicosPostoRoute
+  '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/experiencias': typeof ExperienciasRoute
+  '/lojas': typeof LojasRoute
+  '/noticias': typeof NoticiasRoute
+  '/o-valen': typeof OValenRoute
+  '/promocoes': typeof PromocoesRoute
+  '/trabalhe-conosco': typeof TrabalheConoscoRoute
+  '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
+  '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
+  '/servicos/hotel': typeof ServicosHotelRoute
+  '/servicos/posto': typeof ServicosPostoRoute
+  '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contato'
+    | '/experiencias'
+    | '/lojas'
+    | '/noticias'
+    | '/o-valen'
+    | '/promocoes'
+    | '/trabalhe-conosco'
+    | '/servicos/alimentacao'
+    | '/servicos/clube-do-caminhoneiro'
+    | '/servicos/hotel'
+    | '/servicos/posto'
+    | '/servicos/truck-center'
+    | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contato'
+    | '/experiencias'
+    | '/lojas'
+    | '/noticias'
+    | '/o-valen'
+    | '/promocoes'
+    | '/trabalhe-conosco'
+    | '/servicos/alimentacao'
+    | '/servicos/clube-do-caminhoneiro'
+    | '/servicos/hotel'
+    | '/servicos/posto'
+    | '/servicos/truck-center'
+    | '/servicos'
+  id:
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/experiencias'
+    | '/lojas'
+    | '/noticias'
+    | '/o-valen'
+    | '/promocoes'
+    | '/trabalhe-conosco'
+    | '/servicos/alimentacao'
+    | '/servicos/clube-do-caminhoneiro'
+    | '/servicos/hotel'
+    | '/servicos/posto'
+    | '/servicos/truck-center'
+    | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContatoRoute: typeof ContatoRoute
+  ExperienciasRoute: typeof ExperienciasRoute
+  LojasRoute: typeof LojasRoute
+  NoticiasRoute: typeof NoticiasRoute
+  OValenRoute: typeof OValenRoute
+  PromocoesRoute: typeof PromocoesRoute
+  TrabalheConoscoRoute: typeof TrabalheConoscoRoute
+  ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
+  ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
+  ServicosHotelRoute: typeof ServicosHotelRoute
+  ServicosPostoRoute: typeof ServicosPostoRoute
+  ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
+  ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trabalhe-conosco': {
+      id: '/trabalhe-conosco'
+      path: '/trabalhe-conosco'
+      fullPath: '/trabalhe-conosco'
+      preLoaderRoute: typeof TrabalheConoscoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/promocoes': {
+      id: '/promocoes'
+      path: '/promocoes'
+      fullPath: '/promocoes'
+      preLoaderRoute: typeof PromocoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/o-valen': {
+      id: '/o-valen'
+      path: '/o-valen'
+      fullPath: '/o-valen'
+      preLoaderRoute: typeof OValenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noticias': {
+      id: '/noticias'
+      path: '/noticias'
+      fullPath: '/noticias'
+      preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lojas': {
+      id: '/lojas'
+      path: '/lojas'
+      fullPath: '/lojas'
+      preLoaderRoute: typeof LojasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiencias': {
+      id: '/experiencias'
+      path: '/experiencias'
+      fullPath: '/experiencias'
+      preLoaderRoute: typeof ExperienciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +271,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/servicos'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/truck-center': {
+      id: '/servicos/truck-center'
+      path: '/servicos/truck-center'
+      fullPath: '/servicos/truck-center'
+      preLoaderRoute: typeof ServicosTruckCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/posto': {
+      id: '/servicos/posto'
+      path: '/servicos/posto'
+      fullPath: '/servicos/posto'
+      preLoaderRoute: typeof ServicosPostoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/hotel': {
+      id: '/servicos/hotel'
+      path: '/servicos/hotel'
+      fullPath: '/servicos/hotel'
+      preLoaderRoute: typeof ServicosHotelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/clube-do-caminhoneiro': {
+      id: '/servicos/clube-do-caminhoneiro'
+      path: '/servicos/clube-do-caminhoneiro'
+      fullPath: '/servicos/clube-do-caminhoneiro'
+      preLoaderRoute: typeof ServicosClubeDoCaminhoneiroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/alimentacao': {
+      id: '/servicos/alimentacao'
+      path: '/servicos/alimentacao'
+      fullPath: '/servicos/alimentacao'
+      preLoaderRoute: typeof ServicosAlimentacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContatoRoute: ContatoRoute,
+  ExperienciasRoute: ExperienciasRoute,
+  LojasRoute: LojasRoute,
+  NoticiasRoute: NoticiasRoute,
+  OValenRoute: OValenRoute,
+  PromocoesRoute: PromocoesRoute,
+  TrabalheConoscoRoute: TrabalheConoscoRoute,
+  ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
+  ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
+  ServicosHotelRoute: ServicosHotelRoute,
+  ServicosPostoRoute: ServicosPostoRoute,
+  ServicosTruckCenterRoute: ServicosTruckCenterRoute,
+  ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
