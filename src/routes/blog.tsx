@@ -1,9 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, Clock, ArrowRight, Play, Smartphone, Mail, MapPin } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
-import { posts, categories, videos, blogPromotions, banners } from "@/data/blog";
+import { posts as fallbackPosts, categories, videos, blogPromotions, banners, type Post } from "@/data/blog";
+import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
+
+function adaptRow(row: BlogPostRow): Post {
+  return {
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt,
+    category: row.category as Post["category"],
+    cover: row.cover_url || fallbackPosts[0].cover,
+    author: row.author,
+    publishedAt: formatPublishedDate(row.published_at),
+    readingTime: row.reading_time,
+    featured: row.featured,
+    mainFeatured: row.main_featured,
+    tags: row.tags,
+    metaTitle: row.meta_title ?? undefined,
+    metaDescription: row.meta_description ?? undefined,
+    content: row.content,
+  };
+}
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -27,6 +47,21 @@ export const Route = createFileRoute("/blog")({
 function BlogPage() {
   const [query, setQuery] = useState("");
   const [cat, setCat] = useState<string>("Todos");
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const rows = await listPublishedPosts();
+        setPosts(rows.length > 0 ? rows.map(adaptRow) : fallbackPosts);
+      } catch {
+        setPosts(fallbackPosts);
+      } finally {
+        setLoaded(true);
+      }
+    })();
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -41,6 +76,14 @@ function BlogPage() {
       return matchCat && matchQuery;
     });
   }, [query, cat]);
+
+  if (!loaded || posts.length === 0) {
+    return (
+      <div className="container-valen py-32 text-center text-muted-foreground">
+        {loaded ? "Nenhum artigo publicado ainda." : "Carregando…"}
+      </div>
+    );
+  }
 
   const main = posts.find((p) => p.mainFeatured) ?? posts[0];
   const featured = posts.filter((p) => p.featured && p.slug !== main.slug).slice(0, 4);
@@ -217,7 +260,7 @@ function BlogPage() {
 
 /* -------------------- Cards -------------------- */
 
-function ArticleCardLarge({ post }: { post: typeof posts[number] }) {
+function ArticleCardLarge({ post }: { post: Post }) {
   return (
     <Link
       to="/blog/$slug"
@@ -249,7 +292,7 @@ function ArticleCardLarge({ post }: { post: typeof posts[number] }) {
   );
 }
 
-function ArticleCardSmall({ post }: { post: typeof posts[number] }) {
+function ArticleCardSmall({ post }: { post: Post }) {
   return (
     <Link
       to="/blog/$slug"

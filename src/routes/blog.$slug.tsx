@@ -1,28 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Clock, MapPin, Tag } from "lucide-react";
-import { posts, banners } from "@/data/blog";
+import { marked } from "marked";
+import { posts as fallbackPosts, banners, type Post } from "@/data/blog";
+import { getPostBySlug, formatPublishedDate } from "@/lib/blog-api";
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
-    const post = posts.find((p) => p.slug === params.slug);
-    if (!post) throw notFound();
-    return { post };
-  },
-  head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Artigo — Blog do Caminhoneiro" }] };
-    const { post } = loaderData;
-    return {
-      meta: [
-        { title: post.metaTitle ?? `${post.title} — Blog do Caminhoneiro Valen` },
-        { name: "description", content: post.metaDescription ?? post.excerpt },
-        { property: "og:title", content: post.title },
-        { property: "og:description", content: post.metaDescription ?? post.excerpt },
-        { property: "og:image", content: post.cover },
-        { property: "og:type", content: "article" },
-        { name: "twitter:image", content: post.cover },
-      ],
-    };
-  },
   notFoundComponent: () => (
     <div className="container-valen py-32 text-center">
       <h1 className="text-4xl font-display font-extrabold text-secondary">Artigo não encontrado</h1>
@@ -38,20 +21,73 @@ export const Route = createFileRoute("/blog/$slug")({
   component: ArticlePage,
 });
 
-function ArticlePage() {
-  const { post } = Route.useLoaderData();
+function looksLikeHtml(s: string) {
+  return /<\w+[\s>]/.test(s);
+}
 
-  const related = posts
+function ArticlePage() {
+  const { slug } = Route.useParams();
+  const [post, setPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notExists, setNotExists] = useState(false);
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const row = await getPostBySlug(slug);
+        if (row) {
+          setPost({
+            slug: row.slug,
+            title: row.title,
+            excerpt: row.excerpt,
+            category: row.category as Post["category"],
+            cover: row.cover_url || fallbackPosts[0].cover,
+            author: row.author,
+            publishedAt: formatPublishedDate(row.published_at),
+            readingTime: row.reading_time,
+            featured: row.featured,
+            mainFeatured: row.main_featured,
+            tags: row.tags,
+            metaTitle: row.meta_title ?? undefined,
+            metaDescription: row.meta_description ?? undefined,
+            content: looksLikeHtml(row.content) ? row.content : (marked.parse(row.content) as string),
+          });
+        } else {
+          const fb = fallbackPosts.find((p) => p.slug === slug);
+          if (fb) setPost(fb);
+          else setNotExists(true);
+        }
+      } catch {
+        const fb = fallbackPosts.find((p) => p.slug === slug);
+        if (fb) setPost(fb);
+        else setNotExists(true);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [slug]);
+
+  useEffect(() => {
+    if (post) document.title = post.metaTitle ?? `${post.title} — Blog do Caminhoneiro Valen`;
+  }, [post]);
+
+  if (loading) {
+    return <div className="container-valen py-32 text-center text-muted-foreground">Carregando…</div>;
+  }
+  if (notExists || !post) {
+    throw notFound();
+  }
+
+  const related = fallbackPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3);
-  const fallback = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const fallback = fallbackPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
   const readAlso = related.length >= 3 ? related : [...related, ...fallback].slice(0, 3);
 
   const endBanner = banners.find((b) => b.placement === "article-end")!;
 
   return (
     <>
-      {/* Hero da matéria */}
       <section className="relative overflow-hidden bg-gradient-hero text-white pt-20 pb-32">
         <div className="absolute inset-0 opacity-25">
           <img src={post.cover} alt="" className="h-full w-full object-cover mix-blend-overlay" />
@@ -93,7 +129,6 @@ function ArticlePage() {
         </svg>
       </section>
 
-      {/* Conteúdo + Sidebar */}
       <section className="py-16 bg-background">
         <div className="container-valen grid gap-12 lg:grid-cols-[1fr_320px]">
           <article className="min-w-0">
@@ -137,21 +172,6 @@ function ArticlePage() {
               </ul>
             </div>
 
-            <div className="rounded-3xl bg-gradient-hero text-white p-6 relative overflow-hidden">
-              <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-primary/40 blur-3xl" />
-              <span className="text-xs font-bold uppercase tracking-wider">App ValenLog</span>
-              <h4 className="mt-2 text-xl font-display font-bold">Sua operação em movimento</h4>
-              <p className="mt-2 text-sm text-white/80">
-                Agilidade, controle e praticidade na palma da mão.
-              </p>
-              <a
-                href="#"
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-5 py-2.5 text-sm font-semibold text-primary-foreground"
-              >
-                Conhecer o app <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-
             <a
               href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA"
               target="_blank"
@@ -168,38 +188,6 @@ function ArticlePage() {
         </div>
       </section>
 
-      {/* Leia também */}
-      <section className="py-20 bg-surface/40">
-        <div className="container-valen">
-          <h2 className="text-3xl md:text-4xl font-display font-extrabold text-secondary">Leia também</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {readAlso.map((p) => (
-              <Link
-                key={p.slug}
-                to="/blog/$slug"
-                params={{ slug: p.slug }}
-                className="group rounded-2xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
-              >
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img
-                    src={p.cover}
-                    alt={p.title}
-                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
-                  <h3 className="mt-2 font-display font-bold text-secondary line-clamp-2">{p.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.excerpt}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Banner final */}
       <section className="py-16 bg-background">
         <div className="container-valen">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-orange text-primary-foreground p-10 md:p-14 grid lg:grid-cols-[1fr_auto] items-center gap-8">

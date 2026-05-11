@@ -1,0 +1,145 @@
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { Pencil, Trash2, Eye, Plus, Star } from "lucide-react";
+import {
+  listAllPosts,
+  deletePost,
+  formatPublishedDate,
+  type BlogPostRow,
+} from "@/lib/blog-api";
+
+export const Route = createFileRoute("/admin/blog/")({
+  component: AdminBlogList,
+});
+
+function AdminBlogList() {
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState<BlogPostRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const reload = async () => {
+    setLoading(true);
+    try {
+      setPosts(await listAllPosts());
+      setError(null);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Erro ao carregar artigos");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { void reload(); }, []);
+
+  const handleDelete = async (id: string, title: string) => {
+    if (!confirm(`Excluir o artigo "${title}"?`)) return;
+    try {
+      await deletePost(id);
+      await reload();
+    } catch (e: unknown) {
+      alert(e instanceof Error ? e.message : "Falha ao excluir");
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-3xl font-display font-bold">Blog do Caminhoneiro</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Gerencie os artigos publicados no blog.</p>
+        </div>
+        <button
+          onClick={() => navigate({ to: "/admin/blog/novo" })}
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow hover:bg-primary/90"
+        >
+          <Plus className="h-4 w-4" /> Novo artigo
+        </button>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border bg-card shadow-sm">
+        {loading ? (
+          <div className="p-8 text-center text-sm text-muted-foreground">Carregando…</div>
+        ) : error ? (
+          <div className="p-8 text-center text-sm text-destructive">{error}</div>
+        ) : posts.length === 0 ? (
+          <div className="p-8 text-center text-sm text-muted-foreground">
+            Nenhum artigo cadastrado. Clique em <strong>Novo artigo</strong> para começar.
+          </div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead className="bg-muted/50 text-left">
+              <tr>
+                <th className="px-4 py-3 font-semibold">Título</th>
+                <th className="px-4 py-3 font-semibold">Categoria</th>
+                <th className="px-4 py-3 font-semibold">Status</th>
+                <th className="px-4 py-3 font-semibold">Data</th>
+                <th className="px-4 py-3 font-semibold">Destaque</th>
+                <th className="px-4 py-3 font-semibold text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {posts.map((p) => (
+                <tr key={p.id} className="border-t">
+                  <td className="px-4 py-3">
+                    <div className="font-medium">{p.title}</div>
+                    <div className="text-xs text-muted-foreground">/blog/{p.slug}</div>
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground">{p.category}</td>
+                  <td className="px-4 py-3">
+                    <span className={
+                      "rounded-full px-2 py-0.5 text-xs font-semibold " +
+                      (p.status === "publicado"
+                        ? "bg-emerald-100 text-emerald-700"
+                        : "bg-amber-100 text-amber-700")
+                    }>
+                      {p.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground">{formatPublishedDate(p.published_at)}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex gap-1">
+                      {p.main_featured && <Star className="h-4 w-4 fill-primary text-primary" />}
+                      {p.featured && !p.main_featured && <Star className="h-4 w-4 text-primary" />}
+                      {!p.featured && !p.main_featured && <span className="text-xs text-muted-foreground">—</span>}
+                    </div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center justify-end gap-1">
+                      {p.status === "publicado" && (
+                        <Link
+                          to="/blog/$slug"
+                          params={{ slug: p.slug }}
+                          target="_blank"
+                          className="rounded-md p-2 hover:bg-muted"
+                          title="Visualizar"
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Link>
+                      )}
+                      <Link
+                        to="/admin/blog/$id"
+                        params={{ id: p.id }}
+                        className="rounded-md p-2 hover:bg-muted"
+                        title="Editar"
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(p.id, p.title)}
+                        className="rounded-md p-2 text-destructive hover:bg-destructive/10"
+                        title="Excluir"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+}
