@@ -82,9 +82,20 @@ function Lojas() {
         <div className="container-valen">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {filtradas.map((l) => (
-              <article key={l.nome} className="rounded-3xl bg-card border border-border p-6 hover:border-primary/50 hover:-translate-y-1 transition-all">
-                <span className="text-xs font-bold uppercase tracking-wider text-primary">{l.categoria}</span>
-                <h3 className="mt-2 text-xl font-display font-bold text-secondary">{l.nome}</h3>
+              <article key={l.nome} className="rounded-3xl bg-card border border-border p-6 hover:border-primary/50 hover:-translate-y-1 transition-all flex flex-col">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-primary pt-1">{l.categoria}</span>
+                  <div className="h-16 w-16 shrink-0 rounded-2xl bg-white border border-border shadow-sm flex items-center justify-center overflow-hidden">
+                    {l.logo ? (
+                      <img src={l.logo} alt={`Logo ${l.nome}`} className="h-full w-full object-contain p-2" />
+                    ) : (
+                      <span className="font-display font-bold text-secondary text-lg">
+                        {l.nome.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <h3 className="mt-3 text-xl font-display font-bold text-secondary">{l.nome}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{l.desc}</p>
                 <div className="mt-4 space-y-1.5 text-sm">
                   <p className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {l.horario}</p>
