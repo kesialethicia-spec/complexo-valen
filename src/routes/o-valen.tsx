@@ -1,26 +1,49 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
-import { CheckCircle2, MapPin, Building2, Users, Sparkles } from "lucide-react";
+import { Lightbulb, ShieldCheck, HeartHandshake, UserCheck, Users, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/hero-valen.jpg";
 import hotelImg from "@/assets/hotel.jpg";
 import postoImg from "@/assets/posto.jpg";
 import truckImg from "@/assets/truck-center.jpg";
 import foodImg from "@/assets/alimentacao.jpg";
-import parkImg from "@/assets/estacionamento.jpg";
-import festaImg from "@/assets/festa.jpg";
 import equipeImg from "@/assets/equipe-valen.png";
-import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/o-valen")({
   head: () => ({
     meta: [
       { title: "O Valen — Complexo em movimento | São Luís/MA" },
-      { name: "description", content: "Conheça o Complexo Valen: história, estrutura e posicionamento. Mais que uma parada, um ponto de apoio para quem está em movimento." },
+      { name: "description", content: "Conheça o Complexo Valen: propósito, ambição, valores e história. Mais que uma parada, um ponto de apoio para quem vive a estrada." },
     ],
   }),
   component: OValen,
 });
+
+const valores = [
+  { icon: Lightbulb, t: "Inovação na prestação de serviços" },
+  { icon: ShieldCheck, t: "Ética, transparência e segurança" },
+  { icon: HeartHandshake, t: "Acolher para melhor servir" },
+  { icon: UserCheck, t: "Reconhecimento e desenvolvimento do colaborador Valen" },
+  { icon: Users, t: "Valorização da comunidade local" },
+];
+
+const timeline = [
+  {
+    year: "2019",
+    title: "Início da jornada",
+    text: "Em 05 de setembro de 2019, o Complexo Valen foi inaugurado com uma área inicial de 150 mil m².",
+  },
+  {
+    year: "2023",
+    title: "Expansão contínua",
+    text: "Com a inauguração do Pátio de Triagem 03, o Valen alcançou mais de 250 mil m² de área total, ampliando sua capacidade operacional.",
+  },
+  {
+    year: "2025/2026",
+    title: "Mais avanços",
+    text: "Com uma nova expansão, o complexo alcança 350 mil m² de área total e mais de 400 vagas, consolidando o Valen como o maior complexo logístico da região.",
+  },
+];
 
 function OValen() {
   return (
@@ -28,17 +51,18 @@ function OValen() {
       <PageHero
         eyebrow="O Valen"
         title="O Valen é feito de movimento"
-        subtitle="Um complexo completo em São Luís, criado para acompanhar o ritmo da estrada, das pessoas e dos negócios."
+        subtitle="Mais do que uma parada, somos um ponto de apoio para quem vive a estrada, movimenta negócios e conecta jornadas."
         image={heroImg}
       />
 
+      {/* Sobre o Valen */}
       <section className="py-24 bg-background">
         <div className="container-valen grid gap-12 lg:grid-cols-2 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">Sobre o complexo</span>
-            <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">Um complexo, infinitas jornadas.</h2>
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">Sobre o Valen</span>
+            <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">Um complexo criado para mover o Brasil.</h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              O Valen reúne em um só lugar serviços essenciais, conveniência, alimentação, descanso, hospedagem, lojas, estacionamento, eventos e experiências. Mais do que uma parada, é um ponto de apoio para quem está em movimento.
+              Localizado a 14 km do Porto do Itaqui, no coração da região industrial de São Luís, o Valen é um complexo criado para oferecer excelência na prestação de serviços ao caminhoneiro. Reunimos em um só lugar soluções que agregam valor em todos os pontos de contato da jornada: abastecimento, triagem, estacionamento, manutenção, alimentação, descanso, hospedagem, lojas, serviços e experiências.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -50,81 +74,68 @@ function OValen() {
         </div>
       </section>
 
-      {/* Posicionamento */}
-      <section className="py-24 bg-gradient-orange text-primary-foreground relative overflow-hidden">
-        <div className="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
-        <div className="container-valen relative text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.3em] opacity-80">Novo posicionamento</p>
-          <h2 className="mt-6 text-5xl md:text-7xl font-display font-extrabold text-balance leading-[0.95]">Somos feitos de movimento.</h2>
-          <p className="mt-8 max-w-3xl mx-auto text-lg leading-relaxed">
-            Movimento é chegada, partida, trabalho, descanso, cuidado e conexão. O Valen nasceu para acompanhar o ritmo de quem vive na estrada, oferecendo estrutura, conveniência e acolhimento em uma só parada.
-          </p>
+      {/* Propósito + Ambição */}
+      <section className="py-24 bg-surface">
+        <div className="container-valen grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl bg-card border border-border p-10 shadow-soft">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Nosso propósito</span>
+            <p className="mt-5 text-2xl md:text-3xl font-display font-bold text-secondary leading-snug text-balance">
+              Proporcionar a melhor experiência para que as pessoas que estão longe de casa se sintam entre amigos.
+            </p>
+          </div>
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-orange text-primary-foreground p-10 shadow-glow">
+            <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-white/15 blur-3xl" />
+            <span className="relative text-xs font-bold uppercase tracking-[0.25em] text-white/90">Nossa ambição</span>
+            <p className="relative mt-5 text-2xl md:text-3xl font-display font-bold leading-snug text-balance">
+              Ser referência em serviços de qualidade no Brasil até 2029.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Números */}
+      {/* Valores */}
       <section className="py-24 bg-background">
         <div className="container-valen">
-          <SectionHeader eyebrow="Números" title="Números do Valen" center />
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { v: "+35 mil m²", l: "de estrutura" },
-              { v: "24h", l: "Posto de combustível" },
-              { v: "Truck", l: "Center completo" },
-              { v: "Hotel", l: "executivo" },
-              { v: "Lojas", l: "e serviços" },
-              { v: "Eventos", l: "e experiências" },
-              { v: "7 km", l: "do Porto e Distrito Industrial" },
-              { v: "São Luís", l: "MA — Brasil" },
-            ].map((s) => (
-              <div key={s.l} className="rounded-3xl border border-border bg-card p-7 text-center hover:border-primary/50 transition-colors">
-                <p className="text-3xl font-display font-extrabold text-primary">{s.v}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{s.l}</p>
+          <SectionHeader eyebrow="Valores" title="Valores que nos movem" center />
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {valores.map((v) => (
+              <div key={v.t} className="rounded-3xl bg-card border border-border p-7 hover:border-primary/50 transition-colors flex items-start gap-4">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-orange text-white shadow-glow">
+                  <v.icon className="h-6 w-6" />
+                </span>
+                <p className="text-lg font-display font-bold text-secondary leading-snug">{v.t}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pilares */}
+      {/* História — timeline */}
       <section className="py-24 bg-surface">
         <div className="container-valen">
-          <SectionHeader eyebrow="Pilares" title="Os pilares que movem o Valen" />
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              { icon: CheckCircle2, t: "Completo", d: "Tudo que o caminhoneiro precisa em uma só parada." },
-              { icon: MapPin, t: "Estratégico", d: "Localização pensada para quem movimenta São Luís, o Porto e o Distrito Industrial." },
-              { icon: Users, t: "Humano", d: "Acolhimento para quem passa dias longe de casa." },
-              { icon: Sparkles, t: "Dinâmico", d: "Serviços, lojas, eventos e experiências em constante movimento." },
-            ].map((p) => (
-              <div key={p.t} className="rounded-3xl bg-card border border-border p-7">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-orange text-white shadow-glow">
-                  <p.icon className="h-6 w-6" />
+          <SectionHeader eyebrow="História" title="Nossa história em movimento" center />
+          <div className="mt-16 relative">
+            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-border" aria-hidden />
+            <div className="space-y-12 md:space-y-0">
+              {timeline.map((item, i) => (
+                <div key={item.year} className={`relative md:grid md:grid-cols-2 md:gap-12 md:items-center ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
+                  <div className={`md:px-8 ${i % 2 === 0 ? "md:text-right" : ""}`}>
+                    <span className="inline-block rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground shadow-glow">{item.year}</span>
+                    <h3 className="mt-4 text-2xl md:text-3xl font-display font-extrabold text-secondary">{item.title}</h3>
+                    <p className="mt-3 text-muted-foreground leading-relaxed">{item.text}</p>
+                  </div>
+                  <div className="hidden md:flex justify-center">
+                    <span className="relative z-10 inline-flex h-5 w-5 rounded-full bg-primary border-4 border-background shadow-glow" aria-hidden />
+                  </div>
                 </div>
-                <h3 className="mt-5 text-xl font-display font-bold text-secondary">{p.t}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Galeria */}
-      <section className="py-24 bg-background">
-        <div className="container-valen">
-          <SectionHeader eyebrow="Galeria" title="O Valen em imagens" center />
-          <div className="mt-12 grid gap-4 grid-cols-2 md:grid-cols-4">
-            {[heroImg, postoImg, truckImg, hotelImg, foodImg, parkImg, festaImg, heroImg].map((src, i) => (
-              <div key={i} className={`overflow-hidden rounded-2xl ${i % 3 === 0 ? "row-span-2 aspect-[3/4]" : "aspect-square"}`}>
-                <img src={src} alt="" className="h-full w-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Trabalhe Conosco */}
-      <section className="py-20 bg-surface">
+      <section className="py-20 bg-background">
         <div className="container-valen">
           <div className="relative overflow-hidden rounded-3xl bg-card border border-border shadow-soft">
             <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />

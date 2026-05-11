@@ -117,7 +117,7 @@ function BlogPage() {
       <PageHero
         eyebrow="Blog do Caminhoneiro"
         title="Blog do Caminhoneiro"
-        subtitle="Dicas, novidades, promoções e conteúdos úteis para quem vive em movimento."
+        subtitle="Fique por dentro de tudo que acontece no Complexo Valen: eventos, ações especiais, novidades, dicas da estrada e experiências que movimentam o nosso dia a dia."
         image={main.cover}
       />
 
