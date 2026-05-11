@@ -18,7 +18,7 @@ function AdminLayout() {
 
   useEffect(() => {
     if (!loading && !session) {
-      navigate({ to: "/login" });
+      navigate({ to: "/conecte-se" });
     }
   }, [loading, session, navigate]);
 
@@ -36,7 +36,7 @@ function AdminLayout() {
           Sua conta ({user?.email}) não possui permissão de administrador.
         </p>
         <button
-          onClick={async () => { await signOut(); navigate({ to: "/login" }); }}
+          onClick={async () => { await signOut(); navigate({ to: "/conecte-se" }); }}
           className="rounded-full border px-5 py-2 text-sm font-semibold hover:bg-muted"
         >
           Sair
@@ -58,7 +58,7 @@ function AdminLayout() {
           <div className="flex items-center gap-3 text-sm">
             <span className="hidden text-muted-foreground md:inline">{user?.email}</span>
             <button
-              onClick={async () => { await signOut(); navigate({ to: "/login" }); }}
+              onClick={async () => { await signOut(); navigate({ to: "/conecte-se" }); }}
               className="rounded-full border px-4 py-1.5 font-medium hover:bg-muted"
             >
               Sair
