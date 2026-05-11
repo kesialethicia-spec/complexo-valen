@@ -10,8 +10,7 @@ const nav = [
   { to: "/lojas", label: "Lojas" },
   { to: "/promocoes", label: "Promoções" },
   { to: "/experiencias", label: "Experiências" },
-  { to: "/noticias", label: "Notícias" },
-  { to: "/trabalhe-conosco", label: "Trabalhe Conosco" },
+  { to: "/noticias", label: "Blog do Caminhoneiro" },
   { to: "/contato", label: "Contato" },
 ] as const;
 

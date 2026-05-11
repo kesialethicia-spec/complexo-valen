@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TrabalheConoscoRouteImport } from './routes/trabalhe-conosco'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as OValenRouteImport } from './routes/o-valen'
 import { Route as NoticiasRouteImport } from './routes/noticias'
@@ -24,11 +23,6 @@ import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
 import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
 import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
 
-const TrabalheConoscoRoute = TrabalheConoscoRouteImport.update({
-  id: '/trabalhe-conosco',
-  path: '/trabalhe-conosco',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PromocoesRoute = PromocoesRouteImport.update({
   id: '/promocoes',
   path: '/promocoes',
@@ -104,7 +98,6 @@ export interface FileRoutesByFullPath {
   '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
-  '/trabalhe-conosco': typeof TrabalheConoscoRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -120,7 +113,6 @@ export interface FileRoutesByTo {
   '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
-  '/trabalhe-conosco': typeof TrabalheConoscoRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -137,7 +129,6 @@ export interface FileRoutesById {
   '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
-  '/trabalhe-conosco': typeof TrabalheConoscoRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -155,7 +146,6 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/o-valen'
     | '/promocoes'
-    | '/trabalhe-conosco'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -171,7 +161,6 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/o-valen'
     | '/promocoes'
-    | '/trabalhe-conosco'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -187,7 +176,6 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/o-valen'
     | '/promocoes'
-    | '/trabalhe-conosco'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -204,7 +192,6 @@ export interface RootRouteChildren {
   NoticiasRoute: typeof NoticiasRoute
   OValenRoute: typeof OValenRoute
   PromocoesRoute: typeof PromocoesRoute
-  TrabalheConoscoRoute: typeof TrabalheConoscoRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
   ServicosHotelRoute: typeof ServicosHotelRoute
@@ -215,13 +202,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/trabalhe-conosco': {
-      id: '/trabalhe-conosco'
-      path: '/trabalhe-conosco'
-      fullPath: '/trabalhe-conosco'
-      preLoaderRoute: typeof TrabalheConoscoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/promocoes': {
       id: '/promocoes'
       path: '/promocoes'
@@ -324,7 +304,6 @@ const rootRouteChildren: RootRouteChildren = {
   NoticiasRoute: NoticiasRoute,
   OValenRoute: OValenRoute,
   PromocoesRoute: PromocoesRoute,
-  TrabalheConoscoRoute: TrabalheConoscoRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
   ServicosHotelRoute: ServicosHotelRoute,
