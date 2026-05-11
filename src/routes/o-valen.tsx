@@ -9,6 +9,8 @@ import truckImg from "@/assets/truck-center.jpg";
 import foodImg from "@/assets/alimentacao.jpg";
 import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
+import equipeImg from "@/assets/equipe-valen.png";
+import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/o-valen")({
   head: () => ({
