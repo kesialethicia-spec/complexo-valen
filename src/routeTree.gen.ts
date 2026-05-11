@@ -15,6 +15,7 @@ import { Route as LojasRouteImport } from './routes/lojas'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ConecteSeRouteImport } from './routes/conecte-se'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -55,6 +56,11 @@ const ExperienciasRoute = ExperienciasRouteImport.update({
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConecteSeRoute = ConecteSeRouteImport.update({
+  id: '/conecte-se',
+  path: '/conecte-se',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
+  '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
   '/login': typeof LoginRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
   '/login': typeof LoginRoute
@@ -156,6 +164,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
+  '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
   '/login': typeof LoginRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/blog'
+    | '/conecte-se'
     | '/contato'
     | '/experiencias'
     | '/login'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/blog'
+    | '/conecte-se'
     | '/contato'
     | '/experiencias'
     | '/login'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/blog'
+    | '/conecte-se'
     | '/contato'
     | '/experiencias'
     | '/login'
@@ -234,6 +246,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   BlogRoute: typeof BlogRouteWithChildren
+  ConecteSeRoute: typeof ConecteSeRoute
   ContatoRoute: typeof ContatoRoute
   ExperienciasRoute: typeof ExperienciasRoute
   LoginRoute: typeof LoginRoute
@@ -290,6 +303,13 @@ declare module '@tanstack/react-router' {
       path: '/contato'
       fullPath: '/contato'
       preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conecte-se': {
+      id: '/conecte-se'
+      path: '/conecte-se'
+      fullPath: '/conecte-se'
+      preLoaderRoute: typeof ConecteSeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -396,6 +416,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   BlogRoute: BlogRouteWithChildren,
+  ConecteSeRoute: ConecteSeRoute,
   ContatoRoute: ContatoRoute,
   ExperienciasRoute: ExperienciasRoute,
   LoginRoute: LoginRoute,
@@ -412,3 +433,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
