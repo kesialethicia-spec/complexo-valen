@@ -34,7 +34,7 @@ export function Header() {
           : "bg-background/60 backdrop-blur"
       }`}
     >
-      <div className="container-valen flex h-18 items-center justify-between py-3">
+      <div className="container-valen flex h-20 items-center justify-between py-3">
         <Logo />
 
         <nav className="hidden xl:flex items-center gap-1">
