@@ -98,6 +98,72 @@ export type Database = {
         }
         Relationships: []
       }
+      promotions: {
+        Row: {
+          category: string
+          cover_url: string
+          created_at: string
+          cta_text: string
+          cta_url: string
+          featured: boolean
+          full_description: string
+          id: string
+          meta_description: string | null
+          meta_title: string | null
+          rules: string
+          short_description: string
+          show_on_blog: boolean
+          show_on_home: boolean
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+          validity: string
+        }
+        Insert: {
+          category: string
+          cover_url?: string
+          created_at?: string
+          cta_text?: string
+          cta_url?: string
+          featured?: boolean
+          full_description?: string
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          rules?: string
+          short_description?: string
+          show_on_blog?: boolean
+          show_on_home?: boolean
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+          validity?: string
+        }
+        Update: {
+          category?: string
+          cover_url?: string
+          created_at?: string
+          cta_text?: string
+          cta_url?: string
+          featured?: boolean
+          full_description?: string
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          rules?: string
+          short_description?: string
+          show_on_blog?: boolean
+          show_on_home?: boolean
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          validity?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
