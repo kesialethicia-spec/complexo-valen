@@ -42,9 +42,17 @@ function AdminDashboard() {
             Gerenciar promoções <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="rounded-xl border bg-card p-6 shadow-sm">
+        <div className="flex flex-col rounded-xl border bg-card p-6 shadow-sm">
           <h2 className="font-semibold">Lojas do Complexo</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Gerencie as lojas, serviços e operações presentes no Complexo Valen.</p>
+          <p className="mt-1 text-sm text-muted-foreground flex-1">
+            Gerencie as lojas, serviços e operações presentes no Complexo Valen.
+          </p>
+          <Link
+            to="/admin/lojas"
+            className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+          >
+            Gerenciar lojas <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </div>

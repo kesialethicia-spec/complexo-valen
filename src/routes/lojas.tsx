@@ -1,47 +1,89 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
 import { PageHero } from "@/components/PageHero";
-import { Search, MapPin, Phone, Clock } from "lucide-react";
+import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
+import { listActiveStores, STORE_CATEGORIES, type StoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas")({
-  head: () => ({ meta: [{ title: "Lojas — Complexo Valen" }, { name: "description", content: "Lojas, serviços e conveniência no Complexo Valen. Encontre o que precisa sem sair da sua rota." }] }),
+  head: () => ({
+    meta: [
+      { title: "Lojas — Complexo Valen" },
+      { name: "description", content: "Lojas, serviços e conveniência no Complexo Valen. Encontre o que precisa sem sair da sua rota." },
+    ],
+  }),
   component: Lojas,
 });
 
-const categorias = ["Todas", "Alimentação", "Serviços", "Autopeças", "Saúde", "Conveniência", "Financeiro", "Escritórios", "Outros"];
+const categoriaFiltros = ["Todas", ...STORE_CATEGORIES] as const;
 
-interface Loja {
-  nome: string;
-  categoria: string;
-  desc: string;
-  horario: string;
-  contato: string;
-  local: string;
-  logo?: string;
+interface LojaUI {
+  id: string;
+  slug?: string;
+  name: string;
+  category: string;
+  short_description: string;
+  hours: string;
+  phone: string;
+  whatsapp: string;
+  location: string;
+  block: string;
+  logo_url: string;
+  cta_text: string;
+  cta_url: string;
+  featured: boolean;
 }
 
-const lojas: Loja[] = [
-  { nome: "Restaurante Valen", categoria: "Alimentação", desc: "Pratos caseiros e self-service todos os dias.", horario: "06h às 22h", contato: "(98) 0000-0000", local: "Bloco A" },
-  { nome: "Lanchonete Movimento", categoria: "Alimentação", desc: "Lanches rápidos, cafés especiais e sucos.", horario: "24h", contato: "(98) 0000-0001", local: "Bloco A" },
-  { nome: "Conveniência Valen", categoria: "Conveniência", desc: "Tudo para a sua jornada em um só lugar.", horario: "24h", contato: "(98) 0000-0002", local: "Posto" },
-  { nome: "AutoPeças Rota", categoria: "Autopeças", desc: "Peças, acessórios e produtos automotivos.", horario: "08h às 18h", contato: "(98) 0000-0003", local: "Truck Center" },
-  { nome: "Farmácia Estrada", categoria: "Saúde", desc: "Remédios e itens de cuidado pessoal.", horario: "07h às 22h", contato: "(98) 0000-0004", local: "Galeria" },
-  { nome: "Lotérica Valen", categoria: "Financeiro", desc: "Apostas, recebimentos e pagamentos.", horario: "08h às 20h", contato: "(98) 0000-0005", local: "Galeria" },
-  { nome: "Barbearia em Movimento", categoria: "Serviços", desc: "Cuidado pessoal para seguir em rota.", horario: "08h às 19h", contato: "(98) 0000-0006", local: "Clube" },
-  { nome: "Escritório Logística+", categoria: "Escritórios", desc: "Apoio operacional para empresas.", horario: "08h às 18h", contato: "(98) 0000-0007", local: "Bloco B" },
-  { nome: "Lavanderia Rota Limpa", categoria: "Serviços", desc: "Lavanderia para quem está em viagem.", horario: "07h às 21h", contato: "(98) 0000-0008", local: "Clube" },
+const fallback: LojaUI[] = [
+  { id: "f1", name: "Restaurante Valen", category: "Alimentação", short_description: "Pratos caseiros e self-service todos os dias.", hours: "06h às 22h", phone: "(98) 0000-0000", whatsapp: "", location: "", block: "Bloco A", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
+  { id: "f2", name: "Conveniência Valen", category: "Conveniência", short_description: "Tudo para a sua jornada em um só lugar.", hours: "24h", phone: "(98) 0000-0002", whatsapp: "", location: "Posto", block: "", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
+  { id: "f3", name: "AutoPeças Rota", category: "Autopeças", short_description: "Peças, acessórios e produtos automotivos.", hours: "08h às 18h", phone: "(98) 0000-0003", whatsapp: "", location: "Truck Center", block: "", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
 ];
+
+function toUI(s: StoreRow): LojaUI {
+  return {
+    id: s.id, slug: s.slug, name: s.name, category: s.category, short_description: s.short_description,
+    hours: s.hours, phone: s.phone, whatsapp: s.whatsapp, location: s.location, block: s.block,
+    logo_url: s.logo_url, cta_text: s.cta_text, cta_url: s.cta_url, featured: s.featured,
+  };
+}
+
+function waHref(l: LojaUI): string {
+  if (l.cta_url) return l.cta_url;
+  const digits = (l.whatsapp || "").replace(/\D/g, "");
+  if (digits) return `https://wa.me/${digits}?text=${encodeURIComponent(`Olá! Vi a ${l.name} no Valen.`)}`;
+  return `https://wa.me/?text=${encodeURIComponent(`Olá! Vi a ${l.name} no Valen.`)}`;
+}
 
 function Lojas() {
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState("Todas");
+  const [cat, setCat] = useState<string>("Todas");
+  const [items, setItems] = useState<LojaUI[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const rows = await listActiveStores();
+        setItems(rows.length ? rows.map(toUI) : fallback);
+      } catch {
+        setItems(fallback);
+      } finally {
+        setLoaded(true);
+      }
+    })();
+  }, []);
 
   const filtradas = useMemo(() => {
-    return lojas.filter((l) =>
-      (cat === "Todas" || l.categoria === cat) &&
-      (q === "" || l.nome.toLowerCase().includes(q.toLowerCase()))
+    const term = q.trim().toLowerCase();
+    return items.filter((l) =>
+      (cat === "Todas" || l.category === cat) &&
+      (term === "" ||
+        l.name.toLowerCase().includes(term) ||
+        l.category.toLowerCase().includes(term) ||
+        l.location.toLowerCase().includes(term) ||
+        l.block.toLowerCase().includes(term))
     );
-  }, [q, cat]);
+  }, [items, q, cat]);
 
   return (
     <>
@@ -58,12 +100,12 @@ function Lojas() {
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Buscar loja por nome..."
+              placeholder="Buscar por nome, categoria ou localização..."
               className="w-full rounded-full border border-border bg-card pl-12 pr-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="mt-5 flex flex-wrap gap-2">
-            {categorias.map((c) => (
+            {categoriaFiltros.map((c) => (
               <button
                 key={c}
                 onClick={() => setCat(c)}
@@ -80,37 +122,48 @@ function Lojas() {
 
       <section className="pb-24 bg-background">
         <div className="container-valen">
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {filtradas.map((l) => (
-              <article key={l.nome} className="rounded-3xl bg-card border border-border p-6 hover:border-primary/50 hover:-translate-y-1 transition-all flex flex-col">
-                <div className="flex items-start justify-between gap-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary pt-1">{l.categoria}</span>
-                  <div className="h-16 w-16 shrink-0 rounded-2xl bg-white border border-border shadow-sm flex items-center justify-center overflow-hidden">
-                    {l.logo ? (
-                      <img src={l.logo} alt={`Logo ${l.nome}`} className="h-full w-full object-contain p-2" />
-                    ) : (
-                      <span className="font-display font-bold text-secondary text-lg">
-                        {l.nome.split(" ").map((w) => w[0]).slice(0, 2).join("")}
-                      </span>
+          {!loaded ? (
+            <p className="text-center text-muted-foreground py-12">Carregando…</p>
+          ) : (
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {filtradas.map((l) => (
+                <article key={l.id} className="rounded-3xl bg-card border border-border p-6 hover:border-primary/50 hover:-translate-y-1 transition-all flex flex-col">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="text-xs font-bold uppercase tracking-wider text-primary pt-1">{l.category}</span>
+                    <div className="h-16 w-16 shrink-0 rounded-2xl bg-white border border-border shadow-sm flex items-center justify-center overflow-hidden">
+                      {l.logo_url ? (
+                        <img src={l.logo_url} alt={`Logo ${l.name}`} className="h-full w-full object-contain p-2" />
+                      ) : (
+                        <span className="font-display font-bold text-secondary text-lg">
+                          {l.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <h3 className="mt-3 text-xl font-display font-bold text-secondary">{l.name}</h3>
+                  {l.short_description && <p className="mt-2 text-sm text-muted-foreground">{l.short_description}</p>}
+                  <div className="mt-4 space-y-1.5 text-sm">
+                    {l.hours && <p className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {l.hours}</p>}
+                    {(l.phone || l.whatsapp) && <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {l.whatsapp || l.phone}</p>}
+                    {(l.block || l.location) && <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {[l.block, l.location].filter(Boolean).join(" • ")}</p>}
+                  </div>
+                  <div className="mt-5 flex gap-2">
+                    <a href={waHref(l)} target="_blank" rel="noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-gradient-orange px-4 py-2.5 text-sm font-bold text-primary-foreground">
+                      <MessageCircle className="h-4 w-4" /> WhatsApp
+                    </a>
+                    {l.slug && (
+                      <Link to="/lojas/$slug" params={{ slug: l.slug }} className="inline-flex items-center justify-center rounded-full border border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted">
+                        Ver detalhes
+                      </Link>
                     )}
                   </div>
-                </div>
-                <h3 className="mt-3 text-xl font-display font-bold text-secondary">{l.nome}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{l.desc}</p>
-                <div className="mt-4 space-y-1.5 text-sm">
-                  <p className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {l.horario}</p>
-                  <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {l.contato}</p>
-                  <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {l.local}</p>
-                </div>
-                <a href={`https://wa.me/?text=Olá! Vi a ${l.nome} no Valen.`} target="_blank" rel="noreferrer" className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-gradient-orange px-5 py-2.5 text-sm font-bold text-primary-foreground">
-                  WhatsApp
-                </a>
-              </article>
-            ))}
-            {filtradas.length === 0 && (
-              <p className="col-span-full text-center text-muted-foreground py-12">Nenhuma loja encontrada.</p>
-            )}
-          </div>
+                </article>
+              ))}
+              {filtradas.length === 0 && (
+                <p className="col-span-full text-center text-muted-foreground py-12">Nenhuma loja encontrada.</p>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </>
