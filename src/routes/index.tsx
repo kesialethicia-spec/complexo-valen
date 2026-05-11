@@ -5,7 +5,7 @@ import {
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
-import heroImg from "@/assets/hero-valen.jpg";
+import heroImg from "@/assets/hero-trucks.jpg";
 import postoImg from "@/assets/posto.jpg";
 import truckImg from "@/assets/truck-center.jpg";
 import hotelImg from "@/assets/hotel.jpg";
