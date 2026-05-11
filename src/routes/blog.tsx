@@ -235,30 +235,54 @@ function BlogPage() {
           </div>
 
           <div className="mt-10 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0">
-            {blogPromotions.map((p) => (
-              <article
-                key={p.id}
-                className="snap-start shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
-              >
-                <div className="h-44 overflow-hidden">
-                  <img src={p.image} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
-                </div>
-                <div className="p-5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
-                  <h3 className="mt-2 font-display font-bold text-lg text-secondary line-clamp-2">{p.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{p.shortDescription}</p>
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">{p.validity}</span>
-                    <Link
-                      to={p.link as "/promocoes"}
-                      className="inline-flex items-center gap-1 text-sm font-bold text-primary"
-                    >
-                      Ver promoção <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
+            {blogPromosList
+              ? blogPromosList.map((p) => (
+                  <Link
+                    key={p.id}
+                    to="/promocoes/$slug"
+                    params={{ slug: p.slug }}
+                    className="snap-start shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
+                  >
+                    <div className="h-44 overflow-hidden">
+                      {p.cover_url && <img src={p.cover_url} alt={p.title} className="h-full w-full object-cover" loading="lazy" />}
+                    </div>
+                    <div className="p-5">
+                      <span className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
+                      <h3 className="mt-2 font-display font-bold text-lg text-secondary line-clamp-2">{p.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{p.short_description}</p>
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">{p.validity}</span>
+                        <span className="inline-flex items-center gap-1 text-sm font-bold text-primary">
+                          Ver promoção <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))
+              : blogPromotions.map((p) => (
+                  <article
+                    key={p.id}
+                    className="snap-start shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
+                  >
+                    <div className="h-44 overflow-hidden">
+                      <img src={p.image} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                    </div>
+                    <div className="p-5">
+                      <span className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
+                      <h3 className="mt-2 font-display font-bold text-lg text-secondary line-clamp-2">{p.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{p.shortDescription}</p>
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">{p.validity}</span>
+                        <Link
+                          to={p.link as "/promocoes"}
+                          className="inline-flex items-center gap-1 text-sm font-bold text-primary"
+                        >
+                          Ver promoção <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                ))}
           </div>
 
           <Link
