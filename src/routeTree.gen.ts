@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as OValenRouteImport } from './routes/o-valen'
-import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as LojasRouteImport } from './routes/lojas'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
@@ -22,6 +22,7 @@ import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
 import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
 import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
 import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const PromocoesRoute = PromocoesRouteImport.update({
   id: '/promocoes',
@@ -31,11 +32,6 @@ const PromocoesRoute = PromocoesRouteImport.update({
 const OValenRoute = OValenRouteImport.update({
   id: '/o-valen',
   path: '/o-valen',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NoticiasRoute = NoticiasRouteImport.update({
-  id: '/noticias',
-  path: '/noticias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LojasRoute = LojasRouteImport.update({
@@ -51,6 +47,11 @@ const ExperienciasRoute = ExperienciasRouteImport.update({
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -89,15 +90,21 @@ const ServicosAlimentacaoRoute = ServicosAlimentacaoRouteImport.update({
   path: '/servicos/alimentacao',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
   '/lojas': typeof LojasRoute
-  '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -107,12 +114,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
   '/lojas': typeof LojasRoute
-  '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -123,12 +131,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
   '/lojas': typeof LojasRoute
-  '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -140,12 +149,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/blog'
     | '/contato'
     | '/experiencias'
     | '/lojas'
-    | '/noticias'
     | '/o-valen'
     | '/promocoes'
+    | '/blog/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -155,12 +165,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/blog'
     | '/contato'
     | '/experiencias'
     | '/lojas'
-    | '/noticias'
     | '/o-valen'
     | '/promocoes'
+    | '/blog/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -170,12 +181,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/blog'
     | '/contato'
     | '/experiencias'
     | '/lojas'
-    | '/noticias'
     | '/o-valen'
     | '/promocoes'
+    | '/blog/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -186,10 +198,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   ExperienciasRoute: typeof ExperienciasRoute
   LojasRoute: typeof LojasRoute
-  NoticiasRoute: typeof NoticiasRoute
   OValenRoute: typeof OValenRoute
   PromocoesRoute: typeof PromocoesRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
@@ -216,13 +228,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OValenRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/noticias': {
-      id: '/noticias'
-      path: '/noticias'
-      fullPath: '/noticias'
-      preLoaderRoute: typeof NoticiasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/lojas': {
       id: '/lojas'
       path: '/lojas'
@@ -242,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/contato'
       fullPath: '/contato'
       preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -293,15 +305,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosAlimentacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContatoRoute: ContatoRoute,
   ExperienciasRoute: ExperienciasRoute,
   LojasRoute: LojasRoute,
-  NoticiasRoute: NoticiasRoute,
   OValenRoute: OValenRoute,
   PromocoesRoute: PromocoesRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
@@ -314,3 +343,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
