@@ -31,7 +31,7 @@ const fallback: PromoItem[] = [
   { id: "2", title: "Voucher na Conveniência", cat: "Conveniência", validade: "Campanha ativa", desc: "Abasteça e participe de campanhas especiais.", img: foodImg },
   { id: "3", title: "Estacionamento condição especial", cat: "Estacionamento", validade: "Promoção", desc: "Confira as condições para garantir sua permanência no pátio.", img: parkImg },
   { id: "4", title: "Troca de óleo em promoção", cat: "Truck Center", validade: "Até esgotar", desc: "Manutenção preventiva com condições especiais.", img: truckImg },
-  { id: "5", title: "Promoção em lojas parceiras", cat: "Lojas", validade: "Mensal", desc: "Descontos exclusivos em parceiros do Valen.", img: hotelImg },
+  { id: "5", title: "Promoção em lojas do complexo", cat: "Lojas", validade: "Mensal", desc: "Descontos exclusivos nas lojas do Complexo Valen.", img: hotelImg },
   { id: "6", title: "Sexta Valen", cat: "Eventos", validade: "Toda sexta", desc: "Música, promoções e relacionamento.", img: festaImg },
 ];
 
