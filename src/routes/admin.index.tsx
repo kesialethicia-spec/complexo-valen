@@ -43,8 +43,8 @@ function AdminDashboard() {
           </Link>
         </div>
         <div className="rounded-xl border bg-card p-6 shadow-sm">
-          <h2 className="font-semibold">Lojas e parceiros</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Atualize lojas do complexo (em breve).</p>
+          <h2 className="font-semibold">Lojas do Complexo</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Gerencie as lojas, serviços e operações presentes no Complexo Valen.</p>
         </div>
       </div>
     </div>
