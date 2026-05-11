@@ -77,6 +77,14 @@ function BlogPage() {
     });
   }, [query, cat]);
 
+  if (!loaded || posts.length === 0) {
+    return (
+      <div className="container-valen py-32 text-center text-muted-foreground">
+        {loaded ? "Nenhum artigo publicado ainda." : "Carregando…"}
+      </div>
+    );
+  }
+
   const main = posts.find((p) => p.mainFeatured) ?? posts[0];
   const featured = posts.filter((p) => p.featured && p.slug !== main.slug).slice(0, 4);
   const recent = filtered.filter((p) => p.slug !== main.slug).slice(0, 9);
