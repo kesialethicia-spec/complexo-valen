@@ -9,7 +9,7 @@ import foodImg from "@/assets/alimentacao.jpg";
 import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
 
-export const Route = createFileRoute("/servicos")({
+export const Route = createFileRoute("/servicos/")({
   head: () => ({
     meta: [
       { title: "Serviços — Complexo Valen" },

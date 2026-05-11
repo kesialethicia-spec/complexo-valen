@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrabalheConoscoRouteImport } from './routes/trabalhe-conosco'
-import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as OValenRouteImport } from './routes/o-valen'
 import { Route as NoticiasRouteImport } from './routes/noticias'
@@ -18,6 +17,7 @@ import { Route as LojasRouteImport } from './routes/lojas'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
 import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
@@ -27,11 +27,6 @@ import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alime
 const TrabalheConoscoRoute = TrabalheConoscoRouteImport.update({
   id: '/trabalhe-conosco',
   path: '/trabalhe-conosco',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicosRoute = ServicosRouteImport.update({
-  id: '/servicos',
-  path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromocoesRoute = PromocoesRouteImport.update({
@@ -69,6 +64,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/servicos/',
+  path: '/servicos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
   id: '/truck-center',
   path: '/truck-center',
@@ -104,13 +104,13 @@ export interface FileRoutesByFullPath {
   '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
-  '/servicos': typeof ServicosRouteWithChildren
   '/trabalhe-conosco': typeof TrabalheConoscoRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -120,13 +120,13 @@ export interface FileRoutesByTo {
   '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
-  '/servicos': typeof ServicosRouteWithChildren
   '/trabalhe-conosco': typeof TrabalheConoscoRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -137,13 +137,13 @@ export interface FileRoutesById {
   '/noticias': typeof NoticiasRoute
   '/o-valen': typeof OValenRoute
   '/promocoes': typeof PromocoesRoute
-  '/servicos': typeof ServicosRouteWithChildren
   '/trabalhe-conosco': typeof TrabalheConoscoRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -155,13 +155,13 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/o-valen'
     | '/promocoes'
-    | '/servicos'
     | '/trabalhe-conosco'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -171,13 +171,13 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/o-valen'
     | '/promocoes'
-    | '/servicos'
     | '/trabalhe-conosco'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos'
   id:
     | '__root__'
     | '/'
@@ -187,13 +187,13 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/o-valen'
     | '/promocoes'
-    | '/servicos'
     | '/trabalhe-conosco'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -204,8 +204,8 @@ export interface RootRouteChildren {
   NoticiasRoute: typeof NoticiasRoute
   OValenRoute: typeof OValenRoute
   PromocoesRoute: typeof PromocoesRoute
-  ServicosRoute: typeof ServicosRouteWithChildren
   TrabalheConoscoRoute: typeof TrabalheConoscoRoute
+  ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -215,13 +215,6 @@ declare module '@tanstack/react-router' {
       path: '/trabalhe-conosco'
       fullPath: '/trabalhe-conosco'
       preLoaderRoute: typeof TrabalheConoscoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos': {
-      id: '/servicos'
-      path: '/servicos'
-      fullPath: '/servicos'
-      preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/promocoes': {
@@ -273,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/servicos'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos/truck-center': {
       id: '/servicos/truck-center'
       path: '/truck-center'
@@ -311,26 +311,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface ServicosRouteChildren {
-  ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
-  ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
-  ServicosHotelRoute: typeof ServicosHotelRoute
-  ServicosPostoRoute: typeof ServicosPostoRoute
-  ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
-}
-
-const ServicosRouteChildren: ServicosRouteChildren = {
-  ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
-  ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
-  ServicosHotelRoute: ServicosHotelRoute,
-  ServicosPostoRoute: ServicosPostoRoute,
-  ServicosTruckCenterRoute: ServicosTruckCenterRoute,
-}
-
-const ServicosRouteWithChildren = ServicosRoute._addFileChildren(
-  ServicosRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContatoRoute: ContatoRoute,
@@ -339,9 +319,19 @@ const rootRouteChildren: RootRouteChildren = {
   NoticiasRoute: NoticiasRoute,
   OValenRoute: OValenRoute,
   PromocoesRoute: PromocoesRoute,
-  ServicosRoute: ServicosRouteWithChildren,
   TrabalheConoscoRoute: TrabalheConoscoRoute,
+  ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
