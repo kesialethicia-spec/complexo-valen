@@ -207,3 +207,5 @@ function AdminBlogList() {
     </div>
   );
 }
+
+const selectCls = "rounded-md border bg-background px-3 py-2 text-sm shadow-sm outline-none focus:ring-2 focus:ring-primary/30";
