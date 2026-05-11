@@ -5,6 +5,7 @@ import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { posts as fallbackPosts, categories, videos, blogPromotions, banners, type Post } from "@/data/blog";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
+import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 
 function adaptRow(row: BlogPostRow): Post {
   return {
@@ -49,6 +50,7 @@ function BlogPage() {
   const [cat, setCat] = useState<string>("Todos");
   const [posts, setPosts] = useState<Post[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
 
   useEffect(() => {
     void (async () => {
@@ -61,7 +63,23 @@ function BlogPage() {
         setLoaded(true);
       }
     })();
+    void (async () => {
+      try {
+        const rows = await listActivePromotions();
+        setDbPromos(rows);
+      } catch { /* keep fallback */ }
+    })();
   }, []);
+
+  const blogPromosList = useMemo(() => {
+    if (dbPromos.length === 0) return null;
+    const priority = [...dbPromos].sort((a, b) => {
+      const bs = (b.show_on_blog ? 2 : 0) + (b.featured ? 1 : 0);
+      const as = (a.show_on_blog ? 2 : 0) + (a.featured ? 1 : 0);
+      return bs - as;
+    });
+    return priority;
+  }, [dbPromos]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
