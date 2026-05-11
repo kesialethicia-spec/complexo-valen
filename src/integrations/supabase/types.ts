@@ -164,6 +164,81 @@ export type Database = {
         }
         Relationships: []
       }
+      stores: {
+        Row: {
+          block: string
+          category: string
+          cover_url: string
+          created_at: string
+          cta_text: string
+          cta_url: string
+          featured: boolean
+          full_description: string
+          hours: string
+          id: string
+          location: string
+          logo_url: string
+          meta_description: string | null
+          meta_title: string | null
+          name: string
+          phone: string
+          short_description: string
+          show_on_home: boolean
+          slug: string
+          status: string
+          updated_at: string
+          whatsapp: string
+        }
+        Insert: {
+          block?: string
+          category: string
+          cover_url?: string
+          created_at?: string
+          cta_text?: string
+          cta_url?: string
+          featured?: boolean
+          full_description?: string
+          hours?: string
+          id?: string
+          location?: string
+          logo_url?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          name: string
+          phone?: string
+          short_description?: string
+          show_on_home?: boolean
+          slug: string
+          status?: string
+          updated_at?: string
+          whatsapp?: string
+        }
+        Update: {
+          block?: string
+          category?: string
+          cover_url?: string
+          created_at?: string
+          cta_text?: string
+          cta_url?: string
+          featured?: boolean
+          full_description?: string
+          hours?: string
+          id?: string
+          location?: string
+          logo_url?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string
+          phone?: string
+          short_description?: string
+          show_on_home?: boolean
+          slug?: string
+          status?: string
+          updated_at?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
