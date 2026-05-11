@@ -1,10 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Pencil, Trash2, Eye, Plus, Star } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Pencil, Trash2, Eye, Plus, Star, Search, X } from "lucide-react";
 import {
   listAllPosts,
   deletePost,
   formatPublishedDate,
+  BLOG_CATEGORIES,
   type BlogPostRow,
 } from "@/lib/blog-api";
 
@@ -17,6 +18,11 @@ function AdminBlogList() {
   const [posts, setPosts] = useState<BlogPostRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<string>("todas");
+  const [status, setStatus] = useState<string>("todos");
+  const [featured, setFeatured] = useState<string>("todos");
 
   const reload = async () => {
     setLoading(true);
@@ -31,6 +37,24 @@ function AdminBlogList() {
   };
 
   useEffect(() => { void reload(); }, []);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return posts.filter((p) => {
+      if (q && !p.title.toLowerCase().includes(q) && !p.slug.toLowerCase().includes(q)) return false;
+      if (category !== "todas" && p.category !== category) return false;
+      if (status !== "todos" && p.status !== status) return false;
+      if (featured === "principal" && !p.main_featured) return false;
+      if (featured === "destaque" && !p.featured) return false;
+      if (featured === "sem" && (p.featured || p.main_featured)) return false;
+      return true;
+    });
+  }, [posts, query, category, status, featured]);
+
+  const hasFilters = query !== "" || category !== "todas" || status !== "todos" || featured !== "todos";
+  const clearFilters = () => {
+    setQuery(""); setCategory("todas"); setStatus("todos"); setFeatured("todos");
+  };
 
   const handleDelete = async (id: string, title: string) => {
     if (!confirm(`Excluir o artigo "${title}"?`)) return;
