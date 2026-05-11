@@ -84,7 +84,7 @@ function Experiencias() {
                 {clubeItens.map((i) => (
                   <div key={i.t} className="flex items-center gap-3 rounded-2xl bg-card border border-border p-3.5">
                     <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-orange text-white">
-                      <i.icon className="h-4.5 w-4.5" />
+                      <i.icon className="h-4 w-4" />
                     </span>
                     <span className="text-sm font-semibold text-secondary">{i.t}</span>
                   </div>
