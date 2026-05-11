@@ -17,6 +17,7 @@ interface Loja {
   horario: string;
   contato: string;
   local: string;
+  logo?: string;
 }
 
 const lojas: Loja[] = [
