@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useMatches } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Fuel, Wrench, ParkingSquare, UtensilsCrossed, Coffee, Hotel, ArrowRight } from "lucide-react";
@@ -29,10 +29,6 @@ const servicos = [
 ];
 
 function Servicos() {
-  const matches = useMatches();
-  const isChild = matches.some((m) => m.routeId !== "__root__" && m.routeId !== "/servicos" && m.routeId.startsWith("/servicos/"));
-  if (isChild) return <Outlet />;
-
   return (
     <>
       <PageHero
