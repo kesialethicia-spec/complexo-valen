@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
@@ -11,6 +12,7 @@ import hotelImg from "@/assets/hotel.jpg";
 import foodImg from "@/assets/alimentacao.jpg";
 import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
+import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,6 +25,20 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
+  useEffect(() => {
+    void (async () => {
+      try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
+    })();
+  }, []);
+  const homePromos = useMemo(() => {
+    if (dbPromos.length === 0) return null;
+    return [...dbPromos].sort((a, b) => {
+      const bs = (b.show_on_home ? 2 : 0) + (b.featured ? 1 : 0);
+      const as = (a.show_on_home ? 2 : 0) + (a.featured ? 1 : 0);
+      return bs - as;
+    }).slice(0, 6);
+  }, [dbPromos]);
   return (
     <>
       {/* HERO */}
@@ -123,29 +139,53 @@ function Home() {
 
           <div className="mt-12 -mx-5 px-5 overflow-x-auto pb-4">
             <div className="flex gap-5 w-max">
-              {[
-                { cat: "Posto", title: "Diesel com preço especial", desc: "Condições exclusivas para abastecimento no Posto Valen.", date: "Até 31/12", img: postoImg },
-                { cat: "Conveniência", title: "Voucher na Conveniência", desc: "Abasteça e participe de campanhas especiais para aproveitar sua parada.", date: "Campanha ativa", img: foodImg },
-                { cat: "Estacionamento", title: "Estacionamento com condição especial", desc: "Confira as condições para garantir sua permanência no pátio.", date: "Promoção", img: parkImg },
-                { cat: "Truck Center", title: "Troca de óleo em promoção", desc: "Manutenção preventiva com condições especiais.", date: "Até esgotar", img: truckImg },
-              ].map((p) => (
-                <article key={p.title} className="w-[320px] md:w-[360px] shrink-0 overflow-hidden rounded-3xl bg-card border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all">
-                  <div className="relative h-44 overflow-hidden">
-                    <img src={p.img} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
-                    <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
-                      <Tag className="h-3 w-3" /> {p.cat}
-                    </span>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-xs font-semibold text-muted-foreground">{p.date}</p>
-                    <h3 className="mt-1.5 text-lg font-display font-bold text-secondary">{p.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.desc}</p>
-                    <Link to="/promocoes" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all">
-                      Ver promoção <ArrowRight className="h-4 w-4" />
+              {homePromos
+                ? homePromos.map((p) => (
+                    <Link
+                      key={p.id}
+                      to="/promocoes/$slug"
+                      params={{ slug: p.slug }}
+                      className="w-[320px] md:w-[360px] shrink-0 overflow-hidden rounded-3xl bg-card border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all"
+                    >
+                      <div className="relative h-44 overflow-hidden">
+                        {p.cover_url && <img src={p.cover_url} alt={p.title} className="h-full w-full object-cover" loading="lazy" />}
+                        <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+                          <Tag className="h-3 w-3" /> {p.category}
+                        </span>
+                      </div>
+                      <div className="p-6">
+                        <p className="text-xs font-semibold text-muted-foreground">{p.validity}</p>
+                        <h3 className="mt-1.5 text-lg font-display font-bold text-secondary">{p.title}</h3>
+                        <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.short_description}</p>
+                        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                          Ver promoção <ArrowRight className="h-4 w-4" />
+                        </span>
+                      </div>
                     </Link>
-                  </div>
-                </article>
-              ))}
+                  ))
+                : [
+                    { cat: "Posto", title: "Diesel com preço especial", desc: "Condições exclusivas para abastecimento no Posto Valen.", date: "Até 31/12", img: postoImg },
+                    { cat: "Conveniência", title: "Voucher na Conveniência", desc: "Abasteça e participe de campanhas especiais para aproveitar sua parada.", date: "Campanha ativa", img: foodImg },
+                    { cat: "Estacionamento", title: "Estacionamento com condição especial", desc: "Confira as condições para garantir sua permanência no pátio.", date: "Promoção", img: parkImg },
+                    { cat: "Truck Center", title: "Troca de óleo em promoção", desc: "Manutenção preventiva com condições especiais.", date: "Até esgotar", img: truckImg },
+                  ].map((p) => (
+                    <article key={p.title} className="w-[320px] md:w-[360px] shrink-0 overflow-hidden rounded-3xl bg-card border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all">
+                      <div className="relative h-44 overflow-hidden">
+                        <img src={p.img} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                        <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+                          <Tag className="h-3 w-3" /> {p.cat}
+                        </span>
+                      </div>
+                      <div className="p-6">
+                        <p className="text-xs font-semibold text-muted-foreground">{p.date}</p>
+                        <h3 className="mt-1.5 text-lg font-display font-bold text-secondary">{p.title}</h3>
+                        <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.desc}</p>
+                        <Link to="/promocoes" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all">
+                          Ver promoção <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </div>
+                    </article>
+                  ))}
             </div>
           </div>
         </div>

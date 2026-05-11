@@ -30,9 +30,17 @@ function AdminDashboard() {
             Gerenciar artigos <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="rounded-xl border bg-card p-6 shadow-sm">
+        <div className="flex flex-col rounded-xl border bg-card p-6 shadow-sm">
           <h2 className="font-semibold">Promoções</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Cadastre promoções ativas (em breve).</p>
+          <p className="mt-1 text-sm text-muted-foreground flex-1">
+            Cadastre e gerencie as promoções exibidas no site.
+          </p>
+          <Link
+            to="/admin/promocoes"
+            className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+          >
+            Gerenciar promoções <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
         <div className="rounded-xl border bg-card p-6 shadow-sm">
           <h2 className="font-semibold">Lojas e parceiros</h2>
