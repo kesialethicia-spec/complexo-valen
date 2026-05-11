@@ -26,6 +26,7 @@ import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
 import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
 import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
 import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
+import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin.blog.index'
@@ -120,6 +121,11 @@ const ServicosAlimentacaoRoute = ServicosAlimentacaoRouteImport.update({
   path: '/servicos/alimentacao',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PromocoesSlugRoute = PromocoesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PromocoesRoute,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -166,8 +172,9 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/lojas': typeof LojasRoute
   '/o-valen': typeof OValenRoute
-  '/promocoes': typeof PromocoesRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -191,8 +198,9 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/lojas': typeof LojasRoute
   '/o-valen': typeof OValenRoute
-  '/promocoes': typeof PromocoesRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -218,8 +226,9 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/lojas': typeof LojasRoute
   '/o-valen': typeof OValenRoute
-  '/promocoes': typeof PromocoesRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
   '/servicos/hotel': typeof ServicosHotelRoute
@@ -248,6 +257,7 @@ export interface FileRouteTypes {
     | '/o-valen'
     | '/promocoes'
     | '/blog/$slug'
+    | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/o-valen'
     | '/promocoes'
     | '/blog/$slug'
+    | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/o-valen'
     | '/promocoes'
     | '/blog/$slug'
+    | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
     | '/servicos/hotel'
@@ -324,7 +336,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   LojasRoute: typeof LojasRoute
   OValenRoute: typeof OValenRoute
-  PromocoesRoute: typeof PromocoesRoute
+  PromocoesRoute: typeof PromocoesRouteWithChildren
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
   ServicosHotelRoute: typeof ServicosHotelRoute
@@ -454,6 +466,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosAlimentacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/promocoes/$slug': {
+      id: '/promocoes/$slug'
+      path: '/$slug'
+      fullPath: '/promocoes/$slug'
+      preLoaderRoute: typeof PromocoesSlugRouteImport
+      parentRoute: typeof PromocoesRoute
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -538,6 +557,18 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface PromocoesRouteChildren {
+  PromocoesSlugRoute: typeof PromocoesSlugRoute
+}
+
+const PromocoesRouteChildren: PromocoesRouteChildren = {
+  PromocoesSlugRoute: PromocoesSlugRoute,
+}
+
+const PromocoesRouteWithChildren = PromocoesRoute._addFileChildren(
+  PromocoesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
@@ -548,7 +579,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   LojasRoute: LojasRoute,
   OValenRoute: OValenRoute,
-  PromocoesRoute: PromocoesRoute,
+  PromocoesRoute: PromocoesRouteWithChildren,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
   ServicosHotelRoute: ServicosHotelRoute,

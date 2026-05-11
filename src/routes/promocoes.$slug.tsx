@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Tag, Calendar } from "lucide-react";
 import { getPromotionBySlug, listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
