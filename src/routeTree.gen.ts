@@ -70,30 +70,30 @@ const ServicosIndexRoute = ServicosIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
-  id: '/truck-center',
-  path: '/truck-center',
-  getParentRoute: () => ServicosRoute,
+  id: '/servicos/truck-center',
+  path: '/servicos/truck-center',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosPostoRoute = ServicosPostoRouteImport.update({
-  id: '/posto',
-  path: '/posto',
-  getParentRoute: () => ServicosRoute,
+  id: '/servicos/posto',
+  path: '/servicos/posto',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosHotelRoute = ServicosHotelRouteImport.update({
-  id: '/hotel',
-  path: '/hotel',
-  getParentRoute: () => ServicosRoute,
+  id: '/servicos/hotel',
+  path: '/servicos/hotel',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosClubeDoCaminhoneiroRoute =
   ServicosClubeDoCaminhoneiroRouteImport.update({
-    id: '/clube-do-caminhoneiro',
-    path: '/clube-do-caminhoneiro',
-    getParentRoute: () => ServicosRoute,
+    id: '/servicos/clube-do-caminhoneiro',
+    path: '/servicos/clube-do-caminhoneiro',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const ServicosAlimentacaoRoute = ServicosAlimentacaoRouteImport.update({
-  id: '/alimentacao',
-  path: '/alimentacao',
-  getParentRoute: () => ServicosRoute,
+  id: '/servicos/alimentacao',
+  path: '/servicos/alimentacao',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -205,6 +205,11 @@ export interface RootRouteChildren {
   OValenRoute: typeof OValenRoute
   PromocoesRoute: typeof PromocoesRoute
   TrabalheConoscoRoute: typeof TrabalheConoscoRoute
+  ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
+  ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
+  ServicosHotelRoute: typeof ServicosHotelRoute
+  ServicosPostoRoute: typeof ServicosPostoRoute
+  ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -275,38 +280,38 @@ declare module '@tanstack/react-router' {
     }
     '/servicos/truck-center': {
       id: '/servicos/truck-center'
-      path: '/truck-center'
+      path: '/servicos/truck-center'
       fullPath: '/servicos/truck-center'
       preLoaderRoute: typeof ServicosTruckCenterRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof rootRouteImport
     }
     '/servicos/posto': {
       id: '/servicos/posto'
-      path: '/posto'
+      path: '/servicos/posto'
       fullPath: '/servicos/posto'
       preLoaderRoute: typeof ServicosPostoRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof rootRouteImport
     }
     '/servicos/hotel': {
       id: '/servicos/hotel'
-      path: '/hotel'
+      path: '/servicos/hotel'
       fullPath: '/servicos/hotel'
       preLoaderRoute: typeof ServicosHotelRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof rootRouteImport
     }
     '/servicos/clube-do-caminhoneiro': {
       id: '/servicos/clube-do-caminhoneiro'
-      path: '/clube-do-caminhoneiro'
+      path: '/servicos/clube-do-caminhoneiro'
       fullPath: '/servicos/clube-do-caminhoneiro'
       preLoaderRoute: typeof ServicosClubeDoCaminhoneiroRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof rootRouteImport
     }
     '/servicos/alimentacao': {
       id: '/servicos/alimentacao'
-      path: '/alimentacao'
+      path: '/servicos/alimentacao'
       fullPath: '/servicos/alimentacao'
       preLoaderRoute: typeof ServicosAlimentacaoRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -320,18 +325,13 @@ const rootRouteChildren: RootRouteChildren = {
   OValenRoute: OValenRoute,
   PromocoesRoute: PromocoesRoute,
   TrabalheConoscoRoute: TrabalheConoscoRoute,
+  ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
+  ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
+  ServicosHotelRoute: ServicosHotelRoute,
+  ServicosPostoRoute: ServicosPostoRoute,
+  ServicosTruckCenterRoute: ServicosTruckCenterRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
