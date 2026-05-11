@@ -12,7 +12,7 @@ function Contato() {
     { icon: Phone, t: "Atendimento geral", d: "(98) 0000-0000", link: "tel:+550000000000" },
     { icon: Briefcase, t: "Comercial", d: "comercial@valen.com.br", link: "mailto:comercial@valen.com.br" },
     { icon: Store, t: "Lojas", d: "(98) 0000-0001", link: "tel:+550000000001" },
-    { icon: Users, t: "Trabalhe Conosco", d: "rh@valen.com.br", link: "mailto:rh@valen.com.br" },
+    { icon: Users, t: "Trabalhe Conosco", d: "Portal de talentos", link: "https://complexovalen.portaldetalentos.senior.com.br/jobs" },
     { icon: Hotel, t: "Hotel", d: "reservas@valen.com.br", link: "mailto:reservas@valen.com.br" },
     { icon: Calendar, t: "Eventos", d: "eventos@valen.com.br", link: "mailto:eventos@valen.com.br" },
   ];
