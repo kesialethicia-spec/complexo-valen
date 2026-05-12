@@ -44,10 +44,21 @@ function Home() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-secondary text-white">
-        {/* Background sutil de caminhões */}
+        {/* Background com foto de caminhões + overlay azul forte */}
         <div className="absolute inset-0">
-          <img src={heroImg} alt="" aria-hidden="true" className="h-full w-full object-cover opacity-15" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary to-secondary/85" />
+          <img
+            src={heroImg}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover opacity-30"
+            width={1920}
+            height={1080}
+          />
+          {/* Overlay azul institucional forte */}
+          <div className="absolute inset-0 bg-secondary/80" />
+          {/* Gradiente escuro para profundidade e legibilidade */}
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/90 to-secondary/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/40" />
         </div>
         <div className="absolute -bottom-32 -left-20 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl" />
         <div className="absolute top-20 right-10 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
@@ -77,21 +88,18 @@ function Home() {
             </div>
 
             {/* Coluna direita — mascotes */}
-            <div className="relative flex items-center justify-center lg:justify-end">
-              {/* Círculo laranja de fundo */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative aspect-square w-[85%] max-w-[520px]">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-primary/70 shadow-glow" />
-                  {/* Linhas curvas de movimento */}
-                  <div className="absolute -inset-4 rounded-full border-2 border-primary/40" />
-                  <div className="absolute -inset-10 rounded-full border border-primary/25" />
-                  <div className="absolute -inset-16 rounded-full border border-primary/15" />
-                </div>
-              </div>
+            <div className="relative mx-auto w-full max-w-[520px] aspect-square">
+              {/* Linhas curvas de movimento (fora do círculo, sem cortar) */}
+              <div className="absolute inset-[-6%] rounded-full border-2 border-primary/30" />
+              <div className="absolute inset-[-14%] rounded-full border border-primary/20" />
+              <div className="absolute inset-[-22%] rounded-full border border-primary/10" />
+              {/* Círculo laranja */}
+              <div className="absolute inset-[6%] rounded-full bg-gradient-to-br from-primary to-primary/70 shadow-glow" />
+              {/* Mascotes — contain para nunca cortar */}
               <img
                 src={mascotesImg}
                 alt="Tino e Tina, mascotes do Complexo Valen"
-                className="relative z-10 w-full max-w-[560px] drop-shadow-2xl animate-fade-up"
+                className="absolute inset-0 h-full w-full object-contain object-center drop-shadow-2xl animate-fade-up p-2"
                 width={1320}
                 height={1380}
               />
