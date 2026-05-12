@@ -44,35 +44,59 @@ function Home() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-secondary text-white">
+        {/* Background sutil de caminhões */}
         <div className="absolute inset-0">
-          <img src={heroImg} alt="Complexo Valen" className="h-full w-full object-cover opacity-50" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/80 to-secondary/40" />
+          <img src={heroImg} alt="" aria-hidden="true" className="h-full w-full object-cover opacity-15" width={1920} height={1080} />
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary to-secondary/85" />
         </div>
-        <div className="absolute -bottom-32 -right-20 h-[500px] w-[500px] rounded-full bg-primary/30 blur-3xl" />
-        <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
+        <div className="absolute -bottom-32 -left-20 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute top-20 right-10 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
 
-        <div className="container-valen relative py-24 md:py-36">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/90">
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> Complexo Valen · São Luís/MA
-          </span>
-          <h1 className="mt-6 max-w-4xl text-5xl md:text-7xl lg:text-8xl font-display font-extrabold leading-[0.95] tracking-tight text-balance animate-fade-up">
-            Somos feitos<br />
-            de <span className="text-primary">movimento</span>.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg md:text-xl text-white/85 leading-relaxed">
-            Mais do que uma parada, o Valen é um ponto de apoio para quem está em movimento. Um complexo completo para caminhoneiros, empresas e pessoas que seguem em rota.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link to="/o-valen" className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold shadow-glow hover:scale-105 transition-transform">
-              Conheça o complexo <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-7 py-4 text-base font-semibold hover:bg-white/20">
-              <MapPin className="h-4 w-4" /> Como chegar
-            </a>
+        <div className="container-valen relative py-20 md:py-28 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            {/* Coluna esquerda — texto */}
+            <div className="relative z-10 text-center lg:text-left">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/90">
+                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> Complexo Valen · São Luís/MA
+              </span>
+              <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[0.95] tracking-tight text-balance animate-fade-up">
+                Somos feitos<br />
+                de <span className="text-primary">movimento.</span>
+              </h1>
+              <p className="mt-6 max-w-xl mx-auto lg:mx-0 text-lg md:text-xl text-white/85 leading-relaxed">
+                Mais do que uma parada, o Valen é um ponto de apoio para quem está em movimento. Um complexo completo para caminhoneiros, empresas e pessoas que seguem em rota.
+              </p>
+              <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
+                <Link to="/o-valen" className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold shadow-glow hover:scale-105 transition-transform">
+                  Conheça o complexo <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-7 py-4 text-base font-semibold hover:bg-white/20">
+                  <MapPin className="h-4 w-4" /> Como chegar
+                </a>
+              </div>
+            </div>
+
+            {/* Coluna direita — mascotes */}
+            <div className="relative flex items-center justify-center lg:justify-end">
+              {/* Círculo laranja de fundo */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative aspect-square w-[85%] max-w-[520px]">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-primary/70 shadow-glow" />
+                  {/* Linhas curvas de movimento */}
+                  <div className="absolute -inset-4 rounded-full border-2 border-primary/40" />
+                  <div className="absolute -inset-10 rounded-full border border-primary/25" />
+                  <div className="absolute -inset-16 rounded-full border border-primary/15" />
+                </div>
+              </div>
+              <img
+                src={mascotesImg}
+                alt="Tino e Tina, mascotes do Complexo Valen"
+                className="relative z-10 w-full max-w-[560px] drop-shadow-2xl animate-fade-up"
+                width={1320}
+                height={1380}
+              />
+            </div>
           </div>
-          <p className="mt-10 text-sm font-medium text-white/70">
-            350 mil m² de estrutura · +400 vagas · A 14 km do Porto do Itaqui
-          </p>
         </div>
 
         {/* Marquee strip */}
@@ -80,7 +104,7 @@ function Home() {
           <div className="flex animate-marquee whitespace-nowrap py-3 text-sm font-bold uppercase tracking-widest text-white/50">
             {Array.from({ length: 2 }).map((_, k) => (
               <div key={k} className="flex shrink-0">
-                {["Movimento", "Estrada", "Acolhimento", "Jornada", "Parada completa", "Experiência", "Confiança"].map((t, i) => (
+                {["Estrada", "Acolhimento", "Jornada", "Parada completa", "Experiência", "Confiança", "Movimento"].map((t, i) => (
                   <span key={i} className="flex items-center gap-6 px-6">
                     {t} <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                   </span>
