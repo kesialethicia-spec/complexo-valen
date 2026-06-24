@@ -1,0 +1,41 @@
+name: Supabase security check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - "supabase/migrations/**"
+      - "scripts/security-check.mjs"
+      - ".github/workflows/security-check.yml"
+
+jobs:
+  static-scan:
+    name: Static migration scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Scan migrations for security regressions
+        run: node scripts/security-check.mjs
+
+  supabase-lint:
+    name: Supabase db lint
+    runs-on: ubuntu-latest
+    # Only runs when a project ref + access token are configured as repo secrets.
+    if: ${{ vars.SUPABASE_PROJECT_REF != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Link project
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: supabase link --project-ref "${{ vars.SUPABASE_PROJECT_REF }}"
+      - name: Run linter (fails on warnings)
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: supabase db lint --level warning --linked
