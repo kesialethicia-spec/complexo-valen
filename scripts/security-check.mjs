@@ -149,13 +149,20 @@ for (const [file, sql] of sqlByFile) {
 }
 
 // ---------- output ----------
-if (findings.length === 0) {
-  console.log(`✓ security-check: no findings across ${files.length} migrations`);
+const active = findings.filter(
+  (f) => !ALLOWLIST.has(`${f.rule}:${f.file}:${f.message}`),
+);
+
+if (active.length === 0) {
+  console.log(
+    `✓ security-check: no new findings across ${files.length} migrations (${findings.length - active.length} allowlisted)`,
+  );
   process.exit(0);
 }
 
-console.error(`✗ security-check: ${findings.length} finding(s)\n`);
-for (const f of findings) {
+console.error(`✗ security-check: ${active.length} new finding(s)\n`);
+for (const f of active) {
   console.error(`  [${f.rule}] ${f.file}\n    ${f.message}`);
 }
 process.exit(1);
+
