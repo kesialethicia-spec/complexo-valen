@@ -25,6 +25,16 @@ import { join } from "node:path";
 
 const MIGRATIONS_DIR = "supabase/migrations";
 
+// Pre-existing findings grandfathered in when CI was introduced. New entries
+// must NOT be added here — fix the migration instead. Format: `${rule}:${file}:${message}`.
+const ALLOWLIST = new Set([
+  "grants-missing:20260511200657_3df2280b-22be-4526-b7b6-5edfb52e85bb.sql:public.profiles is created without any GRANT to a role",
+  "grants-missing:20260511202543_8b1a08d6-f37f-409f-883e-1b08435c8b8a.sql:public.blog_posts is created without any GRANT to a role",
+  "grants-missing:20260511204100_3b849e64-3566-4f54-89ae-a9621d66035e.sql:public.promotions is created without any GRANT to a role",
+  "grants-missing:20260511205421_d4f58794-9059-4346-ab6d-38d51b2cceb0.sql:public.stores is created without any GRANT to a role",
+]);
+
+
 const files = readdirSync(MIGRATIONS_DIR)
   .filter((f) => f.endsWith(".sql"))
   .sort();
