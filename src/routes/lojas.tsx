@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { PageHero } from "@/components/PageHero";
 import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
-import { listActiveStores, STORE_CATEGORIES, type StoreRow } from "@/lib/stores-api";
+import { listActiveStores, STORE_CATEGORIES, type PublicStoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas")({
   head: () => ({
