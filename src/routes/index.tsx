@@ -320,7 +320,7 @@ function Home() {
               { title: "Valen Porto Hotel", desc: "Hospedagem estratégica para descanso e negócios.", to: "/servicos/valen-porto-hotel" as const, icon: Bed },
               { title: "ValenLub", desc: "Distribuidora de lubrificantes para a estrada.", to: "/servicos" as const, icon: Fuel },
               { title: "Lotérica Valen", desc: "Serviços financeiros sem sair do complexo.", to: "/lojas" as const, icon: Tag },
-              { title: "Studio Valen", desc: "Conteúdo, comunicação e experiências do Valen.", to: "/blog" as const, icon: Newspaper },
+              { title: "Studio Valen", desc: "Conteúdo, comunicação e experiências do Valen.", to: "/blog-do-caminhoneiro" as const, icon: Newspaper },
             ].map((c) => (
               <Link key={c.title} to={c.to} className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 hover:-translate-y-1 hover:shadow-glow hover:border-primary/40 transition-all flex flex-col">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-orange text-white shadow-glow">
@@ -419,7 +419,7 @@ function Home() {
         <div className="container-valen">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <SectionHeader eyebrow="Conteúdo" title="O que movimenta o Valen" subtitle="Notícias, dicas, campanhas e novidades para quem acompanha nosso complexo." />
-            <Link to="/blog" className="shrink-0 inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground">
+            <Link to="/blog-do-caminhoneiro" className="shrink-0 inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground">
               Ver todas <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -429,7 +429,7 @@ function Home() {
               { cat: "Eventos", title: "Experiências em movimento no Valen", img: festaImg },
               { cat: "Novidades", title: "Novidades do complexo Valen", img: hotelImg },
             ].map((n) => (
-              <Link to="/blog" key={n.title} className="group overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all">
+              <Link to="/blog-do-caminhoneiro" key={n.title} className="group overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all">
                 <div className="h-48 overflow-hidden">
                   <img src={n.img} alt={n.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
                 </div>

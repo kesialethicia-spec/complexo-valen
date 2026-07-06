@@ -172,7 +172,7 @@ function AdminBlogList() {
                     <div className="flex items-center justify-end gap-1">
                       {p.status === "publicado" && (
                         <Link
-                          to="/blog/$slug"
+                          to="/blog-do-caminhoneiro/$slug"
                           params={{ slug: p.slug }}
                           target="_blank"
                           className="rounded-md p-2 hover:bg-muted"
