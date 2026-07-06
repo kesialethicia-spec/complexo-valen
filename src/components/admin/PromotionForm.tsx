@@ -79,16 +79,14 @@ export function PromotionForm({ initial, submitting, onSubmit, onCancel }: Props
           <p className="text-xs text-muted-foreground mt-1">/promocoes/{slug || "..."}</p>
         </Field>
 
-        <Field label="Imagem principal (URL)">
-          <input
-            type="url"
-            value={coverUrl}
-            onChange={(e) => setCoverUrl(e.target.value)}
-            placeholder="https://..."
-            className={inputCls}
-          />
-          {coverUrl && <img src={coverUrl} alt="" className="mt-2 max-h-48 rounded-lg object-cover border" />}
-        </Field>
+        <ImageUploadField
+          label="Imagem principal"
+          hint="Recomendado: imagem horizontal (JPG, PNG ou WebP)."
+          value={coverUrl}
+          onChange={setCoverUrl}
+          aspect="landscape"
+        />
+
 
         <Field label="Descrição curta">
           <textarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} rows={2} className={inputCls} />
