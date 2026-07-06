@@ -5,6 +5,9 @@ import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { listActiveStores, STORE_CATEGORIES, type PublicStoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    categoria: typeof search.categoria === "string" ? search.categoria : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Lojas — Complexo Valen" },
@@ -13,6 +16,22 @@ export const Route = createFileRoute("/lojas")({
   }),
   component: Lojas,
 });
+
+const CATEGORY_SLUGS: Record<string, string> = {
+  "alimentacao": "Alimentação",
+  "truck-center": "Truck Center",
+  "conveniencia": "Conveniência",
+  "autopecas": "Autopeças",
+};
+
+function slugifyCategory(cat: string): string {
+  return cat
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
+}
+
 
 const categoriaFiltros = ["Todas", ...STORE_CATEGORIES] as const;
 
@@ -55,10 +74,31 @@ function waHref(l: LojaUI): string {
 }
 
 function Lojas() {
+  const navigate = Route.useNavigate();
+  const { categoria } = Route.useSearch();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string>("Todas");
   const [items, setItems] = useState<LojaUI[]>([]);
   const [loaded, setLoaded] = useState(false);
+
+  // Sync selected filter with URL ?categoria=
+  useEffect(() => {
+    if (!categoria) {
+      setCat("Todas");
+      return;
+    }
+    const match = CATEGORY_SLUGS[categoria]
+      ?? STORE_CATEGORIES.find((c) => slugifyCategory(c) === categoria);
+    setCat(match ?? "Todas");
+  }, [categoria]);
+
+  const handleSelectCategory = (c: string) => {
+    setCat(c);
+    void navigate({
+      search: c === "Todas" ? {} : { categoria: slugifyCategory(c) },
+      replace: true,
+    });
+  };
 
   useEffect(() => {
     void (async () => {
@@ -72,6 +112,7 @@ function Lojas() {
       }
     })();
   }, []);
+
 
   const filtradas = useMemo(() => {
     const term = q.trim().toLowerCase();
@@ -108,7 +149,8 @@ function Lojas() {
             {categoriaFiltros.map((c) => (
               <button
                 key={c}
-                onClick={() => setCat(c)}
+                onClick={() => handleSelectCategory(c)}
+
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                   cat === c ? "bg-secondary text-secondary-foreground" : "bg-surface text-muted-foreground hover:bg-surface/80"
                 }`}

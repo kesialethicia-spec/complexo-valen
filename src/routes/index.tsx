@@ -208,14 +208,14 @@ function Home() {
             {[
               { icon: Fuel, title: "Abasteça", desc: "Combustível com confiança para sua rota.", to: "/servicos/posto-valen" },
               { icon: Bed, title: "Descanse", desc: "Hospedagem e estrutura para repor energias.", to: "/servicos/valen-porto-hotel" },
-              { icon: UtensilsCrossed, title: "Coma bem", desc: "Restaurante, lanchonete e conveniência.", to: "/servicos/alimentacao" },
-              { icon: Wrench, title: "Cuide do caminhão", desc: "Truck Center completo e confiável.", to: "/servicos/truck-center" },
+              { icon: UtensilsCrossed, title: "Coma bem", desc: "Restaurante, lanchonete e conveniência.", to: "/lojas", search: { categoria: "alimentacao" } as Record<string, string> | undefined },
+              { icon: Wrench, title: "Cuide do caminhão", desc: "Truck Center completo e confiável.", to: "/lojas", search: { categoria: "truck-center" } as Record<string, string> | undefined },
               { icon: ShoppingBag, title: "Resolva serviços", desc: "Lojas, lotérica e conveniência.", to: "/lojas", hash: undefined as string | undefined },
               { icon: ParkingSquare, title: "Estacione", desc: "Pátio organizado e seguro.", to: "/servicos/valenlog", hash: undefined },
               { icon: Sparkles, title: "Viva experiências", desc: "Eventos, cinema e Clube do Caminhoneiro.", to: "/experiencias", hash: undefined },
               { icon: Coffee, title: "Acolhimento", desc: "Espaço Valentina para mulheres e crianças.", to: "/servicos/valenlog", hash: "espaco-valentina" },
             ].map((c) => (
-              <Link key={c.title} to={c.to} hash={c.hash} className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-glow hover:border-primary/40">
+              <Link key={c.title} to={c.to as string} hash={(c as { hash?: string }).hash} search={(c as { search?: Record<string, string> }).search as never} className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-glow hover:border-primary/40">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-orange text-white shadow-glow">
                   <c.icon className="h-6 w-6" />
                 </div>
@@ -225,6 +225,7 @@ function Home() {
               </Link>
             ))}
           </div>
+
         </div>
       </section>
 
