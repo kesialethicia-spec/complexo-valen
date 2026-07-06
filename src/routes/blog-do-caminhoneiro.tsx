@@ -231,7 +231,7 @@ function BlogPage() {
 
             <div className="mt-10 grid gap-6 lg:grid-cols-5">
               <VideoCardLarge video={mainVideo} onPlay={() => setOpenVideo(mainVideo)} />
-              <div className="lg:col-span-2 grid gap-4">
+              <div className="lg:col-span-2 flex flex-col gap-4 self-start">
                 {otherVideos.map((v) => (
                   <VideoCardSmall key={v.id} video={v} onPlay={() => setOpenVideo(v)} />
                 ))}
