@@ -133,18 +133,27 @@ function Home() {
                 to="/promocoes/$slug"
                 params={{ slug: p.slug }}
                 aria-label={`Ver promoção: ${p.title}`}
-                className="mx-auto block w-full max-w-5xl overflow-hidden rounded-3xl bg-secondary/40 shadow-glow ring-1 ring-white/10 transition-transform hover:scale-[1.01]"
+                className="mx-auto block w-full max-w-[1200px] overflow-hidden rounded-3xl bg-secondary shadow-glow ring-1 ring-white/10 transition-transform hover:scale-[1.01]"
               >
-                <div className="relative w-full aspect-[16/9] md:aspect-[21/9]">
+                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] flex items-center justify-center overflow-hidden">
+                  {/* Fundo desfocado da própria imagem */}
+                  <img
+                    src={p.cover_url}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 h-full w-full object-cover scale-110 blur-2xl opacity-40"
+                  />
+                  {/* Imagem principal inteira */}
                   <img
                     src={p.cover_url}
                     alt={p.title}
-                    className="absolute inset-0 h-full w-full object-contain md:object-cover"
+                    className="relative h-full w-full object-contain object-center"
                     loading="eager"
                   />
                 </div>
               </Link>
             </div>
+
           </div>
         ))}
 
