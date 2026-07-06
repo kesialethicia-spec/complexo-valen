@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Search, Clock, ArrowRight, Play, Smartphone, Mail, MapPin, X, Youtube } from "lucide-react";
+import { Search, Clock, ArrowRight, Play, Mail, MapPin, X, Youtube } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { posts as fallbackPosts, categories, blogPromotions, banners, type Post } from "@/data/blog";
