@@ -53,6 +53,9 @@ function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
+  const [videos, setVideos] = useState<VideoRow[]>([]);
+  const [openVideo, setOpenVideo] = useState<VideoRow | null>(null);
+
 
   useEffect(() => {
     void (async () => {
