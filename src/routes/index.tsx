@@ -133,7 +133,7 @@ function Home() {
           />
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: Fuel, title: "Abasteça", desc: "Combustível com confiança para sua rota.", to: "/servicos/posto" },
+              { icon: Fuel, title: "Abasteça", desc: "Combustível com confiança para sua rota.", to: "/servicos/posto-valen" },
               { icon: Bed, title: "Descanse", desc: "Hospedagem e estrutura para repor energias.", to: "/servicos/valen-porto-hotel" },
               { icon: UtensilsCrossed, title: "Coma bem", desc: "Restaurante, lanchonete e conveniência.", to: "/servicos/alimentacao" },
               { icon: Wrench, title: "Cuide do caminhão", desc: "Truck Center completo e confiável.", to: "/servicos/truck-center" },
@@ -235,7 +235,7 @@ function Home() {
           />
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[
-              { title: "Posto de Combustível", desc: "Abastecimento com confiança e estrutura completa.", to: "/servicos/posto" as const, icon: Fuel },
+              { title: "Posto de Combustível", desc: "Abastecimento com confiança e estrutura completa.", to: "/servicos/posto-valen" as const, icon: Fuel },
               { title: "ValenBen — Super Troca de Óleo", desc: "Troca de óleo especializada para leves e pesados.", to: "/servicos" as const, icon: Wrench },
               { title: "Valen Center", desc: "Lojas e salas comerciais dentro do complexo.", to: "/lojas" as const, icon: ShoppingBag },
               { title: "Valen Truck Center", desc: "Manutenção, borracharia e oficinas especializadas.", to: "/servicos/truck-center" as const, icon: Wrench },

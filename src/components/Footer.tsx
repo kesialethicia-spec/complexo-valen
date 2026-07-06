@@ -45,7 +45,7 @@ export function Footer() {
           ]} />
 
           <FooterCol title="Serviços" links={[
-            ["Posto Valen", "/servicos/posto"],
+            ["Posto Valen", "/servicos/posto-valen"],
             ["Truck Center", "/servicos/truck-center"],
             ["Alimentação", "/servicos/alimentacao"],
             ["Valen Porto Hotel", "/servicos/valen-porto-hotel"],
