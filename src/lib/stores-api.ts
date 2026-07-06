@@ -55,15 +55,21 @@ export function slugify(input: string): string {
     .replace(/-+/g, "-");
 }
 
-export async function listActiveStores(): Promise<StoreRow[]> {
+// Columns readable by anonymous visitors (phone/whatsapp are restricted to authenticated users).
+export const PUBLIC_STORE_COLUMNS =
+  "id,name,slug,category,logo_url,cover_url,short_description,full_description,hours,location,block,cta_text,cta_url,status,featured,show_on_home,meta_title,meta_description,created_at,updated_at";
+
+export type PublicStoreRow = Omit<StoreRow, "phone" | "whatsapp">;
+
+export async function listActiveStores(): Promise<PublicStoreRow[]> {
   const { data, error } = await supabase
     .from("stores")
-    .select("*")
+    .select(PUBLIC_STORE_COLUMNS)
     .eq("status", "ativa")
     .order("featured", { ascending: false })
     .order("name", { ascending: true });
   if (error) throw error;
-  return (data ?? []) as StoreRow[];
+  return (data ?? []) as PublicStoreRow[];
 }
 
 export async function listAllStores(): Promise<StoreRow[]> {
@@ -75,15 +81,15 @@ export async function listAllStores(): Promise<StoreRow[]> {
   return (data ?? []) as StoreRow[];
 }
 
-export async function getStoreBySlug(slug: string): Promise<StoreRow | null> {
+export async function getStoreBySlug(slug: string): Promise<PublicStoreRow | null> {
   const { data, error } = await supabase
     .from("stores")
-    .select("*")
+    .select(PUBLIC_STORE_COLUMNS)
     .eq("slug", slug)
     .eq("status", "ativa")
     .maybeSingle();
   if (error) throw error;
-  return data as StoreRow | null;
+  return data as PublicStoreRow | null;
 }
 
 export async function getStoreById(id: string): Promise<StoreRow | null> {

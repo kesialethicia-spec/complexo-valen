@@ -1,26 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { MapPin, Phone, Clock, MessageCircle, ArrowLeft } from "lucide-react";
+import { MapPin, Clock, MessageCircle, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { getStoreBySlug, type StoreRow } from "@/lib/stores-api";
+import { getStoreBySlug, PUBLIC_STORE_COLUMNS, type PublicStoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas/$slug")({
   component: StoreDetail,
 });
 
-function buildWhatsappLink(store: StoreRow): string | null {
+function buildWhatsappLink(store: PublicStoreRow): string | null {
   if (store.cta_url) return store.cta_url;
-  if (store.whatsapp) {
-    const digits = store.whatsapp.replace(/\D/g, "");
-    if (digits) return `https://wa.me/${digits}?text=${encodeURIComponent(`Olá! Vi a ${store.name} no Valen.`)}`;
-  }
   return null;
 }
 
 function StoreDetail() {
   const { slug } = Route.useParams();
-  const [store, setStore] = useState<StoreRow | null>(null);
-  const [related, setRelated] = useState<StoreRow[]>([]);
+  const [store, setStore] = useState<PublicStoreRow | null>(null);
+  const [related, setRelated] = useState<PublicStoreRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [missing, setMissing] = useState(false);
 
@@ -35,12 +31,12 @@ function StoreDetail() {
         setStore(data);
         const { data: rel } = await supabase
           .from("stores")
-          .select("*")
+          .select(PUBLIC_STORE_COLUMNS)
           .eq("status", "ativa")
           .eq("category", data.category)
           .neq("id", data.id)
           .limit(3);
-        setRelated((rel ?? []) as StoreRow[]);
+        setRelated((rel ?? []) as PublicStoreRow[]);
       } finally {
         setLoading(false);
       }
@@ -101,7 +97,7 @@ function StoreDetail() {
           <aside className="space-y-5 rounded-3xl border bg-card p-6 h-fit">
             <div className="space-y-3 text-sm">
               {store.hours && <p className="flex items-start gap-2"><Clock className="h-4 w-4 text-primary mt-0.5" /> {store.hours}</p>}
-              {store.phone && <p className="flex items-start gap-2"><Phone className="h-4 w-4 text-primary mt-0.5" /> {store.phone}</p>}
+              
               {(store.block || store.location) && (
                 <p className="flex items-start gap-2"><MapPin className="h-4 w-4 text-primary mt-0.5" /> {[store.block, store.location].filter(Boolean).join(" • ")}</p>
               )}
