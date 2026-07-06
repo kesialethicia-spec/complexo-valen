@@ -451,7 +451,7 @@ function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void
     <button
       type="button"
       onClick={onPlay}
-      className="group grid grid-cols-[140px_1fr] gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
+      className="group flex items-center gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
     >
       <div className="relative aspect-video overflow-hidden rounded-xl">
         <img
