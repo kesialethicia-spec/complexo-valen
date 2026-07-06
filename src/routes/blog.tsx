@@ -208,8 +208,6 @@ function BlogPage() {
         </div>
       </section>
 
-      {/* Banner ValenLog */}
-      <BannerValenLog banner={midBanner} />
 
       {/* Vídeos */}
       {mainVideo && (
