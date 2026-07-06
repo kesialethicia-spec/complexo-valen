@@ -77,6 +77,39 @@ export type Database = {
         }
         Relationships: []
       }
+      hotel_page_settings: {
+        Row: {
+          gallery_urls: string[]
+          hero_image_url: string | null
+          id: boolean
+          logo_url: string | null
+          map_url: string | null
+          presentation_image_url: string | null
+          reservation_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          gallery_urls?: string[]
+          hero_image_url?: string | null
+          id?: boolean
+          logo_url?: string | null
+          map_url?: string | null
+          presentation_image_url?: string | null
+          reservation_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          gallery_urls?: string[]
+          hero_image_url?: string | null
+          id?: boolean
+          logo_url?: string | null
+          map_url?: string | null
+          presentation_image_url?: string | null
+          reservation_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
