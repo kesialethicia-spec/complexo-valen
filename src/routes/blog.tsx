@@ -124,7 +124,7 @@ function BlogPage() {
   const otherVideos = mainVideo ? videos.filter((v) => v.id !== mainVideo.id) : [];
 
 
-  const midBanner = banners.find((b) => b.placement === "blog-mid")!;
+  
 
   return (
     <>
