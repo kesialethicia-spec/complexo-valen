@@ -26,7 +26,6 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
-import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
 import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
 import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
@@ -129,11 +128,6 @@ const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
 const ServicosPostoRoute = ServicosPostoRouteImport.update({
   id: '/servicos/posto',
   path: '/servicos/posto',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicosHotelRoute = ServicosHotelRouteImport.update({
-  id: '/servicos/hotel',
-  path: '/servicos/hotel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosClubeDoCaminhoneiroRoute =
@@ -247,7 +241,6 @@ export interface FileRoutesByFullPath {
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
-  '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
@@ -284,7 +277,6 @@ export interface FileRoutesByTo {
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
-  '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
@@ -323,7 +315,6 @@ export interface FileRoutesById {
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
-  '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
@@ -363,7 +354,6 @@ export interface FileRouteTypes {
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
-    | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
@@ -400,7 +390,6 @@ export interface FileRouteTypes {
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
-    | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
@@ -438,7 +427,6 @@ export interface FileRouteTypes {
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
-    | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
@@ -473,7 +461,6 @@ export interface RootRouteChildren {
   TermosDeUsoRoute: typeof TermosDeUsoRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
-  ServicosHotelRoute: typeof ServicosHotelRoute
   ServicosPostoRoute: typeof ServicosPostoRoute
   ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
   ServicosValenPortoHotelRoute: typeof ServicosValenPortoHotelRoute
@@ -599,13 +586,6 @@ declare module '@tanstack/react-router' {
       path: '/servicos/posto'
       fullPath: '/servicos/posto'
       preLoaderRoute: typeof ServicosPostoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/hotel': {
-      id: '/servicos/hotel'
-      path: '/servicos/hotel'
-      fullPath: '/servicos/hotel'
-      preLoaderRoute: typeof ServicosHotelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicos/clube-do-caminhoneiro': {
@@ -820,7 +800,6 @@ const rootRouteChildren: RootRouteChildren = {
   TermosDeUsoRoute: TermosDeUsoRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
-  ServicosHotelRoute: ServicosHotelRoute,
   ServicosPostoRoute: ServicosPostoRoute,
   ServicosTruckCenterRoute: ServicosTruckCenterRoute,
   ServicosValenPortoHotelRoute: ServicosValenPortoHotelRoute,
