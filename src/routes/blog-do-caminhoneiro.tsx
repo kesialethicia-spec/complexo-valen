@@ -466,7 +466,7 @@ function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center pr-2">
+      <div className="flex-1 min-w-0 flex flex-col justify-center pr-2">
         <span className="text-[10px] font-bold uppercase tracking-wider text-primary">{video.category}</span>
         <h4 className="mt-1 font-display font-bold text-sm text-secondary line-clamp-2 leading-snug">
           {video.title}
