@@ -453,7 +453,7 @@ function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void
       onClick={onPlay}
       className="group flex items-center gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
     >
-      <div className="relative aspect-video overflow-hidden rounded-xl">
+      <div className="relative w-[140px] shrink-0 aspect-video overflow-hidden rounded-xl">
         <img
           src={youtubeThumbnail(video.youtube_id, "mq")}
           alt={video.title}
