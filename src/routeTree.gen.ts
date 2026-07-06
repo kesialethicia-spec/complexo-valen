@@ -23,6 +23,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ServicosValenlogRouteImport } from './routes/servicos.valenlog'
 import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
@@ -31,6 +32,7 @@ import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alime
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-valenlog'
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
@@ -115,6 +117,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const ServicosValenlogRoute = ServicosValenlogRouteImport.update({
+  id: '/servicos/valenlog',
+  path: '/servicos/valenlog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicosValenPortoHotelRoute = ServicosValenPortoHotelRouteImport.update({
   id: '/servicos/valen-porto-hotel',
   path: '/servicos/valen-porto-hotel',
@@ -155,6 +162,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
+} as any)
+const AdminPaginaValenlogRoute = AdminPaginaValenlogRouteImport.update({
+  id: '/pagina-valenlog',
+  path: '/pagina-valenlog',
+  getParentRoute: () => AdminRoute,
 } as any)
 const AdminPaginaHotelRoute = AdminPaginaHotelRouteImport.update({
   id: '/pagina-hotel',
@@ -236,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
+  '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -244,6 +257,7 @@ export interface FileRoutesByFullPath {
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
+  '/servicos/valenlog': typeof ServicosValenlogRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -272,6 +286,7 @@ export interface FileRoutesByTo {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
+  '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -280,6 +295,7 @@ export interface FileRoutesByTo {
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
+  '/servicos/valenlog': typeof ServicosValenlogRoute
   '/admin': typeof AdminIndexRoute
   '/servicos': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -310,6 +326,7 @@ export interface FileRoutesById {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
+  '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -318,6 +335,7 @@ export interface FileRoutesById {
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
+  '/servicos/valenlog': typeof ServicosValenlogRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -349,6 +367,7 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/termos-de-uso'
     | '/admin/pagina-hotel'
+    | '/admin/pagina-valenlog'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -357,6 +376,7 @@ export interface FileRouteTypes {
     | '/servicos/posto'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
+    | '/servicos/valenlog'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -385,6 +405,7 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/termos-de-uso'
     | '/admin/pagina-hotel'
+    | '/admin/pagina-valenlog'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -393,6 +414,7 @@ export interface FileRouteTypes {
     | '/servicos/posto'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
+    | '/servicos/valenlog'
     | '/admin'
     | '/servicos'
     | '/admin/blog/$id'
@@ -422,6 +444,7 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/termos-de-uso'
     | '/admin/pagina-hotel'
+    | '/admin/pagina-valenlog'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -430,6 +453,7 @@ export interface FileRouteTypes {
     | '/servicos/posto'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
+    | '/servicos/valenlog'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -464,6 +488,7 @@ export interface RootRouteChildren {
   ServicosPostoRoute: typeof ServicosPostoRoute
   ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
   ServicosValenPortoHotelRoute: typeof ServicosValenPortoHotelRoute
+  ServicosValenlogRoute: typeof ServicosValenlogRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -567,6 +592,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/servicos/valenlog': {
+      id: '/servicos/valenlog'
+      path: '/servicos/valenlog'
+      fullPath: '/servicos/valenlog'
+      preLoaderRoute: typeof ServicosValenlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos/valen-porto-hotel': {
       id: '/servicos/valen-porto-hotel'
       path: '/servicos/valen-porto-hotel'
@@ -622,6 +654,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/admin/pagina-valenlog': {
+      id: '/admin/pagina-valenlog'
+      path: '/pagina-valenlog'
+      fullPath: '/admin/pagina-valenlog'
+      preLoaderRoute: typeof AdminPaginaValenlogRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/admin/pagina-hotel': {
       id: '/admin/pagina-hotel'
@@ -719,6 +758,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
+  AdminPaginaValenlogRoute: typeof AdminPaginaValenlogRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
   AdminBlogNovoRoute: typeof AdminBlogNovoRoute
@@ -736,6 +776,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminPaginaHotelRoute: AdminPaginaHotelRoute,
+  AdminPaginaValenlogRoute: AdminPaginaValenlogRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
   AdminBlogNovoRoute: AdminBlogNovoRoute,
@@ -803,6 +844,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosPostoRoute: ServicosPostoRoute,
   ServicosTruckCenterRoute: ServicosTruckCenterRoute,
   ServicosValenPortoHotelRoute: ServicosValenPortoHotelRoute,
+  ServicosValenlogRoute: ServicosValenlogRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport

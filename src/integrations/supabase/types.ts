@@ -293,6 +293,42 @@ export type Database = {
         }
         Relationships: []
       }
+      valenlog_page_settings: {
+        Row: {
+          classificacao_image_url: string | null
+          gallery_urls: string[]
+          hero_image_url: string | null
+          id: boolean
+          inspecao_image_url: string | null
+          map_url: string | null
+          presentation_image_url: string | null
+          updated_at: string
+          valentina_image_urls: string[]
+        }
+        Insert: {
+          classificacao_image_url?: string | null
+          gallery_urls?: string[]
+          hero_image_url?: string | null
+          id?: boolean
+          inspecao_image_url?: string | null
+          map_url?: string | null
+          presentation_image_url?: string | null
+          updated_at?: string
+          valentina_image_urls?: string[]
+        }
+        Update: {
+          classificacao_image_url?: string | null
+          gallery_urls?: string[]
+          hero_image_url?: string | null
+          id?: boolean
+          inspecao_image_url?: string | null
+          map_url?: string | null
+          presentation_image_url?: string | null
+          updated_at?: string
+          valentina_image_urls?: string[]
+        }
+        Relationships: []
+      }
       videos: {
         Row: {
           category: string
