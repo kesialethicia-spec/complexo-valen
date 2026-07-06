@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Search, Clock, ArrowRight, Play, Smartphone, Mail, MapPin } from "lucide-react";
+import { Search, Clock, ArrowRight, Play, Smartphone, Mail, MapPin, X, Youtube } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
-import { posts as fallbackPosts, categories, videos, blogPromotions, banners, type Post } from "@/data/blog";
+import { posts as fallbackPosts, categories, blogPromotions, banners, type Post } from "@/data/blog";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
+import { listPublishedVideos, youtubeThumbnail, youtubeEmbedUrl, type VideoRow } from "@/lib/videos-api";
+
 
 function adaptRow(row: BlogPostRow): Post {
   return {
