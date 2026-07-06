@@ -101,6 +101,7 @@ function RootComponent() {
           </main>
           <Footer />
         </div>
+        <CookieBanner />
       </AuthProvider>
     </QueryClientProvider>
   );
