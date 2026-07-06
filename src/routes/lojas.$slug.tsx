@@ -15,8 +15,8 @@ function buildWhatsappLink(store: PublicStoreRow): string | null {
 
 function StoreDetail() {
   const { slug } = Route.useParams();
-  const [store, setStore] = useState<StoreRow | null>(null);
-  const [related, setRelated] = useState<StoreRow[]>([]);
+  const [store, setStore] = useState<PublicStoreRow | null>(null);
+  const [related, setRelated] = useState<PublicStoreRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [missing, setMissing] = useState(false);
 
@@ -31,12 +31,12 @@ function StoreDetail() {
         setStore(data);
         const { data: rel } = await supabase
           .from("stores")
-          .select("*")
+          .select(PUBLIC_STORE_COLUMNS)
           .eq("status", "ativa")
           .eq("category", data.category)
           .neq("id", data.id)
           .limit(3);
-        setRelated((rel ?? []) as StoreRow[]);
+        setRelated((rel ?? []) as PublicStoreRow[]);
       } finally {
         setLoading(false);
       }
