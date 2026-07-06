@@ -1,19 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { MapPin, Phone, Clock, MessageCircle, ArrowLeft } from "lucide-react";
+import { MapPin, Clock, MessageCircle, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { getStoreBySlug, type StoreRow } from "@/lib/stores-api";
+import { getStoreBySlug, PUBLIC_STORE_COLUMNS, type PublicStoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas/$slug")({
   component: StoreDetail,
 });
 
-function buildWhatsappLink(store: StoreRow): string | null {
+function buildWhatsappLink(store: PublicStoreRow): string | null {
   if (store.cta_url) return store.cta_url;
-  if (store.whatsapp) {
-    const digits = store.whatsapp.replace(/\D/g, "");
-    if (digits) return `https://wa.me/${digits}?text=${encodeURIComponent(`Olá! Vi a ${store.name} no Valen.`)}`;
-  }
   return null;
 }
 
