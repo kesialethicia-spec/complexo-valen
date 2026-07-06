@@ -6,6 +6,8 @@ import {
   type PromotionRow,
   type PromotionStatus,
 } from "@/lib/promotions-api";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
+
 
 interface Props {
   initial?: PromotionRow;
