@@ -99,7 +99,7 @@ const servicos: ServicoBloco[] = [
     img: festaImg,
   },
   {
-    to: "/servicos/hotel",
+    to: "/servicos/valen-porto-hotel",
     icon: Hotel,
     title: "Valen Porto Hotel",
     desc: "Hospedagem estratégica para descanso, negócios e eventos corporativos.",
