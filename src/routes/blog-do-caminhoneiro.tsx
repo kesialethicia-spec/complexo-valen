@@ -231,7 +231,7 @@ function BlogPage() {
 
             <div className="mt-10 grid gap-6 lg:grid-cols-5">
               <VideoCardLarge video={mainVideo} onPlay={() => setOpenVideo(mainVideo)} />
-              <div className="lg:col-span-2 grid gap-4">
+              <div className="lg:col-span-2 flex flex-col gap-4 self-start">
                 {otherVideos.map((v) => (
                   <VideoCardSmall key={v.id} video={v} onPlay={() => setOpenVideo(v)} />
                 ))}
@@ -451,9 +451,9 @@ function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void
     <button
       type="button"
       onClick={onPlay}
-      className="group grid grid-cols-[140px_1fr] gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
+      className="group flex items-center gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
     >
-      <div className="relative aspect-video overflow-hidden rounded-xl">
+      <div className="relative w-[140px] shrink-0 aspect-video overflow-hidden rounded-xl">
         <img
           src={youtubeThumbnail(video.youtube_id, "mq")}
           alt={video.title}
@@ -466,7 +466,7 @@ function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center pr-2">
+      <div className="flex-1 min-w-0 flex flex-col justify-center pr-2">
         <span className="text-[10px] font-bold uppercase tracking-wider text-primary">{video.category}</span>
         <h4 className="mt-1 font-display font-bold text-sm text-secondary line-clamp-2 leading-snug">
           {video.title}
