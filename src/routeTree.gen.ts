@@ -23,14 +23,15 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
-import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
 import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
 import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
 import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
@@ -114,6 +115,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const ServicosValenPortoHotelRoute = ServicosValenPortoHotelRouteImport.update({
+  id: '/servicos/valen-porto-hotel',
+  path: '/servicos/valen-porto-hotel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
   id: '/servicos/truck-center',
   path: '/servicos/truck-center',
@@ -122,11 +128,6 @@ const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
 const ServicosPostoRoute = ServicosPostoRouteImport.update({
   id: '/servicos/posto',
   path: '/servicos/posto',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicosHotelRoute = ServicosHotelRouteImport.update({
-  id: '/servicos/hotel',
-  path: '/servicos/hotel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosClubeDoCaminhoneiroRoute =
@@ -154,6 +155,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
+} as any)
+const AdminPaginaHotelRoute = AdminPaginaHotelRouteImport.update({
+  id: '/pagina-hotel',
+  path: '/pagina-hotel',
+  getParentRoute: () => AdminRoute,
 } as any)
 const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
   id: '/videos/',
@@ -229,14 +235,15 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
-  '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -264,14 +271,15 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
-  '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/admin': typeof AdminIndexRoute
   '/servicos': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -301,14 +309,15 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
-  '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -339,14 +348,15 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-hotel'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
-    | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/valen-porto-hotel'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -374,14 +384,15 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-hotel'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
-    | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/valen-porto-hotel'
     | '/admin'
     | '/servicos'
     | '/admin/blog/$id'
@@ -410,14 +421,15 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-hotel'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
-    | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/valen-porto-hotel'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -449,9 +461,9 @@ export interface RootRouteChildren {
   TermosDeUsoRoute: typeof TermosDeUsoRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
-  ServicosHotelRoute: typeof ServicosHotelRoute
   ServicosPostoRoute: typeof ServicosPostoRoute
   ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
+  ServicosValenPortoHotelRoute: typeof ServicosValenPortoHotelRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -555,6 +567,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/servicos/valen-porto-hotel': {
+      id: '/servicos/valen-porto-hotel'
+      path: '/servicos/valen-porto-hotel'
+      fullPath: '/servicos/valen-porto-hotel'
+      preLoaderRoute: typeof ServicosValenPortoHotelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos/truck-center': {
       id: '/servicos/truck-center'
       path: '/servicos/truck-center'
@@ -567,13 +586,6 @@ declare module '@tanstack/react-router' {
       path: '/servicos/posto'
       fullPath: '/servicos/posto'
       preLoaderRoute: typeof ServicosPostoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/hotel': {
-      id: '/servicos/hotel'
-      path: '/servicos/hotel'
-      fullPath: '/servicos/hotel'
-      preLoaderRoute: typeof ServicosHotelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicos/clube-do-caminhoneiro': {
@@ -610,6 +622,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/admin/pagina-hotel': {
+      id: '/admin/pagina-hotel'
+      path: '/pagina-hotel'
+      fullPath: '/admin/pagina-hotel'
+      preLoaderRoute: typeof AdminPaginaHotelRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/admin/videos/': {
       id: '/admin/videos/'
@@ -699,6 +718,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
   AdminBlogNovoRoute: typeof AdminBlogNovoRoute
@@ -715,6 +735,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminPaginaHotelRoute: AdminPaginaHotelRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
   AdminBlogNovoRoute: AdminBlogNovoRoute,
@@ -779,9 +800,9 @@ const rootRouteChildren: RootRouteChildren = {
   TermosDeUsoRoute: TermosDeUsoRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
-  ServicosHotelRoute: ServicosHotelRoute,
   ServicosPostoRoute: ServicosPostoRoute,
   ServicosTruckCenterRoute: ServicosTruckCenterRoute,
+  ServicosValenPortoHotelRoute: ServicosValenPortoHotelRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport

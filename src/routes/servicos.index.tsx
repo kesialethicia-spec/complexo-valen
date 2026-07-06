@@ -22,7 +22,7 @@ export const Route = createFileRoute("/servicos/")({
 });
 
 interface ServicoBloco {
-  to?: "/servicos/posto" | "/servicos/truck-center" | "/servicos/hotel" | "/servicos/clube-do-caminhoneiro" | "/lojas" | "/blog";
+  to?: "/servicos/posto" | "/servicos/truck-center" | "/servicos/valen-porto-hotel" | "/servicos/clube-do-caminhoneiro" | "/lojas" | "/blog";
   icon: typeof Fuel;
   title: string;
   desc: string;
@@ -99,7 +99,7 @@ const servicos: ServicoBloco[] = [
     img: festaImg,
   },
   {
-    to: "/servicos/hotel",
+    to: "/servicos/valen-porto-hotel",
     icon: Hotel,
     title: "Valen Porto Hotel",
     desc: "Hospedagem estratégica para descanso, negócios e eventos corporativos.",
