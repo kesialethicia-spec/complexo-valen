@@ -39,10 +39,10 @@ const fallback: LojaUI[] = [
   { id: "f3", name: "AutoPeças Rota", category: "Autopeças", short_description: "Peças, acessórios e produtos automotivos.", hours: "08h às 18h", phone: "(98) 0000-0003", whatsapp: "", location: "Truck Center", block: "", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
 ];
 
-function toUI(s: StoreRow): LojaUI {
+function toUI(s: PublicStoreRow): LojaUI {
   return {
     id: s.id, slug: s.slug, name: s.name, category: s.category, short_description: s.short_description,
-    hours: s.hours, phone: s.phone, whatsapp: s.whatsapp, location: s.location, block: s.block,
+    hours: s.hours, phone: "", whatsapp: "", location: s.location, block: s.block,
     logo_url: s.logo_url, cta_text: s.cta_text, cta_url: s.cta_url, featured: s.featured,
   };
 }
