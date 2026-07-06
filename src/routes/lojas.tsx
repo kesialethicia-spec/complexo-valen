@@ -149,7 +149,8 @@ function Lojas() {
             {categoriaFiltros.map((c) => (
               <button
                 key={c}
-                onClick={() => setCat(c)}
+                onClick={() => handleSelectCategory(c)}
+
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                   cat === c ? "bg-secondary text-secondary-foreground" : "bg-surface text-muted-foreground hover:bg-surface/80"
                 }`}
