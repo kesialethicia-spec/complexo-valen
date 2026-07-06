@@ -97,7 +97,7 @@ function StoreDetail() {
           <aside className="space-y-5 rounded-3xl border bg-card p-6 h-fit">
             <div className="space-y-3 text-sm">
               {store.hours && <p className="flex items-start gap-2"><Clock className="h-4 w-4 text-primary mt-0.5" /> {store.hours}</p>}
-              {store.phone && <p className="flex items-start gap-2"><Phone className="h-4 w-4 text-primary mt-0.5" /> {store.phone}</p>}
+              
               {(store.block || store.location) && (
                 <p className="flex items-start gap-2"><MapPin className="h-4 w-4 text-primary mt-0.5" /> {[store.block, store.location].filter(Boolean).join(" • ")}</p>
               )}
