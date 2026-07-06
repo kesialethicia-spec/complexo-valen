@@ -150,7 +150,6 @@ function HotelPage() {
               icon: BedDouble,
               title: "Acomodações",
               items: ["Quartos confortáveis", "Wi-Fi", "Ar-condicionado", "Café da manhã"],
-              extras: [Wifi, Wind, Coffee],
             },
             {
               icon: Briefcase,
