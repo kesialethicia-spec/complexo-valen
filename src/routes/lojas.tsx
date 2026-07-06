@@ -5,6 +5,9 @@ import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { listActiveStores, STORE_CATEGORIES, type PublicStoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    categoria: typeof search.categoria === "string" ? search.categoria : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Lojas — Complexo Valen" },
@@ -13,6 +16,22 @@ export const Route = createFileRoute("/lojas")({
   }),
   component: Lojas,
 });
+
+const CATEGORY_SLUGS: Record<string, string> = {
+  "alimentacao": "Alimentação",
+  "truck-center": "Truck Center",
+  "conveniencia": "Conveniência",
+  "autopecas": "Autopeças",
+};
+
+function slugifyCategory(cat: string): string {
+  return cat
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
+}
+
 
 const categoriaFiltros = ["Todas", ...STORE_CATEGORIES] as const;
 
