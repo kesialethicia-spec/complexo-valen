@@ -134,7 +134,7 @@ function Home() {
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Fuel, title: "Abasteça", desc: "Combustível com confiança para sua rota.", to: "/servicos/posto" },
-              { icon: Bed, title: "Descanse", desc: "Hospedagem e estrutura para repor energias.", to: "/servicos/hotel" },
+              { icon: Bed, title: "Descanse", desc: "Hospedagem e estrutura para repor energias.", to: "/servicos/valen-porto-hotel" },
               { icon: UtensilsCrossed, title: "Coma bem", desc: "Restaurante, lanchonete e conveniência.", to: "/servicos/alimentacao" },
               { icon: Wrench, title: "Cuide do caminhão", desc: "Truck Center completo e confiável.", to: "/servicos/truck-center" },
               { icon: ShoppingBag, title: "Resolva serviços", desc: "Lojas, lotérica e conveniência.", to: "/lojas" },
@@ -243,7 +243,7 @@ function Home() {
               { title: "Classificação de Grãos", desc: "Serviço exclusivo de apoio às operações agrícolas.", to: "/servicos" as const, icon: Sparkles },
               { title: "Espaço Valentina", desc: "Acolhimento e cuidado para quem passa pelo Valen.", to: "/experiencias" as const, icon: Coffee },
               { title: "Clube do Caminhoneiro", desc: "Convivência, lazer e bem-estar para o motorista.", to: "/servicos/clube-do-caminhoneiro" as const, icon: Sparkles },
-              { title: "Valen Porto Hotel", desc: "Hospedagem estratégica para descanso e negócios.", to: "/servicos/hotel" as const, icon: Bed },
+              { title: "Valen Porto Hotel", desc: "Hospedagem estratégica para descanso e negócios.", to: "/servicos/valen-porto-hotel" as const, icon: Bed },
               { title: "ValenLub", desc: "Distribuidora de lubrificantes para a estrada.", to: "/servicos" as const, icon: Fuel },
               { title: "Lotérica Valen", desc: "Serviços financeiros sem sair do complexo.", to: "/lojas" as const, icon: Tag },
               { title: "Studio Valen", desc: "Conteúdo, comunicação e experiências do Valen.", to: "/blog" as const, icon: Newspaper },

@@ -48,7 +48,7 @@ export function Footer() {
             ["Posto Valen", "/servicos/posto"],
             ["Truck Center", "/servicos/truck-center"],
             ["Alimentação", "/servicos/alimentacao"],
-            ["Valen Porto Hotel", "/servicos/hotel"],
+            ["Valen Porto Hotel", "/servicos/valen-porto-hotel"],
             ["Clube do Caminhoneiro", "/servicos/clube-do-caminhoneiro"],
           ]} />
 
