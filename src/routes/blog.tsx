@@ -74,7 +74,15 @@ function BlogPage() {
         setDbPromos(rows);
       } catch { /* keep fallback */ }
     })();
+    void (async () => {
+      try {
+        setVideos(await listPublishedVideos());
+      } catch {
+        setVideos([]);
+      }
+    })();
   }, []);
+
 
   const blogPromosList = useMemo(() => {
     if (dbPromos.length === 0) return null;
