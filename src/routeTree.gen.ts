@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as OValenRouteImport } from './routes/o-valen'
 import { Route as LojasRouteImport } from './routes/lojas'
 import { Route as LoginRouteImport } from './routes/login'
@@ -39,9 +41,19 @@ import { Route as AdminLojasIdRouteImport } from './routes/admin.lojas.$id'
 import { Route as AdminBlogNovoRouteImport } from './routes/admin.blog.novo'
 import { Route as AdminBlogIdRouteImport } from './routes/admin.blog.$id'
 
+const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
+  id: '/termos-de-uso',
+  path: '/termos-de-uso',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PromocoesRoute = PromocoesRouteImport.update({
   id: '/promocoes',
   path: '/promocoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OValenRoute = OValenRouteImport.update({
@@ -196,7 +208,9 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/lojas': typeof LojasRouteWithChildren
   '/o-valen': typeof OValenRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
+  '/termos-de-uso': typeof TermosDeUsoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -226,7 +240,9 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/lojas': typeof LojasRouteWithChildren
   '/o-valen': typeof OValenRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
+  '/termos-de-uso': typeof TermosDeUsoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -258,7 +274,9 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/lojas': typeof LojasRouteWithChildren
   '/o-valen': typeof OValenRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
+  '/termos-de-uso': typeof TermosDeUsoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -291,7 +309,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/lojas'
     | '/o-valen'
+    | '/politica-de-privacidade'
     | '/promocoes'
+    | '/termos-de-uso'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -321,7 +341,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/lojas'
     | '/o-valen'
+    | '/politica-de-privacidade'
     | '/promocoes'
+    | '/termos-de-uso'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -352,7 +374,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/lojas'
     | '/o-valen'
+    | '/politica-de-privacidade'
     | '/promocoes'
+    | '/termos-de-uso'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -384,7 +408,9 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   LojasRoute: typeof LojasRouteWithChildren
   OValenRoute: typeof OValenRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   PromocoesRoute: typeof PromocoesRouteWithChildren
+  TermosDeUsoRoute: typeof TermosDeUsoRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
   ServicosHotelRoute: typeof ServicosHotelRoute
@@ -395,11 +421,25 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos-de-uso': {
+      id: '/termos-de-uso'
+      path: '/termos-de-uso'
+      fullPath: '/termos-de-uso'
+      preLoaderRoute: typeof TermosDeUsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/promocoes': {
       id: '/promocoes'
       path: '/promocoes'
       fullPath: '/promocoes'
       preLoaderRoute: typeof PromocoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/o-valen': {
@@ -671,7 +711,9 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   LojasRoute: LojasRouteWithChildren,
   OValenRoute: OValenRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   PromocoesRoute: PromocoesRouteWithChildren,
+  TermosDeUsoRoute: TermosDeUsoRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
   ServicosHotelRoute: ServicosHotelRoute,
