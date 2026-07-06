@@ -1,71 +1,86 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, Tag, Calendar } from "lucide-react";
 import { getPromotionBySlug, listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
+import postoImg from "@/assets/posto.jpg";
+
+const promotionQueryOptions = (slug: string) =>
+  queryOptions({
+    queryKey: ["promotion", slug],
+    queryFn: async () => {
+      const item = await getPromotionBySlug(slug);
+      if (!item) throw notFound();
+      const all = await listActivePromotions();
+      const related = all.filter((p) => p.category === item.category && p.id !== item.id).slice(0, 3);
+      return { item, related };
+    },
+  });
 
 export const Route = createFileRoute("/promocoes/$slug")({
+  loader: ({ params, context }) => context.queryClient.ensureQueryData(promotionQueryOptions(params.slug)),
+  head: ({ loaderData }) => {
+    if (!loaderData) {
+      return { meta: [{ title: "Promoção não encontrada | Promoções Valen" }, { name: "robots", content: "noindex" }] };
+    }
+    const { item } = loaderData as { item: PromotionRow };
+    const title = item.meta_title || `${item.title} | Promoções Valen`;
+    const description =
+      item.meta_description ||
+      `Confira os detalhes da promoção ${item.title} no Complexo Valen.`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "article" },
+        ...(item.cover_url ? [{ property: "og:image", content: item.cover_url }] : []),
+      ],
+    };
+  },
   component: PromotionDetail,
+  errorComponent: ({ error }) => (
+    <div className="container-valen py-20 text-center">
+      <h1 className="text-2xl font-display font-bold">Erro ao carregar promoção</h1>
+      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+      <Link to="/promocoes" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground">
+        <ArrowLeft className="h-4 w-4" /> Voltar
+      </Link>
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="container-valen py-20 text-center">
+      <h1 className="text-2xl font-display font-bold">Promoção não encontrada</h1>
+      <p className="mt-2 text-sm text-muted-foreground">Esta promoção pode ter sido encerrada ou ainda não foi publicada.</p>
+      <Link to="/promocoes" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground">
+        <ArrowLeft className="h-4 w-4" /> Voltar para promoções
+      </Link>
+    </div>
+  ),
 });
 
 function PromotionDetail() {
   const { slug } = Route.useParams();
-  const [item, setItem] = useState<PromotionRow | null>(null);
-  const [related, setRelated] = useState<PromotionRow[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    void (async () => {
-      setLoading(true);
-      try {
-        const data = await getPromotionBySlug(slug);
-        if (!data) {
-          setError("Promoção não encontrada.");
-        } else {
-          setItem(data);
-          if (data.meta_title) document.title = data.meta_title;
-          else document.title = `${data.title} — Promoções Valen`;
-          const all = await listActivePromotions();
-          setRelated(all.filter((p) => p.category === data.category && p.id !== data.id).slice(0, 3));
-        }
-      } catch (e: unknown) {
-        setError(e instanceof Error ? e.message : "Erro ao carregar promoção");
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [slug]);
-
-  if (loading) {
-    return <div className="container-valen py-20 text-center text-sm text-muted-foreground">Carregando…</div>;
-  }
-
-  if (error || !item) {
-    return (
-      <div className="container-valen py-20 text-center">
-        <h1 className="text-2xl font-display font-bold">Promoção não encontrada</h1>
-        <p className="mt-2 text-sm text-muted-foreground">{error}</p>
-        <Link to="/promocoes" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground">
-          <ArrowLeft className="h-4 w-4" /> Voltar para promoções
-        </Link>
-      </div>
-    );
-  }
+  const { data } = useSuspenseQuery(promotionQueryOptions(slug));
+  const { item, related } = data;
+  const cover = item.cover_url || postoImg;
 
   return (
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-secondary text-white">
         <div className="absolute inset-0">
-          {item.cover_url && (
-            <img src={item.cover_url} alt={item.title} className="h-full w-full object-cover opacity-40" />
-          )}
+          <img src={cover} alt={item.title} className="h-full w-full object-cover opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/90 to-secondary/60" />
         </div>
         <div className="container-valen relative py-20 md:py-28">
-          <Link to="/promocoes" className="inline-flex items-center gap-1 text-sm text-white/80 hover:text-white">
-            <ArrowLeft className="h-4 w-4" /> Promoções
-          </Link>
+          <nav className="text-xs text-white/70">
+            <Link to="/" className="hover:text-white">Home</Link>
+            <span className="mx-2">/</span>
+            <Link to="/promocoes" className="hover:text-white">Promoções</Link>
+            <span className="mx-2">/</span>
+            <span className="text-white/90">{item.title}</span>
+          </nav>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
               <Tag className="h-3 w-3" /> {item.category}
@@ -85,12 +100,23 @@ function PromotionDetail() {
         </div>
       </section>
 
+      {/* IMAGEM DESTAQUE */}
+      {item.cover_url && (
+        <section className="bg-background pt-12">
+          <div className="container-valen max-w-4xl">
+            <div className="overflow-hidden rounded-3xl shadow-glow">
+              <img src={item.cover_url} alt={item.title} className="w-full h-auto object-cover" />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CONTEÚDO */}
       <section className="py-16 bg-background">
         <div className="container-valen max-w-3xl">
           {item.full_description && (
             <>
-              <h2 className="text-2xl font-display font-bold text-secondary">Como participar</h2>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Como participar</h2>
               <div className="mt-4 whitespace-pre-line text-base leading-relaxed text-foreground/90">
                 {item.full_description}
               </div>
@@ -99,7 +125,7 @@ function PromotionDetail() {
 
           {item.rules && (
             <div className="mt-12">
-              <h2 className="text-2xl font-display font-bold text-secondary">Regulamento</h2>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Regulamento e regras</h2>
               <div className="mt-4 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
                 {item.rules}
               </div>
@@ -110,7 +136,7 @@ function PromotionDetail() {
             <div className="mt-12">
               <a
                 href={item.cta_url}
-                target="_blank"
+                target={item.cta_url.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow hover:scale-105 transition-transform"
               >
@@ -135,7 +161,7 @@ function PromotionDetail() {
                   className="block overflow-hidden rounded-3xl bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                 >
                   <div className="relative h-44 overflow-hidden">
-                    {p.cover_url && <img src={p.cover_url} alt={p.title} className="h-full w-full object-cover" loading="lazy" />}
+                    <img src={p.cover_url || postoImg} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
                     <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
                       <Tag className="h-3 w-3" /> {p.category}
                     </span>
