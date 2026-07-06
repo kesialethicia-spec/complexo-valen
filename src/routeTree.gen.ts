@@ -32,6 +32,7 @@ import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alime
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
 import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
@@ -161,6 +162,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AdminPaginaHotelRoute = AdminPaginaHotelRouteImport.update({
+  id: '/pagina-hotel',
+  path: '/pagina-hotel',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
   id: '/videos/',
   path: '/videos/',
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -271,6 +278,7 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -309,6 +317,7 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-hotel'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -384,6 +394,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-hotel'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -421,6 +432,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-hotel'
     | '/blog/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -631,6 +643,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/admin/pagina-hotel': {
+      id: '/admin/pagina-hotel'
+      path: '/pagina-hotel'
+      fullPath: '/admin/pagina-hotel'
+      preLoaderRoute: typeof AdminPaginaHotelRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/videos/': {
       id: '/admin/videos/'
       path: '/videos'
@@ -719,6 +738,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
   AdminBlogNovoRoute: typeof AdminBlogNovoRoute
@@ -735,6 +755,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminPaginaHotelRoute: AdminPaginaHotelRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
   AdminBlogNovoRoute: AdminBlogNovoRoute,
