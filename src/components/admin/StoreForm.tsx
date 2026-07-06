@@ -6,6 +6,8 @@ import {
   type StoreRow,
   type StoreStatus,
 } from "@/lib/stores-api";
+import { ImageUploadField } from "./ImageUploadField";
+
 
 interface Props {
   initial?: StoreRow;
@@ -84,14 +86,20 @@ export function StoreForm({ initial, submitting, onSubmit, onCancel }: Props) {
         </Field>
 
         <div className="grid gap-4 md:grid-cols-2">
-          <Field label="Logo (URL)">
-            <input type="url" value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)} placeholder="https://..." className={inputCls} />
-            {logoUrl && <img src={logoUrl} alt="" className="mt-2 h-24 w-24 rounded-2xl object-contain bg-white p-2 border" />}
-          </Field>
-          <Field label="Imagem principal (URL)">
-            <input type="url" value={coverUrl} onChange={(e) => setCoverUrl(e.target.value)} placeholder="https://..." className={inputCls} />
-            {coverUrl && <img src={coverUrl} alt="" className="mt-2 max-h-32 rounded-lg object-cover border" />}
-          </Field>
+          <ImageUploadField
+            label="Logo da loja"
+            hint="Recomendado: imagem quadrada (ex.: 400×400px)."
+            value={logoUrl}
+            onChange={setLogoUrl}
+            aspect="square"
+          />
+          <ImageUploadField
+            label="Imagem principal"
+            hint="Recomendado: imagem horizontal (ex.: 1200×675px)."
+            value={coverUrl}
+            onChange={setCoverUrl}
+            aspect="landscape"
+          />
         </div>
 
         <Field label="Descrição curta">
