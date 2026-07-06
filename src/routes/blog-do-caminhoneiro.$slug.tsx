@@ -5,13 +5,13 @@ import { marked } from "marked";
 import { posts as fallbackPosts, banners, type Post } from "@/data/blog";
 import { getPostBySlug, formatPublishedDate } from "@/lib/blog-api";
 
-export const Route = createFileRoute("/blog/$slug")({
+export const Route = createFileRoute("/blog-do-caminhoneiro/$slug")({
   notFoundComponent: () => (
     <div className="container-valen py-32 text-center">
       <h1 className="text-4xl font-display font-extrabold text-secondary">Artigo não encontrado</h1>
       <p className="mt-4 text-muted-foreground">O conteúdo que você procura pode ter sido movido.</p>
       <Link
-        to="/blog"
+        to="/blog-do-caminhoneiro"
         className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-6 py-3 text-sm font-semibold text-primary-foreground"
       >
         Voltar para o blog <ArrowRight className="h-4 w-4" />
@@ -98,7 +98,7 @@ function ArticlePage() {
           <nav className="text-xs text-white/70 mb-6">
             <Link to="/" className="hover:text-white">Home</Link>
             <span className="mx-2">/</span>
-            <Link to="/blog" className="hover:text-white">Blog do Caminhoneiro</Link>
+            <Link to="/blog-do-caminhoneiro" className="hover:text-white">Blog do Caminhoneiro</Link>
             <span className="mx-2">/</span>
             <span className="text-white/50">{post.category}</span>
           </nav>
@@ -156,7 +156,7 @@ function ArticlePage() {
               <ul className="mt-4 space-y-4">
                 {readAlso.map((p) => (
                   <li key={p.slug}>
-                    <Link to="/blog/$slug" params={{ slug: p.slug }} className="group grid grid-cols-[64px_1fr] gap-3">
+                    <Link to="/blog-do-caminhoneiro/$slug" params={{ slug: p.slug }} className="group grid grid-cols-[64px_1fr] gap-3">
                       <img src={p.cover} alt="" className="h-16 w-16 rounded-xl object-cover" loading="lazy" />
                       <div>
                         <span className="text-[10px] font-bold uppercase tracking-wider text-primary">

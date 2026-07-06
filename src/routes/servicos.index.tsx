@@ -22,7 +22,7 @@ export const Route = createFileRoute("/servicos/")({
 });
 
 interface ServicoBloco {
-  to?: "/servicos/posto-valen" | "/servicos/truck-center" | "/servicos/valen-porto-hotel" | "/servicos/clube-do-caminhoneiro" | "/lojas" | "/blog";
+  to?: "/servicos/posto-valen" | "/servicos/truck-center" | "/servicos/valen-porto-hotel" | "/servicos/clube-do-caminhoneiro" | "/lojas" | "/blog-do-caminhoneiro";
   icon: typeof Fuel;
   title: string;
   desc: string;
@@ -118,7 +118,7 @@ const servicos: ServicoBloco[] = [
     img: hotelImg,
   },
   {
-    to: "/blog",
+    to: "/blog-do-caminhoneiro",
     icon: Mic,
     title: "Studio Valen",
     desc: "Canal de comunicação, conteúdo e experiências do Complexo Valen.",

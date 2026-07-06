@@ -110,7 +110,7 @@ function Experiencias() {
       <section className="py-20 bg-surface">
         <div className="container-valen text-center">
           <h2 className="text-4xl md:text-5xl font-display font-extrabold text-secondary">Acompanhe nossas próximas ações</h2>
-          <Link to="/blog" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow">Ver novidades</Link>
+          <Link to="/blog-do-caminhoneiro" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow">Ver novidades</Link>
         </div>
       </section>
     </>

@@ -28,7 +28,7 @@ function adaptRow(row: BlogPostRow): Post {
   };
 }
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog-do-caminhoneiro")({
   head: () => ({
     meta: [
       { title: "Blog do Caminhoneiro — Complexo Valen" },
@@ -344,7 +344,7 @@ function BlogPage() {
 function ArticleCardLarge({ post }: { post: Post }) {
   return (
     <Link
-      to="/blog/$slug"
+      to="/blog-do-caminhoneiro/$slug"
       params={{ slug: post.slug }}
       className="group block rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
     >
@@ -376,7 +376,7 @@ function ArticleCardLarge({ post }: { post: Post }) {
 function ArticleCardSmall({ post }: { post: Post }) {
   return (
     <Link
-      to="/blog/$slug"
+      to="/blog-do-caminhoneiro/$slug"
       params={{ slug: post.slug }}
       className="group flex flex-col rounded-2xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
     >
