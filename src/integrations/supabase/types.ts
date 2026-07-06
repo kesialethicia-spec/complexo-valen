@@ -260,6 +260,48 @@ export type Database = {
         }
         Relationships: []
       }
+      videos: {
+        Row: {
+          category: string
+          created_at: string
+          featured: boolean
+          id: string
+          short_description: string
+          sort_order: number
+          status: string
+          title: string
+          updated_at: string
+          youtube_id: string
+          youtube_url: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          featured?: boolean
+          id?: string
+          short_description?: string
+          sort_order?: number
+          status?: string
+          title: string
+          updated_at?: string
+          youtube_id: string
+          youtube_url: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          featured?: boolean
+          id?: string
+          short_description?: string
+          sort_order?: number
+          status?: string
+          title?: string
+          updated_at?: string
+          youtube_id?: string
+          youtube_url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
