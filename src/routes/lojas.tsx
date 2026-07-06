@@ -74,10 +74,31 @@ function waHref(l: LojaUI): string {
 }
 
 function Lojas() {
+  const navigate = Route.useNavigate();
+  const { categoria } = Route.useSearch();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string>("Todas");
   const [items, setItems] = useState<LojaUI[]>([]);
   const [loaded, setLoaded] = useState(false);
+
+  // Sync selected filter with URL ?categoria=
+  useEffect(() => {
+    if (!categoria) {
+      setCat("Todas");
+      return;
+    }
+    const match = CATEGORY_SLUGS[categoria]
+      ?? STORE_CATEGORIES.find((c) => slugifyCategory(c) === categoria);
+    setCat(match ?? "Todas");
+  }, [categoria]);
+
+  const handleSelectCategory = (c: string) => {
+    setCat(c);
+    void navigate({
+      search: c === "Todas" ? {} : { categoria: slugifyCategory(c) },
+      replace: true,
+    });
+  };
 
   useEffect(() => {
     void (async () => {
@@ -91,6 +112,7 @@ function Lojas() {
       }
     })();
   }, []);
+
 
   const filtradas = useMemo(() => {
     const term = q.trim().toLowerCase();
