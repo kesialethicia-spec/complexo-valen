@@ -11,6 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { CookieBanner } from "@/components/CookieBanner";
 import { AuthProvider } from "@/hooks/use-auth";
 
 function NotFoundComponent() {
@@ -100,6 +101,7 @@ function RootComponent() {
           </main>
           <Footer />
         </div>
+        <CookieBanner />
       </AuthProvider>
     </QueryClientProvider>
   );

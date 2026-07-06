@@ -78,6 +78,14 @@ export function Footer() {
             <span className="opacity-40">·</span>
             <Link to="/termos-de-uso" className="hover:text-primary">Termos de Uso</Link>
             <span className="opacity-40">·</span>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("valen:open-cookie-preferences"))}
+              className="hover:text-primary"
+            >
+              Preferências de cookies
+            </button>
+            <span className="opacity-40">·</span>
             <Link to="/conecte-se" className="hover:text-primary">Área Administrativa</Link>
           </p>
 
