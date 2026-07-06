@@ -77,7 +77,19 @@ function AdminDashboard() {
           >
             Editar página do hotel <ArrowRight className="h-4 w-4" />
           </Link>
+        <div className="flex flex-col rounded-xl border bg-card p-6 shadow-sm">
+          <h2 className="font-semibold">Página ValenLog</h2>
+          <p className="mt-1 text-sm text-muted-foreground flex-1">
+            Gerencie imagens da página do ValenLog e do Espaço Valentina.
+          </p>
+          <Link
+            to="/admin/pagina-valenlog"
+            className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+          >
+            Editar página do ValenLog <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
+      </div>
       </div>
 
     </div>

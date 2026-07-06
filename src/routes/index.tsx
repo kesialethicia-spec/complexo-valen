@@ -142,7 +142,7 @@ function Home() {
               { icon: Sparkles, title: "Viva experiências", desc: "Eventos, cinema e Clube do Caminhoneiro.", to: "/experiencias", hash: undefined },
               { icon: Coffee, title: "Acolhimento", desc: "Espaço Valentina para mulheres e crianças.", to: "/servicos/valenlog", hash: "espaco-valentina" },
             ].map((c) => (
-              <Link key={c.title} to={c.to} className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-glow hover:border-primary/40">
+              <Link key={c.title} to={c.to} hash={c.hash} className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-glow hover:border-primary/40">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-orange text-white shadow-glow">
                   <c.icon className="h-6 w-6" />
                 </div>
