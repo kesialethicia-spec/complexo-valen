@@ -487,17 +487,17 @@ function BannerValenLog({ banner }: { banner: typeof banners[number] }) {
 
 /* -------------------- Vídeos -------------------- */
 
-function VideoCardLarge({ video }: { video: typeof videos[number] }) {
+function VideoCardLarge({ video, onPlay }: { video: VideoRow; onPlay: () => void }) {
   return (
-    <a
-      href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
-      target="_blank"
-      rel="noreferrer"
-      className="lg:col-span-3 group block rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow transition-all"
+    <button
+      type="button"
+      onClick={onPlay}
+      className="lg:col-span-3 group text-left block rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow transition-all"
     >
       <div className="relative aspect-video overflow-hidden">
         <img
-          src={`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`}
+          src={youtubeThumbnail(video.youtube_id, "max")}
+          onError={(e) => { (e.currentTarget as HTMLImageElement).src = youtubeThumbnail(video.youtube_id, "hq"); }}
           alt={video.title}
           className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
           loading="lazy"
@@ -512,23 +512,24 @@ function VideoCardLarge({ video }: { video: typeof videos[number] }) {
       <div className="p-6">
         <span className="text-xs font-bold uppercase tracking-wider text-primary">{video.category}</span>
         <h3 className="mt-2 text-2xl font-display font-bold text-secondary">{video.title}</h3>
-        <p className="mt-2 text-muted-foreground">{video.description}</p>
+        {video.short_description && (
+          <p className="mt-2 text-muted-foreground">{video.short_description}</p>
+        )}
       </div>
-    </a>
+    </button>
   );
 }
 
-function VideoCardSmall({ video }: { video: typeof videos[number] }) {
+function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void }) {
   return (
-    <a
-      href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
-      target="_blank"
-      rel="noreferrer"
-      className="group grid grid-cols-[140px_1fr] gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3"
+    <button
+      type="button"
+      onClick={onPlay}
+      className="group grid grid-cols-[140px_1fr] gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
     >
       <div className="relative aspect-video overflow-hidden rounded-xl">
         <img
-          src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
+          src={youtubeThumbnail(video.youtube_id, "mq")}
           alt={video.title}
           className="h-full w-full object-cover"
           loading="lazy"
@@ -545,9 +546,58 @@ function VideoCardSmall({ video }: { video: typeof videos[number] }) {
           {video.title}
         </h4>
       </div>
-    </a>
+    </button>
   );
 }
+
+function VideoModal({ video, onClose }: { video: VideoRow | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!video) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [video, onClose]);
+
+  if (!video) return null;
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fechar"
+          className="absolute -top-12 right-0 inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1.5 text-sm text-white hover:bg-white/20"
+        >
+          <X className="h-4 w-4" /> Fechar
+        </button>
+        <div className="relative aspect-video overflow-hidden rounded-2xl bg-black shadow-glow">
+          <iframe
+            src={youtubeEmbedUrl(video.youtube_id)}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full"
+          />
+        </div>
+        <div className="mt-4 text-white">
+          <span className="text-xs font-bold uppercase tracking-wider text-primary">{video.category}</span>
+          <h3 className="mt-1 text-xl font-display font-bold">{video.title}</h3>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 /* -------------------- Newsletter -------------------- */
 
