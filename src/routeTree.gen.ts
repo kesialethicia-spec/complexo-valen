@@ -23,6 +23,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoRouteImport } from './routes/servicos.posto'
 import { Route as ServicosHotelRouteImport } from './routes/servicos.hotel'
@@ -113,6 +114,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const ServicosValenPortoHotelRoute = ServicosValenPortoHotelRouteImport.update({
+  id: '/servicos/valen-porto-hotel',
+  path: '/servicos/valen-porto-hotel',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
   id: '/servicos/truck-center',
@@ -237,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -272,6 +279,7 @@ export interface FileRoutesByTo {
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/admin': typeof AdminIndexRoute
   '/servicos': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -309,6 +317,7 @@ export interface FileRoutesById {
   '/servicos/hotel': typeof ServicosHotelRoute
   '/servicos/posto': typeof ServicosPostoRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
+  '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -347,6 +356,7 @@ export interface FileRouteTypes {
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/valen-porto-hotel'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -382,6 +392,7 @@ export interface FileRouteTypes {
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/valen-porto-hotel'
     | '/admin'
     | '/servicos'
     | '/admin/blog/$id'
@@ -418,6 +429,7 @@ export interface FileRouteTypes {
     | '/servicos/hotel'
     | '/servicos/posto'
     | '/servicos/truck-center'
+    | '/servicos/valen-porto-hotel'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -452,6 +464,7 @@ export interface RootRouteChildren {
   ServicosHotelRoute: typeof ServicosHotelRoute
   ServicosPostoRoute: typeof ServicosPostoRoute
   ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
+  ServicosValenPortoHotelRoute: typeof ServicosValenPortoHotelRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -554,6 +567,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/servicos/valen-porto-hotel': {
+      id: '/servicos/valen-porto-hotel'
+      path: '/servicos/valen-porto-hotel'
+      fullPath: '/servicos/valen-porto-hotel'
+      preLoaderRoute: typeof ServicosValenPortoHotelRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/servicos/truck-center': {
       id: '/servicos/truck-center'
@@ -782,6 +802,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosHotelRoute: ServicosHotelRoute,
   ServicosPostoRoute: ServicosPostoRoute,
   ServicosTruckCenterRoute: ServicosTruckCenterRoute,
+  ServicosValenPortoHotelRoute: ServicosValenPortoHotelRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport

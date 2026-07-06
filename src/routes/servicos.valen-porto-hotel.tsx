@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MapPin, ArrowRight, Building2, BedDouble, Briefcase, Wifi, Coffee, Wind, Users, Sparkles, Heart } from "lucide-react";
+import { MapPin, ArrowRight, Building2, BedDouble, Briefcase, Sparkles, Heart } from "lucide-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getHotelPageSettings } from "@/lib/hotel-settings-api";
 import fachadaAsset from "@/assets/hotel/fachada.jpg.asset.json";
