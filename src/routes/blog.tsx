@@ -120,8 +120,9 @@ function BlogPage() {
   const featured = posts.filter((p) => p.featured && p.slug !== main.slug).slice(0, 4);
   const recent = filtered.filter((p) => p.slug !== main.slug).slice(0, 9);
 
-  const mainVideo = videos.find((v) => v.featured) ?? videos[0];
-  const otherVideos = videos.filter((v) => v.id !== mainVideo.id);
+  const mainVideo = videos.find((v) => v.featured) ?? videos[0] ?? null;
+  const otherVideos = mainVideo ? videos.filter((v) => v.id !== mainVideo.id) : [];
+
 
   const midBanner = banners.find((b) => b.placement === "blog-mid")!;
 
