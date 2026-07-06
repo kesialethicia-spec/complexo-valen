@@ -17,7 +17,7 @@ function AdminDashboard() {
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col rounded-xl border bg-card p-6 shadow-sm">
           <h2 className="font-semibold">Blog do Caminhoneiro</h2>
           <p className="mt-1 text-sm text-muted-foreground flex-1">
@@ -54,7 +54,20 @@ function AdminDashboard() {
             Gerenciar lojas <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+        <div className="flex flex-col rounded-xl border bg-card p-6 shadow-sm">
+          <h2 className="font-semibold">Vídeos</h2>
+          <p className="mt-1 text-sm text-muted-foreground flex-1">
+            Cadastre vídeos do YouTube para a seção "Vídeos para quem vive na estrada".
+          </p>
+          <Link
+            to="/admin/videos"
+            className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+          >
+            Gerenciar vídeos <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
+
     </div>
   );
 }
