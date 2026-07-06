@@ -124,38 +124,25 @@ function Home() {
           </div>
         </div>
 
-        {/* Slides de promoções — apenas a arte, sem textos sobrepostos */}
+        {/* Slides de promoções — arte full-bleed, sem moldura */}
         {heroPromos.map((p, i) => (
           <div key={p.id} className={slideIdx === i + 1 ? "block" : "hidden"}>
-            <div className="absolute inset-0 bg-secondary" />
-            <div className="container-valen relative py-10 md:py-14 lg:py-16">
-              <Link
-                to="/promocoes/$slug"
-                params={{ slug: p.slug }}
-                aria-label={`Ver promoção: ${p.title}`}
-                className="mx-auto block w-full max-w-[1200px] overflow-hidden rounded-3xl bg-secondary shadow-glow ring-1 ring-white/10 transition-transform hover:scale-[1.01]"
-              >
-                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] flex items-center justify-center overflow-hidden">
-                  {/* Fundo desfocado da própria imagem */}
-                  <img
-                    src={p.cover_url}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 h-full w-full object-cover scale-110 blur-2xl opacity-40"
-                  />
-                  {/* Imagem principal inteira */}
-                  <img
-                    src={p.cover_url}
-                    alt={p.title}
-                    className="relative h-full w-full object-contain object-center"
-                    loading="eager"
-                  />
-                </div>
-              </Link>
-            </div>
-
+            <Link
+              to="/promocoes/$slug"
+              params={{ slug: p.slug }}
+              aria-label={`Ver promoção: ${p.title}`}
+              className="relative block w-full min-h-[520px] md:min-h-[640px] lg:min-h-[720px] bg-secondary overflow-hidden"
+            >
+              <img
+                src={p.cover_url}
+                alt={p.title}
+                loading="eager"
+                className="absolute inset-0 h-full w-full object-cover [object-position:center_top] md:[object-position:center_center]"
+              />
+            </Link>
           </div>
         ))}
+
 
         {/* Controles do carrossel */}
         {totalSlides > 1 && (
