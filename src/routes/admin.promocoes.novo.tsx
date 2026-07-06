@@ -16,12 +16,14 @@ function NewPromotion() {
     setSubmitting(true);
     try {
       await createPromotion(data);
+      alert("Promoção salva com sucesso!");
       navigate({ to: "/admin/promocoes" });
     } catch (e: unknown) {
       alert(e instanceof Error ? e.message : "Erro ao salvar promoção");
       setSubmitting(false);
     }
   };
+
 
   return (
     <div className="space-y-6">
