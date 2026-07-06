@@ -97,7 +97,7 @@ function Home() {
               <div className="absolute inset-[6%] rounded-full bg-gradient-to-br from-primary to-primary/70 shadow-glow" />
               {/* Mascotes — contain para nunca cortar */}
               <img
-                src={mascotesImg}
+                src={mascotesAsset.url}
                 alt="Tino e Tina, mascotes do Complexo Valen"
                 className="absolute inset-0 h-full w-full object-contain object-center drop-shadow-2xl animate-fade-up p-2"
                 width={1320}
