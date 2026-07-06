@@ -21,7 +21,7 @@ function TermosDeUso() {
       <section className="py-20 bg-background">
         <div className="container-valen max-w-4xl">
           <article className="space-y-6 text-foreground/90 leading-relaxed">
-            <p className="text-sm text-muted-foreground">Última atualização: [inserir data]</p>
+            <p className="text-sm text-muted-foreground">Última atualização: 06.07.2026</p>
 
             <p>Bem-vindo ao site do Complexo Valen. Ao acessar ou utilizar este site, você concorda com estes Termos de Uso. Caso não concorde com alguma condição, recomendamos que não utilize o site.</p>
 
@@ -89,8 +89,8 @@ function TermosDeUso() {
 
             <Section title="12. Contato">
               <p>Para dúvidas sobre estes Termos de Uso, entre em contato:</p>
-              <p>E-mail: [inserir e-mail oficial]</p>
-              <p>Telefone/WhatsApp: [inserir contato]</p>
+              <p>E-mail: marketing@redevalen.com</p>
+              <p>Telefone/WhatsApp: +55 (98) 98445-8884</p>
             </Section>
           </article>
         </div>

@@ -21,7 +21,7 @@ function PoliticaDePrivacidade() {
       <section className="py-20 bg-background">
         <div className="container-valen max-w-4xl">
           <article className="prose-valen space-y-6 text-foreground/90 leading-relaxed">
-            <p className="text-sm text-muted-foreground">Última atualização: [inserir data]</p>
+            <p className="text-sm text-muted-foreground">Última atualização: 06.07.2026</p>
 
             <p>
               O Complexo Valen valoriza a privacidade e a segurança das informações de seus usuários, clientes, parceiros, candidatos e visitantes. Esta Política de Privacidade explica de forma simples como podemos coletar, utilizar, armazenar e proteger dados pessoais fornecidos por meio deste site.
@@ -118,8 +118,8 @@ function PoliticaDePrivacidade() {
 
             <Section title="10. Como entrar em contato">
               <p>Para dúvidas, solicitações ou exercício de direitos relacionados à privacidade e proteção de dados, entre em contato pelo canal oficial:</p>
-              <p>E-mail: [inserir e-mail oficial de contato/LGPD]</p>
-              <p>Telefone/WhatsApp: [inserir contato]</p>
+              <p>E-mail: marketing@redevalen.com</p>
+              <p>Telefone/WhatsApp: +55 (98) 98445-8884</p>
             </Section>
 
             <Section title="11. Alterações nesta Política">
