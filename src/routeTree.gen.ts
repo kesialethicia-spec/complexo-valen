@@ -31,6 +31,7 @@ import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alime
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
 import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin.blog.index'
@@ -152,6 +153,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
+  id: '/videos/',
+  path: '/videos/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPromocoesIndexRoute = AdminPromocoesIndexRouteImport.update({
   id: '/promocoes/',
   path: '/promocoes/',
@@ -230,6 +236,7 @@ export interface FileRoutesByFullPath {
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/lojas/': typeof AdminLojasIndexRoute
   '/admin/promocoes/': typeof AdminPromocoesIndexRoute
+  '/admin/videos/': typeof AdminVideosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -262,6 +269,7 @@ export interface FileRoutesByTo {
   '/admin/blog': typeof AdminBlogIndexRoute
   '/admin/lojas': typeof AdminLojasIndexRoute
   '/admin/promocoes': typeof AdminPromocoesIndexRoute
+  '/admin/videos': typeof AdminVideosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -296,6 +304,7 @@ export interface FileRoutesById {
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/lojas/': typeof AdminLojasIndexRoute
   '/admin/promocoes/': typeof AdminPromocoesIndexRoute
+  '/admin/videos/': typeof AdminVideosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/admin/blog/'
     | '/admin/lojas/'
     | '/admin/promocoes/'
+    | '/admin/videos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -363,6 +373,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/lojas'
     | '/admin/promocoes'
+    | '/admin/videos'
   id:
     | '__root__'
     | '/'
@@ -396,6 +407,7 @@ export interface FileRouteTypes {
     | '/admin/blog/'
     | '/admin/lojas/'
     | '/admin/promocoes/'
+    | '/admin/videos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -575,6 +587,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/admin/videos/': {
+      id: '/admin/videos/'
+      path: '/videos'
+      fullPath: '/admin/videos/'
+      preLoaderRoute: typeof AdminVideosIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/promocoes/': {
       id: '/admin/promocoes/'
       path: '/promocoes'
@@ -652,6 +671,7 @@ interface AdminRouteChildren {
   AdminBlogIndexRoute: typeof AdminBlogIndexRoute
   AdminLojasIndexRoute: typeof AdminLojasIndexRoute
   AdminPromocoesIndexRoute: typeof AdminPromocoesIndexRoute
+  AdminVideosIndexRoute: typeof AdminVideosIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
@@ -665,6 +685,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminBlogIndexRoute: AdminBlogIndexRoute,
   AdminLojasIndexRoute: AdminLojasIndexRoute,
   AdminPromocoesIndexRoute: AdminPromocoesIndexRoute,
+  AdminVideosIndexRoute: AdminVideosIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
