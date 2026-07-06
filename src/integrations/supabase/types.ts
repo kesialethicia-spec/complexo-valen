@@ -110,6 +110,48 @@ export type Database = {
         }
         Relationships: []
       }
+      posto_page_settings: {
+        Row: {
+          abastecimento_image_url: string | null
+          conveniencia_image_url: string | null
+          hero_image_url: string | null
+          id: boolean
+          logo_url: string | null
+          map_url: string | null
+          payment_logos: string[]
+          payment_strip_url: string | null
+          posto_image_url: string | null
+          updated_at: string
+          whatsapp_url: string | null
+        }
+        Insert: {
+          abastecimento_image_url?: string | null
+          conveniencia_image_url?: string | null
+          hero_image_url?: string | null
+          id?: boolean
+          logo_url?: string | null
+          map_url?: string | null
+          payment_logos?: string[]
+          payment_strip_url?: string | null
+          posto_image_url?: string | null
+          updated_at?: string
+          whatsapp_url?: string | null
+        }
+        Update: {
+          abastecimento_image_url?: string | null
+          conveniencia_image_url?: string | null
+          hero_image_url?: string | null
+          id?: boolean
+          logo_url?: string | null
+          map_url?: string | null
+          payment_logos?: string[]
+          payment_strip_url?: string | null
+          posto_image_url?: string | null
+          updated_at?: string
+          whatsapp_url?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
