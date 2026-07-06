@@ -7,7 +7,8 @@ import hotelImg from "@/assets/hotel.jpg";
 import postoImg from "@/assets/posto.jpg";
 import truckImg from "@/assets/truck-center.jpg";
 import foodImg from "@/assets/alimentacao.jpg";
-import equipeImg from "@/assets/equipe-valen.png";
+import equipeAsset from "@/assets/equipe-valen.png.asset.json";
+const equipeImg = equipeAsset.url;
 
 export const Route = createFileRoute("/o-valen")({
   head: () => ({
