@@ -212,24 +212,51 @@ function BlogPage() {
       <BannerValenLog banner={midBanner} />
 
       {/* Vídeos */}
-      <section className="py-20 bg-background">
-        <div className="container-valen">
-          <SectionHeader
-            eyebrow="Vídeos"
-            title="Vídeos para quem vive na estrada"
-            subtitle="Aprenda, atualize-se e descubra o que movimenta o complexo."
-          />
+      {mainVideo && (
+        <section className="py-20 bg-background">
+          <div className="container-valen">
+            <div className="flex items-end justify-between flex-wrap gap-4">
+              <SectionHeader
+                eyebrow="Vídeos"
+                title="Vídeos para quem vive na estrada"
+                subtitle="Aprenda, atualize-se e descubra o que movimenta o complexo."
+              />
+              <a
+                href="https://www.youtube.com/@complexovalen/videos"
+                target="_blank"
+                rel="noreferrer"
+                className="hidden md:inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:scale-105 transition-transform"
+              >
+                <Youtube className="h-4 w-4" /> Ver canal no YouTube
+              </a>
+            </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-5">
-            <VideoCardLarge video={mainVideo} />
-            <div className="lg:col-span-2 grid gap-4">
-              {otherVideos.map((v) => (
-                <VideoCardSmall key={v.id} video={v} />
-              ))}
+            <div className="mt-10 grid gap-6 lg:grid-cols-5">
+              <VideoCardLarge video={mainVideo} onPlay={() => setOpenVideo(mainVideo)} />
+              <div className="lg:col-span-2 grid gap-4">
+                {otherVideos.map((v) => (
+                  <VideoCardSmall key={v.id} video={v} onPlay={() => setOpenVideo(v)} />
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 md:hidden">
+              <a
+                href="https://www.youtube.com/@complexovalen/videos"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+              >
+                <Youtube className="h-4 w-4" /> Ver canal no YouTube
+              </a>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      <VideoModal video={openVideo} onClose={() => setOpenVideo(null)} />
+
+
 
       {/* Promoções */}
       <section className="py-20 bg-gradient-soft">
