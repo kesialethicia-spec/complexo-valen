@@ -73,11 +73,14 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4 text-xs text-white/60">
           <p>© {new Date().getFullYear()} Complexo Valen. Todos os direitos reservados.</p>
-          <p className="flex items-center gap-3">
-            <span>Política de Privacidade · Termos de Uso</span>
+          <p className="flex flex-wrap items-center gap-3">
+            <Link to="/politica-de-privacidade" className="hover:text-primary">Política de Privacidade</Link>
+            <span className="opacity-40">·</span>
+            <Link to="/termos-de-uso" className="hover:text-primary">Termos de Uso</Link>
             <span className="opacity-40">·</span>
             <Link to="/conecte-se" className="hover:text-primary">Área Administrativa</Link>
           </p>
+
         </div>
       </div>
     </footer>
