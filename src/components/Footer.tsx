@@ -16,8 +16,20 @@ export function Footer() {
               Somos feitos<br />de <span className="text-primary">movimento</span>.
             </p>
             <div className="mt-6 flex gap-3">
-              {[Instagram, Facebook, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 hover:bg-primary transition-colors">
+              {[
+                { Icon: Instagram, href: "https://www.instagram.com/posto.valen/", label: "Instagram do Posto Valen" },
+                { Icon: Facebook, href: "https://www.facebook.com/grupovalen1/?locale=pt_BR", label: "Facebook do Grupo Valen" },
+                { Icon: Youtube, href: "https://www.youtube.com/@complexovalen/videos", label: "YouTube do Complexo Valen" },
+                { Icon: Linkedin, href: "https://br.linkedin.com/company/grupovalen", label: "LinkedIn do Grupo Valen" },
+              ].map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-primary hover:text-primary-foreground transition-colors"
+                >
                   <Icon className="h-4 w-4" />
                 </a>
               ))}
