@@ -282,9 +282,60 @@ function AdminExperienciasPage() {
                   />
                   <input
                     className="rounded-md border bg-background px-3 py-2 text-sm"
+                    placeholder="Título (opcional, sobrepõe o nome)"
+                    value={ev.title ?? ""}
+                    onChange={(e) => updEvent(i, { title: e.target.value })}
+                  />
+                  <input
+                    className="rounded-md border bg-background px-3 py-2 text-sm"
+                    placeholder="Slug (opcional)"
+                    value={ev.slug ?? ""}
+                    onChange={(e) => updEvent(i, { slug: e.target.value })}
+                  />
+                  <input
+                    className="rounded-md border bg-background px-3 py-2 text-sm"
                     placeholder="Data / período (ex: Julho 2026)"
                     value={ev.period}
                     onChange={(e) => updEvent(i, { period: e.target.value })}
+                  />
+                  <input
+                    className="rounded-md border bg-background px-3 py-2 text-sm"
+                    placeholder="Localização (opcional)"
+                    value={ev.location ?? ""}
+                    onChange={(e) => updEvent(i, { location: e.target.value })}
+                  />
+                  <select
+                    className="rounded-md border bg-background px-3 py-2 text-sm"
+                    value={ev.category ?? ""}
+                    onChange={(e) => updEvent(i, { category: e.target.value })}
+                  >
+                    <option value="">Categoria…</option>
+                    <option>Evento</option>
+                    <option>Saúde</option>
+                    <option>Experiência</option>
+                    <option>Campanha</option>
+                    <option>Institucional</option>
+                  </select>
+                  <select
+                    className="rounded-md border bg-background px-3 py-2 text-sm"
+                    value={ev.event_status ?? ""}
+                    onChange={(e) => updEvent(i, { event_status: e.target.value })}
+                  >
+                    <option value="">Status do evento…</option>
+                    <option>Realizado</option>
+                    <option>Em breve</option>
+                    <option>Inscrições abertas</option>
+                  </select>
+                  <input
+                    type="number"
+                    className="rounded-md border bg-background px-3 py-2 text-sm"
+                    placeholder="Ordem de exibição"
+                    value={ev.order ?? ""}
+                    onChange={(e) =>
+                      updEvent(i, {
+                        order: e.target.value === "" ? undefined : Number(e.target.value),
+                      })
+                    }
                   />
                 </div>
                 <textarea
@@ -294,14 +345,21 @@ function AdminExperienciasPage() {
                   value={ev.description}
                   onChange={(e) => updEvent(i, { description: e.target.value })}
                 />
+                <textarea
+                  className="w-full rounded-md border bg-background px-3 py-2 text-sm"
+                  placeholder="Descrição completa (aparece no modal ao clicar em 'Ver detalhes')"
+                  rows={4}
+                  value={ev.full_description ?? ""}
+                  onChange={(e) => updEvent(i, { full_description: e.target.value })}
+                />
                 <input
                   className="w-full rounded-md border bg-background px-3 py-2 text-sm"
-                  placeholder="Link (opcional)"
+                  placeholder="Link 'Ver detalhes' (opcional — se vazio, abre modal)"
                   value={ev.link}
                   onChange={(e) => updEvent(i, { link: e.target.value })}
                 />
                 <ImageUploadField
-                  label="Imagem do evento"
+                  label="Imagem de capa"
                   value={ev.image_url}
                   onChange={(url) => updEvent(i, { image_url: url })}
                   aspect="landscape"
@@ -328,6 +386,7 @@ function AdminExperienciasPage() {
                     Destaque
                   </label>
                 </div>
+
               </div>
             ))}
             <button
