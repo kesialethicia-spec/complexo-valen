@@ -88,7 +88,7 @@ const estrutura: EstruturaCard[] = [
   { icon: Wrench, title: "Truck Center", desc: "Manutenção, borracharia, mecânica e serviços para caminhões.", to: "/lojas?categoria=truck-center" },
   { icon: BedDouble, title: "Valen Porto Hotel", desc: "Hospedagem estratégica para negócios, descanso e equipes.", to: "/servicos/valen-porto-hotel" },
   { icon: Droplets, title: "ValenLub", desc: "Lubrificantes, filtros, químicos, palhetas, Arla e automotivos.", to: "/servicos" },
-  { icon: RefreshCw, title: "ValenBen Super Troca de Óleo", desc: "Troca de óleo para veículos pesados com produtos homologados." },
+  { icon: RefreshCw, title: "ValenBen Super Troca de Óleo", desc: "Troca de óleo para veículos pesados com produtos homologados.", to: "/servicos/valenben-super-troca-de-oleo" },
   { icon: Coffee, title: "Clube do Caminhoneiro", desc: "Espaço de descanso, convivência e benefícios para a estrada.", to: "/experiencias" },
   { icon: Sparkles, title: "Espaço Valentina", desc: "Acolhimento para mulheres e crianças dentro do ValenLog.", to: "/servicos/valenlog#espaco-valentina" },
 ];
