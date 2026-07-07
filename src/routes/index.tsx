@@ -15,6 +15,7 @@ import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
+import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 
 export const Route = createFileRoute("/")({
   head: () => ({
