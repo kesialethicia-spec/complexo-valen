@@ -11,6 +11,7 @@ type AdminLink =
   | "/admin/promocoes"
   | "/admin/lojas"
   | "/admin/videos"
+  | "/admin/pagina-o-valen"
   | "/admin/pagina-hotel"
   | "/admin/pagina-valenlog"
   | "/admin/pagina-posto";
@@ -20,6 +21,7 @@ const cards: { title: string; desc: string; to: AdminLink; cta: string }[] = [
   { title: "Promoções", desc: "Cadastre e gerencie as promoções exibidas no site.", to: "/admin/promocoes", cta: "Gerenciar promoções" },
   { title: "Lojas do Complexo", desc: "Gerencie as lojas, serviços e operações presentes no Complexo Valen.", to: "/admin/lojas", cta: "Gerenciar lojas" },
   { title: "Vídeos", desc: "Cadastre vídeos do YouTube para a seção “Vídeos para quem vive na estrada”.", to: "/admin/videos", cta: "Gerenciar vídeos" },
+  { title: "Página O Valen", desc: "Gerencie imagens da página institucional 'O Valen', linha do tempo, galeria e Instagram.", to: "/admin/pagina-o-valen", cta: "Editar página O Valen" },
   { title: "Página Posto Valen", desc: "Atualize imagens, logo e formas de pagamento da página do Posto Valen.", to: "/admin/pagina-posto", cta: "Editar página do Posto" },
   { title: "Página Valen Porto Hotel", desc: "Atualize imagens, logo e links de reserva exibidos na página do hotel.", to: "/admin/pagina-hotel", cta: "Editar página do hotel" },
   { title: "Página ValenLog", desc: "Gerencie imagens da página do ValenLog e do Espaço Valentina.", to: "/admin/pagina-valenlog", cta: "Editar página do ValenLog" },
