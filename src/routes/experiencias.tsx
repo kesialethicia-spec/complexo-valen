@@ -119,7 +119,7 @@ function Experiencias() {
 
 
       {/* 3. Café da Manhã de Sábado */}
-      <section className="py-24 bg-surface">
+      <section id="cafe-da-manha" className="py-24 bg-surface scroll-mt-24">
         <div className="container-valen space-y-12">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div className="lg:order-2">
