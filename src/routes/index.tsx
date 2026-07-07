@@ -446,21 +446,50 @@ function Home() {
             </Link>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              { cat: "Dicas", title: "Dicas para quem vive na estrada", img: postoImg },
-              { cat: "Eventos", title: "Experiências em movimento no Valen", img: festaImg },
-              { cat: "Novidades", title: "Novidades do complexo Valen", img: hotelImg },
-            ].map((n) => (
-              <Link to="/blog-do-caminhoneiro" key={n.title} className="group overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all">
-                <div className="h-48 overflow-hidden">
-                  <img src={n.img} alt={n.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-                </div>
-                <div className="p-6">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
-                  <h3 className="mt-3 text-lg font-display font-bold text-secondary group-hover:text-primary transition-colors">{n.title}</h3>
-                </div>
-              </Link>
-            ))}
+            {(latestPosts.length > 0
+              ? latestPosts.map((p) => ({
+                  slug: p.slug,
+                  cat: p.category,
+                  title: p.title,
+                  excerpt: p.excerpt,
+                  img: p.cover_url || postoImg,
+                  date: formatPublishedDate(p.published_at),
+                }))
+              : [
+                  { slug: "", cat: "Dicas", title: "Dicas para quem vive na estrada", excerpt: "", img: postoImg, date: "" },
+                  { slug: "", cat: "Eventos", title: "Experiências em movimento no Valen", excerpt: "", img: festaImg, date: "" },
+                  { slug: "", cat: "Novidades", title: "Novidades do complexo Valen", excerpt: "", img: hotelImg, date: "" },
+                ]
+            ).map((n) =>
+              n.slug ? (
+                <Link
+                  to="/blog-do-caminhoneiro/$slug"
+                  params={{ slug: n.slug }}
+                  key={n.slug}
+                  className="group flex flex-col overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
+                >
+                  <div className="h-48 overflow-hidden">
+                    <img src={n.img} alt={n.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
+                    <h3 className="mt-3 text-lg font-display font-bold text-secondary group-hover:text-primary transition-colors line-clamp-2">{n.title}</h3>
+                    {n.excerpt && <p className="mt-2 text-sm text-muted-foreground line-clamp-3">{n.excerpt}</p>}
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-primary">Ler mais <ArrowRight className="h-3.5 w-3.5" /></span>
+                  </div>
+                </Link>
+              ) : (
+                <Link to="/blog-do-caminhoneiro" key={n.title} className="group overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all">
+                  <div className="h-48 overflow-hidden">
+                    <img src={n.img} alt={n.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                  </div>
+                  <div className="p-6">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
+                    <h3 className="mt-3 text-lg font-display font-bold text-secondary group-hover:text-primary transition-colors">{n.title}</h3>
+                  </div>
+                </Link>
+              ),
+            )}
           </div>
         </div>
       </section>
