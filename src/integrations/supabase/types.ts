@@ -81,6 +81,7 @@ export type Database = {
         Row: {
           cafe_image_url: string
           cafe_instagram_urls: string[]
+          cafe_instagram_videos: Json
           clube_image_url: string
           created_at: string
           events: Json
@@ -97,6 +98,7 @@ export type Database = {
         Insert: {
           cafe_image_url?: string
           cafe_instagram_urls?: string[]
+          cafe_instagram_videos?: Json
           clube_image_url?: string
           created_at?: string
           events?: Json
@@ -113,6 +115,7 @@ export type Database = {
         Update: {
           cafe_image_url?: string
           cafe_instagram_urls?: string[]
+          cafe_instagram_videos?: Json
           clube_image_url?: string
           created_at?: string
           events?: Json
