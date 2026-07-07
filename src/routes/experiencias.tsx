@@ -96,7 +96,12 @@ function Experiencias() {
       : [festaImg, foodImg, hotelImg, postoImg, festaImg, foodImg, hotelImg, postoImg];
   const publishedEvents = data.events
     .filter((e) => e.status === "publicado")
-    .sort((a, b) => Number(b.featured) - Number(a.featured));
+    .sort((a, b) => {
+      const oa = a.order ?? 999;
+      const ob = b.order ?? 999;
+      if (oa !== ob) return oa - ob;
+      return Number(b.featured) - Number(a.featured);
+    });
 
   return (
     <>
@@ -104,43 +109,9 @@ function Experiencias() {
         eyebrow="Experiências"
         title="Experiências que movimentam pessoas"
         subtitle="A experiência Valen está em todo o complexo. Cada ação é pensada para aproximar pessoas, acolher quem está longe de casa e transformar a parada em um momento especial."
-        image={festaImage}
+        image={cafeImage}
       />
 
-      {/* 2. Festa do Caminhoneiro */}
-      <section className="py-24 bg-background">
-        <div className="container-valen">
-          <div className="grid gap-10 lg:grid-cols-2 items-center">
-            <img
-              src={festaImage}
-              alt="Festa do Caminhoneiro"
-              className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
-              loading="lazy"
-            />
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
-                Evento oficial
-              </span>
-              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">
-                Festa do Caminhoneiro
-              </h2>
-              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-                Um dos momentos mais especiais do Complexo Valen. A Festa do
-                Caminhoneiro celebra quem move o Brasil com programação
-                especial, música, churrasco, ações promocionais, experiências
-                para parceiros e momentos de reconhecimento para quem vive na
-                estrada.
-              </p>
-              <a
-                href="#eventos"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-6 py-3 text-sm font-bold text-primary-foreground shadow-glow"
-              >
-                Ver eventos <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 3. Café da Manhã de Sábado */}
       <section className="py-24 bg-surface">
