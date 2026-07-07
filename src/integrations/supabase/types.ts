@@ -536,6 +536,54 @@ export type Database = {
         }
         Relationships: []
       }
+      valenlub_page_settings: {
+        Row: {
+          brand_logos: string[]
+          created_at: string
+          delivery_image_url: string
+          gallery_urls: string[]
+          hero_image_url: string
+          id: boolean
+          logo_url: string
+          map_url: string
+          presentation_image_url: string
+          stock_image_url: string
+          team_image_url: string
+          updated_at: string
+          whatsapp_url: string
+        }
+        Insert: {
+          brand_logos?: string[]
+          created_at?: string
+          delivery_image_url?: string
+          gallery_urls?: string[]
+          hero_image_url?: string
+          id?: boolean
+          logo_url?: string
+          map_url?: string
+          presentation_image_url?: string
+          stock_image_url?: string
+          team_image_url?: string
+          updated_at?: string
+          whatsapp_url?: string
+        }
+        Update: {
+          brand_logos?: string[]
+          created_at?: string
+          delivery_image_url?: string
+          gallery_urls?: string[]
+          hero_image_url?: string
+          id?: boolean
+          logo_url?: string
+          map_url?: string
+          presentation_image_url?: string
+          stock_image_url?: string
+          team_image_url?: string
+          updated_at?: string
+          whatsapp_url?: string
+        }
+        Relationships: []
+      }
       videos: {
         Row: {
           category: string
