@@ -398,68 +398,12 @@ function Experiencias() {
           {publishedEvents.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {publishedEvents.map((ev) => (
-                <article
-                  key={ev.id}
-                  className="group flex flex-col rounded-3xl border bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
-                >
-                  {ev.image_url ? (
-                    <img
-                      src={ev.image_url}
-                      alt={ev.name}
-                      className="aspect-[16/10] w-full object-cover group-hover:scale-105 transition-transform"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="aspect-[16/10] bg-gradient-orange" />
-                  )}
-                  <div className="p-6 flex-1 flex flex-col">
-                    {ev.period && (
-                      <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-primary">
-                        <Calendar className="h-3 w-3" /> {ev.period}
-                      </span>
-                    )}
-                    <h3 className="mt-2 text-xl font-display font-bold text-secondary">
-                      {ev.name}
-                    </h3>
-                    {ev.description && (
-                      <p className="mt-2 text-sm text-muted-foreground flex-1">
-                        {ev.description}
-                      </p>
-                    )}
-                    {ev.link && (
-                      <a
-                        href={ev.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
-                      >
-                        Ver mais <ArrowRight className="h-3.5 w-3.5" />
-                      </a>
-                    )}
-                  </div>
-                </article>
+                <EventCard key={ev.id} ev={ev} />
               ))}
             </div>
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {[
-                "Festa do Caminhoneiro",
-                "Ações de saúde",
-                "Campanhas promocionais",
-                "Eventos com parceiros",
-                "Ações internas e institucionais",
-                "Momentos especiais no complexo",
-              ].map((t) => (
-                <div
-                  key={t}
-                  className="rounded-2xl border bg-card p-6 flex items-center gap-3"
-                >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-orange text-white">
-                    <Calendar className="h-5 w-5" />
-                  </span>
-                  <span className="font-semibold text-secondary">{t}</span>
-                </div>
-              ))}
+            <div className="rounded-3xl border-2 border-dashed border-border p-12 text-center text-sm text-muted-foreground bg-card">
+              Novos eventos serão publicados em breve.
             </div>
           )}
         </div>
