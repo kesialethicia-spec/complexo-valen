@@ -28,7 +28,8 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
-  const [heroBgUrl, setHeroBgUrl] = useState<string>("");
+  const [heroBgDesktop, setHeroBgDesktop] = useState<string>("");
+  const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -36,7 +37,9 @@ function Home() {
     void (async () => {
       try {
         const s = await getHomePageSettings();
-        if (s.hero_bg_image_url) setHeroBgUrl(s.hero_bg_image_url);
+        const desktop = s.hero_bg_image_desktop_url || s.hero_bg_image_url;
+        if (desktop) setHeroBgDesktop(desktop);
+        if (s.hero_bg_image_mobile_url) setHeroBgMobile(s.hero_bg_image_mobile_url);
       } catch { /* fallback */ }
     })();
   }, []);
