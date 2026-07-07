@@ -125,6 +125,7 @@ function AdminExperienciasPage() {
         valentina_image_urls: form.valentina_image_urls.filter(Boolean),
         gallery_urls: form.gallery_urls.filter(Boolean),
         cafe_instagram_urls: form.cafe_instagram_urls.filter(Boolean),
+        cafe_instagram_videos: form.cafe_instagram_videos.filter((v) => v.url),
         saude_instagram_urls: form.saude_instagram_urls.filter(Boolean),
         studio_youtube_urls: form.studio_youtube_urls.filter(Boolean),
       });
