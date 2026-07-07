@@ -84,7 +84,7 @@ function Experiencias() {
     queryFn: getExperienciasPageSettings,
   });
 
-  const festaImage = data.festa_image_url || festaImg;
+  void data.festa_image_url;
   const cafeImage = data.cafe_image_url || foodImg;
   const clubeImage = data.clube_image_url || hotelImg;
   const studioImage = data.studio_image_url || postoImg;
