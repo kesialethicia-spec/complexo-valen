@@ -349,7 +349,7 @@ function Experiencias() {
       </section>
 
       {/* 7. Studio Valen / PodValen */}
-      <section className="py-24 bg-secondary text-white">
+      <section id="studio-valen" className="py-24 bg-secondary text-white scroll-mt-24">
         <div className="container-valen space-y-12">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div>
