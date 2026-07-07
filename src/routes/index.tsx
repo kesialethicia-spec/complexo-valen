@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
+  Heart, Users, Baby, Mic, Calendar,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import heroImg from "@/assets/hero-trucks.jpg";
@@ -15,7 +16,9 @@ import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
+import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,6 +35,7 @@ function Home() {
   const [heroBgDesktop, setHeroBgDesktop] = useState<string>("");
   const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   const [latestPosts, setLatestPosts] = useState<BlogPostRow[]>([]);
+  const [expSettings, setExpSettings] = useState<ExperienciasPageSettings>(DEFAULT_EXPERIENCIAS_SETTINGS);
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -47,7 +51,11 @@ function Home() {
     void (async () => {
       try { setLatestPosts((await listPublishedPosts()).slice(0, 3)); } catch { /* fallback */ }
     })();
+    void (async () => {
+      try { setExpSettings(await getExperienciasPageSettings()); } catch { /* fallback */ }
+    })();
   }, []);
+
   const homePromos = useMemo(() => {
     if (dbPromos.length === 0) return null;
     return [...dbPromos].sort((a, b) => {
@@ -320,76 +328,150 @@ function Home() {
         </div>
       </section>
 
-      {/* O QUE VOCÊ ENCONTRA */}
-      <section className="py-24 bg-background">
-        <div className="container-valen">
-          <SectionHeader
-            eyebrow="No complexo"
-            title="O que você encontra no Valen"
-            subtitle="Um complexo completo para caminhoneiros, empresas, viajantes e todos que vivem em movimento."
-            center
-          />
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {[
-              { title: "Posto de Combustível", desc: "Abastecimento com confiança e estrutura completa.", to: "/servicos/posto-valen" as const, icon: Fuel },
-              { title: "ValenBen — Super Troca de Óleo", desc: "Troca de óleo especializada para leves e pesados.", to: "/servicos" as const, icon: Wrench },
-              { title: "Valen Center", desc: "Lojas e salas comerciais dentro do complexo.", to: "/lojas" as const, icon: ShoppingBag },
-              { title: "Valen Truck Center", desc: "Manutenção, borracharia e oficinas especializadas.", to: "/servicos/truck-center" as const, icon: Wrench },
-              { title: "ValenLog — Triagem e Estacionamento", desc: "Triagem, pátio e app para organização logística.", to: "/servicos" as const, icon: ParkingSquare },
-              { title: "Classificação de Grãos", desc: "Serviço exclusivo de apoio às operações agrícolas.", to: "/servicos" as const, icon: Sparkles },
-              { title: "Espaço Valentina", desc: "Acolhimento e cuidado para quem passa pelo Valen.", to: "/experiencias" as const, icon: Coffee },
-              { title: "Clube do Caminhoneiro", desc: "Convivência, lazer e bem-estar para o motorista.", to: "/servicos/clube-do-caminhoneiro" as const, icon: Sparkles },
-              { title: "Valen Porto Hotel", desc: "Hospedagem estratégica para descanso e negócios.", to: "/servicos/valen-porto-hotel" as const, icon: Bed },
-              { title: "ValenLub", desc: "Distribuidora de lubrificantes para a estrada.", to: "/servicos" as const, icon: Fuel },
-              { title: "Lotérica Valen", desc: "Serviços financeiros sem sair do complexo.", to: "/lojas" as const, icon: Tag },
-              { title: "Studio Valen", desc: "Conteúdo, comunicação e experiências do Valen.", to: "/blog-do-caminhoneiro" as const, icon: Newspaper },
-            ].map((c) => (
-              <Link key={c.title} to={c.to} className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 hover:-translate-y-1 hover:shadow-glow hover:border-primary/40 transition-all flex flex-col">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-orange text-white shadow-glow">
-                  <c.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-5 text-lg font-display font-bold text-secondary leading-snug">{c.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{c.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
-                  Ver mais <ArrowRight className="h-4 w-4" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* EXPERIÊNCIAS — vitrine visual */}
+      {(() => {
+        const firstEventImg = expSettings.events.find(
+          (e) => e.status === "publicado" && e.image_url,
+        )?.image_url;
+        const cards = [
+          {
+            t: "Café da Manhã de Sábado",
+            d: "Todo sábado, um momento de acolhimento para quem passa pelo Valen.",
+            hash: "cafe-da-manha",
+            tag: "Toda semana",
+            icon: Coffee,
+            img: expSettings.cafe_image_url || foodImg,
+          },
+          {
+            t: "Ações de Saúde",
+            d: "Vacinação, aferição de pressão, orientação e cuidado para quem vive em movimento.",
+            hash: "acoes-de-saude",
+            tag: "Cuidado",
+            icon: Heart,
+            img: expSettings.saude_image_urls.filter(Boolean)[0] || hotelImg,
+          },
+          {
+            t: "Clube do Caminhoneiro",
+            d: "Espaço de descanso, convivência e lazer para quem está na estrada.",
+            hash: "clube-do-caminhoneiro",
+            tag: "Convivência",
+            icon: Users,
+            img: expSettings.clube_image_url || hotelImg,
+          },
+          {
+            t: "Espaço Valentina",
+            d: "Acolhimento para mulheres e crianças no Pátio 01 e Pátio 05.",
+            hash: "espaco-valentina",
+            tag: "Acolhimento",
+            icon: Baby,
+            img: expSettings.valentina_image_urls.filter(Boolean)[0] || foodImg,
+          },
+          {
+            t: "Studio Valen",
+            d: "Conteúdos, entrevistas e episódios do PodValen.",
+            hash: "studio-valen",
+            tag: "Conteúdo",
+            icon: Mic,
+            img: expSettings.studio_image_url || postoImg,
+          },
+          {
+            t: "Eventos Valen",
+            d: "Momentos especiais que aproximam caminhoneiros, clientes, parceiros e equipe.",
+            hash: "eventos",
+            tag: "Eventos",
+            icon: Calendar,
+            img: firstEventImg || expSettings.festa_image_url || festaImg,
+          },
+        ];
+        const [featured, ...rest] = cards;
+        return (
+          <section className="py-24 bg-surface">
+            <div className="container-valen">
+              <SectionHeader
+                eyebrow="Experiências"
+                title="Mais do que uma parada. Uma experiência em movimento."
+                subtitle="No Valen, cada jornada também é feita de cuidado, convivência, conteúdo e momentos que aproximam pessoas."
+              />
 
-      {/* EXPERIÊNCIAS */}
-      <section className="py-24 bg-surface">
-        <div className="container-valen">
-          <SectionHeader
-            eyebrow="Experiências"
-            title="Mais do que uma parada. Uma experiência em movimento."
-            subtitle="No Valen, a estrada encontra acolhimento. Criamos experiências que fazem quem está longe de casa se sentir entre amigos."
-          />
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              { t: "Festa do Caminhoneiro", d: "Um dos maiores momentos de celebração do complexo." },
-              { t: "Café de Sábado", d: "Acolhimento e conexão com quem vive na estrada." },
-              { t: "Sexta Valen", d: "Música, promoções e relacionamento toda semana." },
-              { t: "Clube do Caminhoneiro", d: "Benefícios e cuidado para a rotina na estrada." },
-              { t: "Cinema gratuito", d: "Lazer para descontrair durante a parada." },
-              { t: "Barbearia e cuidado pessoal", d: "Bem-estar para seguir em rota com energia." },
-            ].map((e) => (
-              <div key={e.t} className="rounded-3xl bg-card border border-border p-7 hover:border-primary/50 hover:-translate-y-1 transition-all">
-                <Sparkles className="h-7 w-7 text-primary" />
-                <h3 className="mt-4 text-xl font-display font-bold text-secondary">{e.t}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{e.d}</p>
+              <div className="mt-14 grid gap-5 lg:grid-cols-3">
+                {/* Card grande em destaque */}
+                <Link
+                  to="/experiencias"
+                  hash={featured.hash}
+                  className="group relative overflow-hidden rounded-3xl lg:row-span-2 lg:col-span-1 min-h-[380px] lg:min-h-[560px]"
+                >
+                  <img
+                    src={featured.img}
+                    alt={featured.t}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/10" />
+                  <div className="relative h-full flex flex-col justify-end p-7 text-white">
+                    <span className="inline-flex self-start items-center gap-1.5 rounded-full bg-primary/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
+                      <featured.icon className="h-3.5 w-3.5" /> {featured.tag}
+                    </span>
+                    <h3 className="mt-4 text-3xl md:text-4xl font-display font-extrabold text-balance leading-tight">
+                      {featured.t}
+                    </h3>
+                    <p className="mt-3 text-base text-white/85 leading-relaxed max-w-md">
+                      {featured.d}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all">
+                      Ver mais <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </Link>
+
+                {/* Cards menores */}
+                <div className="grid gap-5 sm:grid-cols-2 lg:col-span-2">
+                  {rest.map((c) => (
+                    <Link
+                      key={c.t}
+                      to="/experiencias"
+                      hash={c.hash}
+                      className="group relative overflow-hidden rounded-3xl min-h-[240px] lg:min-h-[270px]"
+                    >
+                      <img
+                        src={c.img}
+                        alt={c.t}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/60 to-secondary/10 group-hover:from-secondary group-hover:via-secondary/70 transition-colors" />
+                      <div className="relative h-full flex flex-col justify-end p-5 text-white">
+                        <span className="inline-flex self-start items-center gap-1.5 rounded-full bg-white/15 backdrop-blur px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                          <c.icon className="h-3 w-3 text-primary" /> {c.tag}
+                        </span>
+                        <h3 className="mt-3 text-xl font-display font-bold text-balance leading-tight">
+                          {c.t}
+                        </h3>
+                        <p className="mt-1.5 text-sm text-white/80 leading-relaxed line-clamp-2">
+                          {c.d}
+                        </p>
+                        <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-primary group-hover:gap-2.5 transition-all">
+                          Ver mais <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link to="/experiencias" className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow hover:scale-105 transition-transform">
-              Conheça nossas experiências <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+
+              <div className="mt-12 text-center">
+                <Link
+                  to="/experiencias"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow hover:scale-105 transition-transform"
+                >
+                  Conheça nossas experiências <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
+
+
 
       {/* MANIFESTO */}
       <section className="relative py-32 bg-gradient-orange text-primary-foreground overflow-hidden">

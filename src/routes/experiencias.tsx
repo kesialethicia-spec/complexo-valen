@@ -119,7 +119,7 @@ function Experiencias() {
 
 
       {/* 3. Café da Manhã de Sábado */}
-      <section className="py-24 bg-surface">
+      <section id="cafe-da-manha" className="py-24 bg-surface scroll-mt-24">
         <div className="container-valen space-y-12">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div className="lg:order-2">
@@ -179,7 +179,7 @@ function Experiencias() {
       </section>
 
       {/* 4. Ações de Saúde */}
-      <section className="py-24 bg-background">
+      <section id="acoes-de-saude" className="py-24 bg-background scroll-mt-24">
         <div className="container-valen space-y-12">
           <SectionHeader
             eyebrow="Ações de Saúde"
@@ -235,7 +235,7 @@ function Experiencias() {
       </section>
 
       {/* 5. Clube do Caminhoneiro */}
-      <section className="py-24 bg-surface">
+      <section id="clube-do-caminhoneiro" className="py-24 bg-surface scroll-mt-24">
         <div className="container-valen">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div>
@@ -282,7 +282,7 @@ function Experiencias() {
       </section>
 
       {/* 6. Espaço Valentina */}
-      <section className="py-24 bg-background">
+      <section id="espaco-valentina" className="py-24 bg-background scroll-mt-24">
         <div className="container-valen">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             {valentinaImages.length > 0 ? (
@@ -349,7 +349,7 @@ function Experiencias() {
       </section>
 
       {/* 7. Studio Valen / PodValen */}
-      <section className="py-24 bg-secondary text-white">
+      <section id="studio-valen" className="py-24 bg-secondary text-white scroll-mt-24">
         <div className="container-valen space-y-12">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div>
