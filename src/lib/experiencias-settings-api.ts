@@ -1,5 +1,13 @@
 import { supabase } from "@/integrations/supabase/client";
 
+export type EventStatus = "Realizado" | "Em breve" | "Inscrições abertas";
+export type EventCategory =
+  | "Evento"
+  | "Saúde"
+  | "Experiência"
+  | "Campanha"
+  | "Institucional";
+
 export interface ExperienciasEvent {
   id: string;
   name: string;
@@ -9,6 +17,13 @@ export interface ExperienciasEvent {
   link: string;
   status: "rascunho" | "publicado";
   featured: boolean;
+  title?: string;
+  slug?: string;
+  location?: string;
+  category?: EventCategory | string;
+  event_status?: EventStatus | string;
+  full_description?: string;
+  order?: number;
 }
 
 export interface ExperienciasPageSettings {
