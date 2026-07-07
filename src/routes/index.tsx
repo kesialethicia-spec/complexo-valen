@@ -35,6 +35,7 @@ function Home() {
   const [heroBgDesktop, setHeroBgDesktop] = useState<string>("");
   const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   const [latestPosts, setLatestPosts] = useState<BlogPostRow[]>([]);
+  const [expSettings, setExpSettings] = useState<ExperienciasPageSettings>(DEFAULT_EXPERIENCIAS_SETTINGS);
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -50,7 +51,11 @@ function Home() {
     void (async () => {
       try { setLatestPosts((await listPublishedPosts()).slice(0, 3)); } catch { /* fallback */ }
     })();
+    void (async () => {
+      try { setExpSettings(await getExperienciasPageSettings()); } catch { /* fallback */ }
+    })();
   }, []);
+
   const homePromos = useMemo(() => {
     if (dbPromos.length === 0) return null;
     return [...dbPromos].sort((a, b) => {
