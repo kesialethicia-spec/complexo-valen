@@ -38,11 +38,14 @@ import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-v
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminPaginaHomeRouteImport } from './routes/admin.pagina-home'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
+import { Route as AdminServicosIndexRouteImport } from './routes/admin.servicos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
 import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin.blog.index'
 import { Route as AdminVideosNovoRouteImport } from './routes/admin.videos.novo'
 import { Route as AdminVideosIdRouteImport } from './routes/admin.videos.$id'
+import { Route as AdminServicosNovoRouteImport } from './routes/admin.servicos.novo'
+import { Route as AdminServicosIdRouteImport } from './routes/admin.servicos.$id'
 import { Route as AdminPromocoesNovoRouteImport } from './routes/admin.promocoes.novo'
 import { Route as AdminPromocoesIdRouteImport } from './routes/admin.promocoes.$id'
 import { Route as AdminLojasNovoRouteImport } from './routes/admin.lojas.novo'
@@ -196,6 +199,11 @@ const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
   path: '/videos/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminServicosIndexRoute = AdminServicosIndexRouteImport.update({
+  id: '/servicos/',
+  path: '/servicos/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPromocoesIndexRoute = AdminPromocoesIndexRouteImport.update({
   id: '/promocoes/',
   path: '/promocoes/',
@@ -219,6 +227,16 @@ const AdminVideosNovoRoute = AdminVideosNovoRouteImport.update({
 const AdminVideosIdRoute = AdminVideosIdRouteImport.update({
   id: '/videos/$id',
   path: '/videos/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicosNovoRoute = AdminServicosNovoRouteImport.update({
+  id: '/servicos/novo',
+  path: '/servicos/novo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicosIdRoute = AdminServicosIdRouteImport.update({
+  id: '/servicos/$id',
+  path: '/servicos/$id',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminPromocoesNovoRoute = AdminPromocoesNovoRouteImport.update({
@@ -287,11 +305,14 @@ export interface FileRoutesByFullPath {
   '/admin/lojas/novo': typeof AdminLojasNovoRoute
   '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
   '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
+  '/admin/servicos/$id': typeof AdminServicosIdRoute
+  '/admin/servicos/novo': typeof AdminServicosNovoRoute
   '/admin/videos/$id': typeof AdminVideosIdRoute
   '/admin/videos/novo': typeof AdminVideosNovoRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/lojas/': typeof AdminLojasIndexRoute
   '/admin/promocoes/': typeof AdminPromocoesIndexRoute
+  '/admin/servicos/': typeof AdminServicosIndexRoute
   '/admin/videos/': typeof AdminVideosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -328,11 +349,14 @@ export interface FileRoutesByTo {
   '/admin/lojas/novo': typeof AdminLojasNovoRoute
   '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
   '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
+  '/admin/servicos/$id': typeof AdminServicosIdRoute
+  '/admin/servicos/novo': typeof AdminServicosNovoRoute
   '/admin/videos/$id': typeof AdminVideosIdRoute
   '/admin/videos/novo': typeof AdminVideosNovoRoute
   '/admin/blog': typeof AdminBlogIndexRoute
   '/admin/lojas': typeof AdminLojasIndexRoute
   '/admin/promocoes': typeof AdminPromocoesIndexRoute
+  '/admin/servicos': typeof AdminServicosIndexRoute
   '/admin/videos': typeof AdminVideosIndexRoute
 }
 export interface FileRoutesById {
@@ -371,11 +395,14 @@ export interface FileRoutesById {
   '/admin/lojas/novo': typeof AdminLojasNovoRoute
   '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
   '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
+  '/admin/servicos/$id': typeof AdminServicosIdRoute
+  '/admin/servicos/novo': typeof AdminServicosNovoRoute
   '/admin/videos/$id': typeof AdminVideosIdRoute
   '/admin/videos/novo': typeof AdminVideosNovoRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/lojas/': typeof AdminLojasIndexRoute
   '/admin/promocoes/': typeof AdminPromocoesIndexRoute
+  '/admin/servicos/': typeof AdminServicosIndexRoute
   '/admin/videos/': typeof AdminVideosIndexRoute
 }
 export interface FileRouteTypes {
@@ -415,11 +442,14 @@ export interface FileRouteTypes {
     | '/admin/lojas/novo'
     | '/admin/promocoes/$id'
     | '/admin/promocoes/novo'
+    | '/admin/servicos/$id'
+    | '/admin/servicos/novo'
     | '/admin/videos/$id'
     | '/admin/videos/novo'
     | '/admin/blog/'
     | '/admin/lojas/'
     | '/admin/promocoes/'
+    | '/admin/servicos/'
     | '/admin/videos/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -456,11 +486,14 @@ export interface FileRouteTypes {
     | '/admin/lojas/novo'
     | '/admin/promocoes/$id'
     | '/admin/promocoes/novo'
+    | '/admin/servicos/$id'
+    | '/admin/servicos/novo'
     | '/admin/videos/$id'
     | '/admin/videos/novo'
     | '/admin/blog'
     | '/admin/lojas'
     | '/admin/promocoes'
+    | '/admin/servicos'
     | '/admin/videos'
   id:
     | '__root__'
@@ -498,11 +531,14 @@ export interface FileRouteTypes {
     | '/admin/lojas/novo'
     | '/admin/promocoes/$id'
     | '/admin/promocoes/novo'
+    | '/admin/servicos/$id'
+    | '/admin/servicos/novo'
     | '/admin/videos/$id'
     | '/admin/videos/novo'
     | '/admin/blog/'
     | '/admin/lojas/'
     | '/admin/promocoes/'
+    | '/admin/servicos/'
     | '/admin/videos/'
   fileRoutesById: FileRoutesById
 }
@@ -733,6 +769,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminVideosIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/servicos/': {
+      id: '/admin/servicos/'
+      path: '/servicos'
+      fullPath: '/admin/servicos/'
+      preLoaderRoute: typeof AdminServicosIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/promocoes/': {
       id: '/admin/promocoes/'
       path: '/promocoes'
@@ -766,6 +809,20 @@ declare module '@tanstack/react-router' {
       path: '/videos/$id'
       fullPath: '/admin/videos/$id'
       preLoaderRoute: typeof AdminVideosIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/servicos/novo': {
+      id: '/admin/servicos/novo'
+      path: '/servicos/novo'
+      fullPath: '/admin/servicos/novo'
+      preLoaderRoute: typeof AdminServicosNovoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/servicos/$id': {
+      id: '/admin/servicos/$id'
+      path: '/servicos/$id'
+      fullPath: '/admin/servicos/$id'
+      preLoaderRoute: typeof AdminServicosIdRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/promocoes/novo': {
@@ -826,11 +883,14 @@ interface AdminRouteChildren {
   AdminLojasNovoRoute: typeof AdminLojasNovoRoute
   AdminPromocoesIdRoute: typeof AdminPromocoesIdRoute
   AdminPromocoesNovoRoute: typeof AdminPromocoesNovoRoute
+  AdminServicosIdRoute: typeof AdminServicosIdRoute
+  AdminServicosNovoRoute: typeof AdminServicosNovoRoute
   AdminVideosIdRoute: typeof AdminVideosIdRoute
   AdminVideosNovoRoute: typeof AdminVideosNovoRoute
   AdminBlogIndexRoute: typeof AdminBlogIndexRoute
   AdminLojasIndexRoute: typeof AdminLojasIndexRoute
   AdminPromocoesIndexRoute: typeof AdminPromocoesIndexRoute
+  AdminServicosIndexRoute: typeof AdminServicosIndexRoute
   AdminVideosIndexRoute: typeof AdminVideosIndexRoute
 }
 
@@ -847,11 +907,14 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminLojasNovoRoute: AdminLojasNovoRoute,
   AdminPromocoesIdRoute: AdminPromocoesIdRoute,
   AdminPromocoesNovoRoute: AdminPromocoesNovoRoute,
+  AdminServicosIdRoute: AdminServicosIdRoute,
+  AdminServicosNovoRoute: AdminServicosNovoRoute,
   AdminVideosIdRoute: AdminVideosIdRoute,
   AdminVideosNovoRoute: AdminVideosNovoRoute,
   AdminBlogIndexRoute: AdminBlogIndexRoute,
   AdminLojasIndexRoute: AdminLojasIndexRoute,
   AdminPromocoesIndexRoute: AdminPromocoesIndexRoute,
+  AdminServicosIndexRoute: AdminServicosIndexRoute,
   AdminVideosIndexRoute: AdminVideosIndexRoute,
 }
 
