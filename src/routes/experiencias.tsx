@@ -32,8 +32,11 @@ import postoImg from "@/assets/posto.jpg";
 import {
   getExperienciasPageSettings,
   DEFAULT_EXPERIENCIAS_SETTINGS,
+  type ExperienciasEvent,
 } from "@/lib/experiencias-settings-api";
 import { extractYoutubeId, youtubeThumbnail } from "@/lib/videos-api";
+import { X } from "lucide-react";
+
 
 export const Route = createFileRoute("/experiencias")({
   head: () => ({
