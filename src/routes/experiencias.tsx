@@ -179,7 +179,7 @@ function Experiencias() {
       </section>
 
       {/* 4. Ações de Saúde */}
-      <section className="py-24 bg-background">
+      <section id="acoes-de-saude" className="py-24 bg-background scroll-mt-24">
         <div className="container-valen space-y-12">
           <SectionHeader
             eyebrow="Ações de Saúde"
