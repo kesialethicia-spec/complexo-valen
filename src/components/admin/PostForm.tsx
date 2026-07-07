@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 import {
   BLOG_CATEGORIES,
   slugify,
