@@ -172,14 +172,8 @@ function AdminExperienciasPage() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        <Section title="Festa do Caminhoneiro">
-          <ImageUploadField
-            label="Imagem da Festa do Caminhoneiro"
-            value={form.festa_image_url}
-            onChange={(url) => set("festa_image_url", url)}
-            aspect="landscape"
-          />
-        </Section>
+
+
 
         <Section title="Café da Manhã de Sábado">
           <ImageUploadField
