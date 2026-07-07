@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 import {
   BLOG_CATEGORIES,
   slugify,
@@ -39,7 +40,10 @@ export function PostForm({ initial, submitting, onSubmit, onCancel }: Props) {
     if (!slugTouched) setSlug(slugify(title));
   }, [title, slugTouched]);
 
-  const previewHtml = useMemo(() => marked.parse(content || "*Sem conteúdo ainda…*"), [content]);
+  const previewHtml = useMemo(
+    () => DOMPurify.sanitize(marked.parse(content || "*Sem conteúdo ainda…*") as string),
+    [content],
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,7 +118,7 @@ export function PostForm({ initial, submitting, onSubmit, onCancel }: Props) {
           {showPreview ? (
             <div
               className="article-body min-h-[300px] rounded-md border bg-card p-4"
-              dangerouslySetInnerHTML={{ __html: previewHtml as string }}
+              dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
           ) : (
             <textarea

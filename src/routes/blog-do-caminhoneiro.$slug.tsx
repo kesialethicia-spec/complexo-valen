@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Clock, MapPin, Tag } from "lucide-react";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 import { posts as fallbackPosts, banners, type Post } from "@/data/blog";
 import { getPostBySlug, formatPublishedDate } from "@/lib/blog-api";
 
@@ -50,7 +51,9 @@ function ArticlePage() {
             tags: row.tags,
             metaTitle: row.meta_title ?? undefined,
             metaDescription: row.meta_description ?? undefined,
-            content: looksLikeHtml(row.content) ? row.content : (marked.parse(row.content) as string),
+            content: DOMPurify.sanitize(
+              looksLikeHtml(row.content) ? row.content : (marked.parse(row.content) as string),
+            ),
           });
         } else {
           const fb = fallbackPosts.find((p) => p.slug === slug);
