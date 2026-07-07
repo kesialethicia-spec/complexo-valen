@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
 import {
@@ -30,8 +32,11 @@ import postoImg from "@/assets/posto.jpg";
 import {
   getExperienciasPageSettings,
   DEFAULT_EXPERIENCIAS_SETTINGS,
+  type ExperienciasEvent,
 } from "@/lib/experiencias-settings-api";
 import { extractYoutubeId, youtubeThumbnail } from "@/lib/videos-api";
+import { X } from "lucide-react";
+
 
 export const Route = createFileRoute("/experiencias")({
   head: () => ({
@@ -84,7 +89,7 @@ function Experiencias() {
     queryFn: getExperienciasPageSettings,
   });
 
-  const festaImage = data.festa_image_url || festaImg;
+  void data.festa_image_url;
   const cafeImage = data.cafe_image_url || foodImg;
   const clubeImage = data.clube_image_url || hotelImg;
   const studioImage = data.studio_image_url || postoImg;
@@ -96,7 +101,12 @@ function Experiencias() {
       : [festaImg, foodImg, hotelImg, postoImg, festaImg, foodImg, hotelImg, postoImg];
   const publishedEvents = data.events
     .filter((e) => e.status === "publicado")
-    .sort((a, b) => Number(b.featured) - Number(a.featured));
+    .sort((a, b) => {
+      const oa = a.order ?? 999;
+      const ob = b.order ?? 999;
+      if (oa !== ob) return oa - ob;
+      return Number(b.featured) - Number(a.featured);
+    });
 
   return (
     <>
@@ -104,43 +114,9 @@ function Experiencias() {
         eyebrow="Experiências"
         title="Experiências que movimentam pessoas"
         subtitle="A experiência Valen está em todo o complexo. Cada ação é pensada para aproximar pessoas, acolher quem está longe de casa e transformar a parada em um momento especial."
-        image={festaImage}
+        image={cafeImage}
       />
 
-      {/* 2. Festa do Caminhoneiro */}
-      <section className="py-24 bg-background">
-        <div className="container-valen">
-          <div className="grid gap-10 lg:grid-cols-2 items-center">
-            <img
-              src={festaImage}
-              alt="Festa do Caminhoneiro"
-              className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
-              loading="lazy"
-            />
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
-                Evento oficial
-              </span>
-              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">
-                Festa do Caminhoneiro
-              </h2>
-              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-                Um dos momentos mais especiais do Complexo Valen. A Festa do
-                Caminhoneiro celebra quem move o Brasil com programação
-                especial, música, churrasco, ações promocionais, experiências
-                para parceiros e momentos de reconhecimento para quem vive na
-                estrada.
-              </p>
-              <a
-                href="#eventos"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-6 py-3 text-sm font-bold text-primary-foreground shadow-glow"
-              >
-                Ver eventos <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 3. Café da Manhã de Sábado */}
       <section className="py-24 bg-surface">
@@ -427,68 +403,12 @@ function Experiencias() {
           {publishedEvents.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {publishedEvents.map((ev) => (
-                <article
-                  key={ev.id}
-                  className="group flex flex-col rounded-3xl border bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
-                >
-                  {ev.image_url ? (
-                    <img
-                      src={ev.image_url}
-                      alt={ev.name}
-                      className="aspect-[16/10] w-full object-cover group-hover:scale-105 transition-transform"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="aspect-[16/10] bg-gradient-orange" />
-                  )}
-                  <div className="p-6 flex-1 flex flex-col">
-                    {ev.period && (
-                      <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-primary">
-                        <Calendar className="h-3 w-3" /> {ev.period}
-                      </span>
-                    )}
-                    <h3 className="mt-2 text-xl font-display font-bold text-secondary">
-                      {ev.name}
-                    </h3>
-                    {ev.description && (
-                      <p className="mt-2 text-sm text-muted-foreground flex-1">
-                        {ev.description}
-                      </p>
-                    )}
-                    {ev.link && (
-                      <a
-                        href={ev.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
-                      >
-                        Ver mais <ArrowRight className="h-3.5 w-3.5" />
-                      </a>
-                    )}
-                  </div>
-                </article>
+                <EventCard key={ev.id} ev={ev} />
               ))}
             </div>
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {[
-                "Festa do Caminhoneiro",
-                "Ações de saúde",
-                "Campanhas promocionais",
-                "Eventos com parceiros",
-                "Ações internas e institucionais",
-                "Momentos especiais no complexo",
-              ].map((t) => (
-                <div
-                  key={t}
-                  className="rounded-2xl border bg-card p-6 flex items-center gap-3"
-                >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-orange text-white">
-                    <Calendar className="h-5 w-5" />
-                  </span>
-                  <span className="font-semibold text-secondary">{t}</span>
-                </div>
-              ))}
+            <div className="rounded-3xl border-2 border-dashed border-border p-12 text-center text-sm text-muted-foreground bg-card">
+              Novos eventos serão publicados em breve.
             </div>
           )}
         </div>
@@ -601,3 +521,159 @@ function YoutubeCard({ url }: { url: string }) {
     </a>
   );
 }
+
+function statusBadgeClass(s?: string): string {
+  switch (s) {
+    case "Em breve":
+      return "bg-blue-100 text-blue-800 border-blue-200";
+    case "Inscrições abertas":
+      return "bg-green-100 text-green-800 border-green-200";
+    case "Realizado":
+      return "bg-neutral-100 text-neutral-700 border-neutral-200";
+    default:
+      return "bg-primary/10 text-primary border-primary/20";
+  }
+}
+
+function EventCard({ ev }: { ev: ExperienciasEvent }) {
+  const [open, setOpen] = useState(false);
+  const title = ev.title || ev.name;
+  const status = ev.event_status;
+  const category = ev.category;
+  const location = ev.location;
+  const date = ev.period;
+
+  return (
+    <>
+      <article className="group flex flex-col rounded-3xl border bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+        <div className="relative">
+          {ev.image_url ? (
+            <img
+              src={ev.image_url}
+              alt={title}
+              className="aspect-[16/10] w-full object-cover group-hover:scale-105 transition-transform"
+              loading="lazy"
+            />
+          ) : (
+            <div className="aspect-[16/10] bg-gradient-orange" />
+          )}
+          {status && (
+            <span
+              className={`absolute top-3 right-3 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${statusBadgeClass(
+                status,
+              )}`}
+            >
+              {status}
+            </span>
+          )}
+        </div>
+        <div className="p-6 flex-1 flex flex-col">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-bold uppercase tracking-wider text-primary">
+            {date && (
+              <span className="inline-flex items-center gap-1">
+                <Calendar className="h-3 w-3" /> {date}
+              </span>
+            )}
+            {location && (
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="h-3 w-3" /> {location}
+              </span>
+            )}
+            {category && (
+              <span className="inline-flex items-center gap-1 text-secondary/70">
+                • {category}
+              </span>
+            )}
+          </div>
+          <h3 className="mt-2 text-xl font-display font-bold text-secondary">
+            {title}
+          </h3>
+          {ev.description && (
+            <p className="mt-2 text-sm text-muted-foreground flex-1">
+              {ev.description}
+            </p>
+          )}
+          <div className="mt-4">
+            {ev.link ? (
+              <a
+                href={ev.link}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:opacity-90"
+              >
+                Ver detalhes <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            ) : (
+              (ev.full_description || ev.description) && (
+                <button
+                  type="button"
+                  onClick={() => setOpen(true)}
+                  className="inline-flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:opacity-90"
+                >
+                  Ver detalhes <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              )
+            )}
+          </div>
+        </div>
+      </article>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="relative max-w-2xl w-full max-h-[90vh] overflow-auto rounded-3xl bg-card shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="absolute top-3 right-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-secondary hover:bg-white"
+              aria-label="Fechar"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            {ev.image_url && (
+              <img
+                src={ev.image_url}
+                alt={title}
+                className="aspect-[16/9] w-full object-cover"
+              />
+            )}
+            <div className="p-6 space-y-3">
+              {status && (
+                <span
+                  className={`inline-block rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${statusBadgeClass(status)}`}
+                >
+                  {status}
+                </span>
+              )}
+              <h3 className="text-2xl font-display font-bold text-secondary">
+                {title}
+              </h3>
+              <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold uppercase tracking-wider text-primary">
+                {date && (
+                  <span className="inline-flex items-center gap-1">
+                    <Calendar className="h-3 w-3" /> {date}
+                  </span>
+                )}
+                {location && (
+                  <span className="inline-flex items-center gap-1">
+                    <MapPin className="h-3 w-3" /> {location}
+                  </span>
+                )}
+                {category && <span>• {category}</span>}
+              </div>
+              <p className="text-sm text-muted-foreground whitespace-pre-line">
+                {ev.full_description || ev.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
