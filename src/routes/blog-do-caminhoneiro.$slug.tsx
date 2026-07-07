@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Clock, MapPin, Tag } from "lucide-react";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 import { posts as fallbackPosts, banners, type Post } from "@/data/blog";
 import { getPostBySlug, formatPublishedDate } from "@/lib/blog-api";
 
