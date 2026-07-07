@@ -24,9 +24,7 @@ import {
 } from "@/lib/valenlub-settings-api";
 import heroFallback from "@/assets/posto/hero.jpg.asset.json";
 import abastecimentoFallback from "@/assets/posto/abastecimento.jpg.asset.json";
-import atendimentoFallback from "@/assets/posto/atendimento.jpg.asset.json";
 import truckFallback from "@/assets/o-valen/truck.jpg.asset.json";
-import patioFallback from "@/assets/o-valen/patio.jpg.asset.json";
 import equipeFallback from "@/assets/equipe-valen.png.asset.json";
 
 export const Route = createFileRoute("/servicos/valenlub")({
@@ -101,19 +99,9 @@ function ValenlubPage() {
 
   const hero = data.hero_image_url || heroFallback.url;
   const presentation = data.presentation_image_url || abastecimentoFallback.url;
-  const stock = data.stock_image_url || abastecimentoFallback.url;
   const team = data.team_image_url || equipeFallback.url;
   const delivery = data.delivery_image_url || truckFallback.url;
 
-  const galleryDefault = [
-    stock,
-    presentation,
-    delivery,
-    atendimentoFallback.url,
-    patioFallback.url,
-    team,
-  ];
-  const gallery = data.gallery_urls.length ? data.gallery_urls : galleryDefault;
   const brandLogos = (data.brand_logos ?? []).filter(Boolean);
 
   return (
@@ -321,37 +309,6 @@ function ValenlubPage() {
         </div>
       </section>
 
-      {/* GALERIA */}
-      <section className="py-20 bg-surface">
-        <div className="container-valen">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
-              <Package className="h-3.5 w-3.5" /> Galeria
-            </span>
-            <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold tracking-tight text-secondary text-balance">
-              Conheça a ValenLub
-            </h2>
-          </div>
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {gallery.slice(0, 6).map((img, i) => (
-              <div
-                key={i}
-                className={
-                  "overflow-hidden rounded-2xl bg-card group " +
-                  (i === 0 ? "sm:col-span-2 sm:row-span-2 aspect-[4/3] sm:aspect-auto" : "aspect-[4/3]")
-                }
-              >
-                <img
-                  src={img}
-                  alt=""
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA FINAL */}
       <section className="py-20 bg-background">
