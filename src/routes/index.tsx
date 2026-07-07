@@ -28,7 +28,8 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
-  const [heroBgUrl, setHeroBgUrl] = useState<string>("");
+  const [heroBgDesktop, setHeroBgDesktop] = useState<string>("");
+  const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -36,7 +37,9 @@ function Home() {
     void (async () => {
       try {
         const s = await getHomePageSettings();
-        if (s.hero_bg_image_url) setHeroBgUrl(s.hero_bg_image_url);
+        const desktop = s.hero_bg_image_desktop_url || s.hero_bg_image_url;
+        if (desktop) setHeroBgDesktop(desktop);
+        if (s.hero_bg_image_mobile_url) setHeroBgMobile(s.hero_bg_image_mobile_url);
       } catch { /* fallback */ }
     })();
   }, []);
@@ -77,14 +80,19 @@ function Home() {
         {/* Slide institucional */}
         <div className={slideIdx === 0 ? "block" : "hidden"}>
           <div className="absolute inset-0">
-            <img
-              src={heroBgUrl || heroImg}
-              alt=""
-              aria-hidden="true"
-              className="h-full w-full object-cover opacity-30"
-              width={1920}
-              height={1080}
-            />
+            <picture>
+              {heroBgMobile && (
+                <source media="(max-width: 767px)" srcSet={heroBgMobile} />
+              )}
+              <img
+                src={heroBgDesktop || heroImg}
+                alt=""
+                aria-hidden="true"
+                className="h-full w-full object-cover opacity-30"
+                width={1920}
+                height={1080}
+              />
+            </picture>
             <div className="absolute inset-0 bg-secondary/80" />
             <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/90 to-secondary/70" />
             <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/40" />
