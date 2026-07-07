@@ -235,7 +235,7 @@ function Experiencias() {
       </section>
 
       {/* 5. Clube do Caminhoneiro */}
-      <section className="py-24 bg-surface">
+      <section id="clube-do-caminhoneiro" className="py-24 bg-surface scroll-mt-24">
         <div className="container-valen">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div>
