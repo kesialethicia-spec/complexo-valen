@@ -15,7 +15,7 @@ export const DEFAULT_HOTEL_SETTINGS: HotelPageSettings = {
   logo_url: "",
   gallery_urls: [],
   reservation_url: "",
-  map_url: "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA",
+  map_url: "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6",
 };
 
 export async function getHotelPageSettings(): Promise<HotelPageSettings> {

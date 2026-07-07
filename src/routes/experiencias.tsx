@@ -337,12 +337,13 @@ function Experiencias() {
                   </div>
                 ))}
               </div>
-              <a
-                href="/servicos/valenlog#espaco-valentina"
+              <Link
+                to="/servicos/valenlog"
+                hash="espaco-valentina"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
               >
                 Conhecer Espaço Valentina <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -379,7 +380,7 @@ function Experiencias() {
               <a
                 href={YOUTUBE_CHANNEL_URL}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-6 py-3 text-sm font-bold text-primary-foreground shadow-glow"
               >
                 <Youtube className="h-4 w-4" /> Ver canal no YouTube
@@ -473,7 +474,7 @@ function Experiencias() {
             <a
               href={INSTAGRAM_URL}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border-2 border-white px-7 py-4 text-base font-bold text-white hover:bg-white/10"
             >
               <Instagram className="h-4 w-4" /> Seguir no Instagram
@@ -498,7 +499,7 @@ function InstagramCard({
     <a
       href={url}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="group flex flex-col rounded-2xl border bg-card overflow-hidden hover:shadow-lg transition-shadow"
     >
       <div className="relative aspect-square bg-gradient-to-br from-pink-500 via-purple-500 to-orange-400 grid place-items-center text-white overflow-hidden">
@@ -537,7 +538,7 @@ function YoutubeCard({ url }: { url: string }) {
     <a
       href={url}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="group flex flex-col rounded-2xl overflow-hidden bg-white text-secondary hover:shadow-xl transition-shadow"
     >
       <div className="relative aspect-video">
@@ -639,7 +640,7 @@ function EventCard({ ev }: { ev: ExperienciasEvent }) {
               <a
                 href={ev.link}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:opacity-90"
               >
                 Ver detalhes <ArrowRight className="h-3.5 w-3.5" />

@@ -22,7 +22,7 @@ export const DEFAULT_VALENLUB_SETTINGS: ValenlubPageSettings = {
   delivery_image_url: "",
   gallery_urls: [],
   brand_logos: [],
-  map_url: "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA",
+  map_url: "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6",
   whatsapp_url: "https://wa.me/559884458884",
 };
 

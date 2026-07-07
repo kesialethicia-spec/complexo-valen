@@ -222,7 +222,7 @@ function BlogPage() {
               <a
                 href="https://www.youtube.com/@complexovalen/videos"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="hidden md:inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:scale-105 transition-transform"
               >
                 <Youtube className="h-4 w-4" /> Ver canal no YouTube
@@ -242,7 +242,7 @@ function BlogPage() {
               <a
                 href="https://www.youtube.com/@complexovalen/videos"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
               >
                 <Youtube className="h-4 w-4" /> Ver canal no YouTube

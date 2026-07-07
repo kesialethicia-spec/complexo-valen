@@ -146,7 +146,7 @@ function AdminVideosList() {
                         <a
                           href={v.youtube_url}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           className="text-xs text-muted-foreground hover:underline inline-flex items-center gap-1"
                         >
                           <Play className="h-3 w-3" /> Abrir no YouTube

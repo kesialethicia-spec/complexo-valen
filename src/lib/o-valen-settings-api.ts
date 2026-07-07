@@ -28,7 +28,7 @@ export const DEFAULT_O_VALEN_SETTINGS: OValenPageSettings = {
   timeline_2025_image_url: "",
   gallery_urls: [],
   instagram_urls: [],
-  map_url: "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA",
+  map_url: "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6",
 };
 
 export async function getOValenPageSettings(): Promise<OValenPageSettings> {

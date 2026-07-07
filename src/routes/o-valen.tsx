@@ -117,7 +117,7 @@ function OValen() {
         link_url: "https://www.instagram.com/posto.valen/",
       }));
 
-  const mapUrl = settings?.map_url || "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA";
+  const mapUrl = settings?.map_url || "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6";
 
   return (
     <>
@@ -367,7 +367,7 @@ function OValen() {
               <a
                 href="https://www.instagram.com/posto.valen/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-6 py-3 text-sm font-bold text-primary-foreground shadow-glow hover:scale-[1.03] transition-transform"
               >
                 <Instagram className="h-4 w-4" /> Seguir no Instagram
@@ -385,7 +385,7 @@ function OValen() {
                 );
                 if (post.link_url) {
                   return (
-                    <a key={i} href={post.link_url} target="_blank" rel="noreferrer">
+                    <a key={i} href={post.link_url} target="_blank" rel="noopener noreferrer">
                       {inner}
                     </a>
                   );
@@ -420,7 +420,7 @@ function OValen() {
                 <a
                   href={mapUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-7 py-3.5 text-sm md:text-base font-bold text-white hover:bg-white/20 transition-colors backdrop-blur"
                 >
                   <MapPin className="h-4 w-4" /> Como chegar
@@ -449,9 +449,9 @@ function OValen() {
                   Quer crescer com o Valen? Acesse nossa plataforma de talentos, confira as vagas disponíveis e cadastre seu currículo.
                 </p>
                 <a
-                  href="https://complexovalen.portaldetalentos.senior.com.br/jobs"
+                  href="https://complexovalen.portaldetalentos.senior.com.br/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-3.5 text-sm md:text-base font-bold text-primary-foreground shadow-glow hover:scale-[1.03] transition-transform"
                 >
                   Ver vagas e cadastrar currículo <ArrowRight className="h-4 w-4" />

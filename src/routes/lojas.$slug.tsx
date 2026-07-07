@@ -103,7 +103,7 @@ function StoreDetail() {
               )}
             </div>
             {waLink && (
-              <a href={waLink} target="_blank" rel="noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-orange px-5 py-3 text-sm font-bold text-primary-foreground">
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-orange px-5 py-3 text-sm font-bold text-primary-foreground">
                 <MessageCircle className="h-4 w-4" /> {store.cta_text || "WhatsApp"}
               </a>
             )}

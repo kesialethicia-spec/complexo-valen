@@ -58,12 +58,12 @@ export function Footer() {
               <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /> São Luís — MA, Brasil</li>
               <li className="flex gap-2"><MessageCircle className="h-4 w-4 mt-0.5 text-primary shrink-0" /> WhatsApp: (98) 98445-8884</li>
               <li><Link to="/contato" className="hover:text-primary">Fale conosco</Link></li>
-              <li><a href="https://complexovalen.portaldetalentos.senior.com.br/jobs" target="_blank" rel="noreferrer" className="hover:text-primary">Trabalhe Conosco</a></li>
+              <li><a href="https://complexovalen.portaldetalentos.senior.com.br/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Trabalhe Conosco</a></li>
             </ul>
             <a
-              href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA"
+              href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
             >
               <MapPin className="h-4 w-4" /> Como chegar

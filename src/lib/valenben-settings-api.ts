@@ -20,7 +20,7 @@ export const DEFAULT_VALENBEN_SETTINGS: ValenbenPageSettings = {
   oil_change_area_image_url: "",
   team_image_url: "",
   gallery_urls: [],
-  map_url: "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA",
+  map_url: "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6",
   whatsapp_url: "https://wa.me/559884458884",
 };
 
