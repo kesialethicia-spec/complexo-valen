@@ -36,6 +36,7 @@ import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-v
 import { Route as AdminPaginaPostoRouteImport } from './routes/admin.pagina-posto'
 import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-valen'
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
+import { Route as AdminPaginaHomeRouteImport } from './routes/admin.pagina-home'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
 import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
@@ -185,6 +186,11 @@ const AdminPaginaHotelRoute = AdminPaginaHotelRouteImport.update({
   path: '/pagina-hotel',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPaginaHomeRoute = AdminPaginaHomeRouteImport.update({
+  id: '/pagina-home',
+  path: '/pagina-home',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
   id: '/videos/',
   path: '/videos/',
@@ -259,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
@@ -299,6 +306,7 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
@@ -341,6 +349,7 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
@@ -384,6 +393,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-home'
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
@@ -424,6 +434,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-home'
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
@@ -465,6 +476,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-home'
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
@@ -707,6 +719,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPaginaHotelRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pagina-home': {
+      id: '/admin/pagina-home'
+      path: '/pagina-home'
+      fullPath: '/admin/pagina-home'
+      preLoaderRoute: typeof AdminPaginaHomeRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/videos/': {
       id: '/admin/videos/'
       path: '/videos'
@@ -795,6 +814,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminPaginaHomeRoute: typeof AdminPaginaHomeRoute
   AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
   AdminPaginaOValenRoute: typeof AdminPaginaOValenRoute
   AdminPaginaPostoRoute: typeof AdminPaginaPostoRoute
@@ -815,6 +835,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminPaginaHomeRoute: AdminPaginaHomeRoute,
   AdminPaginaHotelRoute: AdminPaginaHotelRoute,
   AdminPaginaOValenRoute: AdminPaginaOValenRoute,
   AdminPaginaPostoRoute: AdminPaginaPostoRoute,
