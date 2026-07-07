@@ -455,6 +455,51 @@ export type Database = {
         }
         Relationships: []
       }
+      valenben_page_settings: {
+        Row: {
+          created_at: string
+          gallery_urls: string[]
+          hero_image_url: string
+          id: boolean
+          logo_url: string
+          map_url: string
+          oil_change_area_image_url: string
+          presentation_image_url: string
+          team_image_url: string
+          updated_at: string
+          waiting_room_image_url: string
+          whatsapp_url: string
+        }
+        Insert: {
+          created_at?: string
+          gallery_urls?: string[]
+          hero_image_url?: string
+          id?: boolean
+          logo_url?: string
+          map_url?: string
+          oil_change_area_image_url?: string
+          presentation_image_url?: string
+          team_image_url?: string
+          updated_at?: string
+          waiting_room_image_url?: string
+          whatsapp_url?: string
+        }
+        Update: {
+          created_at?: string
+          gallery_urls?: string[]
+          hero_image_url?: string
+          id?: boolean
+          logo_url?: string
+          map_url?: string
+          oil_change_area_image_url?: string
+          presentation_image_url?: string
+          team_image_url?: string
+          updated_at?: string
+          waiting_room_image_url?: string
+          whatsapp_url?: string
+        }
+        Relationships: []
+      }
       valenlog_page_settings: {
         Row: {
           classificacao_image_url: string | null
