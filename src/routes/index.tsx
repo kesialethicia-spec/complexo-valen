@@ -14,6 +14,7 @@ import foodImg from "@/assets/alimentacao.jpg";
 import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
+import { getHomePageSettings } from "@/lib/home-settings-api";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,9 +28,16 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
+  const [heroBgUrl, setHeroBgUrl] = useState<string>("");
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
+    })();
+    void (async () => {
+      try {
+        const s = await getHomePageSettings();
+        if (s.hero_bg_image_url) setHeroBgUrl(s.hero_bg_image_url);
+      } catch { /* fallback */ }
     })();
   }, []);
   const homePromos = useMemo(() => {
@@ -70,7 +78,7 @@ function Home() {
         <div className={slideIdx === 0 ? "block" : "hidden"}>
           <div className="absolute inset-0">
             <img
-              src={heroImg}
+              src={heroBgUrl || heroImg}
               alt=""
               aria-hidden="true"
               className="h-full w-full object-cover opacity-30"
