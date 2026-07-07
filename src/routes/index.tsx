@@ -78,8 +78,8 @@ function Home() {
         onMouseLeave={() => setPaused(false)}
       >
         {/* Slide institucional */}
-        <div className={slideIdx === 0 ? "block" : "hidden"}>
-          <div className="absolute inset-0">
+        <div className={slideIdx === 0 ? "block relative" : "hidden"}>
+          <div className="absolute inset-0 overflow-hidden">
             <picture>
               {heroBgMobile && (
                 <source media="(max-width: 767px)" srcSet={heroBgMobile} />
@@ -88,17 +88,18 @@ function Home() {
                 src={heroBgDesktop || heroImg}
                 alt=""
                 aria-hidden="true"
-                className="h-full w-full object-cover opacity-30"
+                className="h-full w-full object-cover"
                 width={1920}
                 height={1080}
               />
             </picture>
-            <div className="absolute inset-0 bg-secondary/80" />
-            <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/90 to-secondary/70" />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/40" />
+            {/* Overlay azul escuro — mantém legibilidade e deixa a foto visível */}
+            <div className="absolute inset-0 bg-secondary/75" />
+            <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary/40 to-secondary/70" />
           </div>
           <div className="absolute -bottom-32 -left-20 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl" />
           <div className="absolute top-20 right-10 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
+
 
           <div className="container-valen relative py-20 md:py-28 lg:py-32">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
