@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/PageHero";
-import { Phone, MessageCircle, Mail, MapPin, Briefcase, Hotel, Store, Calendar, Users } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, Briefcase, Hotel, Store, Calendar, Users, Sparkles } from "lucide-react";
+
 
 export const Route = createFileRoute("/contato")({
   head: () => ({ meta: [{ title: "Contato — Complexo Valen" }, { name: "description", content: "Fale com a equipe do Complexo Valen. Atendimento geral, comercial, lojas, hotel, eventos e trabalhe conosco." }] }),
