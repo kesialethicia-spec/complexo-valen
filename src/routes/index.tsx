@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
+  Heart, Users, Baby, Mic, Calendar,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import heroImg from "@/assets/hero-trucks.jpg";
@@ -15,7 +16,9 @@ import parkImg from "@/assets/estacionamento.jpg";
 import festaImg from "@/assets/festa.jpg";
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
+import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
