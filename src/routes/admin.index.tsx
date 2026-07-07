@@ -16,6 +16,7 @@ type AdminLink =
   | "/admin/pagina-o-valen"
   | "/admin/pagina-hotel"
   | "/admin/pagina-valenlog"
+  | "/admin/pagina-valenben"
   | "/admin/pagina-posto";
 
 const cards: { title: string; desc: string; to: AdminLink; cta: string }[] = [
@@ -27,9 +28,11 @@ const cards: { title: string; desc: string; to: AdminLink; cta: string }[] = [
   { title: "Página Home", desc: "Personalize a imagem de fundo da hero principal do site.", to: "/admin/pagina-home", cta: "Editar página Home" },
   { title: "Página O Valen", desc: "Gerencie imagens da página institucional 'O Valen', linha do tempo, galeria e Instagram.", to: "/admin/pagina-o-valen", cta: "Editar página O Valen" },
   { title: "Página Posto Valen", desc: "Atualize imagens, logo e formas de pagamento da página do Posto Valen.", to: "/admin/pagina-posto", cta: "Editar página do Posto" },
+  { title: "Página ValenBen", desc: "Gerencie imagens e links da página ValenBen Super Troca de Óleo.", to: "/admin/pagina-valenben", cta: "Editar página ValenBen" },
   { title: "Página Valen Porto Hotel", desc: "Atualize imagens, logo e links de reserva exibidos na página do hotel.", to: "/admin/pagina-hotel", cta: "Editar página do hotel" },
   { title: "Página ValenLog", desc: "Gerencie imagens da página do ValenLog e do Espaço Valentina.", to: "/admin/pagina-valenlog", cta: "Editar página do ValenLog" },
 ];
+
 
 
 function AdminDashboard() {

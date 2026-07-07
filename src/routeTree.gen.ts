@@ -24,6 +24,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ServicosValenlogRouteImport } from './routes/servicos.valenlog'
+import { Route as ServicosValenbenSuperTrocaDeOleoRouteImport } from './routes/servicos.valenben-super-troca-de-oleo'
 import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoValenRouteImport } from './routes/servicos.posto-valen'
@@ -33,6 +34,7 @@ import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogDoCaminhoneiroSlugRouteImport } from './routes/blog-do-caminhoneiro.$slug'
 import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-valenlog'
+import { Route as AdminPaginaValenbenRouteImport } from './routes/admin.pagina-valenben'
 import { Route as AdminPaginaPostoRouteImport } from './routes/admin.pagina-posto'
 import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-valen'
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
@@ -128,6 +130,12 @@ const ServicosValenlogRoute = ServicosValenlogRouteImport.update({
   path: '/servicos/valenlog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicosValenbenSuperTrocaDeOleoRoute =
+  ServicosValenbenSuperTrocaDeOleoRouteImport.update({
+    id: '/servicos/valenben-super-troca-de-oleo',
+    path: '/servicos/valenben-super-troca-de-oleo',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicosValenPortoHotelRoute = ServicosValenPortoHotelRouteImport.update({
   id: '/servicos/valen-porto-hotel',
   path: '/servicos/valen-porto-hotel',
@@ -172,6 +180,11 @@ const BlogDoCaminhoneiroSlugRoute = BlogDoCaminhoneiroSlugRouteImport.update({
 const AdminPaginaValenlogRoute = AdminPaginaValenlogRouteImport.update({
   id: '/pagina-valenlog',
   path: '/pagina-valenlog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaValenbenRoute = AdminPaginaValenbenRouteImport.update({
+  id: '/pagina-valenben',
+  path: '/pagina-valenben',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminPaginaPostoRoute = AdminPaginaPostoRouteImport.update({
@@ -287,6 +300,7 @@ export interface FileRoutesByFullPath {
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
+  '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
@@ -296,6 +310,7 @@ export interface FileRoutesByFullPath {
   '/servicos/posto-valen': typeof ServicosPostoValenRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
+  '/servicos/valenben-super-troca-de-oleo': typeof ServicosValenbenSuperTrocaDeOleoRoute
   '/servicos/valenlog': typeof ServicosValenlogRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
@@ -331,6 +346,7 @@ export interface FileRoutesByTo {
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
+  '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
@@ -340,6 +356,7 @@ export interface FileRoutesByTo {
   '/servicos/posto-valen': typeof ServicosPostoValenRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
+  '/servicos/valenben-super-troca-de-oleo': typeof ServicosValenbenSuperTrocaDeOleoRoute
   '/servicos/valenlog': typeof ServicosValenlogRoute
   '/admin': typeof AdminIndexRoute
   '/servicos': typeof ServicosIndexRoute
@@ -377,6 +394,7 @@ export interface FileRoutesById {
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
+  '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
@@ -386,6 +404,7 @@ export interface FileRoutesById {
   '/servicos/posto-valen': typeof ServicosPostoValenRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
+  '/servicos/valenben-super-troca-de-oleo': typeof ServicosValenbenSuperTrocaDeOleoRoute
   '/servicos/valenlog': typeof ServicosValenlogRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
@@ -424,6 +443,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
+    | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
@@ -433,6 +453,7 @@ export interface FileRouteTypes {
     | '/servicos/posto-valen'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
+    | '/servicos/valenben-super-troca-de-oleo'
     | '/servicos/valenlog'
     | '/admin/'
     | '/servicos/'
@@ -468,6 +489,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
+    | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
@@ -477,6 +499,7 @@ export interface FileRouteTypes {
     | '/servicos/posto-valen'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
+    | '/servicos/valenben-super-troca-de-oleo'
     | '/servicos/valenlog'
     | '/admin'
     | '/servicos'
@@ -513,6 +536,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
+    | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
@@ -522,6 +546,7 @@ export interface FileRouteTypes {
     | '/servicos/posto-valen'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
+    | '/servicos/valenben-super-troca-de-oleo'
     | '/servicos/valenlog'
     | '/admin/'
     | '/servicos/'
@@ -560,6 +585,7 @@ export interface RootRouteChildren {
   ServicosPostoValenRoute: typeof ServicosPostoValenRoute
   ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
   ServicosValenPortoHotelRoute: typeof ServicosValenPortoHotelRoute
+  ServicosValenbenSuperTrocaDeOleoRoute: typeof ServicosValenbenSuperTrocaDeOleoRoute
   ServicosValenlogRoute: typeof ServicosValenlogRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
@@ -671,6 +697,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosValenlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicos/valenben-super-troca-de-oleo': {
+      id: '/servicos/valenben-super-troca-de-oleo'
+      path: '/servicos/valenben-super-troca-de-oleo'
+      fullPath: '/servicos/valenben-super-troca-de-oleo'
+      preLoaderRoute: typeof ServicosValenbenSuperTrocaDeOleoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos/valen-porto-hotel': {
       id: '/servicos/valen-porto-hotel'
       path: '/servicos/valen-porto-hotel'
@@ -732,6 +765,13 @@ declare module '@tanstack/react-router' {
       path: '/pagina-valenlog'
       fullPath: '/admin/pagina-valenlog'
       preLoaderRoute: typeof AdminPaginaValenlogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pagina-valenben': {
+      id: '/admin/pagina-valenben'
+      path: '/pagina-valenben'
+      fullPath: '/admin/pagina-valenben'
+      preLoaderRoute: typeof AdminPaginaValenbenRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/pagina-posto': {
@@ -875,6 +915,7 @@ interface AdminRouteChildren {
   AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
   AdminPaginaOValenRoute: typeof AdminPaginaOValenRoute
   AdminPaginaPostoRoute: typeof AdminPaginaPostoRoute
+  AdminPaginaValenbenRoute: typeof AdminPaginaValenbenRoute
   AdminPaginaValenlogRoute: typeof AdminPaginaValenlogRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
@@ -899,6 +940,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminPaginaHotelRoute: AdminPaginaHotelRoute,
   AdminPaginaOValenRoute: AdminPaginaOValenRoute,
   AdminPaginaPostoRoute: AdminPaginaPostoRoute,
+  AdminPaginaValenbenRoute: AdminPaginaValenbenRoute,
   AdminPaginaValenlogRoute: AdminPaginaValenlogRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
@@ -971,6 +1013,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosPostoValenRoute: ServicosPostoValenRoute,
   ServicosTruckCenterRoute: ServicosTruckCenterRoute,
   ServicosValenPortoHotelRoute: ServicosValenPortoHotelRoute,
+  ServicosValenbenSuperTrocaDeOleoRoute: ServicosValenbenSuperTrocaDeOleoRoute,
   ServicosValenlogRoute: ServicosValenlogRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
