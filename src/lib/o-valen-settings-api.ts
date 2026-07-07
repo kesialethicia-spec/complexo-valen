@@ -48,7 +48,7 @@ export async function getOValenPageSettings(): Promise<OValenPageSettings> {
     timeline_2022_image_url: data.timeline_2022_image_url ?? "",
     timeline_2025_image_url: data.timeline_2025_image_url ?? "",
     gallery_urls: (data.gallery_urls ?? []) as string[],
-    instagram_urls: (data.instagram_urls ?? []) as InstagramItem[],
+    instagram_urls: (data.instagram_urls ?? []) as unknown as InstagramItem[],
     map_url: data.map_url ?? DEFAULT_O_VALEN_SETTINGS.map_url,
   };
 }
@@ -56,6 +56,6 @@ export async function getOValenPageSettings(): Promise<OValenPageSettings> {
 export async function updateOValenPageSettings(input: OValenPageSettings): Promise<void> {
   const { error } = await supabase
     .from("o_valen_page_settings")
-    .upsert({ id: true, ...input });
+    .upsert({ id: true, ...input, instagram_urls: input.instagram_urls as unknown as never });
   if (error) throw error;
 }
