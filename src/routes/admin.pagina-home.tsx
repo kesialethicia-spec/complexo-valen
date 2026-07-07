@@ -6,8 +6,8 @@ import {
   updateHomePageSettings,
   type HomePageSettings,
 } from "@/lib/home-settings-api";
-import { ImageUploadField } from "@/components/admin/ImageUploadField";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { CropImageUploadField } from "@/components/admin/CropImageUploadField";
+import { ArrowLeft, CheckCircle2, Monitor, Smartphone } from "lucide-react";
 
 export const Route = createFileRoute("/admin/pagina-home")({
   component: AdminHomePage,
@@ -57,7 +57,7 @@ function AdminHomePage() {
           </button>
           <h1 className="mt-2 text-3xl font-display font-bold">Página Home</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Personalize a imagem de fundo da hero principal do site.
+            Personalize a imagem de fundo da hero principal do site. Faça upload, pré-visualize e recorte para desktop e mobile.
           </p>
         </div>
         <Link
@@ -80,21 +80,44 @@ function AdminHomePage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
-        <div className="rounded-2xl border bg-card p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
+        <div className="rounded-2xl border bg-card p-6 space-y-6">
           <div>
             <h2 className="text-lg font-display font-bold">Imagem de fundo da hero</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Uma foto sutil aparece atrás da hero principal, com overlay azul escuro para preservar a identidade visual. Se ficar vazio, o site usa a imagem padrão.
+              Uma foto sutil aparece atrás da hero, com overlay azul escuro. Se ficar vazio, o site usa a imagem padrão.
             </p>
           </div>
-          <ImageUploadField
-            label="Foto de fundo"
-            hint="Recomendado: foto institucional do complexo (estrada, caminhões, pátio, posto)."
-            value={form.hero_bg_image_url}
-            onChange={(url) => setForm((f) => (f ? { ...f, hero_bg_image_url: url } : f))}
-            aspect="landscape"
-          />
+
+          <div className="rounded-xl border bg-background p-5">
+            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-secondary">
+              <Monitor className="h-4 w-4 text-primary" /> Desktop
+            </div>
+            <CropImageUploadField
+              label="Foto de fundo (desktop)"
+              sizeLabel="16:9 · 1920×1080"
+              hint="Foto institucional (estrada, caminhões, pátio, posto). O recorte é aplicado no upload."
+              value={form.hero_bg_image_desktop_url}
+              onChange={(url) => setForm((f) => (f ? { ...f, hero_bg_image_desktop_url: url } : f))}
+              aspect={16 / 9}
+              outputWidth={1920}
+            />
+          </div>
+
+          <div className="rounded-xl border bg-background p-5">
+            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-secondary">
+              <Smartphone className="h-4 w-4 text-primary" /> Mobile
+            </div>
+            <CropImageUploadField
+              label="Foto de fundo (mobile)"
+              sizeLabel="3:4 · 900×1200"
+              hint="Recorte vertical exibido em celulares. Se ficar vazio, usamos a imagem de desktop."
+              value={form.hero_bg_image_mobile_url}
+              onChange={(url) => setForm((f) => (f ? { ...f, hero_bg_image_mobile_url: url } : f))}
+              aspect={3 / 4}
+              outputWidth={900}
+            />
+          </div>
         </div>
 
         <button
