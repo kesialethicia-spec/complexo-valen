@@ -23,6 +23,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ServicosValenlubRouteImport } from './routes/servicos.valenlub'
 import { Route as ServicosValenlogRouteImport } from './routes/servicos.valenlog'
 import { Route as ServicosValenbenSuperTrocaDeOleoRouteImport } from './routes/servicos.valenben-super-troca-de-oleo'
 import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
@@ -33,6 +34,7 @@ import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alime
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogDoCaminhoneiroSlugRouteImport } from './routes/blog-do-caminhoneiro.$slug'
+import { Route as AdminPaginaValenlubRouteImport } from './routes/admin.pagina-valenlub'
 import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-valenlog'
 import { Route as AdminPaginaValenbenRouteImport } from './routes/admin.pagina-valenben'
 import { Route as AdminPaginaPostoRouteImport } from './routes/admin.pagina-posto'
@@ -125,6 +127,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const ServicosValenlubRoute = ServicosValenlubRouteImport.update({
+  id: '/servicos/valenlub',
+  path: '/servicos/valenlub',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicosValenlogRoute = ServicosValenlogRouteImport.update({
   id: '/servicos/valenlog',
   path: '/servicos/valenlog',
@@ -176,6 +183,11 @@ const BlogDoCaminhoneiroSlugRoute = BlogDoCaminhoneiroSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogDoCaminhoneiroRoute,
+} as any)
+const AdminPaginaValenlubRoute = AdminPaginaValenlubRouteImport.update({
+  id: '/pagina-valenlub',
+  path: '/pagina-valenlub',
+  getParentRoute: () => AdminRoute,
 } as any)
 const AdminPaginaValenlogRoute = AdminPaginaValenlogRouteImport.update({
   id: '/pagina-valenlog',
@@ -302,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
   '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
+  '/admin/pagina-valenlub': typeof AdminPaginaValenlubRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -312,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/servicos/valenben-super-troca-de-oleo': typeof ServicosValenbenSuperTrocaDeOleoRoute
   '/servicos/valenlog': typeof ServicosValenlogRoute
+  '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -348,6 +362,7 @@ export interface FileRoutesByTo {
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
   '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
+  '/admin/pagina-valenlub': typeof AdminPaginaValenlubRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -358,6 +373,7 @@ export interface FileRoutesByTo {
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/servicos/valenben-super-troca-de-oleo': typeof ServicosValenbenSuperTrocaDeOleoRoute
   '/servicos/valenlog': typeof ServicosValenlogRoute
+  '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin': typeof AdminIndexRoute
   '/servicos': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -396,6 +412,7 @@ export interface FileRoutesById {
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
   '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
+  '/admin/pagina-valenlub': typeof AdminPaginaValenlubRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -406,6 +423,7 @@ export interface FileRoutesById {
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
   '/servicos/valenben-super-troca-de-oleo': typeof ServicosValenbenSuperTrocaDeOleoRoute
   '/servicos/valenlog': typeof ServicosValenlogRoute
+  '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin/': typeof AdminIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
@@ -445,6 +463,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-posto'
     | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
+    | '/admin/pagina-valenlub'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -455,6 +474,7 @@ export interface FileRouteTypes {
     | '/servicos/valen-porto-hotel'
     | '/servicos/valenben-super-troca-de-oleo'
     | '/servicos/valenlog'
+    | '/servicos/valenlub'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -491,6 +511,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-posto'
     | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
+    | '/admin/pagina-valenlub'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -501,6 +522,7 @@ export interface FileRouteTypes {
     | '/servicos/valen-porto-hotel'
     | '/servicos/valenben-super-troca-de-oleo'
     | '/servicos/valenlog'
+    | '/servicos/valenlub'
     | '/admin'
     | '/servicos'
     | '/admin/blog/$id'
@@ -538,6 +560,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-posto'
     | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
+    | '/admin/pagina-valenlub'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -548,6 +571,7 @@ export interface FileRouteTypes {
     | '/servicos/valen-porto-hotel'
     | '/servicos/valenben-super-troca-de-oleo'
     | '/servicos/valenlog'
+    | '/servicos/valenlub'
     | '/admin/'
     | '/servicos/'
     | '/admin/blog/$id'
@@ -587,6 +611,7 @@ export interface RootRouteChildren {
   ServicosValenPortoHotelRoute: typeof ServicosValenPortoHotelRoute
   ServicosValenbenSuperTrocaDeOleoRoute: typeof ServicosValenbenSuperTrocaDeOleoRoute
   ServicosValenlogRoute: typeof ServicosValenlogRoute
+  ServicosValenlubRoute: typeof ServicosValenlubRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -690,6 +715,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/servicos/valenlub': {
+      id: '/servicos/valenlub'
+      path: '/servicos/valenlub'
+      fullPath: '/servicos/valenlub'
+      preLoaderRoute: typeof ServicosValenlubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos/valenlog': {
       id: '/servicos/valenlog'
       path: '/servicos/valenlog'
@@ -759,6 +791,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog-do-caminhoneiro/$slug'
       preLoaderRoute: typeof BlogDoCaminhoneiroSlugRouteImport
       parentRoute: typeof BlogDoCaminhoneiroRoute
+    }
+    '/admin/pagina-valenlub': {
+      id: '/admin/pagina-valenlub'
+      path: '/pagina-valenlub'
+      fullPath: '/admin/pagina-valenlub'
+      preLoaderRoute: typeof AdminPaginaValenlubRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/admin/pagina-valenlog': {
       id: '/admin/pagina-valenlog'
@@ -917,6 +956,7 @@ interface AdminRouteChildren {
   AdminPaginaPostoRoute: typeof AdminPaginaPostoRoute
   AdminPaginaValenbenRoute: typeof AdminPaginaValenbenRoute
   AdminPaginaValenlogRoute: typeof AdminPaginaValenlogRoute
+  AdminPaginaValenlubRoute: typeof AdminPaginaValenlubRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
   AdminBlogNovoRoute: typeof AdminBlogNovoRoute
@@ -942,6 +982,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminPaginaPostoRoute: AdminPaginaPostoRoute,
   AdminPaginaValenbenRoute: AdminPaginaValenbenRoute,
   AdminPaginaValenlogRoute: AdminPaginaValenlogRoute,
+  AdminPaginaValenlubRoute: AdminPaginaValenlubRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
   AdminBlogNovoRoute: AdminBlogNovoRoute,
@@ -1015,6 +1056,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosValenPortoHotelRoute: ServicosValenPortoHotelRoute,
   ServicosValenbenSuperTrocaDeOleoRoute: ServicosValenbenSuperTrocaDeOleoRoute,
   ServicosValenlogRoute: ServicosValenlogRoute,
+  ServicosValenlubRoute: ServicosValenlubRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
