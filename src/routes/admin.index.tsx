@@ -10,6 +10,7 @@ type AdminLink =
   | "/admin/blog"
   | "/admin/promocoes"
   | "/admin/lojas"
+  | "/admin/servicos"
   | "/admin/videos"
   | "/admin/pagina-home"
   | "/admin/pagina-o-valen"
@@ -20,6 +21,7 @@ type AdminLink =
 const cards: { title: string; desc: string; to: AdminLink; cta: string }[] = [
   { title: "Blog do Caminhoneiro", desc: "Crie, edite e publique artigos do blog do Valen.", to: "/admin/blog", cta: "Gerenciar artigos" },
   { title: "Promoções", desc: "Cadastre e gerencie as promoções exibidas no site.", to: "/admin/promocoes", cta: "Gerenciar promoções" },
+  { title: "Serviços", desc: "Gerencie os cards da página /servicos: nome, imagem, tags, ordem e publicação.", to: "/admin/servicos", cta: "Gerenciar serviços" },
   { title: "Lojas do Complexo", desc: "Gerencie as lojas, serviços e operações presentes no Complexo Valen.", to: "/admin/lojas", cta: "Gerenciar lojas" },
   { title: "Vídeos", desc: "Cadastre vídeos do YouTube para a seção “Vídeos para quem vive na estrada”.", to: "/admin/videos", cta: "Gerenciar vídeos" },
   { title: "Página Home", desc: "Personalize a imagem de fundo da hero principal do site.", to: "/admin/pagina-home", cta: "Editar página Home" },
