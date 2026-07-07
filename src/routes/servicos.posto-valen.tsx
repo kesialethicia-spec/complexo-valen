@@ -164,7 +164,8 @@ function PostoValenPage() {
       </section>
 
       {/* CONVENIÊNCIA */}
-      <section className="py-20 md:py-24 bg-background">
+      <section id="conveniencia" className="py-20 md:py-24 bg-background scroll-mt-24">
+
         <div className="container-valen">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="lg:order-2">
