@@ -110,6 +110,54 @@ export type Database = {
         }
         Relationships: []
       }
+      o_valen_page_settings: {
+        Row: {
+          created_at: string
+          experiencias_image_url: string | null
+          gallery_urls: Json
+          hero_image_url: string | null
+          id: boolean
+          instagram_urls: Json
+          map_url: string | null
+          presentation_image_url: string | null
+          purpose_image_url: string | null
+          timeline_2019_image_url: string | null
+          timeline_2022_image_url: string | null
+          timeline_2025_image_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          experiencias_image_url?: string | null
+          gallery_urls?: Json
+          hero_image_url?: string | null
+          id?: boolean
+          instagram_urls?: Json
+          map_url?: string | null
+          presentation_image_url?: string | null
+          purpose_image_url?: string | null
+          timeline_2019_image_url?: string | null
+          timeline_2022_image_url?: string | null
+          timeline_2025_image_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          experiencias_image_url?: string | null
+          gallery_urls?: Json
+          hero_image_url?: string | null
+          id?: boolean
+          instagram_urls?: Json
+          map_url?: string | null
+          presentation_image_url?: string | null
+          purpose_image_url?: string | null
+          timeline_2019_image_url?: string | null
+          timeline_2022_image_url?: string | null
+          timeline_2025_image_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       posto_page_settings: {
         Row: {
           abastecimento_image_url: string | null

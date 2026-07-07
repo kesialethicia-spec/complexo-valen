@@ -34,6 +34,7 @@ import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogDoCaminhoneiroSlugRouteImport } from './routes/blog-do-caminhoneiro.$slug'
 import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-valenlog'
 import { Route as AdminPaginaPostoRouteImport } from './routes/admin.pagina-posto'
+import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-valen'
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
@@ -174,6 +175,11 @@ const AdminPaginaPostoRoute = AdminPaginaPostoRouteImport.update({
   path: '/pagina-posto',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPaginaOValenRoute = AdminPaginaOValenRouteImport.update({
+  id: '/pagina-o-valen',
+  path: '/pagina-o-valen',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPaginaHotelRoute = AdminPaginaHotelRouteImport.update({
   id: '/pagina-hotel',
   path: '/pagina-hotel',
@@ -254,6 +260,7 @@ export interface FileRoutesByFullPath {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
+  '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
@@ -293,6 +300,7 @@ export interface FileRoutesByTo {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
+  '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
@@ -334,6 +342,7 @@ export interface FileRoutesById {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
+  '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
   '/admin/pagina-posto': typeof AdminPaginaPostoRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
@@ -376,6 +385,7 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/termos-de-uso'
     | '/admin/pagina-hotel'
+    | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
     | '/admin/pagina-valenlog'
     | '/blog-do-caminhoneiro/$slug'
@@ -415,6 +425,7 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/termos-de-uso'
     | '/admin/pagina-hotel'
+    | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
     | '/admin/pagina-valenlog'
     | '/blog-do-caminhoneiro/$slug'
@@ -455,6 +466,7 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/termos-de-uso'
     | '/admin/pagina-hotel'
+    | '/admin/pagina-o-valen'
     | '/admin/pagina-posto'
     | '/admin/pagina-valenlog'
     | '/blog-do-caminhoneiro/$slug'
@@ -681,6 +693,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPaginaPostoRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pagina-o-valen': {
+      id: '/admin/pagina-o-valen'
+      path: '/pagina-o-valen'
+      fullPath: '/admin/pagina-o-valen'
+      preLoaderRoute: typeof AdminPaginaOValenRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/pagina-hotel': {
       id: '/admin/pagina-hotel'
       path: '/pagina-hotel'
@@ -777,6 +796,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
+  AdminPaginaOValenRoute: typeof AdminPaginaOValenRoute
   AdminPaginaPostoRoute: typeof AdminPaginaPostoRoute
   AdminPaginaValenlogRoute: typeof AdminPaginaValenlogRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -796,6 +816,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminPaginaHotelRoute: AdminPaginaHotelRoute,
+  AdminPaginaOValenRoute: AdminPaginaOValenRoute,
   AdminPaginaPostoRoute: AdminPaginaPostoRoute,
   AdminPaginaValenlogRoute: AdminPaginaValenlogRoute,
   AdminIndexRoute: AdminIndexRoute,
