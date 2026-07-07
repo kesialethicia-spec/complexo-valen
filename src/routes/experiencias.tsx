@@ -282,7 +282,7 @@ function Experiencias() {
       </section>
 
       {/* 6. Espaço Valentina */}
-      <section className="py-24 bg-background">
+      <section id="espaco-valentina" className="py-24 bg-background scroll-mt-24">
         <div className="container-valen">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             {valentinaImages.length > 0 ? (
