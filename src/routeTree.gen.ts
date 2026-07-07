@@ -181,9 +181,9 @@ const LojasSlugRoute = LojasSlugRouteImport.update({
   getParentRoute: () => LojasRoute,
 } as any)
 const BlogDoCaminhoneiroSlugRoute = BlogDoCaminhoneiroSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogDoCaminhoneiroRoute,
+  id: '/blog-do-caminhoneiro/$slug',
+  path: '/blog-do-caminhoneiro/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminPaginaValenlubRoute = AdminPaginaValenlubRouteImport.update({
   id: '/pagina-valenlub',
@@ -615,6 +615,7 @@ export interface RootRouteChildren {
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   PromocoesRoute: typeof PromocoesRouteWithChildren
   TermosDeUsoRoute: typeof TermosDeUsoRoute
+  BlogDoCaminhoneiroSlugRoute: typeof BlogDoCaminhoneiroSlugRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
   ServicosPostoValenRoute: typeof ServicosPostoValenRoute
@@ -799,10 +800,10 @@ declare module '@tanstack/react-router' {
     }
     '/blog-do-caminhoneiro/$slug': {
       id: '/blog-do-caminhoneiro/$slug'
-      path: '/$slug'
+      path: '/blog-do-caminhoneiro/$slug'
       fullPath: '/blog-do-caminhoneiro/$slug'
       preLoaderRoute: typeof BlogDoCaminhoneiroSlugRouteImport
-      parentRoute: typeof BlogDoCaminhoneiroRoute
+      parentRoute: typeof rootRouteImport
     }
     '/admin/pagina-valenlub': {
       id: '/admin/pagina-valenlub'
@@ -1058,6 +1059,7 @@ const rootRouteChildren: RootRouteChildren = {
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   PromocoesRoute: PromocoesRouteWithChildren,
   TermosDeUsoRoute: TermosDeUsoRoute,
+  BlogDoCaminhoneiroSlugRoute: BlogDoCaminhoneiroSlugRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
   ServicosPostoValenRoute: ServicosPostoValenRoute,
