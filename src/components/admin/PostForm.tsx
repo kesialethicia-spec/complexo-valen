@@ -40,7 +40,10 @@ export function PostForm({ initial, submitting, onSubmit, onCancel }: Props) {
     if (!slugTouched) setSlug(slugify(title));
   }, [title, slugTouched]);
 
-  const previewHtml = useMemo(() => marked.parse(content || "*Sem conteúdo ainda…*"), [content]);
+  const previewHtml = useMemo(
+    () => DOMPurify.sanitize(marked.parse(content || "*Sem conteúdo ainda…*") as string),
+    [content],
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
