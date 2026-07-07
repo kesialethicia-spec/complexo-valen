@@ -230,7 +230,7 @@ function HotelPage() {
               { icon: MapPin, title: "Localização privilegiada" },
               { icon: Briefcase, title: "Estrutura para negócios" },
               { icon: Sparkles, title: "Conforto após a estrada" },
-              { icon: Heart, title: "Estrutura oara eventos" },
+              { icon: Heart, title: "Estrutura para eventos" },
             ].map((d) => (
               <div key={d.title} className="rounded-2xl bg-card border border-border p-6">
                 <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
