@@ -1,39 +1,54 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
-import { Film, Gamepad2, Baby, Wifi, BedDouble, Coffee, Scissors } from "lucide-react";
+import {
+  Film,
+  Gamepad2,
+  Baby,
+  Wifi,
+  BedDouble,
+  Coffee,
+  Scissors,
+  Instagram,
+  Youtube,
+  Calendar,
+  Heart,
+  Shield,
+  Stethoscope,
+  Syringe,
+  Users,
+  MapPin,
+  ArrowRight,
+  Play,
+  Sparkles,
+} from "lucide-react";
 import festaImg from "@/assets/festa.jpg";
 import foodImg from "@/assets/alimentacao.jpg";
 import hotelImg from "@/assets/hotel.jpg";
 import postoImg from "@/assets/posto.jpg";
+import {
+  getExperienciasPageSettings,
+  DEFAULT_EXPERIENCIAS_SETTINGS,
+} from "@/lib/experiencias-settings-api";
+import { extractYoutubeId, youtubeThumbnail } from "@/lib/videos-api";
 
 export const Route = createFileRoute("/experiencias")({
   head: () => ({
     meta: [
       { title: "Experiências — Complexo Valen" },
-      { name: "description", content: "Festa do Caminhoneiro, Café da Manhã de Sábado, Sextou no Valen e Clube do Caminhoneiro. Experiências que movimentam pessoas." },
+      {
+        name: "description",
+        content:
+          "Festa do Caminhoneiro, Café de Sábado, ações de saúde, Clube do Caminhoneiro, Espaço Valentina e Studio Valen. Experiências que movimentam pessoas.",
+      },
     ],
   }),
   component: Experiencias,
 });
 
-const exps = [
-  {
-    t: "Festa do Caminhoneiro",
-    d: "Um momento especial para celebrar quem move o Brasil pelas estradas. A Festa do Caminhoneiro reúne música, confraternização, homenagens e experiências pensadas para acolher nossos clientes como parte da família. Mais do que um evento, é uma forma de agradecer a confiança de quem faz do Valen uma parada de amizade e cuidado.",
-    img: festaImg,
-  },
-  {
-    t: "Café da Manhã de Sábado",
-    d: "Todo sábado começa com sabor e acolhimento no Complexo Valen. Nosso café da manhã é preparado para proporcionar uma pausa agradável na rotina, reunindo clientes, parceiros e amigos em um ambiente leve, confortável e cheio de boas conversas.",
-    img: foodImg,
-  },
-  {
-    t: "Sextou no Valen",
-    d: "Música, descontração e experiências que transformam a parada em um momento de lazer e conexão. Um convite para relaxar, encontrar amigos e aproveitar o melhor do Valen.",
-    img: festaImg,
-  },
-];
+const INSTAGRAM_URL = "https://www.instagram.com/posto.valen/";
+const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@complexovalen/videos";
 
 const clubeItens = [
   { icon: Film, t: "Cinema" },
@@ -45,74 +60,544 @@ const clubeItens = [
   { icon: Scissors, t: "Barbearia" },
 ];
 
+const valentinaItens = [
+  { icon: Wifi, t: "Wi-Fi" },
+  { icon: Gamepad2, t: "Lan House" },
+  { icon: Baby, t: "Berço" },
+  { icon: Sparkles, t: "Brinquedoteca" },
+  { icon: BedDouble, t: "Sala climatizada" },
+  { icon: Coffee, t: "Espaço para descanso" },
+];
+
+const saudeItens = [
+  { icon: Syringe, t: "Vacinação" },
+  { icon: Stethoscope, t: "Aferição de pressão" },
+  { icon: Heart, t: "Orientação de saúde" },
+  { icon: Shield, t: "Prevenção e cuidado" },
+  { icon: Users, t: "Apoio ao caminhoneiro" },
+  { icon: Calendar, t: "Ações mensais no complexo" },
+];
+
 function Experiencias() {
+  const { data = DEFAULT_EXPERIENCIAS_SETTINGS } = useQuery({
+    queryKey: ["experiencias-page-settings"],
+    queryFn: getExperienciasPageSettings,
+  });
+
+  const festaImage = data.festa_image_url || festaImg;
+  const cafeImage = data.cafe_image_url || foodImg;
+  const clubeImage = data.clube_image_url || hotelImg;
+  const studioImage = data.studio_image_url || postoImg;
+  const saudeImages = data.saude_image_urls.filter(Boolean);
+  const valentinaImages = data.valentina_image_urls.filter(Boolean);
+  const gallery =
+    data.gallery_urls.filter(Boolean).length > 0
+      ? data.gallery_urls.filter(Boolean)
+      : [festaImg, foodImg, hotelImg, postoImg, festaImg, foodImg, hotelImg, postoImg];
+  const publishedEvents = data.events
+    .filter((e) => e.status === "publicado")
+    .sort((a, b) => Number(b.featured) - Number(a.featured));
+
   return (
     <>
       <PageHero
         eyebrow="Experiências"
         title="Experiências que movimentam pessoas"
         subtitle="A experiência Valen está em todo o complexo. Cada ação é pensada para aproximar pessoas, acolher quem está longe de casa e transformar a parada em um momento especial."
-        image={festaImg}
+        image={festaImage}
       />
 
+      {/* 2. Festa do Caminhoneiro */}
       <section className="py-24 bg-background">
-        <div className="container-valen space-y-20">
-          {exps.map((e, i) => (
-            <div key={e.t} className={`grid gap-10 lg:grid-cols-2 items-center ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-              <img src={e.img} alt={e.t} className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow" loading="lazy" />
-              <div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">Experiência</span>
-                <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">{e.t}</h2>
-                <p className="mt-5 text-lg text-muted-foreground leading-relaxed">{e.d}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Clube do Caminhoneiro com itens */}
-      <section className="py-24 bg-surface">
         <div className="container-valen">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
+            <img
+              src={festaImage}
+              alt="Festa do Caminhoneiro"
+              className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
+              loading="lazy"
+            />
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">Experiência</span>
-              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">Clube do Caminhoneiro</h2>
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+                Evento oficial
+              </span>
+              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">
+                Festa do Caminhoneiro
+              </h2>
               <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-                O Clube do Caminhoneiro foi pensado para valorizar quem está sempre na estrada. É um espaço de convivência e lazer gratuito projetado para oferecer conforto, suporte e bem-estar aos motoristas.
+                Um dos momentos mais especiais do Complexo Valen. A Festa do
+                Caminhoneiro celebra quem move o Brasil com programação
+                especial, música, churrasco, ações promocionais, experiências
+                para parceiros e momentos de reconhecimento para quem vive na
+                estrada.
               </p>
-              <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {clubeItens.map((i) => (
-                  <div key={i.t} className="flex items-center gap-3 rounded-2xl bg-card border border-border p-3.5">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-orange text-white">
-                      <i.icon className="h-4 w-4" />
-                    </span>
-                    <span className="text-sm font-semibold text-secondary">{i.t}</span>
-                  </div>
-                ))}
-              </div>
+              <a
+                href="#eventos"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-6 py-3 text-sm font-bold text-primary-foreground shadow-glow"
+              >
+                Ver eventos <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
-            <img src={hotelImg} alt="Clube do Caminhoneiro" className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow" loading="lazy" />
           </div>
         </div>
       </section>
 
+      {/* 3. Café da Manhã de Sábado */}
+      <section className="py-24 bg-surface">
+        <div className="container-valen space-y-12">
+          <div className="grid gap-10 lg:grid-cols-2 items-center">
+            <div className="lg:order-2">
+              <img
+                src={cafeImage}
+                alt="Café da Manhã de Sábado"
+                className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+                Toda semana
+              </span>
+              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">
+                Café da Manhã de Sábado
+              </h2>
+              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+                Todo sábado, o Complexo Valen recebe caminhoneiros, clientes e
+                visitantes com um café da manhã especial. Um momento simples,
+                acolhedor e cheio de significado para começar o dia com
+                energia, conversa boa e o cuidado de quem entende a estrada.
+              </p>
+            </div>
+          </div>
+
+          {data.cafe_instagram_urls.filter(Boolean).length > 0 && (
+            <div>
+              <h3 className="text-xl font-display font-bold text-secondary mb-4">
+                No Instagram
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {data.cafe_instagram_urls.filter(Boolean).map((url, i) => (
+                  <InstagramCard key={i} url={url} title={`Café de Sábado #${i + 1}`} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 4. Ações de Saúde */}
+      <section className="py-24 bg-background">
+        <div className="container-valen space-y-12">
+          <SectionHeader
+            eyebrow="Ações de Saúde"
+            title="Cuidado todos os meses para quem vive em movimento"
+            subtitle="Todos os meses, o Complexo Valen realiza ações de saúde voltadas para caminhoneiros, clientes e pessoas que passam pelo complexo. São momentos de orientação, prevenção e cuidado, reforçando o compromisso do Valen com quem está longe de casa."
+          />
+
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {saudeItens.map((i) => (
+              <div
+                key={i.t}
+                className="flex items-center gap-3 rounded-2xl bg-card border border-border p-4"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-orange text-white">
+                  <i.icon className="h-5 w-5" />
+                </span>
+                <span className="text-sm font-semibold text-secondary">{i.t}</span>
+              </div>
+            ))}
+          </div>
+
+          {saudeImages.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {saudeImages.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  className="aspect-square w-full object-cover rounded-2xl"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-3xl border-2 border-dashed border-border p-12 text-center text-sm text-muted-foreground bg-card">
+              Fotos das ações de saúde aparecerão aqui em breve.
+            </div>
+          )}
+
+          {data.saude_instagram_urls.filter(Boolean).length > 0 && (
+            <div>
+              <h3 className="text-xl font-display font-bold text-secondary mb-4">
+                Registros no Instagram
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {data.saude_instagram_urls.filter(Boolean).map((url, i) => (
+                  <InstagramCard key={i} url={url} title={`Ação de saúde #${i + 1}`} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 5. Clube do Caminhoneiro */}
+      <section className="py-24 bg-surface">
+        <div className="container-valen">
+          <div className="grid gap-10 lg:grid-cols-2 items-center">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+                Experiência
+              </span>
+              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">
+                Clube do Caminhoneiro
+              </h2>
+              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+                O Clube do Caminhoneiro foi pensado para valorizar quem está
+                sempre na estrada. É um espaço de convivência, lazer, apoio e
+                cuidado para oferecer mais conforto durante a parada no
+                Complexo Valen.
+              </p>
+              <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                <MapPin className="h-4 w-4" />
+                Disponível no Valen Center I e no Pátio 05.
+              </p>
+              <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {clubeItens.map((i) => (
+                  <div
+                    key={i.t}
+                    className="flex items-center gap-3 rounded-2xl bg-card border border-border p-3.5"
+                  >
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-orange text-white">
+                      <i.icon className="h-4 w-4" />
+                    </span>
+                    <span className="text-sm font-semibold text-secondary">
+                      {i.t}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <img
+              src={clubeImage}
+              alt="Clube do Caminhoneiro"
+              className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Espaço Valentina */}
       <section className="py-24 bg-background">
         <div className="container-valen">
-          <SectionHeader eyebrow="Galeria" title="Momentos em movimento" center />
+          <div className="grid gap-10 lg:grid-cols-2 items-center">
+            {valentinaImages.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3">
+                {valentinaImages.slice(0, 4).map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt=""
+                    className="aspect-square w-full object-cover rounded-2xl"
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="aspect-[4/3] rounded-3xl border-2 border-dashed border-border grid place-items-center text-sm text-muted-foreground bg-card">
+                Fotos do Espaço Valentina em breve.
+              </div>
+            )}
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+                Acolhimento
+              </span>
+              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-secondary text-balance">
+                Espaço Valentina
+              </h2>
+              <p className="mt-3 text-base font-semibold text-muted-foreground">
+                Acolhimento para mulheres e crianças dentro do Complexo Valen.
+              </p>
+              <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
+                O Espaço Valentina foi criado para oferecer conforto, segurança
+                e acolhimento para mulheres e crianças que passam pelo
+                complexo. Um ambiente de apoio para descanso, conectividade e
+                cuidado durante a jornada.
+              </p>
+              <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                <MapPin className="h-4 w-4" />
+                Disponível no Pátio 01 e Pátio 05.
+              </p>
+              <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {valentinaItens.map((i) => (
+                  <div
+                    key={i.t}
+                    className="flex items-center gap-3 rounded-2xl bg-card border border-border p-3.5"
+                  >
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-orange text-white">
+                      <i.icon className="h-4 w-4" />
+                    </span>
+                    <span className="text-sm font-semibold text-secondary">
+                      {i.t}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <a
+                href="/servicos/valenlog#espaco-valentina"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
+              >
+                Conhecer Espaço Valentina <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Studio Valen / PodValen */}
+      <section className="py-24 bg-secondary text-white">
+        <div className="container-valen space-y-12">
+          <div className="grid gap-10 lg:grid-cols-2 items-center">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+                Destaque
+              </span>
+              <h2 className="mt-4 text-4xl md:text-5xl font-display font-extrabold text-balance">
+                Studio Valen
+              </h2>
+              <p className="mt-3 text-base font-semibold text-white/80">
+                Conteúdo, histórias e conversas que movimentam o complexo.
+              </p>
+              <p className="mt-4 text-lg text-white/85 leading-relaxed">
+                O Studio Valen é o espaço onde nascem conteúdos, entrevistas e
+                episódios do PodValen. Um ambiente criado para registrar
+                histórias, compartilhar experiências e aproximar ainda mais o
+                Valen de quem vive a estrada, os negócios e o movimento do
+                complexo.
+              </p>
+              <ul className="mt-6 space-y-2 text-sm text-white/80">
+                <li>• Gravação do PodValen</li>
+                <li>• Entrevistas</li>
+                <li>• Conteúdos institucionais</li>
+                <li>• Histórias de clientes e parceiros</li>
+                <li>• Bastidores do Complexo Valen</li>
+              </ul>
+              <a
+                href={YOUTUBE_CHANNEL_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-6 py-3 text-sm font-bold text-primary-foreground shadow-glow"
+              >
+                <Youtube className="h-4 w-4" /> Ver canal no YouTube
+              </a>
+            </div>
+            <img
+              src={studioImage}
+              alt="Studio Valen"
+              className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
+              loading="lazy"
+            />
+          </div>
+
+          {data.studio_youtube_urls.filter(Boolean).length > 0 && (
+            <div>
+              <h3 className="text-xl font-display font-bold mb-4">
+                Últimos vídeos
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {data.studio_youtube_urls.filter(Boolean).map((url, i) => (
+                  <YoutubeCard key={i} url={url} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 8. Nossos eventos */}
+      <section id="eventos" className="py-24 bg-background scroll-mt-24">
+        <div className="container-valen space-y-12">
+          <SectionHeader
+            eyebrow="Nossos eventos"
+            title="Momentos que aproximam pessoas, marcas e histórias"
+            subtitle="Ao longo do ano, o Complexo Valen realiza eventos, campanhas e ações especiais que fortalecem o relacionamento com caminhoneiros, clientes, parceiros e colaboradores."
+          />
+
+          {publishedEvents.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {publishedEvents.map((ev) => (
+                <article
+                  key={ev.id}
+                  className="group flex flex-col rounded-3xl border bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                >
+                  {ev.image_url ? (
+                    <img
+                      src={ev.image_url}
+                      alt={ev.name}
+                      className="aspect-[16/10] w-full object-cover group-hover:scale-105 transition-transform"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="aspect-[16/10] bg-gradient-orange" />
+                  )}
+                  <div className="p-6 flex-1 flex flex-col">
+                    {ev.period && (
+                      <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-primary">
+                        <Calendar className="h-3 w-3" /> {ev.period}
+                      </span>
+                    )}
+                    <h3 className="mt-2 text-xl font-display font-bold text-secondary">
+                      {ev.name}
+                    </h3>
+                    {ev.description && (
+                      <p className="mt-2 text-sm text-muted-foreground flex-1">
+                        {ev.description}
+                      </p>
+                    )}
+                    {ev.link && (
+                      <a
+                        href={ev.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                      >
+                        Ver mais <ArrowRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {[
+                "Festa do Caminhoneiro",
+                "Ações de saúde",
+                "Campanhas promocionais",
+                "Eventos com parceiros",
+                "Ações internas e institucionais",
+                "Momentos especiais no complexo",
+              ].map((t) => (
+                <div
+                  key={t}
+                  className="rounded-2xl border bg-card p-6 flex items-center gap-3"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-orange text-white">
+                    <Calendar className="h-5 w-5" />
+                  </span>
+                  <span className="font-semibold text-secondary">{t}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 9. Galeria */}
+      <section className="py-24 bg-surface">
+        <div className="container-valen">
+          <SectionHeader
+            eyebrow="Galeria"
+            title="Momentos em movimento"
+            subtitle="Registros reais de quem vive o Valen todos os dias."
+            center
+          />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[festaImg, foodImg, hotelImg, postoImg, festaImg, foodImg, hotelImg, postoImg].map((src, i) => (
-              <img key={i} src={src} alt="" className="aspect-square w-full object-cover rounded-2xl hover:scale-105 transition-transform" loading="lazy" />
+            {gallery.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt=""
+                className="aspect-square w-full object-cover rounded-2xl hover:scale-105 transition-transform"
+                loading="lazy"
+              />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-surface">
+      {/* 10. CTA final */}
+      <section className="py-20 bg-gradient-orange text-white">
         <div className="container-valen text-center">
-          <h2 className="text-4xl md:text-5xl font-display font-extrabold text-secondary">Acompanhe nossas próximas ações</h2>
-          <Link to="/blog-do-caminhoneiro" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow">Ver novidades</Link>
+          <h2 className="text-4xl md:text-5xl font-display font-extrabold text-balance">
+            Viva as experiências do Complexo Valen
+          </h2>
+          <p className="mt-4 text-lg text-white/90 max-w-2xl mx-auto">
+            Eventos, cuidado, acolhimento e histórias reais para quem está em movimento.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href="#eventos"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-base font-bold text-primary shadow-lg hover:bg-white/90"
+            >
+              <Calendar className="h-4 w-4" /> Ver eventos
+            </a>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-white px-7 py-4 text-base font-bold text-white hover:bg-white/10"
+            >
+              <Instagram className="h-4 w-4" /> Seguir no Instagram
+            </a>
+          </div>
         </div>
       </section>
     </>
+  );
+}
+
+function InstagramCard({ url, title }: { url: string; title: string }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex flex-col rounded-2xl border bg-card overflow-hidden hover:shadow-lg transition-shadow"
+    >
+      <div className="aspect-square bg-gradient-to-br from-pink-500 via-purple-500 to-orange-400 grid place-items-center text-white">
+        <Instagram className="h-14 w-14 opacity-90 group-hover:scale-110 transition-transform" />
+      </div>
+      <div className="p-4 flex items-center justify-between gap-3">
+        <span className="text-sm font-semibold text-secondary truncate">{title}</span>
+        <span className="inline-flex items-center gap-1 text-xs font-bold text-primary shrink-0">
+          Ver no Instagram <ArrowRight className="h-3 w-3" />
+        </span>
+      </div>
+    </a>
+  );
+}
+
+function YoutubeCard({ url }: { url: string }) {
+  const id = extractYoutubeId(url);
+  if (!id) return null;
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex flex-col rounded-2xl overflow-hidden bg-white text-secondary hover:shadow-xl transition-shadow"
+    >
+      <div className="relative aspect-video">
+        <img
+          src={youtubeThumbnail(id, "hq")}
+          alt=""
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+        <span className="absolute inset-0 grid place-items-center bg-black/30 group-hover:bg-black/40 transition-colors">
+          <span className="h-14 w-14 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-lg">
+            <Play className="h-6 w-6 ml-0.5" />
+          </span>
+        </span>
+      </div>
+      <div className="p-4 flex items-center justify-between gap-3">
+        <span className="text-sm font-semibold truncate">Vídeo do canal</span>
+        <span className="inline-flex items-center gap-1 text-xs font-bold text-primary shrink-0">
+          Assistir <ArrowRight className="h-3 w-3" />
+        </span>
+      </div>
+    </a>
   );
 }

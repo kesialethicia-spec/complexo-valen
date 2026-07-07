@@ -41,6 +41,7 @@ import { Route as AdminPaginaPostoRouteImport } from './routes/admin.pagina-post
 import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-valen'
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminPaginaHomeRouteImport } from './routes/admin.pagina-home'
+import { Route as AdminPaginaExperienciasRouteImport } from './routes/admin.pagina-experiencias'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminServicosIndexRouteImport } from './routes/admin.servicos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
@@ -219,6 +220,11 @@ const AdminPaginaHomeRoute = AdminPaginaHomeRouteImport.update({
   path: '/pagina-home',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPaginaExperienciasRoute = AdminPaginaExperienciasRouteImport.update({
+  id: '/pagina-experiencias',
+  path: '/pagina-experiencias',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
   id: '/videos/',
   path: '/videos/',
@@ -308,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
@@ -356,6 +363,7 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
@@ -406,6 +414,7 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
   '/admin/pagina-o-valen': typeof AdminPaginaOValenRoute
@@ -457,6 +466,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
@@ -505,6 +515,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
@@ -554,6 +565,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/promocoes'
     | '/termos-de-uso'
+    | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
     | '/admin/pagina-o-valen'
@@ -841,6 +853,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPaginaHomeRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pagina-experiencias': {
+      id: '/admin/pagina-experiencias'
+      path: '/pagina-experiencias'
+      fullPath: '/admin/pagina-experiencias'
+      preLoaderRoute: typeof AdminPaginaExperienciasRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/videos/': {
       id: '/admin/videos/'
       path: '/videos'
@@ -950,6 +969,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminPaginaExperienciasRoute: typeof AdminPaginaExperienciasRoute
   AdminPaginaHomeRoute: typeof AdminPaginaHomeRoute
   AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
   AdminPaginaOValenRoute: typeof AdminPaginaOValenRoute
@@ -976,6 +996,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminPaginaExperienciasRoute: AdminPaginaExperienciasRoute,
   AdminPaginaHomeRoute: AdminPaginaHomeRoute,
   AdminPaginaHotelRoute: AdminPaginaHotelRoute,
   AdminPaginaOValenRoute: AdminPaginaOValenRoute,

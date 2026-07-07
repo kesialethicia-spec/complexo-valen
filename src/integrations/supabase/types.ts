@@ -77,6 +77,57 @@ export type Database = {
         }
         Relationships: []
       }
+      experiencias_page_settings: {
+        Row: {
+          cafe_image_url: string
+          cafe_instagram_urls: string[]
+          clube_image_url: string
+          created_at: string
+          events: Json
+          festa_image_url: string
+          gallery_urls: string[]
+          id: boolean
+          saude_image_urls: string[]
+          saude_instagram_urls: string[]
+          studio_image_url: string
+          studio_youtube_urls: string[]
+          updated_at: string
+          valentina_image_urls: string[]
+        }
+        Insert: {
+          cafe_image_url?: string
+          cafe_instagram_urls?: string[]
+          clube_image_url?: string
+          created_at?: string
+          events?: Json
+          festa_image_url?: string
+          gallery_urls?: string[]
+          id?: boolean
+          saude_image_urls?: string[]
+          saude_instagram_urls?: string[]
+          studio_image_url?: string
+          studio_youtube_urls?: string[]
+          updated_at?: string
+          valentina_image_urls?: string[]
+        }
+        Update: {
+          cafe_image_url?: string
+          cafe_instagram_urls?: string[]
+          clube_image_url?: string
+          created_at?: string
+          events?: Json
+          festa_image_url?: string
+          gallery_urls?: string[]
+          id?: boolean
+          saude_image_urls?: string[]
+          saude_instagram_urls?: string[]
+          studio_image_url?: string
+          studio_youtube_urls?: string[]
+          updated_at?: string
+          valentina_image_urls?: string[]
+        }
+        Relationships: []
+      }
       home_page_settings: {
         Row: {
           created_at: string

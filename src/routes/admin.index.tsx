@@ -18,6 +18,7 @@ type AdminLink =
   | "/admin/pagina-valenlog"
   | "/admin/pagina-valenben"
   | "/admin/pagina-valenlub"
+  | "/admin/pagina-experiencias"
   | "/admin/pagina-posto";
 
 const cards: { title: string; desc: string; to: AdminLink; cta: string }[] = [
@@ -33,6 +34,7 @@ const cards: { title: string; desc: string; to: AdminLink; cta: string }[] = [
   { title: "Página ValenLub", desc: "Gerencie imagens, logos das marcas e links da página ValenLub.", to: "/admin/pagina-valenlub", cta: "Editar página ValenLub" },
   { title: "Página Valen Porto Hotel", desc: "Atualize imagens, logo e links de reserva exibidos na página do hotel.", to: "/admin/pagina-hotel", cta: "Editar página do hotel" },
   { title: "Página ValenLog", desc: "Gerencie imagens da página do ValenLog e do Espaço Valentina.", to: "/admin/pagina-valenlog", cta: "Editar página do ValenLog" },
+  { title: "Página Experiências", desc: "Gerencie imagens, vídeos do Instagram/YouTube e eventos exibidos na página Experiências.", to: "/admin/pagina-experiencias", cta: "Editar página Experiências" },
 ];
 
 
