@@ -10,11 +10,11 @@ export const Route = createFileRoute("/contato")({
 
 function Contato() {
   const blocos = [
-    { icon: MessageCircle, t: "WhatsApp Valen", d: "+55 98 8445-8884", link: "https://wa.me/559884458884", featured: true },
-    { icon: Phone, t: "Comercial Posto", d: "+55 98 8520-2800", link: "https://wa.me/559885202800" },
-    { icon: Store, t: "Comercial Lojas", d: "+55 98 8485-4901", link: "https://wa.me/559884854901" },
+    { icon: MessageCircle, t: "WhatsApp Valen", d: "(98) 98445-8884", link: "https://wa.me/559884458884", featured: true },
+    { icon: Phone, t: "Comercial Posto", d: "(98) 98520-2800", link: "https://wa.me/559885202800" },
+    { icon: Store, t: "Comercial Lojas", d: "(98) 98485-4901", link: "https://wa.me/559884854901" },
     { icon: Users, t: "Trabalhe Conosco", d: "Portal de talentos", link: "https://complexovalen.portaldetalentos.senior.com.br/" },
-    { icon: Hotel, t: "Hotel", d: "+55 98 2016-7000", link: "tel:+559820167000" },
+    { icon: Hotel, t: "Hotel", d: "(98) 2016-7000", link: "tel:+559820167000" },
     { icon: Mail, t: "Eventos", d: "marketing@redevalen.com", link: "mailto:marketing@redevalen.com" },
   ];
 

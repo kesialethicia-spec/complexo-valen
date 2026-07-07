@@ -56,7 +56,7 @@ export function Footer() {
             <h4 className="font-display font-bold text-base mb-4 text-white">Contato</h4>
             <ul className="space-y-3 text-sm text-white/80">
               <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /> São Luís — MA, Brasil</li>
-              <li className="flex gap-2"><MessageCircle className="h-4 w-4 mt-0.5 text-primary shrink-0" /> WhatsApp: (98) 0000-0000</li>
+              <li className="flex gap-2"><MessageCircle className="h-4 w-4 mt-0.5 text-primary shrink-0" /> WhatsApp: (98) 98445-8884</li>
               <li><Link to="/contato" className="hover:text-primary">Fale conosco</Link></li>
               <li><a href="https://complexovalen.portaldetalentos.senior.com.br/jobs" target="_blank" rel="noreferrer" className="hover:text-primary">Trabalhe Conosco</a></li>
             </ul>
