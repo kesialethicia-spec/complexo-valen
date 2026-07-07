@@ -183,15 +183,99 @@ function AdminExperienciasPage() {
             onChange={(url) => set("cafe_image_url", url)}
             aspect="landscape"
           />
-          <LinkList
-            label="Links de vídeos/Reels do Instagram"
-            hint="Cole a URL pública do Reel ou post. Ex: https://www.instagram.com/reel/XXXX/"
-            values={form.cafe_instagram_urls}
-            onChange={(i, v) => setLinkList("cafe_instagram_urls", i, v)}
-            onAdd={() => addLink("cafe_instagram_urls")}
-            onRemove={(i) => removeLink("cafe_instagram_urls", i)}
-          />
-        </Section>
+          <div>
+            <span className="mb-1 block text-sm font-semibold">
+              Vídeos do Instagram (Reels)
+            </span>
+            <p className="text-xs text-muted-foreground mb-3">
+              Cadastre o link do Reel e envie uma imagem de capa (thumbnail).
+              Cada vídeo abre em uma nova aba no Instagram.
+            </p>
+            <div className="space-y-4">
+              {form.cafe_instagram_videos.map((v, i) => (
+                <div key={i} className="rounded-xl border p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-muted-foreground">
+                      Vídeo #{i + 1}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm((f) =>
+                          f
+                            ? {
+                                ...f,
+                                cafe_instagram_videos: f.cafe_instagram_videos.filter(
+                                  (_, idx) => idx !== i,
+                                ),
+                              }
+                            : f,
+                        )
+                      }
+                      className="inline-flex items-center gap-1 text-xs text-destructive hover:underline"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" /> Remover
+                    </button>
+                  </div>
+                  <input
+                    className="w-full rounded-md border bg-background px-3 py-2 text-sm"
+                    placeholder="https://www.instagram.com/reel/XXXX/"
+                    value={v.url}
+                    onChange={(e) =>
+                      setForm((f) =>
+                        f
+                          ? {
+                              ...f,
+                              cafe_instagram_videos: f.cafe_instagram_videos.map(
+                                (item, idx) =>
+                                  idx === i ? { ...item, url: e.target.value } : item,
+                              ),
+                            }
+                          : f,
+                      )
+                    }
+                  />
+                  <ImageUploadField
+                    label="Thumbnail (capa do vídeo)"
+                    value={v.thumbnail_url}
+                    onChange={(url) =>
+                      setForm((f) =>
+                        f
+                          ? {
+                              ...f,
+                              cafe_instagram_videos: f.cafe_instagram_videos.map(
+                                (item, idx) =>
+                                  idx === i ? { ...item, thumbnail_url: url } : item,
+                              ),
+                            }
+                          : f,
+                      )
+                    }
+                    aspect="square"
+                  />
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() =>
+                  setForm((f) =>
+                    f
+                      ? {
+                          ...f,
+                          cafe_instagram_videos: [
+                            ...f.cafe_instagram_videos,
+                            { url: "", thumbnail_url: "" },
+                          ],
+                        }
+                      : f,
+                  )
+                }
+                className="inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold hover:bg-muted"
+              >
+                <Plus className="h-4 w-4" /> Adicionar vídeo
+              </button>
+            </div>
+          </div>
 
         <Section title="Ações de Saúde">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
