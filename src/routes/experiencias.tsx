@@ -146,18 +146,35 @@ function Experiencias() {
             </div>
           </div>
 
-          {data.cafe_instagram_urls.filter(Boolean).length > 0 && (
-            <div>
-              <h3 className="text-xl font-display font-bold text-secondary mb-4">
-                No Instagram
-              </h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {data.cafe_instagram_urls.filter(Boolean).map((url, i) => (
-                  <InstagramCard key={i} url={url} title={`Café de Sábado #${i + 1}`} />
-                ))}
+          {(() => {
+            const videos = [
+              ...data.cafe_instagram_videos.filter((v) => v.url),
+              ...data.cafe_instagram_urls
+                .filter(Boolean)
+                .filter(
+                  (u) => !data.cafe_instagram_videos.some((v) => v.url === u),
+                )
+                .map((url) => ({ url, thumbnail_url: "" })),
+            ];
+            if (videos.length === 0) return null;
+            return (
+              <div>
+                <h3 className="text-xl font-display font-bold text-secondary mb-4">
+                  No Instagram
+                </h3>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {videos.map((v, i) => (
+                    <InstagramCard
+                      key={i}
+                      url={v.url}
+                      thumbnail={v.thumbnail_url}
+                      title={`Café de Sábado #${i + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
         </div>
       </section>
 
