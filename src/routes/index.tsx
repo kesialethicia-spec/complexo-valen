@@ -31,6 +31,7 @@ function Home() {
   const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
   const [heroBgDesktop, setHeroBgDesktop] = useState<string>("");
   const [heroBgMobile, setHeroBgMobile] = useState<string>("");
+  const [latestPosts, setLatestPosts] = useState<BlogPostRow[]>([]);
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -42,6 +43,9 @@ function Home() {
         if (desktop) setHeroBgDesktop(desktop);
         if (s.hero_bg_image_mobile_url) setHeroBgMobile(s.hero_bg_image_mobile_url);
       } catch { /* fallback */ }
+    })();
+    void (async () => {
+      try { setLatestPosts((await listPublishedPosts()).slice(0, 3)); } catch { /* fallback */ }
     })();
   }, []);
   const homePromos = useMemo(() => {
