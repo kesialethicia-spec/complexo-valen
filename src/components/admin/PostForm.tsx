@@ -118,7 +118,7 @@ export function PostForm({ initial, submitting, onSubmit, onCancel }: Props) {
           {showPreview ? (
             <div
               className="article-body min-h-[300px] rounded-md border bg-card p-4"
-              dangerouslySetInnerHTML={{ __html: previewHtml as string }}
+              dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
           ) : (
             <textarea
