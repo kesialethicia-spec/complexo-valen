@@ -1,0 +1,1 @@
+ALTER TABLE public.experiencias_page_settings ADD COLUMN IF NOT EXISTS cafe_instagram_videos jsonb NOT NULL DEFAULT '[]'::jsonb;

@@ -146,18 +146,35 @@ function Experiencias() {
             </div>
           </div>
 
-          {data.cafe_instagram_urls.filter(Boolean).length > 0 && (
-            <div>
-              <h3 className="text-xl font-display font-bold text-secondary mb-4">
-                No Instagram
-              </h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {data.cafe_instagram_urls.filter(Boolean).map((url, i) => (
-                  <InstagramCard key={i} url={url} title={`Café de Sábado #${i + 1}`} />
-                ))}
+          {(() => {
+            const videos = [
+              ...data.cafe_instagram_videos.filter((v) => v.url),
+              ...data.cafe_instagram_urls
+                .filter(Boolean)
+                .filter(
+                  (u) => !data.cafe_instagram_videos.some((v) => v.url === u),
+                )
+                .map((url) => ({ url, thumbnail_url: "" })),
+            ];
+            if (videos.length === 0) return null;
+            return (
+              <div>
+                <h3 className="text-xl font-display font-bold text-secondary mb-4">
+                  No Instagram
+                </h3>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {videos.map((v, i) => (
+                    <InstagramCard
+                      key={i}
+                      url={v.url}
+                      thumbnail={v.thumbnail_url}
+                      title={`Café de Sábado #${i + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
         </div>
       </section>
 
@@ -468,7 +485,15 @@ function Experiencias() {
   );
 }
 
-function InstagramCard({ url, title }: { url: string; title: string }) {
+function InstagramCard({
+  url,
+  title,
+  thumbnail,
+}: {
+  url: string;
+  title: string;
+  thumbnail?: string;
+}) {
   return (
     <a
       href={url}
@@ -476,8 +501,24 @@ function InstagramCard({ url, title }: { url: string; title: string }) {
       rel="noreferrer"
       className="group flex flex-col rounded-2xl border bg-card overflow-hidden hover:shadow-lg transition-shadow"
     >
-      <div className="aspect-square bg-gradient-to-br from-pink-500 via-purple-500 to-orange-400 grid place-items-center text-white">
-        <Instagram className="h-14 w-14 opacity-90 group-hover:scale-110 transition-transform" />
+      <div className="relative aspect-square bg-gradient-to-br from-pink-500 via-purple-500 to-orange-400 grid place-items-center text-white overflow-hidden">
+        {thumbnail ? (
+          <>
+            <img
+              src={thumbnail}
+              alt={title}
+              className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform"
+              loading="lazy"
+            />
+            <span className="absolute inset-0 grid place-items-center bg-black/25 group-hover:bg-black/35 transition-colors">
+              <span className="h-14 w-14 rounded-full bg-white/95 text-secondary grid place-items-center shadow-lg">
+                <Instagram className="h-6 w-6" />
+              </span>
+            </span>
+          </>
+        ) : (
+          <Instagram className="h-14 w-14 opacity-90 group-hover:scale-110 transition-transform" />
+        )}
       </div>
       <div className="p-4 flex items-center justify-between gap-3">
         <span className="text-sm font-semibold text-secondary truncate">{title}</span>
