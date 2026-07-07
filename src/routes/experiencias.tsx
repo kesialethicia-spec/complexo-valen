@@ -337,12 +337,13 @@ function Experiencias() {
                   </div>
                 ))}
               </div>
-              <a
-                href="/servicos/valenlog#espaco-valentina"
+              <Link
+                to="/servicos/valenlog"
+                hash="espaco-valentina"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
               >
                 Conhecer Espaço Valentina <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
