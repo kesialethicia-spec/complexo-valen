@@ -73,6 +73,9 @@ export async function getExperienciasPageSettings(): Promise<ExperienciasPageSet
     festa_image_url: data.festa_image_url ?? "",
     cafe_image_url: data.cafe_image_url ?? "",
     cafe_instagram_urls: (data.cafe_instagram_urls ?? []) as string[],
+    cafe_instagram_videos: Array.isArray(data.cafe_instagram_videos)
+      ? (data.cafe_instagram_videos as InstagramVideo[])
+      : [],
     saude_image_urls: (data.saude_image_urls ?? []) as string[],
     saude_instagram_urls: (data.saude_instagram_urls ?? []) as string[],
     clube_image_url: data.clube_image_url ?? "",
