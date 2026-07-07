@@ -51,7 +51,9 @@ function ArticlePage() {
             tags: row.tags,
             metaTitle: row.meta_title ?? undefined,
             metaDescription: row.meta_description ?? undefined,
-            content: looksLikeHtml(row.content) ? row.content : (marked.parse(row.content) as string),
+            content: DOMPurify.sanitize(
+              looksLikeHtml(row.content) ? row.content : (marked.parse(row.content) as string),
+            ),
           });
         } else {
           const fb = fallbackPosts.find((p) => p.slug === slug);
