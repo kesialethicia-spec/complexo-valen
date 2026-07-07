@@ -28,7 +28,7 @@ function adaptRow(row: BlogPostRow): Post {
   };
 }
 
-export const Route = createFileRoute("/blog-do-caminhoneiro")({
+export const Route = createFileRoute("/blog-do-caminhoneiro/")({
   head: () => ({
     meta: [
       { title: "Blog do Caminhoneiro — Complexo Valen" },
