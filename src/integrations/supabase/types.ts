@@ -77,6 +77,27 @@ export type Database = {
         }
         Relationships: []
       }
+      home_page_settings: {
+        Row: {
+          created_at: string
+          hero_bg_image_url: string | null
+          id: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          hero_bg_image_url?: string | null
+          id?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          hero_bg_image_url?: string | null
+          id?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
       hotel_page_settings: {
         Row: {
           gallery_urls: string[]
