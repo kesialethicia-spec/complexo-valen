@@ -52,9 +52,9 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <a
-            href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA"
+            href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-2 rounded-full bg-gradient-orange px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-105 transition-transform"
           >
             <MapPin className="h-4 w-4" /> Como chegar
@@ -84,9 +84,9 @@ export function Header() {
               </Link>
             ))}
             <a
-              href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA"
+              href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-orange px-5 py-3 text-sm font-semibold text-primary-foreground"
             >
               <MapPin className="h-4 w-4" /> Como chegar

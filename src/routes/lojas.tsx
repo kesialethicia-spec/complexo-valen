@@ -190,7 +190,7 @@ function Lojas() {
                     {(l.block || l.location) && <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {[l.block, l.location].filter(Boolean).join(" • ")}</p>}
                   </div>
                   <div className="mt-5 flex gap-2">
-                    <a href={waHref(l)} target="_blank" rel="noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-gradient-orange px-4 py-2.5 text-sm font-bold text-primary-foreground">
+                    <a href={waHref(l)} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-gradient-orange px-4 py-2.5 text-sm font-bold text-primary-foreground">
                       <MessageCircle className="h-4 w-4" /> WhatsApp
                     </a>
                     {l.slug && (

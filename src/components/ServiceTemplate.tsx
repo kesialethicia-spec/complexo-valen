@@ -89,7 +89,7 @@ export function ServiceTemplate({
               <p className="mt-2 text-white/90">Estrutura, acolhimento e confiança para sua jornada.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <a href="https://maps.google.com/?q=Complexo+Valen+São+Luís+MA" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white text-secondary px-6 py-3 font-bold">
+              <a href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white text-secondary px-6 py-3 font-bold">
                 <MapPin className="h-4 w-4" /> Como chegar
               </a>
               <Link to="/contato" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 backdrop-blur px-6 py-3 font-semibold">

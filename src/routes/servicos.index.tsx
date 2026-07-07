@@ -100,7 +100,7 @@ function ServiceCard({ service }: { service: ServiceRow }) {
   if (!service.link_url) return <div>{inner}</div>;
 
   if (service.link_url.startsWith("http") || service.link_url.startsWith("mailto:")) {
-    return <a href={service.link_url} target="_blank" rel="noreferrer" className="block">{inner}</a>;
+    return <a href={service.link_url} target="_blank" rel="noopener noreferrer" className="block">{inner}</a>;
   }
 
   return <a href={service.link_url} className="block">{inner}</a>;

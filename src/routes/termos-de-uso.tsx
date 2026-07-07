@@ -59,7 +59,7 @@ function TermosDeUso() {
             <Section title="6. Trabalhe Conosco">
               <p>
                 O cadastro de currículos e candidaturas é realizado por meio da plataforma oficial de talentos:{" "}
-                <a href="https://complexovalen.portaldetalentos.senior.com.br/jobs" target="_blank" rel="noreferrer" className="text-primary hover:underline">
+                <a href="https://complexovalen.portaldetalentos.senior.com.br/jobs" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                   complexovalen.portaldetalentos.senior.com.br/jobs
                 </a>
               </p>

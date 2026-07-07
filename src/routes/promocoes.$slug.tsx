@@ -137,7 +137,7 @@ function PromotionDetail() {
               <a
                 href={item.cta_url}
                 target={item.cta_url.startsWith("http") ? "_blank" : undefined}
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow hover:scale-105 transition-transform"
               >
                 {item.cta_text || "Ver promoção"} <ArrowRight className="h-4 w-4" />

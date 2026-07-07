@@ -17,7 +17,7 @@ export const DEFAULT_VALENLOG_SETTINGS: ValenlogPageSettings = {
   inspecao_image_url: "",
   valentina_image_urls: [],
   gallery_urls: [],
-  map_url: "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA",
+  map_url: "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6",
 };
 
 export async function getValenlogPageSettings(): Promise<ValenlogPageSettings> {

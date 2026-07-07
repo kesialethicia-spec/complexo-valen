@@ -20,7 +20,7 @@ export const DEFAULT_POSTO_SETTINGS: PostoPageSettings = {
   logo_url: "",
   payment_strip_url: "",
   payment_logos: [],
-  map_url: "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA",
+  map_url: "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6",
   whatsapp_url: "https://wa.me/5598000000000",
 };
 

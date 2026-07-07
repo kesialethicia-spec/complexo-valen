@@ -152,7 +152,7 @@ function ValenbenPage() {
             <a
               href={data.whatsapp_url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-bold hover:brightness-110"
             >
               <MessageCircle className="h-4 w-4" /> Falar com a equipe
@@ -160,7 +160,7 @@ function ValenbenPage() {
             <a
               href={data.map_url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 backdrop-blur px-6 py-3 font-semibold hover:bg-white/20"
             >
               <MapPin className="h-4 w-4" /> Como chegar
@@ -311,7 +311,7 @@ function ValenbenPage() {
               <a
                 href={data.whatsapp_url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-white text-secondary px-6 py-3 font-bold"
               >
                 <MessageCircle className="h-4 w-4" /> Falar com a equipe
@@ -319,7 +319,7 @@ function ValenbenPage() {
               <a
                 href={data.map_url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 backdrop-blur px-6 py-3 font-semibold"
               >
                 <MapPin className="h-4 w-4" /> Como chegar

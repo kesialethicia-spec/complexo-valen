@@ -49,7 +49,7 @@ function HotelPage() {
   const logo = settings.logo_url || FALLBACK_LOGO;
   const gallerySrc = settings.gallery_urls.filter(Boolean);
   const gallery = (gallerySrc.length > 0 ? gallerySrc : FALLBACK_GALLERY).slice(0, 4);
-  const mapUrl = settings.map_url || "https://maps.google.com/?q=Complexo+Valen+São+Luís+MA";
+  const mapUrl = settings.map_url || "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6";
   const reservationUrl = settings.reservation_url || "/contato";
   const reservationExternal = /^https?:\/\//i.test(reservationUrl);
 
@@ -86,7 +86,7 @@ function HotelPage() {
             <a
               href={mapUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/30 px-6 py-3 font-semibold hover:bg-white/20 transition"
             >
               <MapPin className="h-4 w-4" /> Como chegar
@@ -257,7 +257,7 @@ function HotelPage() {
               <a
                 href={mapUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-white text-secondary px-6 py-3 font-bold"
               >
                 <MapPin className="h-4 w-4" /> Como chegar

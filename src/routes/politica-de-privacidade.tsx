@@ -84,7 +84,7 @@ function PoliticaDePrivacidade() {
               <p>O cadastro de currículos e candidaturas para vagas do Valen é realizado por meio de plataforma externa oficial.</p>
               <p>
                 Ao clicar em links de Trabalhe Conosco, o usuário será direcionado para:{" "}
-                <a href="https://complexovalen.portaldetalentos.senior.com.br/jobs" target="_blank" rel="noreferrer" className="text-primary hover:underline">
+                <a href="https://complexovalen.portaldetalentos.senior.com.br/jobs" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                   complexovalen.portaldetalentos.senior.com.br/jobs
                 </a>
               </p>

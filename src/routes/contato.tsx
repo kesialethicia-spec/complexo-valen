@@ -74,7 +74,7 @@ function Contato() {
             <a
               href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow"
             >
               <MapPin className="h-4 w-4" /> Como chegar
