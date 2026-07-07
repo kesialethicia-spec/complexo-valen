@@ -521,3 +521,159 @@ function YoutubeCard({ url }: { url: string }) {
     </a>
   );
 }
+
+function statusBadgeClass(s?: string): string {
+  switch (s) {
+    case "Em breve":
+      return "bg-blue-100 text-blue-800 border-blue-200";
+    case "Inscrições abertas":
+      return "bg-green-100 text-green-800 border-green-200";
+    case "Realizado":
+      return "bg-neutral-100 text-neutral-700 border-neutral-200";
+    default:
+      return "bg-primary/10 text-primary border-primary/20";
+  }
+}
+
+function EventCard({ ev }: { ev: ExperienciasEvent }) {
+  const [open, setOpen] = useState(false);
+  const title = ev.title || ev.name;
+  const status = ev.event_status;
+  const category = ev.category;
+  const location = ev.location;
+  const date = ev.period;
+
+  return (
+    <>
+      <article className="group flex flex-col rounded-3xl border bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+        <div className="relative">
+          {ev.image_url ? (
+            <img
+              src={ev.image_url}
+              alt={title}
+              className="aspect-[16/10] w-full object-cover group-hover:scale-105 transition-transform"
+              loading="lazy"
+            />
+          ) : (
+            <div className="aspect-[16/10] bg-gradient-orange" />
+          )}
+          {status && (
+            <span
+              className={`absolute top-3 right-3 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${statusBadgeClass(
+                status,
+              )}`}
+            >
+              {status}
+            </span>
+          )}
+        </div>
+        <div className="p-6 flex-1 flex flex-col">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-bold uppercase tracking-wider text-primary">
+            {date && (
+              <span className="inline-flex items-center gap-1">
+                <Calendar className="h-3 w-3" /> {date}
+              </span>
+            )}
+            {location && (
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="h-3 w-3" /> {location}
+              </span>
+            )}
+            {category && (
+              <span className="inline-flex items-center gap-1 text-secondary/70">
+                • {category}
+              </span>
+            )}
+          </div>
+          <h3 className="mt-2 text-xl font-display font-bold text-secondary">
+            {title}
+          </h3>
+          {ev.description && (
+            <p className="mt-2 text-sm text-muted-foreground flex-1">
+              {ev.description}
+            </p>
+          )}
+          <div className="mt-4">
+            {ev.link ? (
+              <a
+                href={ev.link}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:opacity-90"
+              >
+                Ver detalhes <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            ) : (
+              (ev.full_description || ev.description) && (
+                <button
+                  type="button"
+                  onClick={() => setOpen(true)}
+                  className="inline-flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:opacity-90"
+                >
+                  Ver detalhes <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              )
+            )}
+          </div>
+        </div>
+      </article>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="relative max-w-2xl w-full max-h-[90vh] overflow-auto rounded-3xl bg-card shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="absolute top-3 right-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-secondary hover:bg-white"
+              aria-label="Fechar"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            {ev.image_url && (
+              <img
+                src={ev.image_url}
+                alt={title}
+                className="aspect-[16/9] w-full object-cover"
+              />
+            )}
+            <div className="p-6 space-y-3">
+              {status && (
+                <span
+                  className={`inline-block rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${statusBadgeClass(status)}`}
+                >
+                  {status}
+                </span>
+              )}
+              <h3 className="text-2xl font-display font-bold text-secondary">
+                {title}
+              </h3>
+              <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold uppercase tracking-wider text-primary">
+                {date && (
+                  <span className="inline-flex items-center gap-1">
+                    <Calendar className="h-3 w-3" /> {date}
+                  </span>
+                )}
+                {location && (
+                  <span className="inline-flex items-center gap-1">
+                    <MapPin className="h-3 w-3" /> {location}
+                  </span>
+                )}
+                {category && <span>• {category}</span>}
+              </div>
+              <p className="text-sm text-muted-foreground whitespace-pre-line">
+                {ev.full_description || ev.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
