@@ -26,10 +26,16 @@ export interface ExperienciasEvent {
   order?: number;
 }
 
+export interface InstagramVideo {
+  url: string;
+  thumbnail_url: string;
+}
+
 export interface ExperienciasPageSettings {
   festa_image_url: string;
   cafe_image_url: string;
   cafe_instagram_urls: string[];
+  cafe_instagram_videos: InstagramVideo[];
   saude_image_urls: string[];
   saude_instagram_urls: string[];
   clube_image_url: string;
@@ -44,6 +50,7 @@ export const DEFAULT_EXPERIENCIAS_SETTINGS: ExperienciasPageSettings = {
   festa_image_url: "",
   cafe_image_url: "",
   cafe_instagram_urls: [],
+  cafe_instagram_videos: [],
   saude_image_urls: [],
   saude_instagram_urls: [],
   clube_image_url: "",
