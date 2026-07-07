@@ -131,14 +131,14 @@ function AdminValenbenPage() {
                 hint="Aparece na seção de diferenciais."
                 value={form.oil_change_area_image_url}
                 onChange={(url) => update("oil_change_area_image_url", url)}
-                aspect="portrait"
+                aspect="square"
               />
               <ImageUploadField
                 label="Sala de espera climatizada"
                 hint="Aparece na seção de diferenciais."
                 value={form.waiting_room_image_url}
                 onChange={(url) => update("waiting_room_image_url", url)}
-                aspect="portrait"
+                aspect="square"
               />
               <ImageUploadField
                 label="Equipe / atendimento"
