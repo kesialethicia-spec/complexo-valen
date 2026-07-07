@@ -18,10 +18,10 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ConecteSeRouteImport } from './routes/conecte-se'
-import { Route as BlogDoCaminhoneiroRouteImport } from './routes/blog-do-caminhoneiro'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
+import { Route as BlogDoCaminhoneiroIndexRouteImport } from './routes/blog-do-caminhoneiro.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ServicosValenlubRouteImport } from './routes/servicos.valenlub'
 import { Route as ServicosValenlogRouteImport } from './routes/servicos.valenlog'
@@ -103,11 +103,6 @@ const ConecteSeRoute = ConecteSeRouteImport.update({
   path: '/conecte-se',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogDoCaminhoneiroRoute = BlogDoCaminhoneiroRouteImport.update({
-  id: '/blog-do-caminhoneiro',
-  path: '/blog-do-caminhoneiro',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -121,6 +116,11 @@ const IndexRoute = IndexRouteImport.update({
 const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/servicos/',
   path: '/servicos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogDoCaminhoneiroIndexRoute = BlogDoCaminhoneiroIndexRouteImport.update({
+  id: '/blog-do-caminhoneiro/',
+  path: '/blog-do-caminhoneiro/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -304,7 +304,6 @@ const AdminBlogIdRoute = AdminBlogIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/blog-do-caminhoneiro': typeof BlogDoCaminhoneiroRouteWithChildren
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -334,6 +333,7 @@ export interface FileRoutesByFullPath {
   '/servicos/valenlog': typeof ServicosValenlogRoute
   '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin/': typeof AdminIndexRoute
+  '/blog-do-caminhoneiro/': typeof BlogDoCaminhoneiroIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
@@ -353,7 +353,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog-do-caminhoneiro': typeof BlogDoCaminhoneiroRouteWithChildren
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -383,6 +382,7 @@ export interface FileRoutesByTo {
   '/servicos/valenlog': typeof ServicosValenlogRoute
   '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin': typeof AdminIndexRoute
+  '/blog-do-caminhoneiro': typeof BlogDoCaminhoneiroIndexRoute
   '/servicos': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
@@ -404,7 +404,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/blog-do-caminhoneiro': typeof BlogDoCaminhoneiroRouteWithChildren
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -434,6 +433,7 @@ export interface FileRoutesById {
   '/servicos/valenlog': typeof ServicosValenlogRoute
   '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin/': typeof AdminIndexRoute
+  '/blog-do-caminhoneiro/': typeof BlogDoCaminhoneiroIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
@@ -456,7 +456,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
-    | '/blog-do-caminhoneiro'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -486,6 +485,7 @@ export interface FileRouteTypes {
     | '/servicos/valenlog'
     | '/servicos/valenlub'
     | '/admin/'
+    | '/blog-do-caminhoneiro/'
     | '/servicos/'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
@@ -505,7 +505,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/blog-do-caminhoneiro'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -535,6 +534,7 @@ export interface FileRouteTypes {
     | '/servicos/valenlog'
     | '/servicos/valenlub'
     | '/admin'
+    | '/blog-do-caminhoneiro'
     | '/servicos'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
@@ -555,7 +555,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
-    | '/blog-do-caminhoneiro'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -585,6 +584,7 @@ export interface FileRouteTypes {
     | '/servicos/valenlog'
     | '/servicos/valenlub'
     | '/admin/'
+    | '/blog-do-caminhoneiro/'
     | '/servicos/'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
@@ -606,7 +606,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
-  BlogDoCaminhoneiroRoute: typeof BlogDoCaminhoneiroRouteWithChildren
   ConecteSeRoute: typeof ConecteSeRoute
   ContatoRoute: typeof ContatoRoute
   ExperienciasRoute: typeof ExperienciasRoute
@@ -624,6 +623,7 @@ export interface RootRouteChildren {
   ServicosValenbenSuperTrocaDeOleoRoute: typeof ServicosValenbenSuperTrocaDeOleoRoute
   ServicosValenlogRoute: typeof ServicosValenlogRoute
   ServicosValenlubRoute: typeof ServicosValenlubRoute
+  BlogDoCaminhoneiroIndexRoute: typeof BlogDoCaminhoneiroIndexRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -692,13 +692,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConecteSeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog-do-caminhoneiro': {
-      id: '/blog-do-caminhoneiro'
-      path: '/blog-do-caminhoneiro'
-      fullPath: '/blog-do-caminhoneiro'
-      preLoaderRoute: typeof BlogDoCaminhoneiroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -718,6 +711,13 @@ declare module '@tanstack/react-router' {
       path: '/servicos'
       fullPath: '/servicos/'
       preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog-do-caminhoneiro/': {
+      id: '/blog-do-caminhoneiro/'
+      path: '/blog-do-caminhoneiro'
+      fullPath: '/blog-do-caminhoneiro/'
+      preLoaderRoute: typeof BlogDoCaminhoneiroIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -1024,17 +1024,6 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
-interface BlogDoCaminhoneiroRouteChildren {
-  BlogDoCaminhoneiroSlugRoute: typeof BlogDoCaminhoneiroSlugRoute
-}
-
-const BlogDoCaminhoneiroRouteChildren: BlogDoCaminhoneiroRouteChildren = {
-  BlogDoCaminhoneiroSlugRoute: BlogDoCaminhoneiroSlugRoute,
-}
-
-const BlogDoCaminhoneiroRouteWithChildren =
-  BlogDoCaminhoneiroRoute._addFileChildren(BlogDoCaminhoneiroRouteChildren)
-
 interface LojasRouteChildren {
   LojasSlugRoute: typeof LojasSlugRoute
 }
@@ -1060,7 +1049,6 @@ const PromocoesRouteWithChildren = PromocoesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
-  BlogDoCaminhoneiroRoute: BlogDoCaminhoneiroRouteWithChildren,
   ConecteSeRoute: ConecteSeRoute,
   ContatoRoute: ContatoRoute,
   ExperienciasRoute: ExperienciasRoute,
@@ -1078,6 +1066,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosValenbenSuperTrocaDeOleoRoute: ServicosValenbenSuperTrocaDeOleoRoute,
   ServicosValenlogRoute: ServicosValenlogRoute,
   ServicosValenlubRoute: ServicosValenlubRoute,
+  BlogDoCaminhoneiroIndexRoute: BlogDoCaminhoneiroIndexRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
