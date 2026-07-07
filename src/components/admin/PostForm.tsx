@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import {
   BLOG_CATEGORIES,
   slugify,
@@ -91,18 +92,15 @@ export function PostForm({ initial, submitting, onSubmit, onCancel }: Props) {
           <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={3} className={inputCls} />
         </Field>
 
-        <Field label="Imagem principal (URL)">
-          <input
-            type="url"
-            value={coverUrl}
-            onChange={(e) => setCoverUrl(e.target.value)}
-            placeholder="https://..."
-            className={inputCls}
-          />
-          {coverUrl && (
-            <img src={coverUrl} alt="" className="mt-2 max-h-48 rounded-lg object-cover border" />
-          )}
-        </Field>
+        <ImageUploadField
+          label="Imagem principal"
+          hint="JPG, PNG ou WebP. Aparece como capa no blog e como imagem principal do artigo."
+          value={coverUrl}
+          onChange={setCoverUrl}
+          aspect="landscape"
+          previewClassName="h-48 w-full max-w-md rounded-xl object-cover border"
+        />
+
 
         <div>
           <div className="flex items-center justify-between mb-1">
