@@ -314,6 +314,51 @@ export type Database = {
         }
         Relationships: []
       }
+      services: {
+        Row: {
+          created_at: string
+          description: string
+          icon: string
+          id: string
+          image_url: string
+          link_url: string
+          name: string
+          order_index: number
+          slug: string
+          status: string
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          image_url?: string
+          link_url?: string
+          name: string
+          order_index?: number
+          slug: string
+          status?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          image_url?: string
+          link_url?: string
+          name?: string
+          order_index?: number
+          slug?: string
+          status?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       stores: {
         Row: {
           block: string
