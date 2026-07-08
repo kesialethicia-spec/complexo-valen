@@ -103,5 +103,10 @@ function ServiceCard({ service }: { service: ServiceRow }) {
     return <a href={service.link_url} target="_blank" rel="noopener noreferrer" className="block">{inner}</a>;
   }
 
-  return <a href={service.link_url} className="block">{inner}</a>;
+  const [pathname, hash] = service.link_url.split("#");
+  return (
+    <Link to={pathname} hash={hash} className="block">
+      {inner}
+    </Link>
+  );
 }
