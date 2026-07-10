@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as OValenRouteImport } from './routes/o-valen'
@@ -61,6 +62,11 @@ import { Route as AdminBlogIdRouteImport } from './routes/admin.blog.$id'
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
   id: '/termos-de-uso',
   path: '/termos-de-uso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromocoesRoute = PromocoesRouteImport.update({
@@ -312,6 +318,7 @@ export interface FileRoutesByFullPath {
   '/o-valen': typeof OValenRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
@@ -361,6 +368,7 @@ export interface FileRoutesByTo {
   '/o-valen': typeof OValenRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
@@ -412,6 +420,7 @@ export interface FileRoutesById {
   '/o-valen': typeof OValenRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/promocoes': typeof PromocoesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
@@ -464,6 +473,7 @@ export interface FileRouteTypes {
     | '/o-valen'
     | '/politica-de-privacidade'
     | '/promocoes'
+    | '/sitemap.xml'
     | '/termos-de-uso'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
@@ -513,6 +523,7 @@ export interface FileRouteTypes {
     | '/o-valen'
     | '/politica-de-privacidade'
     | '/promocoes'
+    | '/sitemap.xml'
     | '/termos-de-uso'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
@@ -563,6 +574,7 @@ export interface FileRouteTypes {
     | '/o-valen'
     | '/politica-de-privacidade'
     | '/promocoes'
+    | '/sitemap.xml'
     | '/termos-de-uso'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
@@ -614,6 +626,7 @@ export interface RootRouteChildren {
   OValenRoute: typeof OValenRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   PromocoesRoute: typeof PromocoesRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
   BlogDoCaminhoneiroSlugRoute: typeof BlogDoCaminhoneiroSlugRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
@@ -635,6 +648,13 @@ declare module '@tanstack/react-router' {
       path: '/termos-de-uso'
       fullPath: '/termos-de-uso'
       preLoaderRoute: typeof TermosDeUsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/promocoes': {
@@ -1058,6 +1078,7 @@ const rootRouteChildren: RootRouteChildren = {
   OValenRoute: OValenRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   PromocoesRoute: PromocoesRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
   BlogDoCaminhoneiroSlugRoute: BlogDoCaminhoneiroSlugRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,

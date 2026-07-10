@@ -12,6 +12,41 @@ import {
 } from "@/lib/blog-api";
 
 export const Route = createFileRoute("/blog-do-caminhoneiro/$slug")({
+  loader: async ({ params }) => {
+    try {
+      const row = await getPostBySlug(params.slug);
+      return { seo: row };
+    } catch {
+      return { seo: null };
+    }
+  },
+  head: ({ params, loaderData }) => {
+    const row = loaderData?.seo;
+    const url = `https://valen-route-connect.lovable.app/blog-do-caminhoneiro/${params.slug}`;
+    if (!row) {
+      return {
+        meta: [
+          { title: "Artigo não encontrado | Blog do Caminhoneiro" },
+          { name: "robots", content: "noindex" },
+        ],
+      };
+    }
+    const title = row.meta_title || `${row.title} | Blog do Caminhoneiro Valen`;
+    const description =
+      row.meta_description || row.excerpt || `${row.title} — Blog do Caminhoneiro do Complexo Valen.`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description.slice(0, 160) },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description.slice(0, 160) },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        ...(row.cover_url ? [{ property: "og:image", content: row.cover_url }] : []),
+      ],
+      links: [{ rel: "canonical", href: url }],
+    };
+  },
   notFoundComponent: () => (
     <div className="container-valen py-32 text-center">
       <h1 className="text-4xl font-display font-extrabold text-secondary">Artigo não encontrado</h1>

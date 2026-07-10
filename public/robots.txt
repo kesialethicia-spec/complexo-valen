@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /conecte-se
+Disallow: /login
+
+Sitemap: https://valen-route-connect.lovable.app/sitemap.xml
