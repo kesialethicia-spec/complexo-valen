@@ -39,8 +39,9 @@
   --color-gold-foreground: var(--gold-foreground);
   --color-surface: var(--surface);
 
-  --shadow-glow: 0 24px 60px -20px color-mix(in oklab, var(--primary) 45%, transparent);
-  --shadow-soft: 0 10px 40px -16px color-mix(in oklab, var(--secondary) 35%, transparent);
+  --shadow-glow: 0 30px 70px -22px color-mix(in oklab, var(--primary) 55%, transparent), 0 8px 24px -12px color-mix(in oklab, var(--gold) 30%, transparent);
+  --shadow-soft: 0 14px 44px -18px color-mix(in oklab, var(--secondary) 35%, transparent);
+  --shadow-lift: 0 24px 50px -24px color-mix(in oklab, var(--secondary) 40%, transparent), 0 2px 8px -2px color-mix(in oklab, var(--primary) 15%, transparent);
 }
 
 :root {
