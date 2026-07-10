@@ -18,7 +18,8 @@ const promotionQueryOptions = (slug: string) =>
 
 export const Route = createFileRoute("/promocoes/$slug")({
   loader: ({ params, context }) => context.queryClient.ensureQueryData(promotionQueryOptions(params.slug)),
-  head: ({ loaderData }) => {
+  head: ({ params, loaderData }) => {
+    const url = `https://valen-route-connect.lovable.app/promocoes/${params.slug}`;
     if (!loaderData) {
       return { meta: [{ title: "Promoção não encontrada | Promoções Valen" }, { name: "robots", content: "noindex" }] };
     }
@@ -34,8 +35,10 @@ export const Route = createFileRoute("/promocoes/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
         ...(item.cover_url ? [{ property: "og:image", content: item.cover_url }] : []),
       ],
+      links: [{ rel: "canonical", href: url }],
     };
   },
   component: PromotionDetail,
