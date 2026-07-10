@@ -63,6 +63,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Parada completa em São Luís: posto, truck center, hotel, alimentação, lojas, eventos e experiências para quem vive em movimento." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5f381d6c-5ebd-42a4-8d94-e6c08da8fbff" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5f381d6c-5ebd-42a4-8d94-e6c08da8fbff" },
+      { name: "google-site-verification", content: "BscSQgUQ9c0S-zHenwyq6IAeT6CIlJYaokSLQSseSMg" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
