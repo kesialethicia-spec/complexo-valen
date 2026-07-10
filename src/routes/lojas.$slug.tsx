@@ -5,6 +5,41 @@ import { supabase } from "@/integrations/supabase/client";
 import { getStoreBySlug, PUBLIC_STORE_COLUMNS, type PublicStoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas/$slug")({
+  loader: async ({ params }) => {
+    try {
+      const row = await getStoreBySlug(params.slug);
+      return { seo: row };
+    } catch {
+      return { seo: null };
+    }
+  },
+  head: ({ params, loaderData }) => {
+    const row = loaderData?.seo;
+    const url = `https://valen-route-connect.lovable.app/lojas/${params.slug}`;
+    if (!row) {
+      return {
+        meta: [
+          { title: "Loja não encontrada | Complexo Valen" },
+          { name: "robots", content: "noindex" },
+        ],
+      };
+    }
+    const title = row.meta_title || `${row.name} | Lojas do Complexo Valen`;
+    const description =
+      row.meta_description || row.short_description || `Conheça ${row.name} no Complexo Valen.`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description.slice(0, 160) },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description.slice(0, 160) },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        ...(row.cover_url ? [{ property: "og:image", content: row.cover_url }] : []),
+      ],
+      links: [{ rel: "canonical", href: url }],
+    };
+  },
   component: StoreDetail,
 });
 
