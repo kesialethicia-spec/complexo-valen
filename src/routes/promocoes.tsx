@@ -208,8 +208,6 @@ function Vitrine({ items }: { items: PromoItem[] }) {
   }, [emblaApi]);
 
   if (items.length === 0) return null;
-  const [principal, ...resto] = items;
-  const secundarios = resto.slice(0, 2);
 
   return (
     <section className="bg-background pt-12 md:pt-16">
@@ -221,17 +219,17 @@ function Vitrine({ items }: { items: PromoItem[] }) {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-          {/* banner-card principal (carrossel) */}
+        <div className="mt-8">
+          {/* banner-card principal (carrossel quando houver mais de um destaque) */}
           <div className="relative">
             <div className="overflow-hidden rounded-[2rem]" ref={emblaRef}>
               <div className="flex">
                 {items.map((p) => (
                   <div key={p.id} className="min-w-0 flex-[0_0_100%]">
-                    <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-secondary md:min-h-[480px]">
+                    <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-secondary md:min-h-[520px]">
                       <img src={p.img} alt={p.title} className="absolute inset-0 h-full w-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-secondary/10" />
-                      <div className="relative flex h-full min-h-[420px] flex-col justify-end gap-4 p-7 text-white md:min-h-[480px] md:p-10">
+                      <div className="relative flex h-full min-h-[420px] flex-col justify-end gap-4 p-7 text-white md:min-h-[520px] md:p-12">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-orange px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-primary-foreground">
                             Promoção
@@ -245,8 +243,8 @@ function Vitrine({ items }: { items: PromoItem[] }) {
                             </span>
                           )}
                         </div>
-                        <h3 className="max-w-xl text-3xl font-display font-extrabold leading-tight md:text-5xl">{p.title}</h3>
-                        <p className="max-w-lg text-base text-white/85">{p.desc}</p>
+                        <h3 className="max-w-2xl text-3xl font-display font-extrabold leading-tight md:text-5xl">{p.title}</h3>
+                        <p className="max-w-xl text-base text-white/85">{p.desc}</p>
                         <div className="pt-1">
                           {p.slug ? (
                             <Link
@@ -290,13 +288,6 @@ function Vitrine({ items }: { items: PromoItem[] }) {
                 </div>
               </>
             )}
-          </div>
-
-          {/* cards secundários */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-            {(secundarios.length ? secundarios : [principal]).map((p) => (
-              <PromoCard key={`sec-${p.id}`} p={p} compact />
-            ))}
           </div>
         </div>
       </div>
