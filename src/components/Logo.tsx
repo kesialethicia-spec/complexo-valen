@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import logoOrangeAsset from "@/assets/logo-valen.png.asset.json";
-import logoWhiteAsset from "@/assets/logo-valen-branca.png.asset.json";
+import logoPositivaAsset from "@/assets/logo-valen-positiva.png.asset.json";
+import logoNegativaAsset from "@/assets/logo-valen-negativa.png.asset.json";
 
-const logoOrange = logoOrangeAsset.url;
-const logoWhite = logoWhiteAsset.url;
+const logoOrange = logoPositivaAsset.url;
+const logoWhite = logoNegativaAsset.url;
 
 export function Logo({ variant = "default" }: { variant?: "default" | "light" }) {
   const src = variant === "light" ? logoWhite : logoOrange;
