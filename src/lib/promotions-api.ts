@@ -25,6 +25,7 @@ export interface PromotionRow {
   cover_url: string;
   short_description: string;
   full_description: string;
+  how_to_participate: string;
   validity: string;
   rules: string;
   cta_text: string;
