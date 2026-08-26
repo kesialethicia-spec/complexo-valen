@@ -81,42 +81,29 @@ function normalize(s: string) {
 function PromoHero() {
   return (
     <section className="relative overflow-hidden bg-surface">
-      {/* formas da marca */}
+      {/* formas da marca — mantidas fora da área de texto para não prejudicar a leitura */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-primary/10 blur-2xl" />
-        <div className="absolute right-[38%] top-0 hidden h-full w-[46%] -skew-x-12 bg-gradient-orange opacity-95 lg:block" />
-        <div className="absolute right-0 top-0 hidden h-full w-[34%] -skew-x-12 bg-secondary lg:block" />
-        <div className="absolute bottom-8 left-8 h-24 w-24 rounded-full border-4 border-primary/25" />
+        <div className="absolute right-[34%] top-0 hidden h-full w-[42%] -skew-x-12 bg-gradient-orange opacity-90 lg:block" />
+        <div className="absolute right-0 top-0 hidden h-full w-[30%] -skew-x-12 bg-secondary lg:block" />
       </div>
 
       <div className="container-valen relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="max-w-xl">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/12 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
+        <div className="relative max-w-xl rounded-[2rem] bg-background/85 p-6 backdrop-blur-sm md:p-8 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
             <Sparkles className="h-3.5 w-3.5" /> Campanhas ativas
           </span>
           <h1 className="mt-5 text-4xl font-display font-extrabold leading-[1.05] tracking-tight text-secondary md:text-6xl">
             Promoções e ofertas <span className="text-primary">Valen</span> para você aproveitar!
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-5 text-lg leading-relaxed text-secondary/80">
             Encontre campanhas, vantagens e oportunidades especiais em abastecimento, conveniência, alimentação, serviços e muito mais.
           </p>
-          <p className="mt-3 text-base text-muted-foreground/80">
-            Aproveite as promoções do Valen e descubra benefícios pensados para quem vive em movimento.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8">
             <a
               href="#promocoes"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition hover:scale-[1.03]"
             >
               Ver promoções <ArrowRight className="h-4 w-4" />
-            </a>
-            <a
-              href={MAPS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-secondary/20 bg-card px-7 py-3.5 text-sm font-bold text-secondary transition hover:border-secondary/40"
-            >
-              <MapPin className="h-4 w-4" /> Como chegar
             </a>
           </div>
         </div>
