@@ -126,6 +126,16 @@ function PromotionDetail() {
             </>
           )}
 
+          {item.validity && (
+            <div className="mt-10 flex items-center gap-3 rounded-2xl border border-border bg-surface p-5">
+              <Calendar className="h-5 w-5 shrink-0 text-primary" />
+              <div className="min-w-0">
+                <p className="text-xs font-bold uppercase tracking-widest text-primary">Validade</p>
+                <p className="text-sm font-semibold text-secondary">{item.validity}</p>
+              </div>
+            </div>
+          )}
+
           {item.rules && (
             <div className="mt-12">
               <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Regulamento e regras</h2>
