@@ -85,7 +85,10 @@ function PromotionDetail() {
             <span className="text-white/90">{item.title}</span>
           </nav>
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+            <span className="inline-flex items-center rounded-full bg-gradient-orange px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-primary-foreground">
+              Promoção
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur px-3 py-1 text-xs font-bold text-white">
               <Tag className="h-3 w-3" /> {item.category}
             </span>
             {item.validity && (
