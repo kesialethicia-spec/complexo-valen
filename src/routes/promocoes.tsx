@@ -13,7 +13,7 @@ import caminhoneiroAsset from "@/assets/promocoes/caminhoneiro-promo.png.asset.j
 import tinosClubeAsset from "@/assets/promocoes/tinos-clube.png.asset.json";
 import { listActivePromotions, PROMOTION_CATEGORIES, type PromotionRow } from "@/lib/promotions-api";
 
-const MAPS_URL = "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6";
+
 
 export const Route = createFileRoute("/promocoes")({
   head: () => ({
