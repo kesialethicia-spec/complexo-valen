@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Tag, ArrowRight, ChevronLeft, ChevronRight, Calendar, Search, Sparkles, MapPin, Share2, BadgePercent } from "lucide-react";
+import { Tag, ArrowRight, ChevronLeft, ChevronRight, Calendar, Search, Sparkles, Share2, BadgePercent } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import postoImg from "@/assets/posto.jpg";
