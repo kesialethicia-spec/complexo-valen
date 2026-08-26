@@ -2,9 +2,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const PROMOTION_CATEGORIES = [
   "Posto",
+  "ValenBen",
   "Conveniência",
-  "Truck Center",
   "Alimentação",
+  "Truck Center",
   "Estacionamento",
   "Eventos",
   "Lojas",
