@@ -94,8 +94,18 @@ export function PromotionForm({ initial, submitting, onSubmit, onCancel }: Props
           <textarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} rows={2} className={inputCls} />
         </Field>
 
-        <Field label="Descrição completa (como participar)">
+        <Field label="Descrição completa">
           <textarea value={fullDescription} onChange={(e) => setFullDescription(e.target.value)} rows={8} className={inputCls} />
+        </Field>
+
+        <Field label="Como participar (passo a passo / condições)">
+          <textarea
+            value={howToParticipate}
+            onChange={(e) => setHowToParticipate(e.target.value)}
+            rows={6}
+            placeholder={"1. Abasteça a partir de X litros\n2. Apresente o cupom na conveniência\n3. Retire o seu brinde"}
+            className={inputCls}
+          />
         </Field>
 
         <Field label="Validade / período da promoção">
