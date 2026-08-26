@@ -1,0 +1,1 @@
+ALTER TABLE public.promotions ADD COLUMN IF NOT EXISTS how_to_participate text NOT NULL DEFAULT '';
