@@ -5,9 +5,8 @@ import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { listActiveStores, STORE_CATEGORIES, type PublicStoreRow } from "@/lib/stores-api";
 
 export const Route = createFileRoute("/lojas")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    categoria: typeof search.categoria === "string" ? search.categoria : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { categoria?: string } =>
+    typeof search.categoria === "string" ? { categoria: search.categoria } : {},
   head: () => ({
     meta: [
       { title: "Lojas — Complexo Valen" },
