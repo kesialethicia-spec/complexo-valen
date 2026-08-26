@@ -119,11 +119,20 @@ function PromotionDetail() {
         <div className="container-valen max-w-3xl">
           {item.full_description && (
             <>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Como participar</h2>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Descrição</h2>
               <div className="mt-4 whitespace-pre-line text-base leading-relaxed text-foreground/90">
                 {item.full_description}
               </div>
             </>
+          )}
+
+          {item.how_to_participate && (
+            <div className="mt-12">
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Como participar</h2>
+              <div className="mt-4 whitespace-pre-line rounded-2xl border border-border bg-surface p-6 text-base leading-relaxed text-foreground/90">
+                {item.how_to_participate}
+              </div>
+            </div>
           )}
 
           {item.validity && (
