@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import heroImg from "@/assets/hero-trucks.jpg";
-import mascotesAsset from "@/assets/tinos.png.asset.json";
+import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
 import postoImg from "@/assets/posto.jpg";
 import truckImg from "@/assets/truck-center.jpg";
 import hotelImg from "@/assets/hotel.jpg";
