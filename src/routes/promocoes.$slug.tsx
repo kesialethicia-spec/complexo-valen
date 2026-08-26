@@ -85,7 +85,10 @@ function PromotionDetail() {
             <span className="text-white/90">{item.title}</span>
           </nav>
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+            <span className="inline-flex items-center rounded-full bg-gradient-orange px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-primary-foreground">
+              Promoção
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur px-3 py-1 text-xs font-bold text-white">
               <Tag className="h-3 w-3" /> {item.category}
             </span>
             {item.validity && (
@@ -119,11 +122,20 @@ function PromotionDetail() {
         <div className="container-valen max-w-3xl">
           {item.full_description && (
             <>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Como participar</h2>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Descrição</h2>
               <div className="mt-4 whitespace-pre-line text-base leading-relaxed text-foreground/90">
                 {item.full_description}
               </div>
             </>
+          )}
+
+          {item.how_to_participate && (
+            <div className="mt-12">
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary">Como participar</h2>
+              <div className="mt-4 whitespace-pre-line rounded-2xl border border-border bg-surface p-6 text-base leading-relaxed text-foreground/90">
+                {item.how_to_participate}
+              </div>
+            </div>
           )}
 
           {item.validity && (

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Tag, ArrowRight, ChevronLeft, ChevronRight, Calendar, Search, Sparkles, MapPin, Share2, BadgePercent } from "lucide-react";
+import { Tag, ArrowRight, ChevronLeft, ChevronRight, Calendar, Search, Sparkles, Share2, BadgePercent } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import postoImg from "@/assets/posto.jpg";
@@ -13,7 +13,7 @@ import caminhoneiroAsset from "@/assets/promocoes/caminhoneiro-promo.png.asset.j
 import tinosClubeAsset from "@/assets/promocoes/tinos-clube.png.asset.json";
 import { listActivePromotions, PROMOTION_CATEGORIES, type PromotionRow } from "@/lib/promotions-api";
 
-const MAPS_URL = "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6";
+
 
 export const Route = createFileRoute("/promocoes")({
   head: () => ({
@@ -81,42 +81,29 @@ function normalize(s: string) {
 function PromoHero() {
   return (
     <section className="relative overflow-hidden bg-surface">
-      {/* formas da marca */}
+      {/* formas da marca — mantidas fora da área de texto para não prejudicar a leitura */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-primary/10 blur-2xl" />
-        <div className="absolute right-[38%] top-0 hidden h-full w-[46%] -skew-x-12 bg-gradient-orange opacity-95 lg:block" />
-        <div className="absolute right-0 top-0 hidden h-full w-[34%] -skew-x-12 bg-secondary lg:block" />
-        <div className="absolute bottom-8 left-8 h-24 w-24 rounded-full border-4 border-primary/25" />
+        <div className="absolute right-[34%] top-0 hidden h-full w-[42%] -skew-x-12 bg-gradient-orange opacity-90 lg:block" />
+        <div className="absolute right-0 top-0 hidden h-full w-[30%] -skew-x-12 bg-secondary lg:block" />
       </div>
 
       <div className="container-valen relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="max-w-xl">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/12 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
+        <div className="relative max-w-xl rounded-[2rem] bg-background/85 p-6 backdrop-blur-sm md:p-8 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
             <Sparkles className="h-3.5 w-3.5" /> Campanhas ativas
           </span>
           <h1 className="mt-5 text-4xl font-display font-extrabold leading-[1.05] tracking-tight text-secondary md:text-6xl">
             Promoções e ofertas <span className="text-primary">Valen</span> para você aproveitar!
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-5 text-lg leading-relaxed text-secondary/80">
             Encontre campanhas, vantagens e oportunidades especiais em abastecimento, conveniência, alimentação, serviços e muito mais.
           </p>
-          <p className="mt-3 text-base text-muted-foreground/80">
-            Aproveite as promoções do Valen e descubra benefícios pensados para quem vive em movimento.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8">
             <a
               href="#promocoes"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition hover:scale-[1.03]"
             >
               Ver promoções <ArrowRight className="h-4 w-4" />
-            </a>
-            <a
-              href={MAPS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-secondary/20 bg-card px-7 py-3.5 text-sm font-bold text-secondary transition hover:border-secondary/40"
-            >
-              <MapPin className="h-4 w-4" /> Como chegar
             </a>
           </div>
         </div>
@@ -221,8 +208,6 @@ function Vitrine({ items }: { items: PromoItem[] }) {
   }, [emblaApi]);
 
   if (items.length === 0) return null;
-  const [principal, ...resto] = items;
-  const secundarios = resto.slice(0, 2);
 
   return (
     <section className="bg-background pt-12 md:pt-16">
@@ -234,17 +219,17 @@ function Vitrine({ items }: { items: PromoItem[] }) {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-          {/* banner-card principal (carrossel) */}
+        <div className="mt-8">
+          {/* banner-card principal (carrossel quando houver mais de um destaque) */}
           <div className="relative">
             <div className="overflow-hidden rounded-[2rem]" ref={emblaRef}>
               <div className="flex">
                 {items.map((p) => (
                   <div key={p.id} className="min-w-0 flex-[0_0_100%]">
-                    <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-secondary md:min-h-[480px]">
+                    <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-secondary md:min-h-[520px]">
                       <img src={p.img} alt={p.title} className="absolute inset-0 h-full w-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-secondary/10" />
-                      <div className="relative flex h-full min-h-[420px] flex-col justify-end gap-4 p-7 text-white md:min-h-[480px] md:p-10">
+                      <div className="relative flex h-full min-h-[420px] flex-col justify-end gap-4 p-7 text-white md:min-h-[520px] md:p-12">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-orange px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-primary-foreground">
                             Promoção
@@ -258,8 +243,8 @@ function Vitrine({ items }: { items: PromoItem[] }) {
                             </span>
                           )}
                         </div>
-                        <h3 className="max-w-xl text-3xl font-display font-extrabold leading-tight md:text-5xl">{p.title}</h3>
-                        <p className="max-w-lg text-base text-white/85">{p.desc}</p>
+                        <h3 className="max-w-2xl text-3xl font-display font-extrabold leading-tight md:text-5xl">{p.title}</h3>
+                        <p className="max-w-xl text-base text-white/85">{p.desc}</p>
                         <div className="pt-1">
                           {p.slug ? (
                             <Link
@@ -303,13 +288,6 @@ function Vitrine({ items }: { items: PromoItem[] }) {
                 </div>
               </>
             )}
-          </div>
-
-          {/* cards secundários */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-            {(secundarios.length ? secundarios : [principal]).map((p) => (
-              <PromoCard key={`sec-${p.id}`} p={p} compact />
-            ))}
           </div>
         </div>
       </div>

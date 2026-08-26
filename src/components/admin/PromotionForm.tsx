@@ -24,6 +24,7 @@ export function PromotionForm({ initial, submitting, onSubmit, onCancel }: Props
   const [coverUrl, setCoverUrl] = useState(initial?.cover_url ?? "");
   const [shortDescription, setShortDescription] = useState(initial?.short_description ?? "");
   const [fullDescription, setFullDescription] = useState(initial?.full_description ?? "");
+  const [howToParticipate, setHowToParticipate] = useState(initial?.how_to_participate ?? "");
   const [validity, setValidity] = useState(initial?.validity ?? "");
   const [rules, setRules] = useState(initial?.rules ?? "");
   const [ctaText, setCtaText] = useState(initial?.cta_text ?? "Ver promoção");
@@ -48,6 +49,7 @@ export function PromotionForm({ initial, submitting, onSubmit, onCancel }: Props
       cover_url: coverUrl.trim(),
       short_description: shortDescription.trim(),
       full_description: fullDescription,
+      how_to_participate: howToParticipate,
       validity: validity.trim(),
       rules,
       cta_text: ctaText.trim() || "Ver promoção",
@@ -92,8 +94,18 @@ export function PromotionForm({ initial, submitting, onSubmit, onCancel }: Props
           <textarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} rows={2} className={inputCls} />
         </Field>
 
-        <Field label="Descrição completa (como participar)">
+        <Field label="Descrição completa">
           <textarea value={fullDescription} onChange={(e) => setFullDescription(e.target.value)} rows={8} className={inputCls} />
+        </Field>
+
+        <Field label="Como participar (passo a passo / condições)">
+          <textarea
+            value={howToParticipate}
+            onChange={(e) => setHowToParticipate(e.target.value)}
+            rows={6}
+            placeholder={"1. Abasteça a partir de X litros\n2. Apresente o cupom na conveniência\n3. Retire o seu brinde"}
+            className={inputCls}
+          />
         </Field>
 
         <Field label="Validade / período da promoção">

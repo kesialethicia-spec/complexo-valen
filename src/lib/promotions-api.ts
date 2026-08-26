@@ -2,9 +2,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const PROMOTION_CATEGORIES = [
   "Posto",
+  "ValenBen",
   "Conveniência",
-  "Truck Center",
   "Alimentação",
+  "Truck Center",
   "Estacionamento",
   "Eventos",
   "Lojas",
@@ -24,6 +25,7 @@ export interface PromotionRow {
   cover_url: string;
   short_description: string;
   full_description: string;
+  how_to_participate: string;
   validity: string;
   rules: string;
   cta_text: string;

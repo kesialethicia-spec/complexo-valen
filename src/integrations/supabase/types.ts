@@ -311,6 +311,7 @@ export type Database = {
           cta_url: string
           featured: boolean
           full_description: string
+          how_to_participate: string
           id: string
           meta_description: string | null
           meta_title: string | null
@@ -332,6 +333,7 @@ export type Database = {
           cta_url?: string
           featured?: boolean
           full_description?: string
+          how_to_participate?: string
           id?: string
           meta_description?: string | null
           meta_title?: string | null
@@ -353,6 +355,7 @@ export type Database = {
           cta_url?: string
           featured?: boolean
           full_description?: string
+          how_to_participate?: string
           id?: string
           meta_description?: string | null
           meta_title?: string | null
