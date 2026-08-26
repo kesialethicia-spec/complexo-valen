@@ -49,6 +49,7 @@ export function PromotionForm({ initial, submitting, onSubmit, onCancel }: Props
       cover_url: coverUrl.trim(),
       short_description: shortDescription.trim(),
       full_description: fullDescription,
+      how_to_participate: howToParticipate,
       validity: validity.trim(),
       rules,
       cta_text: ctaText.trim() || "Ver promoção",
