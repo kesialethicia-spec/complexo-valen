@@ -24,6 +24,7 @@ export function PromotionForm({ initial, submitting, onSubmit, onCancel }: Props
   const [coverUrl, setCoverUrl] = useState(initial?.cover_url ?? "");
   const [shortDescription, setShortDescription] = useState(initial?.short_description ?? "");
   const [fullDescription, setFullDescription] = useState(initial?.full_description ?? "");
+  const [howToParticipate, setHowToParticipate] = useState(initial?.how_to_participate ?? "");
   const [validity, setValidity] = useState(initial?.validity ?? "");
   const [rules, setRules] = useState(initial?.rules ?? "");
   const [ctaText, setCtaText] = useState(initial?.cta_text ?? "Ver promoção");
