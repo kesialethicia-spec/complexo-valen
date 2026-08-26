@@ -279,7 +279,7 @@ function OValen() {
           <SectionHeader eyebrow="História" title="Nossa história em movimento" center />
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {[
-              { year: "2019", title: "Início da jornada", text: "Em 05 de setembro de 2019, o Complexo Valen foi inaugurado com uma área inicial de 50 mil m².", img: t2019 },
+              { year: "2019", title: "Início da jornada", text: "Em 05 de setembro de 2019, o Complexo Valen foi inaugurado com uma área inicial de 150 mil m².", img: t2019 },
               { year: "2022", title: "Expansão contínua", text: "Com a inauguração do Pátio de Triagem 03, o Valen alcançou mais de 250 mil m² de área total.", img: t2022 },
               { year: "2025/2026", title: "Mais avanços", text: "Com novos espaços e modernizações, o Complexo Valen chegou a mais de 400 vagas, consolidando sua presença estratégica na região.", img: t2025 },
             ].map((m) => (
