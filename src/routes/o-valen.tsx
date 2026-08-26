@@ -22,7 +22,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { getOValenPageSettings } from "@/lib/o-valen-settings-api";
-import equipeAsset from "@/assets/equipe-valen.png.asset.json";
+import equipeAsset from "@/assets/equipe-o-valen.png.asset.json";
 import heroAsset from "@/assets/o-valen/hero.jpg.asset.json";
 import fachadaAsset from "@/assets/o-valen/fachada.jpg.asset.json";
 import postoAsset from "@/assets/o-valen/posto.jpg.asset.json";
