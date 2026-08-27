@@ -329,6 +329,45 @@ export type Database = {
         }
         Relationships: []
       }
+      markets: {
+        Row: {
+          created_at: string
+          description: string
+          features: string[]
+          id: string
+          image_url: string
+          location: string
+          name: string
+          order_index: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          features?: string[]
+          id?: string
+          image_url?: string
+          location?: string
+          name: string
+          order_index?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          features?: string[]
+          id?: string
+          image_url?: string
+          location?: string
+          name?: string
+          order_index?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       o_valen_page_settings: {
         Row: {
           created_at: string
