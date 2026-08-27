@@ -89,9 +89,6 @@ function ClubeValenPage() {
 
 /* ---------------- HERO ---------------- */
 
-
-/* ---------------- HERO ---------------- */
-
 function StoreButtons({
   google,
   apple,
