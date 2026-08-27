@@ -205,7 +205,7 @@ function Vitrine({ items }: { items: PromoItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="pb-14 pt-12 md:pb-20 md:pt-16">
+    <section className="bg-background pb-14 pt-12 md:pb-20 md:pt-16">
       <div className="container-valen">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
