@@ -33,6 +33,7 @@ import {
 import { extractYoutubeId, youtubeThumbnail } from "@/lib/videos-api";
 import { X } from "lucide-react";
 import { SmartImage } from "@/components/SmartImage";
+import { CapelaSection } from "@/components/CapelaSection";
 
 
 export const Route = createFileRoute("/experiencias")({
