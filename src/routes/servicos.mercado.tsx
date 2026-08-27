@@ -119,6 +119,9 @@ function MarketCard({ market, reverse }: { market: MarketRow; reverse: boolean }
           {market.description && (
             <p className="mt-4 text-muted-foreground leading-relaxed">{market.description}</p>
           )}
+          {market.full_description && (
+            <p className="mt-3 text-muted-foreground leading-relaxed whitespace-pre-line">{market.full_description}</p>
+          )}
           {market.features.length > 0 && (
             <ul className="mt-6 grid gap-2 sm:grid-cols-2">
               {market.features.map((f) => (
