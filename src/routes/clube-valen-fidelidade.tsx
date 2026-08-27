@@ -87,35 +87,8 @@ function ClubeValenPage() {
   );
 }
 
-/* ---------------- NAV ---------------- */
+/* ---------------- HERO ---------------- */
 
-function ClubeNav({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
-  return (
-    <div className="sticky top-20 z-40 border-b border-border/60 bg-background/85 backdrop-blur-xl">
-      <div className="container-valen flex h-16 items-center justify-between gap-4">
-        <img src={logoClube.url} alt="Clube Valen Fidelidade" className="h-9 w-auto shrink-0 object-contain" />
-        <nav className="hidden items-center gap-1 lg:flex">
-          {anchors.map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-primary"
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
-        <a
-          href={settings.cta_url || "#baixe-o-app"}
-          {...(settings.cta_url ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-orange px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-glow transition hover:scale-105"
-        >
-          {settings.cta_text || "Baixe o aplicativo"}
-        </a>
-      </div>
-    </div>
-  );
-}
 
 /* ---------------- HERO ---------------- */
 
