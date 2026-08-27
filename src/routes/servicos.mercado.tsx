@@ -131,14 +131,23 @@ function MarketCard({ market, reverse }: { market: MarketRow; reverse: boolean }
               ))}
             </ul>
           )}
-          <a
-            href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-full border border-secondary/20 px-6 py-2.5 text-sm font-bold text-secondary hover:bg-surface transition-colors"
-          >
-            <MapPin className="h-4 w-4" /> Ver localização
-          </a>
+          {market.gallery_urls?.length > 0 && (
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {market.gallery_urls.map((url) => (
+                <SmartImage key={url} src={url} alt={market.name} className="aspect-[4/3]" rounded="rounded-xl" />
+              ))}
+            </div>
+          )}
+          {market.cta_url && (
+            <a
+              href={market.cta_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 rounded-full border border-secondary/20 px-6 py-2.5 text-sm font-bold text-secondary hover:bg-surface transition-colors"
+            >
+              <MapPin className="h-4 w-4" /> {market.cta_text || "Ver localização"}
+            </a>
+          )}
         </div>
       </div>
     </article>
