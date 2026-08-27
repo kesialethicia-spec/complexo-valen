@@ -5,14 +5,30 @@ export type MarketStatus = "rascunho" | "publicado";
 export interface MarketRow {
   id: string;
   name: string;
+  slug: string;
   description: string;
+  full_description: string;
   location: string;
   image_url: string;
+  gallery_urls: string[];
   features: string[];
+  cta_text: string;
+  cta_url: string;
+  meta_title: string | null;
+  meta_description: string | null;
   status: MarketStatus;
   order_index: number;
   created_at: string;
   updated_at: string;
+}
+
+export function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 export type MarketInput = Omit<MarketRow, "id" | "created_at" | "updated_at">;
