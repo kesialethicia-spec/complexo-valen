@@ -37,6 +37,7 @@ import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alime
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
 import { Route as BlogDoCaminhoneiroSlugRouteImport } from './routes/blog-do-caminhoneiro.$slug'
+import { Route as AdminTruckCentersRouteImport } from './routes/admin.truck-centers'
 import { Route as AdminPaginaValenlubRouteImport } from './routes/admin.pagina-valenlub'
 import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-valenlog'
 import { Route as AdminPaginaValenbenRouteImport } from './routes/admin.pagina-valenben'
@@ -207,6 +208,11 @@ const BlogDoCaminhoneiroSlugRoute = BlogDoCaminhoneiroSlugRouteImport.update({
   path: '/blog-do-caminhoneiro/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminTruckCentersRoute = AdminTruckCentersRouteImport.update({
+  id: '/truck-centers',
+  path: '/truck-centers',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPaginaValenlubRoute = AdminPaginaValenlubRouteImport.update({
   id: '/pagina-valenlub',
   path: '/pagina-valenlub',
@@ -365,6 +371,7 @@ export interface FileRoutesByFullPath {
   '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/admin/pagina-valenlub': typeof AdminPaginaValenlubRoute
+  '/admin/truck-centers': typeof AdminTruckCentersRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -421,6 +428,7 @@ export interface FileRoutesByTo {
   '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/admin/pagina-valenlub': typeof AdminPaginaValenlubRoute
+  '/admin/truck-centers': typeof AdminTruckCentersRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -479,6 +487,7 @@ export interface FileRoutesById {
   '/admin/pagina-valenben': typeof AdminPaginaValenbenRoute
   '/admin/pagina-valenlog': typeof AdminPaginaValenlogRoute
   '/admin/pagina-valenlub': typeof AdminPaginaValenlubRoute
+  '/admin/truck-centers': typeof AdminTruckCentersRoute
   '/blog-do-caminhoneiro/$slug': typeof BlogDoCaminhoneiroSlugRoute
   '/lojas/$slug': typeof LojasSlugRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
@@ -538,6 +547,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
     | '/admin/pagina-valenlub'
+    | '/admin/truck-centers'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -594,6 +604,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
     | '/admin/pagina-valenlub'
+    | '/admin/truck-centers'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -651,6 +662,7 @@ export interface FileRouteTypes {
     | '/admin/pagina-valenben'
     | '/admin/pagina-valenlog'
     | '/admin/pagina-valenlub'
+    | '/admin/truck-centers'
     | '/blog-do-caminhoneiro/$slug'
     | '/lojas/$slug'
     | '/promocoes/$slug'
@@ -914,6 +926,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogDoCaminhoneiroSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/truck-centers': {
+      id: '/admin/truck-centers'
+      path: '/truck-centers'
+      fullPath: '/admin/truck-centers'
+      preLoaderRoute: typeof AdminTruckCentersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/pagina-valenlub': {
       id: '/admin/pagina-valenlub'
       path: '/pagina-valenlub'
@@ -1116,6 +1135,7 @@ interface AdminRouteChildren {
   AdminPaginaValenbenRoute: typeof AdminPaginaValenbenRoute
   AdminPaginaValenlogRoute: typeof AdminPaginaValenlogRoute
   AdminPaginaValenlubRoute: typeof AdminPaginaValenlubRoute
+  AdminTruckCentersRoute: typeof AdminTruckCentersRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
   AdminBlogNovoRoute: typeof AdminBlogNovoRoute
@@ -1147,6 +1167,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminPaginaValenbenRoute: AdminPaginaValenbenRoute,
   AdminPaginaValenlogRoute: AdminPaginaValenlogRoute,
   AdminPaginaValenlubRoute: AdminPaginaValenlubRoute,
+  AdminTruckCentersRoute: AdminTruckCentersRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
   AdminBlogNovoRoute: AdminBlogNovoRoute,

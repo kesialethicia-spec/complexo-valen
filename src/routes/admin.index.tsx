@@ -12,6 +12,7 @@ type AdminLink =
   | "/admin/lojas"
   | "/admin/servicos"
   | "/admin/mercados"
+  | "/admin/truck-centers"
   | "/admin/videos"
   | "/admin/pagina-home"
   | "/admin/pagina-o-valen"
