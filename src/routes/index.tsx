@@ -6,14 +6,9 @@ import {
   Heart, Users, Baby, Mic, Calendar,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
-import heroImg from "@/assets/hero-trucks.jpg";
+import { SmartImage } from "@/components/SmartImage";
 import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
-import postoImg from "@/assets/posto.jpg";
-import truckImg from "@/assets/truck-center.jpg";
-import hotelImg from "@/assets/hotel.jpg";
-import foodImg from "@/assets/alimentacao.jpg";
-import parkImg from "@/assets/estacionamento.jpg";
-import festaImg from "@/assets/festa.jpg";
+
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
 import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
