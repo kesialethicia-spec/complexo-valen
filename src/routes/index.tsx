@@ -87,20 +87,22 @@ function Home() {
       >
         {/* Slide institucional */}
         <div className={slideIdx === 0 ? "block relative" : "hidden"}>
-          <div className="absolute inset-0 overflow-hidden">
-            <picture>
-              {heroBgMobile && (
-                <source media="(max-width: 767px)" srcSet={heroBgMobile} />
-              )}
-              <img
-                src={heroBgDesktop || heroImg}
-                alt=""
-                aria-hidden="true"
-                className="h-full w-full object-cover"
-                width={1920}
-                height={1080}
-              />
-            </picture>
+          <div className="absolute inset-0 overflow-hidden bg-secondary">
+            {(heroBgDesktop || heroBgMobile) && (
+              <picture>
+                {heroBgMobile && (
+                  <source media="(max-width: 767px)" srcSet={heroBgMobile} />
+                )}
+                <img
+                  src={heroBgDesktop || heroBgMobile}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-full w-full object-cover"
+                  width={1920}
+                  height={1080}
+                />
+              </picture>
+            )}
             {/* Overlay azul escuro — mantém legibilidade e deixa a foto visível */}
             <div className="absolute inset-0 bg-secondary/75" />
             <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary/40 to-secondary/70" />
