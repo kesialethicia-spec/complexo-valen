@@ -347,19 +347,26 @@ function Premios({ items }: { items: BenefitRow[] }) {
         <div id="premios" className="mt-10 grid scroll-mt-40 gap-6 lg:grid-cols-3">
           {destaque && (
             <article className="group relative overflow-hidden rounded-3xl bg-secondary text-secondary-foreground shadow-xl lg:col-span-3">
-              <div className="grid md:grid-cols-2">
-                <div className="relative h-56 md:h-full">
+              <div className="grid items-center gap-2 md:grid-cols-2">
+                <div className="flex items-center justify-center p-6 md:p-10">
                   {destaque.image_url ? (
-                    <img src={destaque.image_url} alt={destaque.name} className="h-full w-full object-cover" loading="lazy" />
+                    <img
+                      src={destaque.image_url}
+                      alt={destaque.name}
+                      className="max-h-64 w-full rounded-2xl object-contain md:max-h-72"
+                      loading="lazy"
+                    />
                   ) : (
-                    <Placeholder label={destaque.name} />
+                    <div className="h-56 w-full overflow-hidden rounded-2xl">
+                      <Placeholder label={destaque.name} />
+                    </div>
                   )}
                 </div>
-                <div className="p-8 md:p-12">
+                <div className="p-8 md:py-12 md:pr-12">
                   <span className="text-xs font-extrabold uppercase tracking-widest text-primary">{destaque.category}</span>
-                  <h3 className="mt-3 font-display text-3xl font-extrabold leading-tight md:text-4xl">{destaque.name}</h3>
-                  <p className="mt-3 text-white/80">{destaque.short_description}</p>
-                  <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <h3 className="mt-3 max-w-md font-display text-2xl font-extrabold leading-tight md:text-4xl">{destaque.name}</h3>
+                  <p className="mt-4 max-w-md text-white/80">{destaque.short_description}</p>
+                  <div className="mt-7 flex flex-wrap items-center gap-4">
                     <Points points={destaque.points} />
                     <a
                       href="#baixe-o-app"
@@ -371,6 +378,7 @@ function Premios({ items }: { items: BenefitRow[] }) {
                 </div>
               </div>
             </article>
+
           )}
 
           {outros.map((b) => (
