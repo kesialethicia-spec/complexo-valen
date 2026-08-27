@@ -18,6 +18,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ConecteSeRouteImport } from './routes/conecte-se'
+import { Route as ClubeValenFidelidadeRouteImport } from './routes/clube-valen-fidelidade'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
@@ -102,6 +103,11 @@ const ContatoRoute = ContatoRouteImport.update({
 const ConecteSeRoute = ConecteSeRouteImport.update({
   id: '/conecte-se',
   path: '/conecte-se',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubeValenFidelidadeRoute = ClubeValenFidelidadeRouteImport.update({
+  id: '/clube-valen-fidelidade',
+  path: '/clube-valen-fidelidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -310,6 +316,7 @@ const AdminBlogIdRoute = AdminBlogIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/clube-valen-fidelidade': typeof ClubeValenFidelidadeRoute
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -360,6 +367,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clube-valen-fidelidade': typeof ClubeValenFidelidadeRoute
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -412,6 +420,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/clube-valen-fidelidade': typeof ClubeValenFidelidadeRoute
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -465,6 +474,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/clube-valen-fidelidade'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -515,6 +525,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/clube-valen-fidelidade'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -566,6 +577,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/clube-valen-fidelidade'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -618,6 +630,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ClubeValenFidelidadeRoute: typeof ClubeValenFidelidadeRoute
   ConecteSeRoute: typeof ConecteSeRoute
   ContatoRoute: typeof ContatoRoute
   ExperienciasRoute: typeof ExperienciasRoute
@@ -705,6 +718,13 @@ declare module '@tanstack/react-router' {
       path: '/conecte-se'
       fullPath: '/conecte-se'
       preLoaderRoute: typeof ConecteSeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clube-valen-fidelidade': {
+      id: '/clube-valen-fidelidade'
+      path: '/clube-valen-fidelidade'
+      fullPath: '/clube-valen-fidelidade'
+      preLoaderRoute: typeof ClubeValenFidelidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -1059,6 +1079,7 @@ const LojasRouteWithChildren = LojasRoute._addFileChildren(LojasRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  ClubeValenFidelidadeRoute: ClubeValenFidelidadeRoute,
   ConecteSeRoute: ConecteSeRoute,
   ContatoRoute: ContatoRoute,
   ExperienciasRoute: ExperienciasRoute,

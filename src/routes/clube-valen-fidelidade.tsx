@@ -89,7 +89,7 @@ function ClubeValenPage() {
 
 /* ---------------- NAV ---------------- */
 
-function ClubeNav({ settings }: { settings: ReturnType<typeof Object> & { cta_text: string; cta_url: string } }) {
+function ClubeNav({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
   return (
     <div className="sticky top-20 z-40 border-b border-border/60 bg-background/85 backdrop-blur-xl">
       <div className="container-valen flex h-16 items-center justify-between gap-4">
