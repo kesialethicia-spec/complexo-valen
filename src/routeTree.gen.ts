@@ -18,6 +18,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ConecteSeRouteImport } from './routes/conecte-se'
+import { Route as ClubeValenFidelidadeRouteImport } from './routes/clube-valen-fidelidade'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
@@ -43,6 +44,7 @@ import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-v
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminPaginaHomeRouteImport } from './routes/admin.pagina-home'
 import { Route as AdminPaginaExperienciasRouteImport } from './routes/admin.pagina-experiencias'
+import { Route as AdminClubeValenRouteImport } from './routes/admin.clube-valen'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminServicosIndexRouteImport } from './routes/admin.servicos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
@@ -102,6 +104,11 @@ const ContatoRoute = ContatoRouteImport.update({
 const ConecteSeRoute = ConecteSeRouteImport.update({
   id: '/conecte-se',
   path: '/conecte-se',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubeValenFidelidadeRoute = ClubeValenFidelidadeRouteImport.update({
+  id: '/clube-valen-fidelidade',
+  path: '/clube-valen-fidelidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -231,6 +238,11 @@ const AdminPaginaExperienciasRoute = AdminPaginaExperienciasRouteImport.update({
   path: '/pagina-experiencias',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminClubeValenRoute = AdminClubeValenRouteImport.update({
+  id: '/clube-valen',
+  path: '/clube-valen',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
   id: '/videos/',
   path: '/videos/',
@@ -310,6 +322,7 @@ const AdminBlogIdRoute = AdminBlogIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/clube-valen-fidelidade': typeof ClubeValenFidelidadeRoute
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -319,6 +332,7 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/clube-valen': typeof AdminClubeValenRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
@@ -360,6 +374,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clube-valen-fidelidade': typeof ClubeValenFidelidadeRoute
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -369,6 +384,7 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/clube-valen': typeof AdminClubeValenRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
@@ -412,6 +428,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/clube-valen-fidelidade': typeof ClubeValenFidelidadeRoute
   '/conecte-se': typeof ConecteSeRoute
   '/contato': typeof ContatoRoute
   '/experiencias': typeof ExperienciasRoute
@@ -421,6 +438,7 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/clube-valen': typeof AdminClubeValenRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
@@ -465,6 +483,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/clube-valen-fidelidade'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -474,6 +493,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/admin/clube-valen'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
@@ -515,6 +535,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/clube-valen-fidelidade'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -524,6 +545,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/admin/clube-valen'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
@@ -566,6 +588,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/clube-valen-fidelidade'
     | '/conecte-se'
     | '/contato'
     | '/experiencias'
@@ -575,6 +598,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/admin/clube-valen'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
@@ -618,6 +642,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ClubeValenFidelidadeRoute: typeof ClubeValenFidelidadeRoute
   ConecteSeRoute: typeof ConecteSeRoute
   ContatoRoute: typeof ContatoRoute
   ExperienciasRoute: typeof ExperienciasRoute
@@ -705,6 +730,13 @@ declare module '@tanstack/react-router' {
       path: '/conecte-se'
       fullPath: '/conecte-se'
       preLoaderRoute: typeof ConecteSeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clube-valen-fidelidade': {
+      id: '/clube-valen-fidelidade'
+      path: '/clube-valen-fidelidade'
+      fullPath: '/clube-valen-fidelidade'
+      preLoaderRoute: typeof ClubeValenFidelidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -882,6 +914,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPaginaExperienciasRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/clube-valen': {
+      id: '/admin/clube-valen'
+      path: '/clube-valen'
+      fullPath: '/admin/clube-valen'
+      preLoaderRoute: typeof AdminClubeValenRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/videos/': {
       id: '/admin/videos/'
       path: '/videos'
@@ -991,6 +1030,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminClubeValenRoute: typeof AdminClubeValenRoute
   AdminPaginaExperienciasRoute: typeof AdminPaginaExperienciasRoute
   AdminPaginaHomeRoute: typeof AdminPaginaHomeRoute
   AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
@@ -1018,6 +1058,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminClubeValenRoute: AdminClubeValenRoute,
   AdminPaginaExperienciasRoute: AdminPaginaExperienciasRoute,
   AdminPaginaHomeRoute: AdminPaginaHomeRoute,
   AdminPaginaHotelRoute: AdminPaginaHotelRoute,
@@ -1059,6 +1100,7 @@ const LojasRouteWithChildren = LojasRoute._addFileChildren(LojasRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  ClubeValenFidelidadeRoute: ClubeValenFidelidadeRoute,
   ConecteSeRoute: ConecteSeRoute,
   ContatoRoute: ContatoRoute,
   ExperienciasRoute: ExperienciasRoute,

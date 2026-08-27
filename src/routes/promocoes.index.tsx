@@ -314,7 +314,7 @@ function ClubeValen() {
                 Com o Clube Valen Fidelidade, você pode acessar benefícios especiais e aproveitar ainda mais a sua jornada com o Valen.
               </p>
               <Link
-                to="/servicos/clube-do-caminhoneiro"
+                to="/clube-valen-fidelidade"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition hover:scale-[1.03]"
               >
                 Saiba mais <ArrowRight className="h-4 w-4" />
