@@ -200,12 +200,11 @@ function Experiencias() {
           {saudeImages.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {saudeImages.map((src, i) => (
-                <img
+                <SmartImage
                   key={i}
                   src={src}
                   alt=""
-                  className="aspect-square w-full object-cover rounded-2xl"
-                  loading="lazy"
+                  className="aspect-square w-full"
                 />
               ))}
             </div>
@@ -284,12 +283,11 @@ function Experiencias() {
             {valentinaImages.length > 0 ? (
               <div className="grid grid-cols-2 gap-3">
                 {valentinaImages.slice(0, 4).map((src, i) => (
-                  <img
+                  <SmartImage
                     key={i}
                     src={src}
                     alt=""
-                    className="aspect-square w-full object-cover rounded-2xl"
-                    loading="lazy"
+                    className="aspect-square w-full"
                   />
                 ))}
               </div>
@@ -439,12 +437,11 @@ function Experiencias() {
           />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
             {gallery.map((src, i) => (
-              <img
+              <SmartImage
                 key={i}
                 src={src}
                 alt=""
-                className="aspect-square w-full object-cover rounded-2xl hover:scale-105 transition-transform"
-                loading="lazy"
+                className="aspect-square w-full  hover:scale-105 transition-transform"
               />
             ))}
           </div>
