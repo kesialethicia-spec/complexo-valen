@@ -6,13 +6,11 @@ export const STORE_CATEGORIES = [
   "Autopeças",
   "Saúde",
   "Conveniência",
-  "Financeiro",
-  "Escritórios",
-  "Hotel",
-  "Posto",
+  "Transportadoras",
   "Truck Center",
   "Outros",
 ] as const;
+
 
 export type StoreCategory = (typeof STORE_CATEGORIES)[number];
 export type StoreStatus = "rascunho" | "ativa" | "inativa";
