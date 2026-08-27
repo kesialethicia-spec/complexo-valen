@@ -80,28 +80,22 @@ function normalize(s: string) {
 
 function PromoHero() {
   return (
-    <section className="relative overflow-hidden bg-surface">
-      {/* formas da marca — mantidas fora da área de texto para não prejudicar a leitura */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[34%] top-0 hidden h-full w-[42%] -skew-x-12 bg-gradient-orange opacity-90 lg:block" />
-        <div className="absolute right-0 top-0 hidden h-full w-[30%] -skew-x-12 bg-secondary lg:block" />
-      </div>
-
+    <section className="relative overflow-hidden">
       <div className="container-valen relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="relative max-w-xl rounded-[2rem] bg-background/85 p-6 backdrop-blur-sm md:p-8 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
-            <Sparkles className="h-3.5 w-3.5" /> Campanhas ativas
+        <div className="relative max-w-xl">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary shadow-sm">
+            <Sparkles className="h-3.5 w-3.5 text-primary" /> Campanhas imperdíveis
           </span>
-          <h1 className="mt-5 text-4xl font-display font-extrabold leading-[1.05] tracking-tight text-secondary md:text-6xl">
-            Promoções e ofertas <span className="text-primary">Valen</span> para você aproveitar!
+          <h1 className="mt-5 text-4xl font-display font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl">
+            Promoções e ofertas Valen para você aproveitar!
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-secondary/80">
+          <p className="mt-5 text-lg leading-relaxed text-white/95">
             Encontre campanhas, vantagens e oportunidades especiais em abastecimento, conveniência, alimentação, serviços e muito mais.
           </p>
           <div className="mt-8">
             <a
               href="#promocoes"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-secondary/90 hover:shadow-xl"
             >
               Ver promoções <ArrowRight className="h-4 w-4" />
             </a>
@@ -110,7 +104,7 @@ function PromoHero() {
 
         {/* composição da imagem */}
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-glow ring-8 ring-white/40">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-glow ring-8 ring-white/30">
             <img
               src={caminhoneiroAsset.url}
               alt="Caminhoneiro sorrindo ao ver uma promoção do Valen no celular"
@@ -133,6 +127,7 @@ function PromoHero() {
     </section>
   );
 }
+
 
 /* ---------------- VITRINE ---------------- */
 
