@@ -99,9 +99,9 @@ function Lojas() {
     void (async () => {
       try {
         const rows = await listActiveStores();
-        setItems(rows.length ? rows.map(toUI) : fallback);
+        setItems(rows.map(toUI));
       } catch {
-        setItems(fallback);
+        setItems([]);
       } finally {
         setLoaded(true);
       }
