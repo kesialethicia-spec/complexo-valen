@@ -209,8 +209,8 @@ function Vitrine({ items }: { items: PromoItem[] }) {
       <div className="container-valen">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/80">Vitrine de oportunidades</p>
-            <h2 className="mt-1 text-2xl font-display font-extrabold text-white md:text-4xl">Destaques da vez</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Vitrine de oportunidades</p>
+            <h2 className="mt-1 text-2xl font-display font-extrabold text-secondary md:text-4xl">Destaques da vez</h2>
           </div>
         </div>
 
