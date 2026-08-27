@@ -379,16 +379,18 @@ function Promocoes() {
 
   return (
     <>
-      {/* HERO + DESTAQUES — fundo laranja */}
+      {/* HERO — fundo laranja */}
       <div className="bg-gradient-orange">
         <PromoHero />
-        <Vitrine items={destaques} />
       </div>
 
-      {/* BUSCA E FILTROS — card branco sobre fundo laranja */}
-      <section id="promocoes" className="scroll-mt-24 bg-gradient-orange pb-10 md:pb-14">
+      {/* DESTAQUES — fundo branco */}
+      <Vitrine items={destaques} />
+
+      {/* BUSCA E FILTROS — fundo branco */}
+      <section id="promocoes" className="scroll-mt-24 bg-background pb-10 md:pb-14">
         <div className="container-valen">
-          <h2 className="text-2xl font-display font-extrabold text-white md:text-4xl">
+          <h2 className="text-2xl font-display font-extrabold text-secondary md:text-4xl">
             Promoções e ofertas completas para você
           </h2>
 
