@@ -12,7 +12,6 @@ import {
   Wallet,
   Coffee,
   ArrowRight,
-  ArrowRight,
 } from "lucide-react";
 import {
   getClubeSettings,
