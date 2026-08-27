@@ -185,11 +185,13 @@ function Lojas() {
                     {(l.block || l.location) && <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {[l.block, l.location].filter(Boolean).join(" • ")}</p>}
                   </div>
                   <div className="mt-5 flex gap-2">
-                    <a href={waHref(l)} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-gradient-orange px-4 py-2.5 text-sm font-bold text-primary-foreground">
-                      <MessageCircle className="h-4 w-4" /> WhatsApp
-                    </a>
+                    {(l.whatsapp || l.cta_url) && (
+                      <a href={waHref(l)} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-gradient-orange px-4 py-2.5 text-sm font-bold text-primary-foreground">
+                        <MessageCircle className="h-4 w-4" /> WhatsApp
+                      </a>
+                    )}
                     {l.slug && (
-                      <Link to="/lojas/$slug" params={{ slug: l.slug }} className="inline-flex items-center justify-center rounded-full border border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted">
+                      <Link to="/lojas/$slug" params={{ slug: l.slug }} className="flex-1 inline-flex items-center justify-center rounded-full border border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted">
                         Ver detalhes
                       </Link>
                     )}
@@ -197,7 +199,9 @@ function Lojas() {
                 </article>
               ))}
               {filtradas.length === 0 && (
-                <p className="col-span-full text-center text-muted-foreground py-12">Nenhuma loja encontrada.</p>
+                <p className="col-span-full text-center text-muted-foreground py-12">
+                  {items.length === 0 ? "Nenhuma loja cadastrada no momento." : "Nenhuma loja encontrada."}
+                </p>
               )}
             </div>
           )}
