@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as OValenRouteImport } from './routes/o-valen'
 import { Route as LojasRouteImport } from './routes/lojas'
@@ -22,6 +21,7 @@ import { Route as ConecteSeRouteImport } from './routes/conecte-se'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
+import { Route as PromocoesIndexRouteImport } from './routes/promocoes.index'
 import { Route as BlogDoCaminhoneiroIndexRouteImport } from './routes/blog-do-caminhoneiro.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ServicosValenlubRouteImport } from './routes/servicos.valenlub'
@@ -67,11 +67,6 @@ const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PromocoesRoute = PromocoesRouteImport.update({
-  id: '/promocoes',
-  path: '/promocoes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
@@ -122,6 +117,11 @@ const IndexRoute = IndexRouteImport.update({
 const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/servicos/',
   path: '/servicos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PromocoesIndexRoute = PromocoesIndexRouteImport.update({
+  id: '/promocoes/',
+  path: '/promocoes/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogDoCaminhoneiroIndexRoute = BlogDoCaminhoneiroIndexRouteImport.update({
@@ -177,9 +177,9 @@ const ServicosAlimentacaoRoute = ServicosAlimentacaoRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromocoesSlugRoute = PromocoesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => PromocoesRoute,
+  id: '/promocoes/$slug',
+  path: '/promocoes/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const LojasSlugRoute = LojasSlugRouteImport.update({
   id: '/$slug',
@@ -317,7 +317,6 @@ export interface FileRoutesByFullPath {
   '/lojas': typeof LojasRouteWithChildren
   '/o-valen': typeof OValenRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
-  '/promocoes': typeof PromocoesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
@@ -341,6 +340,7 @@ export interface FileRoutesByFullPath {
   '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin/': typeof AdminIndexRoute
   '/blog-do-caminhoneiro/': typeof BlogDoCaminhoneiroIndexRoute
+  '/promocoes/': typeof PromocoesIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
@@ -367,7 +367,6 @@ export interface FileRoutesByTo {
   '/lojas': typeof LojasRouteWithChildren
   '/o-valen': typeof OValenRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
-  '/promocoes': typeof PromocoesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
@@ -391,6 +390,7 @@ export interface FileRoutesByTo {
   '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin': typeof AdminIndexRoute
   '/blog-do-caminhoneiro': typeof BlogDoCaminhoneiroIndexRoute
+  '/promocoes': typeof PromocoesIndexRoute
   '/servicos': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
@@ -419,7 +419,6 @@ export interface FileRoutesById {
   '/lojas': typeof LojasRouteWithChildren
   '/o-valen': typeof OValenRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
-  '/promocoes': typeof PromocoesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
@@ -443,6 +442,7 @@ export interface FileRoutesById {
   '/servicos/valenlub': typeof ServicosValenlubRoute
   '/admin/': typeof AdminIndexRoute
   '/blog-do-caminhoneiro/': typeof BlogDoCaminhoneiroIndexRoute
+  '/promocoes/': typeof PromocoesIndexRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/novo': typeof AdminBlogNovoRoute
@@ -472,7 +472,6 @@ export interface FileRouteTypes {
     | '/lojas'
     | '/o-valen'
     | '/politica-de-privacidade'
-    | '/promocoes'
     | '/sitemap.xml'
     | '/termos-de-uso'
     | '/admin/pagina-experiencias'
@@ -496,6 +495,7 @@ export interface FileRouteTypes {
     | '/servicos/valenlub'
     | '/admin/'
     | '/blog-do-caminhoneiro/'
+    | '/promocoes/'
     | '/servicos/'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
@@ -522,7 +522,6 @@ export interface FileRouteTypes {
     | '/lojas'
     | '/o-valen'
     | '/politica-de-privacidade'
-    | '/promocoes'
     | '/sitemap.xml'
     | '/termos-de-uso'
     | '/admin/pagina-experiencias'
@@ -546,6 +545,7 @@ export interface FileRouteTypes {
     | '/servicos/valenlub'
     | '/admin'
     | '/blog-do-caminhoneiro'
+    | '/promocoes'
     | '/servicos'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
@@ -573,7 +573,6 @@ export interface FileRouteTypes {
     | '/lojas'
     | '/o-valen'
     | '/politica-de-privacidade'
-    | '/promocoes'
     | '/sitemap.xml'
     | '/termos-de-uso'
     | '/admin/pagina-experiencias'
@@ -597,6 +596,7 @@ export interface FileRouteTypes {
     | '/servicos/valenlub'
     | '/admin/'
     | '/blog-do-caminhoneiro/'
+    | '/promocoes/'
     | '/servicos/'
     | '/admin/blog/$id'
     | '/admin/blog/novo'
@@ -625,10 +625,10 @@ export interface RootRouteChildren {
   LojasRoute: typeof LojasRouteWithChildren
   OValenRoute: typeof OValenRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
-  PromocoesRoute: typeof PromocoesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
   BlogDoCaminhoneiroSlugRoute: typeof BlogDoCaminhoneiroSlugRoute
+  PromocoesSlugRoute: typeof PromocoesSlugRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
   ServicosPostoValenRoute: typeof ServicosPostoValenRoute
@@ -638,6 +638,7 @@ export interface RootRouteChildren {
   ServicosValenlogRoute: typeof ServicosValenlogRoute
   ServicosValenlubRoute: typeof ServicosValenlubRoute
   BlogDoCaminhoneiroIndexRoute: typeof BlogDoCaminhoneiroIndexRoute
+  PromocoesIndexRoute: typeof PromocoesIndexRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -655,13 +656,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/promocoes': {
-      id: '/promocoes'
-      path: '/promocoes'
-      fullPath: '/promocoes'
-      preLoaderRoute: typeof PromocoesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/politica-de-privacidade': {
@@ -732,6 +726,13 @@ declare module '@tanstack/react-router' {
       path: '/servicos'
       fullPath: '/servicos/'
       preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/promocoes/': {
+      id: '/promocoes/'
+      path: '/promocoes'
+      fullPath: '/promocoes/'
+      preLoaderRoute: typeof PromocoesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog-do-caminhoneiro/': {
@@ -806,10 +807,10 @@ declare module '@tanstack/react-router' {
     }
     '/promocoes/$slug': {
       id: '/promocoes/$slug'
-      path: '/$slug'
+      path: '/promocoes/$slug'
       fullPath: '/promocoes/$slug'
       preLoaderRoute: typeof PromocoesSlugRouteImport
-      parentRoute: typeof PromocoesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/lojas/$slug': {
       id: '/lojas/$slug'
@@ -1055,18 +1056,6 @@ const LojasRouteChildren: LojasRouteChildren = {
 
 const LojasRouteWithChildren = LojasRoute._addFileChildren(LojasRouteChildren)
 
-interface PromocoesRouteChildren {
-  PromocoesSlugRoute: typeof PromocoesSlugRoute
-}
-
-const PromocoesRouteChildren: PromocoesRouteChildren = {
-  PromocoesSlugRoute: PromocoesSlugRoute,
-}
-
-const PromocoesRouteWithChildren = PromocoesRoute._addFileChildren(
-  PromocoesRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
@@ -1077,10 +1066,10 @@ const rootRouteChildren: RootRouteChildren = {
   LojasRoute: LojasRouteWithChildren,
   OValenRoute: OValenRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
-  PromocoesRoute: PromocoesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
   BlogDoCaminhoneiroSlugRoute: BlogDoCaminhoneiroSlugRoute,
+  PromocoesSlugRoute: PromocoesSlugRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
   ServicosPostoValenRoute: ServicosPostoValenRoute,
@@ -1090,6 +1079,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosValenlogRoute: ServicosValenlogRoute,
   ServicosValenlubRoute: ServicosValenlubRoute,
   BlogDoCaminhoneiroIndexRoute: BlogDoCaminhoneiroIndexRoute,
+  PromocoesIndexRoute: PromocoesIndexRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
