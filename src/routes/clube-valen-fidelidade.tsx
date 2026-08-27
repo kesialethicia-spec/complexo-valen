@@ -179,7 +179,7 @@ function Hero({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
         preserveAspectRatio="none"
         className="pointer-events-none absolute inset-0 h-full w-full opacity-40"
       >
-        <path d="M-50 520 C 250 420, 400 250, 750 210 S 1150 120, 1300 40" fill="none" stroke="hsl(var(--secondary))" strokeWidth="90" strokeLinecap="round" opacity="0.35" />
+        <path d="M-50 520 C 250 420, 400 250, 750 210 S 1150 120, 1300 40" fill="none" stroke="var(--secondary)" strokeWidth="90" strokeLinecap="round" opacity="0.35" />
         <path d="M-50 520 C 250 420, 400 250, 750 210 S 1150 120, 1300 40" fill="none" stroke="white" strokeWidth="4" strokeDasharray="26 26" opacity="0.8" />
       </svg>
 
@@ -554,8 +554,8 @@ function CtaFinal({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
   return (
     <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground">
       <svg aria-hidden viewBox="0 0 1200 400" preserveAspectRatio="none" className="absolute inset-0 h-full w-full opacity-30">
-        <path d="M-50 300 C 300 200, 600 340, 1250 120" fill="none" stroke="hsl(var(--primary))" strokeWidth="8" />
-        <path d="M-50 360 C 350 260, 700 380, 1250 180" fill="none" stroke="hsl(var(--primary))" strokeWidth="3" strokeDasharray="20 18" />
+        <path d="M-50 300 C 300 200, 600 340, 1250 120" fill="none" stroke="var(--primary)" strokeWidth="8" />
+        <path d="M-50 360 C 350 260, 700 380, 1250 180" fill="none" stroke="var(--primary)" strokeWidth="3" strokeDasharray="20 18" />
       </svg>
       <div className="container-valen relative grid items-center gap-10 lg:grid-cols-2">
         <div>
