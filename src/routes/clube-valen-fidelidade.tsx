@@ -550,49 +550,29 @@ function Vantagens() {
 /* ---------------- CTA FINAL ---------------- */
 
 function CtaFinal({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
-  const phone = settings.phone_mockup_url || celularClube.url;
   return (
-    <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground">
-      <svg aria-hidden viewBox="0 0 1200 400" preserveAspectRatio="none" className="absolute inset-0 h-full w-full opacity-30">
+    <section className="relative overflow-hidden bg-secondary py-16 text-secondary-foreground md:py-20">
+      <svg aria-hidden viewBox="0 0 1200 400" preserveAspectRatio="none" className="absolute inset-0 h-full w-full opacity-25">
         <path d="M-50 300 C 300 200, 600 340, 1250 120" fill="none" stroke="var(--primary)" strokeWidth="8" />
         <path d="M-50 360 C 350 260, 700 380, 1250 180" fill="none" stroke="var(--primary)" strokeWidth="3" strokeDasharray="20 18" />
       </svg>
-      <div className="container-valen relative grid items-center gap-10 lg:grid-cols-2">
+      <div className="container-valen relative grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
         <div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight md:text-5xl">
+          <h2 className="font-display text-3xl font-extrabold leading-tight md:text-4xl">
             Sua próxima parada pode valer <span className="text-primary">muito mais.</span>
           </h2>
-          <p className="mt-4 max-w-lg text-lg text-white/80">
+          <p className="mt-4 max-w-md text-lg text-white/80">
             Baixe o Clube Valen Fidelidade e comece agora a pontuar.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a
-              href={settings.cta_url || settings.google_play_url || "#baixe-o-app"}
-              {...(settings.cta_url || settings.google_play_url
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-8 py-4 text-base font-bold text-primary-foreground shadow-glow transition hover:scale-105"
-            >
-              {settings.cta_text || "Baixe o aplicativo"} <ArrowRight className="h-4 w-4" />
-            </a>
-            {settings.qr_code_url && (
-              <img
-                src={settings.qr_code_url}
-                alt="QR Code para baixar o aplicativo Clube Valen Fidelidade"
-                className="h-24 w-24 rounded-2xl bg-white p-2"
-              />
-            )}
-          </div>
-          <div className="mt-6">
+          <div className="mt-7">
             <StoreButtons google={settings.google_play_url} apple={settings.app_store_url} tone="light" />
           </div>
         </div>
-        <div className="relative flex items-end justify-center gap-2">
-          <img src={tinosClube.url} alt="" aria-hidden className="hidden w-1/2 max-w-[16rem] object-contain md:block" />
+        <div className="flex justify-center lg:justify-end">
           <img
-            src={phone}
-            alt="Aplicativo Clube Valen Fidelidade"
-            className="w-1/2 max-w-[16rem] rotate-3 object-contain drop-shadow-2xl"
+            src={appTelas.url}
+            alt="Telas do aplicativo Clube Valen Fidelidade"
+            className="w-full max-w-[34rem] object-contain drop-shadow-2xl"
             loading="lazy"
           />
         </div>
@@ -600,6 +580,7 @@ function CtaFinal({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
     </section>
   );
 }
+
 
 /* ---------------- FAQ ---------------- */
 
