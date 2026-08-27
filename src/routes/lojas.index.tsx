@@ -4,7 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { listActiveStores, STORE_CATEGORIES, type PublicStoreRow } from "@/lib/stores-api";
 
-export const Route = createFileRoute("/lojas")({
+export const Route = createFileRoute("/lojas/")({
   validateSearch: (search: Record<string, unknown>): { categoria?: string } =>
     typeof search.categoria === "string" ? { categoria: search.categoria } : {},
   head: () => ({
@@ -52,11 +52,6 @@ interface LojaUI {
   featured: boolean;
 }
 
-const fallback: LojaUI[] = [
-  { id: "f1", name: "Restaurante Valen", category: "Alimentação", short_description: "Pratos caseiros e self-service todos os dias.", hours: "06h às 22h", phone: "(98) 0000-0000", whatsapp: "", location: "", block: "Bloco A", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
-  { id: "f2", name: "Conveniência Valen", category: "Conveniência", short_description: "Tudo para a sua jornada em um só lugar.", hours: "24h", phone: "(98) 0000-0002", whatsapp: "", location: "Posto", block: "", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
-  { id: "f3", name: "AutoPeças Rota", category: "Autopeças", short_description: "Peças, acessórios e produtos automotivos.", hours: "08h às 18h", phone: "(98) 0000-0003", whatsapp: "", location: "Truck Center", block: "", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
-];
 
 function toUI(s: PublicStoreRow): LojaUI {
   return {
