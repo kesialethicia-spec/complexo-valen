@@ -4,7 +4,7 @@ import { listPublishedPosts } from "@/lib/blog-api";
 import { listActivePromotions } from "@/lib/promotions-api";
 import { listActiveStores } from "@/lib/stores-api";
 
-const BASE_URL = "https://valen-route-connect.lovable.app";
+const BASE_URL = "https://complexovalen.com.br";
 
 interface SitemapEntry {
   path: string;
