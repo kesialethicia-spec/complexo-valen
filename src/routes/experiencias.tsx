@@ -144,15 +144,9 @@ function Experiencias() {
           </div>
 
           {(() => {
-            const videos = [
-              ...data.cafe_instagram_videos.filter((v) => v.url),
-              ...data.cafe_instagram_urls
-                .filter(Boolean)
-                .filter(
-                  (u) => !data.cafe_instagram_videos.some((v) => v.url === u),
-                )
-                .map((url) => ({ url, thumbnail_url: "" })),
-            ];
+            const videos = data.cafe_instagram_videos.filter(
+              (v) => v.url && v.thumbnail_url,
+            );
             if (videos.length === 0) return null;
             return (
               <div>
