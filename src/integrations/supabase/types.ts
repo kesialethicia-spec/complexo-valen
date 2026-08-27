@@ -689,6 +689,39 @@ export type Database = {
         }
         Relationships: []
       }
+      truck_centers: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string
+          location: string
+          name: string
+          order_index: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          location?: string
+          name: string
+          order_index?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          location?: string
+          name?: string
+          order_index?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
