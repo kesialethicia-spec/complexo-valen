@@ -49,14 +49,6 @@ export const Route = createFileRoute("/clube-valen-fidelidade")({
   component: ClubeValenPage,
 });
 
-const anchors = [
-  ["Como funciona", "#como-funciona"],
-  ["Benefícios", "#beneficios"],
-  ["Prêmios", "#premios"],
-  ["Combos", "#combos"],
-  ["Dúvidas", "#duvidas"],
-] as const;
-
 function ClubeValenPage() {
   const { data: settings = DEFAULT_CLUBE_SETTINGS } = useQuery({
     queryKey: ["clube-settings"],
@@ -73,8 +65,8 @@ function ClubeValenPage() {
 
   return (
     <div className="overflow-x-hidden bg-background">
-      <ClubeNav settings={settings} />
       <Hero settings={settings} />
+
       <ComoFunciona />
       <TinosCena benefits={benefits} />
       <Premios items={premios} />
