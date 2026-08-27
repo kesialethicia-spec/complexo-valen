@@ -43,7 +43,7 @@ export const Route = createFileRoute("/servicos/valenben-super-troca-de-oleo")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: "https://valen-route-connect.lovable.app/servicos/valenben-super-troca-de-oleo" },
+      { rel: "canonical", href: "https://complexovalen.com.br/servicos/valenben-super-troca-de-oleo" },
     ],
   }),
   component: ValenbenPage,

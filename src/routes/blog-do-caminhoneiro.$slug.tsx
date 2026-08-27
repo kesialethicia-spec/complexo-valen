@@ -23,7 +23,7 @@ export const Route = createFileRoute("/blog-do-caminhoneiro/$slug")({
   },
   head: ({ params, loaderData }) => {
     const row = loaderData?.seo;
-    const url = `https://valen-route-connect.lovable.app/blog-do-caminhoneiro/${params.slug}`;
+    const url = `https://complexovalen.com.br/blog-do-caminhoneiro/${params.slug}`;
     if (!row) {
       return {
         meta: [

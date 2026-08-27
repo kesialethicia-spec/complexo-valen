@@ -46,7 +46,7 @@ export const Route = createFileRoute("/servicos/valenlub")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: "https://valen-route-connect.lovable.app/servicos/valenlub" },
+      { rel: "canonical", href: "https://complexovalen.com.br/servicos/valenlub" },
     ],
   }),
   component: ValenlubPage,

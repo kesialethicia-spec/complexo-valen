@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /conecte-se
 Disallow: /login
 
-Sitemap: https://valen-route-connect.lovable.app/sitemap.xml
+Sitemap: https://complexovalen.com.br/sitemap.xml
