@@ -631,6 +631,7 @@ export type Database = {
           meta_description: string | null
           meta_title: string | null
           name: string
+          order_index: number
           phone: string
           short_description: string
           show_on_home: boolean
@@ -655,6 +656,7 @@ export type Database = {
           meta_description?: string | null
           meta_title?: string | null
           name: string
+          order_index?: number
           phone?: string
           short_description?: string
           show_on_home?: boolean
@@ -679,6 +681,7 @@ export type Database = {
           meta_description?: string | null
           meta_title?: string | null
           name?: string
+          order_index?: number
           phone?: string
           short_description?: string
           show_on_home?: boolean

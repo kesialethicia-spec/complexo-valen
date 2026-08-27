@@ -1,0 +1,1 @@
+ALTER TABLE public.stores ADD COLUMN IF NOT EXISTS order_index integer NOT NULL DEFAULT 0;
