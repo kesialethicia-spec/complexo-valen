@@ -21,6 +21,7 @@ const CATEGORY_SLUGS: Record<string, string> = {
   "truck-center": "Truck Center",
   "conveniencia": "Conveniência",
   "autopecas": "Autopeças",
+  "transportadoras": "Transportadoras",
 };
 
 function slugifyCategory(cat: string): string {
