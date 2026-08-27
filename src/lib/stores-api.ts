@@ -34,6 +34,7 @@ export interface StoreRow {
   status: StoreStatus;
   featured: boolean;
   show_on_home: boolean;
+  order_index: number;
   meta_title: string | null;
   meta_description: string | null;
   created_at: string;
@@ -53,22 +54,24 @@ export function slugify(input: string): string {
     .replace(/-+/g, "-");
 }
 
-// Columns readable by anonymous visitors (phone/whatsapp are restricted to authenticated users).
+// Columns exposed publicly (store contact details are business info, not personal data).
 export const PUBLIC_STORE_COLUMNS =
-  "id,name,slug,category,logo_url,cover_url,short_description,full_description,hours,location,block,cta_text,cta_url,status,featured,show_on_home,meta_title,meta_description,created_at,updated_at";
+  "id,name,slug,category,logo_url,cover_url,short_description,full_description,hours,phone,whatsapp,location,block,cta_text,cta_url,status,featured,show_on_home,order_index,meta_title,meta_description,created_at,updated_at";
 
-export type PublicStoreRow = Omit<StoreRow, "phone" | "whatsapp">;
+export type PublicStoreRow = StoreRow;
 
 export async function listActiveStores(): Promise<PublicStoreRow[]> {
   const { data, error } = await supabase
     .from("stores")
     .select(PUBLIC_STORE_COLUMNS)
     .eq("status", "ativa")
+    .order("order_index", { ascending: true })
     .order("featured", { ascending: false })
     .order("name", { ascending: true });
   if (error) throw error;
   return (data ?? []) as PublicStoreRow[];
 }
+
 
 export async function listAllStores(): Promise<StoreRow[]> {
   const { data, error } = await supabase
