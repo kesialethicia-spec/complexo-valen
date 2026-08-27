@@ -3,12 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Tag, ArrowRight, ChevronLeft, ChevronRight, Calendar, Search, Sparkles, Share2, BadgePercent } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import postoImg from "@/assets/posto.jpg";
-import truckImg from "@/assets/truck-center.jpg";
-import foodImg from "@/assets/alimentacao.jpg";
-import parkImg from "@/assets/estacionamento.jpg";
-import festaImg from "@/assets/festa.jpg";
-import hotelImg from "@/assets/hotel.jpg";
 import caminhoneiroAsset from "@/assets/promocoes/caminhoneiro-promo.png.asset.json";
 import tinosClubeAsset from "@/assets/promocoes/tinos-clube.png.asset.json";
 import { listActivePromotions, PROMOTION_CATEGORIES, type PromotionRow } from "@/lib/promotions-api";
@@ -41,12 +35,12 @@ type PromoItem = {
 };
 
 const fallback: PromoItem[] = [
-  { id: "1", title: "Diesel com preço especial", cat: "Posto", validade: "Até 31/12", desc: "Condições exclusivas para abastecimento no Posto Valen.", img: postoImg, featured: true },
-  { id: "2", title: "Voucher na Conveniência", cat: "Conveniência", validade: "Campanha ativa", desc: "Abasteça e participe de campanhas especiais.", img: foodImg, featured: true },
-  { id: "3", title: "Estacionamento condição especial", cat: "Estacionamento", validade: "Promoção", desc: "Confira as condições para garantir sua permanência no pátio.", img: parkImg },
-  { id: "4", title: "Troca de óleo em promoção", cat: "Truck Center", validade: "Até esgotar", desc: "Manutenção preventiva com condições especiais.", img: truckImg },
-  { id: "5", title: "Promoção em lojas do complexo", cat: "Lojas", validade: "Mensal", desc: "Descontos exclusivos nas lojas do Complexo Valen.", img: hotelImg },
-  { id: "6", title: "Sexta Valen", cat: "Eventos", validade: "Toda sexta", desc: "Música, promoções e relacionamento.", img: festaImg, featured: true },
+  { id: "1", title: "Diesel com preço especial", cat: "Posto", validade: "Até 31/12", desc: "Condições exclusivas para abastecimento no Posto Valen.", img: "", featured: true },
+  { id: "2", title: "Voucher na Conveniência", cat: "Conveniência", validade: "Campanha ativa", desc: "Abasteça e participe de campanhas especiais.", img: "", featured: true },
+  { id: "3", title: "Estacionamento condição especial", cat: "Estacionamento", validade: "Promoção", desc: "Confira as condições para garantir sua permanência no pátio.", img: "" },
+  { id: "4", title: "Troca de óleo em promoção", cat: "Truck Center", validade: "Até esgotar", desc: "Manutenção preventiva com condições especiais.", img: "" },
+  { id: "5", title: "Promoção em lojas do complexo", cat: "Lojas", validade: "Mensal", desc: "Descontos exclusivos nas lojas do Complexo Valen.", img: "" },
+  { id: "6", title: "Sexta Valen", cat: "Eventos", validade: "Toda sexta", desc: "Música, promoções e relacionamento.", img: "", featured: true },
 ];
 
 function adapt(r: PromotionRow): PromoItem {
@@ -57,7 +51,7 @@ function adapt(r: PromotionRow): PromoItem {
     cat: r.category,
     validade: r.validity || "Promoção",
     desc: r.short_description,
-    img: r.cover_url || postoImg,
+    img: r.cover_url || "",
     featured: r.featured,
     updatedAt: r.updated_at,
   };

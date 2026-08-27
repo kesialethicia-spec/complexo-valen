@@ -2,7 +2,6 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, Tag, Calendar } from "lucide-react";
 import { getPromotionBySlug, listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
-import postoImg from "@/assets/posto.jpg";
 
 const promotionQueryOptions = (slug: string) =>
   queryOptions({
@@ -66,7 +65,7 @@ function PromotionDetail() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(promotionQueryOptions(slug));
   const { item, related } = data;
-  const cover = item.cover_url || postoImg;
+  const cover = item.cover_url || "";
 
   return (
     <>
@@ -186,7 +185,7 @@ function PromotionDetail() {
                   className="block overflow-hidden rounded-3xl bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                 >
                   <div className="relative h-44 overflow-hidden">
-                    <img src={p.cover_url || postoImg} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                    <img src={p.cover_url || ""} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
                     <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
                       <Tag className="h-3 w-3" /> {p.category}
                     </span>

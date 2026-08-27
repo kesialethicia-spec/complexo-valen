@@ -25,10 +25,6 @@ import {
   Play,
   Sparkles,
 } from "lucide-react";
-import festaImg from "@/assets/festa.jpg";
-import foodImg from "@/assets/alimentacao.jpg";
-import hotelImg from "@/assets/hotel.jpg";
-import postoImg from "@/assets/posto.jpg";
 import {
   getExperienciasPageSettings,
   DEFAULT_EXPERIENCIAS_SETTINGS,
@@ -90,15 +86,15 @@ function Experiencias() {
   });
 
   void data.festa_image_url;
-  const cafeImage = data.cafe_image_url || foodImg;
-  const clubeImage = data.clube_image_url || hotelImg;
-  const studioImage = data.studio_image_url || postoImg;
+  const cafeImage = data.cafe_image_url || "";
+  const clubeImage = data.clube_image_url || "";
+  const studioImage = data.studio_image_url || "";
   const saudeImages = data.saude_image_urls.filter(Boolean);
   const valentinaImages = data.valentina_image_urls.filter(Boolean);
   const gallery =
     data.gallery_urls.filter(Boolean).length > 0
       ? data.gallery_urls.filter(Boolean)
-      : [festaImg, foodImg, hotelImg, postoImg, festaImg, foodImg, hotelImg, postoImg];
+      : ["", "", "", "", "", "", "", ""];
   const publishedEvents = data.events
     .filter((e) => e.status === "publicado")
     .sort((a, b) => {
