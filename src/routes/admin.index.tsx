@@ -19,9 +19,11 @@ type AdminLink =
   | "/admin/pagina-valenben"
   | "/admin/pagina-valenlub"
   | "/admin/pagina-experiencias"
-  | "/admin/pagina-posto";
+  | "/admin/pagina-posto"
+  | "/admin/clube-valen";
 
 const cards: { title: string; desc: string; to: AdminLink; cta: string }[] = [
+  { title: "Clube Valen Fidelidade", desc: "Gerencie benefícios, brindes, combos, imagens e valores de pontos.", to: "/admin/clube-valen", cta: "Gerenciar Clube" },
   { title: "Blog do Caminhoneiro", desc: "Crie, edite e publique artigos do blog do Valen.", to: "/admin/blog", cta: "Gerenciar artigos" },
   { title: "Promoções", desc: "Cadastre e gerencie as promoções exibidas no site.", to: "/admin/promocoes", cta: "Gerenciar promoções" },
   { title: "Serviços", desc: "Gerencie os cards da página /servicos: nome, imagem, tags, ordem e publicação.", to: "/admin/servicos", cta: "Gerenciar serviços" },

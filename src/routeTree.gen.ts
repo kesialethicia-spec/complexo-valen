@@ -44,6 +44,7 @@ import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-v
 import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
 import { Route as AdminPaginaHomeRouteImport } from './routes/admin.pagina-home'
 import { Route as AdminPaginaExperienciasRouteImport } from './routes/admin.pagina-experiencias'
+import { Route as AdminClubeValenRouteImport } from './routes/admin.clube-valen'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminServicosIndexRouteImport } from './routes/admin.servicos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
@@ -237,6 +238,11 @@ const AdminPaginaExperienciasRoute = AdminPaginaExperienciasRouteImport.update({
   path: '/pagina-experiencias',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminClubeValenRoute = AdminClubeValenRouteImport.update({
+  id: '/clube-valen',
+  path: '/clube-valen',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
   id: '/videos/',
   path: '/videos/',
@@ -326,6 +332,7 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/clube-valen': typeof AdminClubeValenRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
@@ -377,6 +384,7 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/clube-valen': typeof AdminClubeValenRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
@@ -430,6 +438,7 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/admin/clube-valen': typeof AdminClubeValenRoute
   '/admin/pagina-experiencias': typeof AdminPaginaExperienciasRoute
   '/admin/pagina-home': typeof AdminPaginaHomeRoute
   '/admin/pagina-hotel': typeof AdminPaginaHotelRoute
@@ -484,6 +493,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/admin/clube-valen'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
@@ -535,6 +545,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/admin/clube-valen'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
@@ -587,6 +598,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/admin/clube-valen'
     | '/admin/pagina-experiencias'
     | '/admin/pagina-home'
     | '/admin/pagina-hotel'
@@ -902,6 +914,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPaginaExperienciasRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/clube-valen': {
+      id: '/admin/clube-valen'
+      path: '/clube-valen'
+      fullPath: '/admin/clube-valen'
+      preLoaderRoute: typeof AdminClubeValenRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/videos/': {
       id: '/admin/videos/'
       path: '/videos'
@@ -1011,6 +1030,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminClubeValenRoute: typeof AdminClubeValenRoute
   AdminPaginaExperienciasRoute: typeof AdminPaginaExperienciasRoute
   AdminPaginaHomeRoute: typeof AdminPaginaHomeRoute
   AdminPaginaHotelRoute: typeof AdminPaginaHotelRoute
@@ -1038,6 +1058,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminClubeValenRoute: AdminClubeValenRoute,
   AdminPaginaExperienciasRoute: AdminPaginaExperienciasRoute,
   AdminPaginaHomeRoute: AdminPaginaHomeRoute,
   AdminPaginaHotelRoute: AdminPaginaHotelRoute,
