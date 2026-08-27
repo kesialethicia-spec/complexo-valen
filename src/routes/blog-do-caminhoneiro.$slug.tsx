@@ -4,8 +4,8 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { posts as fallbackPosts, type Post } from "@/data/blog";
-import {
 import { SmartImage } from "@/components/SmartImage";
+import {
   getPostBySlug,
   listPublishedPosts,
   formatPublishedDate,
