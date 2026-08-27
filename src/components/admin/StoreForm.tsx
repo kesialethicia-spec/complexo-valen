@@ -63,6 +63,7 @@ export function StoreForm({ initial, submitting, onSubmit, onCancel }: Props) {
       status,
       featured,
       show_on_home: showOnHome,
+      order_index: Number.isFinite(orderIndex) ? orderIndex : 0,
       meta_title: metaTitle.trim() || null,
       meta_description: metaDescription.trim() || null,
     };
