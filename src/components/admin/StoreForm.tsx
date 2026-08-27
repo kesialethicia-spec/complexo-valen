@@ -35,6 +35,7 @@ export function StoreForm({ initial, submitting, onSubmit, onCancel }: Props) {
   const [status, setStatus] = useState<StoreStatus>(initial?.status ?? "rascunho");
   const [featured, setFeatured] = useState(initial?.featured ?? false);
   const [showOnHome, setShowOnHome] = useState(initial?.show_on_home ?? false);
+  const [orderIndex, setOrderIndex] = useState<number>(initial?.order_index ?? 0);
   const [metaTitle, setMetaTitle] = useState(initial?.meta_title ?? "");
   const [metaDescription, setMetaDescription] = useState(initial?.meta_description ?? "");
 
@@ -62,6 +63,7 @@ export function StoreForm({ initial, submitting, onSubmit, onCancel }: Props) {
       status,
       featured,
       show_on_home: showOnHome,
+      order_index: Number.isFinite(orderIndex) ? orderIndex : 0,
       meta_title: metaTitle.trim() || null,
       meta_description: metaDescription.trim() || null,
     };
@@ -165,6 +167,16 @@ export function StoreForm({ initial, submitting, onSubmit, onCancel }: Props) {
           <input type="checkbox" checked={showOnHome} onChange={(e) => setShowOnHome(e.target.checked)} />
           Exibir na Home
         </label>
+
+        <Field label="Ordem de exibição">
+          <input
+            type="number"
+            value={orderIndex}
+            onChange={(e) => setOrderIndex(parseInt(e.target.value, 10) || 0)}
+            className={inputCls}
+          />
+          <p className="text-xs text-muted-foreground mt-1">Menor número aparece primeiro.</p>
+        </Field>
 
         <Field label="Meta title (SEO)">
           <input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} className={inputCls} />

@@ -61,7 +61,7 @@ const fallback: LojaUI[] = [
 function toUI(s: PublicStoreRow): LojaUI {
   return {
     id: s.id, slug: s.slug, name: s.name, category: s.category, short_description: s.short_description,
-    hours: s.hours, phone: "", whatsapp: "", location: s.location, block: s.block,
+    hours: s.hours, phone: s.phone ?? "", whatsapp: s.whatsapp ?? "", location: s.location, block: s.block,
     logo_url: s.logo_url, cta_text: s.cta_text, cta_url: s.cta_url, featured: s.featured,
   };
 }
