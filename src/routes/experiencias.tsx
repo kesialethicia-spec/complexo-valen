@@ -443,6 +443,9 @@ function Experiencias() {
         </div>
       </section>
 
+      {/* 9.5 Capela Valen */}
+      <CapelaSection />
+
       {/* 10. CTA final */}
       <section className="py-20 bg-gradient-orange text-white">
         <div className="container-valen text-center">
