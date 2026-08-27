@@ -7,6 +7,7 @@ import { posts as fallbackPosts, categories, blogPromotions, type Post } from "@
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { listPublishedVideos, youtubeThumbnail, youtubeEmbedUrl, type VideoRow } from "@/lib/videos-api";
+import { SmartImage } from "@/components/SmartImage";
 
 
 function adaptRow(row: BlogPostRow): Post {
@@ -283,7 +284,7 @@ function BlogPage() {
                     className="snap-start shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                   >
                     <div className="h-44 overflow-hidden">
-                      {p.cover_url && <img src={p.cover_url} alt={p.title} className="h-full w-full object-cover" loading="lazy" />}
+                      <SmartImage src={p.cover_url} alt={p.title} rounded="rounded-none" className="h-full w-full" />
                     </div>
                     <div className="p-5">
                       <span className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
@@ -304,7 +305,7 @@ function BlogPage() {
                     className="snap-start shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                   >
                     <div className="h-44 overflow-hidden">
-                      <img src={p.image} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                      <SmartImage src={p.image} alt={p.title} rounded="rounded-none" className="h-full w-full" />
                     </div>
                     <div className="p-5">
                       <span className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
@@ -349,10 +350,11 @@ function ArticleCardLarge({ post }: { post: Post }) {
       className="group block rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
     >
       <div className="aspect-[16/11] overflow-hidden">
-        <img
+        <SmartImage
           src={post.cover}
           alt={post.title}
-          className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+          rounded="rounded-none"
+          className="h-full w-full group-hover:scale-105 transition-transform duration-700"
         />
       </div>
       <div className="p-7">
@@ -381,11 +383,11 @@ function ArticleCardSmall({ post }: { post: Post }) {
       className="group flex flex-col rounded-2xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
     >
       <div className="aspect-[16/10] overflow-hidden">
-        <img
+        <SmartImage
           src={post.cover}
           alt={post.title}
-          className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
-          loading="lazy"
+          rounded="rounded-none"
+          className="h-full w-full group-hover:scale-105 transition-transform duration-700"
         />
       </div>
       <div className="p-5 flex flex-col flex-1">

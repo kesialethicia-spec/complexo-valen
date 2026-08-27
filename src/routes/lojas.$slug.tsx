@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { MapPin, Clock, MessageCircle, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { getStoreBySlug, PUBLIC_STORE_COLUMNS, type PublicStoreRow } from "@/lib/stores-api";
+import { SmartImage } from "@/components/SmartImage";
 
 export const Route = createFileRoute("/lojas/$slug")({
   loader: async ({ params }) => {
@@ -98,7 +99,7 @@ function StoreDetail() {
     <article className="bg-background">
       {store.cover_url && (
         <div className="w-full h-64 md:h-96 bg-muted overflow-hidden">
-          <img src={store.cover_url} alt={store.name} className="w-full h-full object-cover" />
+          <SmartImage src={store.cover_url} alt={store.name} rounded="rounded-none" className="w-full h-full" />
         </div>
       )}
 

@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, Tag, Calendar } from "lucide-react";
 import { getPromotionBySlug, listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
+import { SmartImage } from "@/components/SmartImage";
 
 const promotionQueryOptions = (slug: string) =>
   queryOptions({
@@ -72,7 +73,7 @@ function PromotionDetail() {
       {/* HERO */}
       <section className="relative overflow-hidden bg-secondary text-white">
         <div className="absolute inset-0">
-          <img src={cover} alt={item.title} className="h-full w-full object-cover opacity-40" />
+          <SmartImage src={cover} alt={item.title} rounded="rounded-none" className="h-full w-full opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/90 to-secondary/60" />
         </div>
         <div className="container-valen relative py-20 md:py-28">
@@ -110,7 +111,7 @@ function PromotionDetail() {
         <section className="bg-background pt-12">
           <div className="container-valen max-w-4xl">
             <div className="overflow-hidden rounded-3xl shadow-glow">
-              <img src={item.cover_url} alt={item.title} className="w-full h-auto object-cover" />
+              <SmartImage src={item.cover_url} alt={item.title} rounded="rounded-none" className="w-full aspect-[16/9]" />
             </div>
           </div>
         </section>
@@ -185,7 +186,7 @@ function PromotionDetail() {
                   className="block overflow-hidden rounded-3xl bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                 >
                   <div className="relative h-44 overflow-hidden">
-                    <img src={p.cover_url || ""} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                    <SmartImage src={p.cover_url} alt={p.title} rounded="rounded-none" className="h-full w-full" />
                     <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
                       <Tag className="h-3 w-3" /> {p.category}
                     </span>

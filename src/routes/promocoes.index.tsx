@@ -6,6 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import caminhoneiroAsset from "@/assets/promocoes/caminhoneiro-promo.png.asset.json";
 import tinosClubeAsset from "@/assets/promocoes/tinos-clube.png.asset.json";
 import { listActivePromotions, PROMOTION_CATEGORIES, type PromotionRow } from "@/lib/promotions-api";
+import { SmartImage } from "@/components/SmartImage";
 
 
 
@@ -140,7 +141,7 @@ function PromoCard({ p, compact = false }: { p: PromoItem; compact?: boolean }) 
   const body = (
     <>
       <div className={`relative overflow-hidden ${compact ? "h-40" : "h-52"}`}>
-        <img src={p.img} alt={p.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+        <SmartImage src={p.img} alt={p.title} rounded="rounded-none" className="h-full w-full transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
         <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-secondary">
           <Tag className="h-3 w-3 text-primary" /> {p.cat}
@@ -216,7 +217,7 @@ function Vitrine({ items }: { items: PromoItem[] }) {
                 {items.map((p) => (
                   <div key={p.id} className="min-w-0 flex-[0_0_100%]">
                     <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-secondary md:min-h-[520px]">
-                      <img src={p.img} alt={p.title} className="absolute inset-0 h-full w-full object-cover" />
+                      <SmartImage src={p.img} alt={p.title} rounded="rounded-none" className="absolute inset-0 h-full w-full" />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-secondary/10" />
                       <div className="relative flex h-full min-h-[420px] flex-col justify-end gap-4 p-7 text-white md:min-h-[520px] md:p-12">
                         <div className="flex flex-wrap items-center gap-2">
