@@ -15,7 +15,7 @@ import { listActivePromotions, PROMOTION_CATEGORIES, type PromotionRow } from "@
 
 
 
-export const Route = createFileRoute("/promocoes")({
+export const Route = createFileRoute("/promocoes/")({
   head: () => ({
     meta: [
       { title: "Promoções e ofertas Valen — campanhas e vantagens" },
