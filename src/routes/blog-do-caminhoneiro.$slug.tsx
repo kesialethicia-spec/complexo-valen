@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { posts as fallbackPosts, type Post } from "@/data/blog";
+import { SmartImage } from "@/components/SmartImage";
 import {
   getPostBySlug,
   listPublishedPosts,
@@ -213,7 +214,7 @@ function ArticlePage() {
 
           {/* Cover */}
           <div className="mt-10 overflow-hidden rounded-3xl shadow-soft">
-            <img src={post.cover} alt={post.title} className="w-full aspect-[16/9] object-cover" />
+            <SmartImage src={post.cover} alt={post.title} rounded="rounded-none" className="w-full aspect-[16/9]" />
           </div>
 
           {/* Body */}
@@ -264,11 +265,11 @@ function ArticlePage() {
                   className="group flex flex-col rounded-2xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                 >
                   <div className="aspect-[16/10] overflow-hidden">
-                    <img
+                    <SmartImage
                       src={p.cover}
                       alt={p.title}
-                      className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      loading="lazy"
+                      rounded="rounded-none"
+                      className="h-full w-full group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <div className="p-5 flex flex-col flex-1">

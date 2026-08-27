@@ -25,10 +25,6 @@ import {
   Play,
   Sparkles,
 } from "lucide-react";
-import festaImg from "@/assets/festa.jpg";
-import foodImg from "@/assets/alimentacao.jpg";
-import hotelImg from "@/assets/hotel.jpg";
-import postoImg from "@/assets/posto.jpg";
 import {
   getExperienciasPageSettings,
   DEFAULT_EXPERIENCIAS_SETTINGS,
@@ -36,6 +32,7 @@ import {
 } from "@/lib/experiencias-settings-api";
 import { extractYoutubeId, youtubeThumbnail } from "@/lib/videos-api";
 import { X } from "lucide-react";
+import { SmartImage } from "@/components/SmartImage";
 
 
 export const Route = createFileRoute("/experiencias")({
@@ -90,15 +87,15 @@ function Experiencias() {
   });
 
   void data.festa_image_url;
-  const cafeImage = data.cafe_image_url || foodImg;
-  const clubeImage = data.clube_image_url || hotelImg;
-  const studioImage = data.studio_image_url || postoImg;
+  const cafeImage = data.cafe_image_url || "";
+  const clubeImage = data.clube_image_url || "";
+  const studioImage = data.studio_image_url || "";
   const saudeImages = data.saude_image_urls.filter(Boolean);
   const valentinaImages = data.valentina_image_urls.filter(Boolean);
   const gallery =
     data.gallery_urls.filter(Boolean).length > 0
       ? data.gallery_urls.filter(Boolean)
-      : [festaImg, foodImg, hotelImg, postoImg, festaImg, foodImg, hotelImg, postoImg];
+      : ["", "", "", "", "", "", "", ""];
   const publishedEvents = data.events
     .filter((e) => e.status === "publicado")
     .sort((a, b) => {
@@ -123,11 +120,11 @@ function Experiencias() {
         <div className="container-valen space-y-12">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             <div className="lg:order-2">
-              <img
+              <SmartImage
                 src={cafeImage}
                 alt="Café da Manhã de Sábado"
-                className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
-                loading="lazy"
+                rounded="rounded-3xl"
+                className="aspect-[4/3] w-full shadow-glow"
               />
             </div>
             <div>
@@ -204,12 +201,11 @@ function Experiencias() {
           {saudeImages.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {saudeImages.map((src, i) => (
-                <img
+                <SmartImage
                   key={i}
                   src={src}
                   alt=""
-                  className="aspect-square w-full object-cover rounded-2xl"
-                  loading="lazy"
+                  className="aspect-square w-full"
                 />
               ))}
             </div>
@@ -271,11 +267,11 @@ function Experiencias() {
                 ))}
               </div>
             </div>
-            <img
+            <SmartImage
               src={clubeImage}
               alt="Clube do Caminhoneiro"
-              className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
-              loading="lazy"
+              rounded="rounded-3xl"
+              className="aspect-[4/3] w-full shadow-glow"
             />
           </div>
         </div>
@@ -288,12 +284,11 @@ function Experiencias() {
             {valentinaImages.length > 0 ? (
               <div className="grid grid-cols-2 gap-3">
                 {valentinaImages.slice(0, 4).map((src, i) => (
-                  <img
+                  <SmartImage
                     key={i}
                     src={src}
                     alt=""
-                    className="aspect-square w-full object-cover rounded-2xl"
-                    loading="lazy"
+                    className="aspect-square w-full"
                   />
                 ))}
               </div>
@@ -386,11 +381,11 @@ function Experiencias() {
                 <Youtube className="h-4 w-4" /> Ver canal no YouTube
               </a>
             </div>
-            <img
+            <SmartImage
               src={studioImage}
               alt="Studio Valen"
-              className="aspect-[4/3] w-full object-cover rounded-3xl shadow-glow"
-              loading="lazy"
+              rounded="rounded-3xl"
+              className="aspect-[4/3] w-full shadow-glow"
             />
           </div>
 
@@ -443,12 +438,11 @@ function Experiencias() {
           />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
             {gallery.map((src, i) => (
-              <img
+              <SmartImage
                 key={i}
                 src={src}
                 alt=""
-                className="aspect-square w-full object-cover rounded-2xl hover:scale-105 transition-transform"
-                loading="lazy"
+                className="aspect-square w-full  hover:scale-105 transition-transform"
               />
             ))}
           </div>
@@ -590,11 +584,11 @@ function EventCard({ ev }: { ev: ExperienciasEvent }) {
       <article className="group flex flex-col rounded-3xl border bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
         <div className="relative">
           {ev.image_url ? (
-            <img
+            <SmartImage
               src={ev.image_url}
               alt={title}
-              className="aspect-[16/10] w-full object-cover group-hover:scale-105 transition-transform"
-              loading="lazy"
+              rounded="rounded-none"
+              className="aspect-[16/10] w-full group-hover:scale-105 transition-transform"
             />
           ) : (
             <div className="aspect-[16/10] bg-gradient-orange" />
@@ -678,10 +672,11 @@ function EventCard({ ev }: { ev: ExperienciasEvent }) {
               <X className="h-4 w-4" />
             </button>
             {ev.image_url && (
-              <img
+              <SmartImage
                 src={ev.image_url}
                 alt={title}
-                className="aspect-[16/9] w-full object-cover"
+                rounded="rounded-none"
+                className="aspect-[16/9] w-full"
               />
             )}
             <div className="p-6 space-y-3">

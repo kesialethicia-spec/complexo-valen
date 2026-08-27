@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { PageHero } from "./PageHero";
 import { SectionHeader } from "./SectionHeader";
 import { Check, MapPin, ArrowRight } from "lucide-react";
+import { SmartImage } from "@/components/SmartImage";
 
 export interface ServiceBlock {
   title: string;
@@ -32,7 +33,7 @@ export function ServiceTemplate({
       <section className="py-24 bg-background">
         <div className="container-valen grid gap-12 lg:grid-cols-2">
           <div>
-            <img src={image} alt={title} className="w-full aspect-[4/3] object-cover rounded-3xl shadow-glow" loading="lazy" />
+            <SmartImage src={image} alt={title} rounded="rounded-3xl" className="w-full aspect-[4/3] shadow-glow" />
           </div>
           <div className="space-y-8">
             {blocks.map((b) => (
@@ -74,7 +75,7 @@ export function ServiceTemplate({
             <SectionHeader eyebrow="Galeria" title="Conheça o ambiente" center />
             <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4">
               {galleryImages.map((img, i) => (
-                <img key={i} src={img} alt="" className="aspect-[4/3] w-full object-cover rounded-2xl" loading="lazy" />
+                <SmartImage key={i} src={img} alt="" className="aspect-[4/3] w-full" />
               ))}
             </div>
           </div>

@@ -6,14 +6,9 @@ import {
   Heart, Users, Baby, Mic, Calendar,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
-import heroImg from "@/assets/hero-trucks.jpg";
+import { SmartImage } from "@/components/SmartImage";
 import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
-import postoImg from "@/assets/posto.jpg";
-import truckImg from "@/assets/truck-center.jpg";
-import hotelImg from "@/assets/hotel.jpg";
-import foodImg from "@/assets/alimentacao.jpg";
-import parkImg from "@/assets/estacionamento.jpg";
-import festaImg from "@/assets/festa.jpg";
+
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
 import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
@@ -92,20 +87,22 @@ function Home() {
       >
         {/* Slide institucional */}
         <div className={slideIdx === 0 ? "block relative" : "hidden"}>
-          <div className="absolute inset-0 overflow-hidden">
-            <picture>
-              {heroBgMobile && (
-                <source media="(max-width: 767px)" srcSet={heroBgMobile} />
-              )}
-              <img
-                src={heroBgDesktop || heroImg}
-                alt=""
-                aria-hidden="true"
-                className="h-full w-full object-cover"
-                width={1920}
-                height={1080}
-              />
-            </picture>
+          <div className="absolute inset-0 overflow-hidden bg-secondary">
+            {(heroBgDesktop || heroBgMobile) && (
+              <picture>
+                {heroBgMobile && (
+                  <source media="(max-width: 767px)" srcSet={heroBgMobile} />
+                )}
+                <img
+                  src={heroBgDesktop || heroBgMobile}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-full w-full object-cover"
+                  width={1920}
+                  height={1080}
+                />
+              </picture>
+            )}
             {/* Overlay azul escuro — mantém legibilidade e deixa a foto visível */}
             <div className="absolute inset-0 bg-secondary/75" />
             <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary/40 to-secondary/70" />
@@ -285,7 +282,7 @@ function Home() {
                       className="w-[320px] md:w-[360px] shrink-0 overflow-hidden rounded-3xl bg-card border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all"
                     >
                       <div className="relative h-44 overflow-hidden">
-                        {p.cover_url && <img src={p.cover_url} alt={p.title} className="h-full w-full object-cover" loading="lazy" />}
+                        <SmartImage src={p.cover_url} alt={p.title} rounded="rounded-none" className="h-full w-full" />
                         <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
                           <Tag className="h-3 w-3" /> {p.category}
                         </span>
@@ -301,14 +298,14 @@ function Home() {
                     </Link>
                   ))
                 : [
-                    { cat: "Posto", title: "Diesel com preço especial", desc: "Condições exclusivas para abastecimento no Posto Valen.", date: "Até 31/12", img: postoImg },
-                    { cat: "Conveniência", title: "Voucher na Conveniência", desc: "Abasteça e participe de campanhas especiais para aproveitar sua parada.", date: "Campanha ativa", img: foodImg },
-                    { cat: "Estacionamento", title: "Estacionamento com condição especial", desc: "Confira as condições para garantir sua permanência no pátio.", date: "Promoção", img: parkImg },
-                    { cat: "Truck Center", title: "Troca de óleo em promoção", desc: "Manutenção preventiva com condições especiais.", date: "Até esgotar", img: truckImg },
+                    { cat: "Posto", title: "Diesel com preço especial", desc: "Condições exclusivas para abastecimento no Posto Valen.", date: "Até 31/12", img: "" },
+                    { cat: "Conveniência", title: "Voucher na Conveniência", desc: "Abasteça e participe de campanhas especiais para aproveitar sua parada.", date: "Campanha ativa", img: "" },
+                    { cat: "Estacionamento", title: "Estacionamento com condição especial", desc: "Confira as condições para garantir sua permanência no pátio.", date: "Promoção", img: "" },
+                    { cat: "Truck Center", title: "Troca de óleo em promoção", desc: "Manutenção preventiva com condições especiais.", date: "Até esgotar", img: "" },
                   ].map((p) => (
                     <article key={p.title} className="w-[320px] md:w-[360px] shrink-0 overflow-hidden rounded-3xl bg-card border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all">
                       <div className="relative h-44 overflow-hidden">
-                        <img src={p.img} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                        <SmartImage src={p.img} alt={p.title} rounded="rounded-none" className="h-full w-full" />
                         <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
                           <Tag className="h-3 w-3" /> {p.cat}
                         </span>
@@ -340,7 +337,7 @@ function Home() {
             hash: "cafe-da-manha",
             tag: "Toda semana",
             icon: Coffee,
-            img: expSettings.cafe_image_url || foodImg,
+            img: expSettings.cafe_image_url || "",
           },
           {
             t: "Ações de Saúde",
@@ -348,7 +345,7 @@ function Home() {
             hash: "acoes-de-saude",
             tag: "Cuidado",
             icon: Heart,
-            img: expSettings.saude_image_urls.filter(Boolean)[0] || hotelImg,
+            img: expSettings.saude_image_urls.filter(Boolean)[0] || "",
           },
           {
             t: "Clube do Caminhoneiro",
@@ -356,7 +353,7 @@ function Home() {
             hash: "clube-do-caminhoneiro",
             tag: "Convivência",
             icon: Users,
-            img: expSettings.clube_image_url || hotelImg,
+            img: expSettings.clube_image_url || "",
           },
           {
             t: "Espaço Valentina",
@@ -364,7 +361,7 @@ function Home() {
             hash: "espaco-valentina",
             tag: "Acolhimento",
             icon: Baby,
-            img: expSettings.valentina_image_urls.filter(Boolean)[0] || foodImg,
+            img: expSettings.valentina_image_urls.filter(Boolean)[0] || "",
           },
           {
             t: "Studio Valen",
@@ -372,7 +369,7 @@ function Home() {
             hash: "studio-valen",
             tag: "Conteúdo",
             icon: Mic,
-            img: expSettings.studio_image_url || postoImg,
+            img: expSettings.studio_image_url || "",
           },
           {
             t: "Eventos Valen",
@@ -380,7 +377,7 @@ function Home() {
             hash: "eventos",
             tag: "Eventos",
             icon: Calendar,
-            img: firstEventImg || expSettings.festa_image_url || festaImg,
+            img: firstEventImg || expSettings.festa_image_url || "",
           },
         ];
         const [featured, ...rest] = cards;
@@ -400,11 +397,11 @@ function Home() {
                   hash={featured.hash}
                   className="group relative overflow-hidden rounded-3xl lg:row-span-2 lg:col-span-1 min-h-[380px] lg:min-h-[560px]"
                 >
-                  <img
+                  <SmartImage
                     src={featured.img}
                     alt={featured.t}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
+                    rounded="rounded-none"
+                    className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/10" />
                   <div className="relative h-full flex flex-col justify-end p-7 text-white">
@@ -432,11 +429,11 @@ function Home() {
                       hash={c.hash}
                       className="group relative overflow-hidden rounded-3xl min-h-[240px] lg:min-h-[270px]"
                     >
-                      <img
+                      <SmartImage
                         src={c.img}
                         alt={c.t}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        loading="lazy"
+                        rounded="rounded-none"
+                        className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/60 to-secondary/10 group-hover:from-secondary group-hover:via-secondary/70 transition-colors" />
                       <div className="relative h-full flex flex-col justify-end p-5 text-white">
@@ -534,13 +531,13 @@ function Home() {
                   cat: p.category,
                   title: p.title,
                   excerpt: p.excerpt,
-                  img: p.cover_url || postoImg,
+                  img: p.cover_url || "",
                   date: formatPublishedDate(p.published_at),
                 }))
               : [
-                  { slug: "", cat: "Dicas", title: "Dicas para quem vive na estrada", excerpt: "", img: postoImg, date: "" },
-                  { slug: "", cat: "Eventos", title: "Experiências em movimento no Valen", excerpt: "", img: festaImg, date: "" },
-                  { slug: "", cat: "Novidades", title: "Novidades do complexo Valen", excerpt: "", img: hotelImg, date: "" },
+                  { slug: "", cat: "Dicas", title: "Dicas para quem vive na estrada", excerpt: "", img: "", date: "" },
+                  { slug: "", cat: "Eventos", title: "Experiências em movimento no Valen", excerpt: "", img: "", date: "" },
+                  { slug: "", cat: "Novidades", title: "Novidades do complexo Valen", excerpt: "", img: "", date: "" },
                 ]
             ).map((n) =>
               n.slug ? (
@@ -551,7 +548,7 @@ function Home() {
                   className="group flex flex-col overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
                 >
                   <div className="h-48 overflow-hidden">
-                    <img src={n.img} alt={n.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                    <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="h-full w-full group-hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
@@ -563,7 +560,7 @@ function Home() {
               ) : (
                 <Link to="/blog-do-caminhoneiro" key={n.title} className="group overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all">
                   <div className="h-48 overflow-hidden">
-                    <img src={n.img} alt={n.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                    <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="h-full w-full group-hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="p-6">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>

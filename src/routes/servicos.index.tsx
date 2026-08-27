@@ -5,7 +5,6 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { ArrowRight, ImageIcon } from "lucide-react";
 import { listPublishedServices, type ServiceRow } from "@/lib/services-api";
 import { getServiceIcon } from "@/lib/service-icons";
-import postoImg from "@/assets/posto.jpg";
 
 export const Route = createFileRoute("/servicos/")({
   head: () => ({
@@ -29,7 +28,6 @@ function Servicos() {
         eyebrow="Serviços"
         title="Tudo que move sua jornada, em um só lugar"
         subtitle="Conheça os serviços que fazem do Valen uma parada completa para quem vive em movimento."
-        image={postoImg}
       />
       <section className="py-24 bg-background">
         <div className="container-valen">
