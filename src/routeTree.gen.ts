@@ -31,6 +31,7 @@ import { Route as ServicosValenbenSuperTrocaDeOleoRouteImport } from './routes/s
 import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
 import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
 import { Route as ServicosPostoValenRouteImport } from './routes/servicos.posto-valen'
+import { Route as ServicosMercadoRouteImport } from './routes/servicos.mercado'
 import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
 import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
@@ -170,6 +171,11 @@ const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
 const ServicosPostoValenRoute = ServicosPostoValenRouteImport.update({
   id: '/servicos/posto-valen',
   path: '/servicos/posto-valen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosMercadoRoute = ServicosMercadoRouteImport.update({
+  id: '/servicos/mercado',
+  path: '/servicos/mercado',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosClubeDoCaminhoneiroRoute =
@@ -346,6 +352,7 @@ export interface FileRoutesByFullPath {
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
+  '/servicos/mercado': typeof ServicosMercadoRoute
   '/servicos/posto-valen': typeof ServicosPostoValenRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
@@ -398,6 +405,7 @@ export interface FileRoutesByTo {
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
+  '/servicos/mercado': typeof ServicosMercadoRoute
   '/servicos/posto-valen': typeof ServicosPostoValenRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
@@ -452,6 +460,7 @@ export interface FileRoutesById {
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/servicos/alimentacao': typeof ServicosAlimentacaoRoute
   '/servicos/clube-do-caminhoneiro': typeof ServicosClubeDoCaminhoneiroRoute
+  '/servicos/mercado': typeof ServicosMercadoRoute
   '/servicos/posto-valen': typeof ServicosPostoValenRoute
   '/servicos/truck-center': typeof ServicosTruckCenterRoute
   '/servicos/valen-porto-hotel': typeof ServicosValenPortoHotelRoute
@@ -507,6 +516,7 @@ export interface FileRouteTypes {
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
+    | '/servicos/mercado'
     | '/servicos/posto-valen'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
@@ -559,6 +569,7 @@ export interface FileRouteTypes {
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
+    | '/servicos/mercado'
     | '/servicos/posto-valen'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
@@ -612,6 +623,7 @@ export interface FileRouteTypes {
     | '/promocoes/$slug'
     | '/servicos/alimentacao'
     | '/servicos/clube-do-caminhoneiro'
+    | '/servicos/mercado'
     | '/servicos/posto-valen'
     | '/servicos/truck-center'
     | '/servicos/valen-porto-hotel'
@@ -656,6 +668,7 @@ export interface RootRouteChildren {
   PromocoesSlugRoute: typeof PromocoesSlugRoute
   ServicosAlimentacaoRoute: typeof ServicosAlimentacaoRoute
   ServicosClubeDoCaminhoneiroRoute: typeof ServicosClubeDoCaminhoneiroRoute
+  ServicosMercadoRoute: typeof ServicosMercadoRoute
   ServicosPostoValenRoute: typeof ServicosPostoValenRoute
   ServicosTruckCenterRoute: typeof ServicosTruckCenterRoute
   ServicosValenPortoHotelRoute: typeof ServicosValenPortoHotelRoute
@@ -821,6 +834,13 @@ declare module '@tanstack/react-router' {
       path: '/servicos/posto-valen'
       fullPath: '/servicos/posto-valen'
       preLoaderRoute: typeof ServicosPostoValenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/mercado': {
+      id: '/servicos/mercado'
+      path: '/servicos/mercado'
+      fullPath: '/servicos/mercado'
+      preLoaderRoute: typeof ServicosMercadoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicos/clube-do-caminhoneiro': {
@@ -1114,6 +1134,7 @@ const rootRouteChildren: RootRouteChildren = {
   PromocoesSlugRoute: PromocoesSlugRoute,
   ServicosAlimentacaoRoute: ServicosAlimentacaoRoute,
   ServicosClubeDoCaminhoneiroRoute: ServicosClubeDoCaminhoneiroRoute,
+  ServicosMercadoRoute: ServicosMercadoRoute,
   ServicosPostoValenRoute: ServicosPostoValenRoute,
   ServicosTruckCenterRoute: ServicosTruckCenterRoute,
   ServicosValenPortoHotelRoute: ServicosValenPortoHotelRoute,
