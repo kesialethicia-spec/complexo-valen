@@ -183,59 +183,33 @@ function Hero({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
         <path d="M-50 520 C 250 420, 400 250, 750 210 S 1150 120, 1300 40" fill="none" stroke="white" strokeWidth="4" strokeDasharray="26 26" opacity="0.8" />
       </svg>
 
-      <div className="container-valen relative grid items-center gap-10 py-16 md:py-24 lg:grid-cols-2">
+      <div className="container-valen relative grid items-center gap-8 py-12 md:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-secondary shadow">
             {settings.hero_badge}
           </span>
-          <h1 className="mt-5 font-display text-4xl font-extrabold uppercase leading-[1.05] text-white md:text-6xl">
+          <h1 className="mt-4 font-display text-3xl font-extrabold uppercase leading-[1.08] text-white md:text-5xl">
             {parts[0]}
             {highlight && <span className="text-secondary">{highlight}</span>}
             {parts[1]}
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-white/90">{settings.hero_subtitle}</p>
+          <p className="mt-4 max-w-lg text-base text-white/90 md:text-lg">{settings.hero_subtitle}</p>
 
-          <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center">
-            <a
-              href={settings.cta_url || settings.google_play_url || "#premios"}
-              {...(settings.cta_url || settings.google_play_url
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-8 py-4 text-base font-bold text-secondary-foreground shadow-xl transition hover:scale-[1.03]"
-            >
-              {settings.cta_text || "Baixe o aplicativo"} <ArrowRight className="h-4 w-4" />
-            </a>
-            {settings.qr_code_url ? (
-              <div className="flex items-center gap-3 rounded-2xl bg-white/95 p-3 shadow-lg">
-                <img src={settings.qr_code_url} alt="QR Code para baixar o aplicativo" className="h-20 w-20 rounded-lg object-contain" />
-                <p className="max-w-[9rem] text-xs font-semibold leading-tight text-secondary">
-                  Aponte a câmera e baixe o app
-                </p>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3 rounded-2xl bg-white/20 p-3 text-white">
-                <QrCode className="h-10 w-10" />
-                <p className="max-w-[10rem] text-xs font-semibold leading-tight">
-                  QR Code em breve — baixe pelas lojas
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div className="mt-6">
+          <div className="mt-7">
             <StoreButtons google={settings.google_play_url} apple={settings.app_store_url} />
           </div>
         </div>
 
         <div className="relative flex justify-center lg:justify-end">
-          <div className="absolute -right-10 top-10 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
+          <div className="absolute -right-6 top-6 h-56 w-56 rounded-full bg-white/20 blur-3xl" />
           <img
             src={phone}
             alt="Aplicativo Clube Valen Fidelidade no celular"
-            className="relative w-full max-w-md -rotate-3 object-contain drop-shadow-2xl transition-transform duration-700 hover:-rotate-1"
+            className="relative w-full max-w-[16rem] object-contain drop-shadow-2xl md:max-w-[19rem]"
           />
         </div>
       </div>
+
 
       <div className="relative h-16 bg-background [clip-path:ellipse(75%_100%_at_50%_100%)]" />
     </section>
