@@ -11,7 +11,7 @@ import {
   PartyPopper,
   Wallet,
   Coffee,
-  
+  ArrowRight,
   ArrowRight,
 } from "lucide-react";
 import {
