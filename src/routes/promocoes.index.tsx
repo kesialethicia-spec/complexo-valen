@@ -205,12 +205,12 @@ function Vitrine({ items }: { items: PromoItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="pb-14 pt-12 md:pb-20 md:pt-16">
+    <section className="bg-background pb-14 pt-12 md:pb-20 md:pt-16">
       <div className="container-valen">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/80">Vitrine de oportunidades</p>
-            <h2 className="mt-1 text-2xl font-display font-extrabold text-white md:text-4xl">Destaques da vez</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Vitrine de oportunidades</p>
+            <h2 className="mt-1 text-2xl font-display font-extrabold text-secondary md:text-4xl">Destaques da vez</h2>
           </div>
         </div>
 
@@ -379,16 +379,18 @@ function Promocoes() {
 
   return (
     <>
-      {/* HERO + DESTAQUES — fundo laranja */}
+      {/* HERO — fundo laranja */}
       <div className="bg-gradient-orange">
         <PromoHero />
-        <Vitrine items={destaques} />
       </div>
 
-      {/* BUSCA E FILTROS — card branco sobre fundo laranja */}
-      <section id="promocoes" className="scroll-mt-24 bg-gradient-orange pb-10 md:pb-14">
+      {/* DESTAQUES — fundo branco */}
+      <Vitrine items={destaques} />
+
+      {/* BUSCA E FILTROS — fundo branco */}
+      <section id="promocoes" className="scroll-mt-24 bg-background pb-10 md:pb-14">
         <div className="container-valen">
-          <h2 className="text-2xl font-display font-extrabold text-white md:text-4xl">
+          <h2 className="text-2xl font-display font-extrabold text-secondary md:text-4xl">
             Promoções e ofertas completas para você
           </h2>
 
