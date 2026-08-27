@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, Eye } from "lucide-react";
 import { listAllMarkets, deleteMarket, type MarketRow } from "@/lib/markets-api";
 
 export const Route = createFileRoute("/admin/mercados/")({
