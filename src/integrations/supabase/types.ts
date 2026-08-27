@@ -332,37 +332,58 @@ export type Database = {
       markets: {
         Row: {
           created_at: string
+          cta_text: string
+          cta_url: string
           description: string
           features: string[]
+          full_description: string
+          gallery_urls: string[]
           id: string
           image_url: string
           location: string
+          meta_description: string | null
+          meta_title: string | null
           name: string
           order_index: number
+          slug: string
           status: string
           updated_at: string
         }
         Insert: {
           created_at?: string
+          cta_text?: string
+          cta_url?: string
           description?: string
           features?: string[]
+          full_description?: string
+          gallery_urls?: string[]
           id?: string
           image_url?: string
           location?: string
+          meta_description?: string | null
+          meta_title?: string | null
           name: string
           order_index?: number
+          slug?: string
           status?: string
           updated_at?: string
         }
         Update: {
           created_at?: string
+          cta_text?: string
+          cta_url?: string
           description?: string
           features?: string[]
+          full_description?: string
+          gallery_urls?: string[]
           id?: string
           image_url?: string
           location?: string
+          meta_description?: string | null
+          meta_title?: string | null
           name?: string
           order_index?: number
+          slug?: string
           status?: string
           updated_at?: string
         }
