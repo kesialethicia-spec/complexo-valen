@@ -86,6 +86,9 @@ function AdminMarketsList() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-1">
+                      <Link to="/servicos/mercado" className="rounded-md p-2 hover:bg-muted" title="Visualizar no site">
+                        <Eye className="h-4 w-4" />
+                      </Link>
                       <Link to="/admin/mercados/$id" params={{ id: m.id }} className="rounded-md p-2 hover:bg-muted" title="Editar">
                         <Pencil className="h-4 w-4" />
                       </Link>
