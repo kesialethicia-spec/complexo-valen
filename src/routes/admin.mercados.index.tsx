@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, Eye } from "lucide-react";
 import { listAllMarkets, deleteMarket, type MarketRow } from "@/lib/markets-api";
 
 export const Route = createFileRoute("/admin/mercados/")({
@@ -86,6 +86,9 @@ function AdminMarketsList() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-1">
+                      <Link to="/servicos/mercado" className="rounded-md p-2 hover:bg-muted" title="Visualizar no site">
+                        <Eye className="h-4 w-4" />
+                      </Link>
                       <Link to="/admin/mercados/$id" params={{ id: m.id }} className="rounded-md p-2 hover:bg-muted" title="Editar">
                         <Pencil className="h-4 w-4" />
                       </Link>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { MarketInput, MarketRow, MarketStatus } from "@/lib/markets-api";
+import { slugify, type MarketInput, type MarketRow, type MarketStatus } from "@/lib/markets-api";
 import { ImageUploadField } from "./ImageUploadField";
 
 interface Props {
@@ -11,21 +11,41 @@ interface Props {
 
 export function MarketForm({ initial, submitting, onSubmit, onCancel }: Props) {
   const [name, setName] = useState(initial?.name ?? "");
+  const [slug, setSlug] = useState(initial?.slug ?? "");
+  const [slugTouched, setSlugTouched] = useState(Boolean(initial?.slug));
   const [description, setDescription] = useState(initial?.description ?? "");
+  const [fullDescription, setFullDescription] = useState(initial?.full_description ?? "");
   const [location, setLocation] = useState(initial?.location ?? "");
   const [imageUrl, setImageUrl] = useState(initial?.image_url ?? "");
+  const [galleryText, setGalleryText] = useState((initial?.gallery_urls ?? []).join("\n"));
   const [featuresText, setFeaturesText] = useState((initial?.features ?? []).join("\n"));
+  const [ctaText, setCtaText] = useState(initial?.cta_text ?? "Ver localização");
+  const [ctaUrl, setCtaUrl] = useState(initial?.cta_url ?? "https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6");
+  const [metaTitle, setMetaTitle] = useState(initial?.meta_title ?? "");
+  const [metaDescription, setMetaDescription] = useState(initial?.meta_description ?? "");
   const [status, setStatus] = useState<MarketStatus>(initial?.status ?? "rascunho");
   const [orderIndex, setOrderIndex] = useState<number>(initial?.order_index ?? 100);
+
+  const handleName = (value: string) => {
+    setName(value);
+    if (!slugTouched) setSlug(slugify(value));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await onSubmit({
       name: name.trim(),
+      slug: (slug.trim() || slugify(name)).trim(),
       description: description.trim(),
+      full_description: fullDescription.trim(),
       location: location.trim(),
       image_url: imageUrl.trim(),
+      gallery_urls: galleryText.split("\n").map((t) => t.trim()).filter(Boolean),
       features: featuresText.split("\n").map((t) => t.trim()).filter(Boolean),
+      cta_text: ctaText.trim(),
+      cta_url: ctaUrl.trim(),
+      meta_title: metaTitle.trim() || null,
+      meta_description: metaDescription.trim() || null,
       status,
       order_index: Number.isFinite(orderIndex) ? orderIndex : 100,
     });
@@ -35,11 +55,24 @@ export function MarketForm({ initial, submitting, onSubmit, onCancel }: Props) {
     <form onSubmit={handleSubmit} className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div className="space-y-6">
         <Field label="Nome do mercado">
-          <input value={name} onChange={(e) => setName(e.target.value)} required className={inputCls} />
+          <input value={name} onChange={(e) => handleName(e.target.value)} required className={inputCls} />
         </Field>
 
-        <Field label="Descrição">
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} className={inputCls} />
+        <Field label="Slug (endereço na web)">
+          <input
+            value={slug}
+            onChange={(e) => { setSlugTouched(true); setSlug(e.target.value); }}
+            placeholder="gerado automaticamente pelo nome"
+            className={inputCls}
+          />
+        </Field>
+
+        <Field label="Descrição curta">
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className={inputCls} />
+        </Field>
+
+        <Field label="Descrição completa (opcional)">
+          <textarea value={fullDescription} onChange={(e) => setFullDescription(e.target.value)} rows={5} className={inputCls} />
         </Field>
 
         <Field label="Localização">
@@ -68,6 +101,16 @@ export function MarketForm({ initial, submitting, onSubmit, onCancel }: Props) {
           />
         </Field>
 
+        <Field label="Galeria de imagens (uma URL por linha)">
+          <textarea
+            value={galleryText}
+            onChange={(e) => setGalleryText(e.target.value)}
+            rows={4}
+            placeholder="https://…"
+            className={inputCls}
+          />
+        </Field>
+
         <Field label="Características (uma por linha)">
           <textarea
             value={featuresText}
@@ -76,6 +119,23 @@ export function MarketForm({ initial, submitting, onSubmit, onCancel }: Props) {
             placeholder={"Ex.: Padaria\nAçougue\nMercearia"}
             className={inputCls}
           />
+        </Field>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field label="Texto do botão">
+            <input value={ctaText} onChange={(e) => setCtaText(e.target.value)} className={inputCls} />
+          </Field>
+          <Field label="Link do botão / localização">
+            <input value={ctaUrl} onChange={(e) => setCtaUrl(e.target.value)} placeholder="https://…" className={inputCls} />
+          </Field>
+        </div>
+
+        <Field label="Meta title (SEO)">
+          <input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} className={inputCls} />
+        </Field>
+
+        <Field label="Meta description (SEO)">
+          <textarea value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} rows={3} className={inputCls} />
         </Field>
       </div>
 
