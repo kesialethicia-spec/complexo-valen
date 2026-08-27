@@ -49,6 +49,7 @@ import { Route as AdminClubeValenRouteImport } from './routes/admin.clube-valen'
 import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
 import { Route as AdminServicosIndexRouteImport } from './routes/admin.servicos.index'
 import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
+import { Route as AdminMercadosIndexRouteImport } from './routes/admin.mercados.index'
 import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin.blog.index'
 import { Route as AdminVideosNovoRouteImport } from './routes/admin.videos.novo'
@@ -57,6 +58,8 @@ import { Route as AdminServicosNovoRouteImport } from './routes/admin.servicos.n
 import { Route as AdminServicosIdRouteImport } from './routes/admin.servicos.$id'
 import { Route as AdminPromocoesNovoRouteImport } from './routes/admin.promocoes.novo'
 import { Route as AdminPromocoesIdRouteImport } from './routes/admin.promocoes.$id'
+import { Route as AdminMercadosNovoRouteImport } from './routes/admin.mercados.novo'
+import { Route as AdminMercadosIdRouteImport } from './routes/admin.mercados.$id'
 import { Route as AdminLojasNovoRouteImport } from './routes/admin.lojas.novo'
 import { Route as AdminLojasIdRouteImport } from './routes/admin.lojas.$id'
 import { Route as AdminBlogNovoRouteImport } from './routes/admin.blog.novo'
@@ -264,6 +267,11 @@ const AdminPromocoesIndexRoute = AdminPromocoesIndexRouteImport.update({
   path: '/promocoes/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminMercadosIndexRoute = AdminMercadosIndexRouteImport.update({
+  id: '/mercados/',
+  path: '/mercados/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLojasIndexRoute = AdminLojasIndexRouteImport.update({
   id: '/lojas/',
   path: '/lojas/',
@@ -302,6 +310,16 @@ const AdminPromocoesNovoRoute = AdminPromocoesNovoRouteImport.update({
 const AdminPromocoesIdRoute = AdminPromocoesIdRouteImport.update({
   id: '/promocoes/$id',
   path: '/promocoes/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMercadosNovoRoute = AdminMercadosNovoRouteImport.update({
+  id: '/mercados/novo',
+  path: '/mercados/novo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMercadosIdRoute = AdminMercadosIdRouteImport.update({
+  id: '/mercados/$id',
+  path: '/mercados/$id',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminLojasNovoRoute = AdminLojasNovoRouteImport.update({
@@ -367,6 +385,8 @@ export interface FileRoutesByFullPath {
   '/admin/blog/novo': typeof AdminBlogNovoRoute
   '/admin/lojas/$id': typeof AdminLojasIdRoute
   '/admin/lojas/novo': typeof AdminLojasNovoRoute
+  '/admin/mercados/$id': typeof AdminMercadosIdRoute
+  '/admin/mercados/novo': typeof AdminMercadosNovoRoute
   '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
   '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
   '/admin/servicos/$id': typeof AdminServicosIdRoute
@@ -375,6 +395,7 @@ export interface FileRoutesByFullPath {
   '/admin/videos/novo': typeof AdminVideosNovoRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/lojas/': typeof AdminLojasIndexRoute
+  '/admin/mercados/': typeof AdminMercadosIndexRoute
   '/admin/promocoes/': typeof AdminPromocoesIndexRoute
   '/admin/servicos/': typeof AdminServicosIndexRoute
   '/admin/videos/': typeof AdminVideosIndexRoute
@@ -420,6 +441,8 @@ export interface FileRoutesByTo {
   '/admin/blog/novo': typeof AdminBlogNovoRoute
   '/admin/lojas/$id': typeof AdminLojasIdRoute
   '/admin/lojas/novo': typeof AdminLojasNovoRoute
+  '/admin/mercados/$id': typeof AdminMercadosIdRoute
+  '/admin/mercados/novo': typeof AdminMercadosNovoRoute
   '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
   '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
   '/admin/servicos/$id': typeof AdminServicosIdRoute
@@ -428,6 +451,7 @@ export interface FileRoutesByTo {
   '/admin/videos/novo': typeof AdminVideosNovoRoute
   '/admin/blog': typeof AdminBlogIndexRoute
   '/admin/lojas': typeof AdminLojasIndexRoute
+  '/admin/mercados': typeof AdminMercadosIndexRoute
   '/admin/promocoes': typeof AdminPromocoesIndexRoute
   '/admin/servicos': typeof AdminServicosIndexRoute
   '/admin/videos': typeof AdminVideosIndexRoute
@@ -475,6 +499,8 @@ export interface FileRoutesById {
   '/admin/blog/novo': typeof AdminBlogNovoRoute
   '/admin/lojas/$id': typeof AdminLojasIdRoute
   '/admin/lojas/novo': typeof AdminLojasNovoRoute
+  '/admin/mercados/$id': typeof AdminMercadosIdRoute
+  '/admin/mercados/novo': typeof AdminMercadosNovoRoute
   '/admin/promocoes/$id': typeof AdminPromocoesIdRoute
   '/admin/promocoes/novo': typeof AdminPromocoesNovoRoute
   '/admin/servicos/$id': typeof AdminServicosIdRoute
@@ -483,6 +509,7 @@ export interface FileRoutesById {
   '/admin/videos/novo': typeof AdminVideosNovoRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/lojas/': typeof AdminLojasIndexRoute
+  '/admin/mercados/': typeof AdminMercadosIndexRoute
   '/admin/promocoes/': typeof AdminPromocoesIndexRoute
   '/admin/servicos/': typeof AdminServicosIndexRoute
   '/admin/videos/': typeof AdminVideosIndexRoute
@@ -531,6 +558,8 @@ export interface FileRouteTypes {
     | '/admin/blog/novo'
     | '/admin/lojas/$id'
     | '/admin/lojas/novo'
+    | '/admin/mercados/$id'
+    | '/admin/mercados/novo'
     | '/admin/promocoes/$id'
     | '/admin/promocoes/novo'
     | '/admin/servicos/$id'
@@ -539,6 +568,7 @@ export interface FileRouteTypes {
     | '/admin/videos/novo'
     | '/admin/blog/'
     | '/admin/lojas/'
+    | '/admin/mercados/'
     | '/admin/promocoes/'
     | '/admin/servicos/'
     | '/admin/videos/'
@@ -584,6 +614,8 @@ export interface FileRouteTypes {
     | '/admin/blog/novo'
     | '/admin/lojas/$id'
     | '/admin/lojas/novo'
+    | '/admin/mercados/$id'
+    | '/admin/mercados/novo'
     | '/admin/promocoes/$id'
     | '/admin/promocoes/novo'
     | '/admin/servicos/$id'
@@ -592,6 +624,7 @@ export interface FileRouteTypes {
     | '/admin/videos/novo'
     | '/admin/blog'
     | '/admin/lojas'
+    | '/admin/mercados'
     | '/admin/promocoes'
     | '/admin/servicos'
     | '/admin/videos'
@@ -638,6 +671,8 @@ export interface FileRouteTypes {
     | '/admin/blog/novo'
     | '/admin/lojas/$id'
     | '/admin/lojas/novo'
+    | '/admin/mercados/$id'
+    | '/admin/mercados/novo'
     | '/admin/promocoes/$id'
     | '/admin/promocoes/novo'
     | '/admin/servicos/$id'
@@ -646,6 +681,7 @@ export interface FileRouteTypes {
     | '/admin/videos/novo'
     | '/admin/blog/'
     | '/admin/lojas/'
+    | '/admin/mercados/'
     | '/admin/promocoes/'
     | '/admin/servicos/'
     | '/admin/videos/'
@@ -962,6 +998,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPromocoesIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/mercados/': {
+      id: '/admin/mercados/'
+      path: '/mercados'
+      fullPath: '/admin/mercados/'
+      preLoaderRoute: typeof AdminMercadosIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/lojas/': {
       id: '/admin/lojas/'
       path: '/lojas'
@@ -1018,6 +1061,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPromocoesIdRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/mercados/novo': {
+      id: '/admin/mercados/novo'
+      path: '/mercados/novo'
+      fullPath: '/admin/mercados/novo'
+      preLoaderRoute: typeof AdminMercadosNovoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/mercados/$id': {
+      id: '/admin/mercados/$id'
+      path: '/mercados/$id'
+      fullPath: '/admin/mercados/$id'
+      preLoaderRoute: typeof AdminMercadosIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/lojas/novo': {
       id: '/admin/lojas/novo'
       path: '/lojas/novo'
@@ -1064,6 +1121,8 @@ interface AdminRouteChildren {
   AdminBlogNovoRoute: typeof AdminBlogNovoRoute
   AdminLojasIdRoute: typeof AdminLojasIdRoute
   AdminLojasNovoRoute: typeof AdminLojasNovoRoute
+  AdminMercadosIdRoute: typeof AdminMercadosIdRoute
+  AdminMercadosNovoRoute: typeof AdminMercadosNovoRoute
   AdminPromocoesIdRoute: typeof AdminPromocoesIdRoute
   AdminPromocoesNovoRoute: typeof AdminPromocoesNovoRoute
   AdminServicosIdRoute: typeof AdminServicosIdRoute
@@ -1072,6 +1131,7 @@ interface AdminRouteChildren {
   AdminVideosNovoRoute: typeof AdminVideosNovoRoute
   AdminBlogIndexRoute: typeof AdminBlogIndexRoute
   AdminLojasIndexRoute: typeof AdminLojasIndexRoute
+  AdminMercadosIndexRoute: typeof AdminMercadosIndexRoute
   AdminPromocoesIndexRoute: typeof AdminPromocoesIndexRoute
   AdminServicosIndexRoute: typeof AdminServicosIndexRoute
   AdminVideosIndexRoute: typeof AdminVideosIndexRoute
@@ -1092,6 +1152,8 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminBlogNovoRoute: AdminBlogNovoRoute,
   AdminLojasIdRoute: AdminLojasIdRoute,
   AdminLojasNovoRoute: AdminLojasNovoRoute,
+  AdminMercadosIdRoute: AdminMercadosIdRoute,
+  AdminMercadosNovoRoute: AdminMercadosNovoRoute,
   AdminPromocoesIdRoute: AdminPromocoesIdRoute,
   AdminPromocoesNovoRoute: AdminPromocoesNovoRoute,
   AdminServicosIdRoute: AdminServicosIdRoute,
@@ -1100,6 +1162,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminVideosNovoRoute: AdminVideosNovoRoute,
   AdminBlogIndexRoute: AdminBlogIndexRoute,
   AdminLojasIndexRoute: AdminLojasIndexRoute,
+  AdminMercadosIndexRoute: AdminMercadosIndexRoute,
   AdminPromocoesIndexRoute: AdminPromocoesIndexRoute,
   AdminServicosIndexRoute: AdminServicosIndexRoute,
   AdminVideosIndexRoute: AdminVideosIndexRoute,
