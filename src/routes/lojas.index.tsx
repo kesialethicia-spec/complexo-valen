@@ -4,7 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { listActiveStores, STORE_CATEGORIES, type PublicStoreRow } from "@/lib/stores-api";
 
-export const Route = createFileRoute("/lojas")({
+export const Route = createFileRoute("/lojas/")({
   validateSearch: (search: Record<string, unknown>): { categoria?: string } =>
     typeof search.categoria === "string" ? { categoria: search.categoria } : {},
   head: () => ({
@@ -52,11 +52,6 @@ interface LojaUI {
   featured: boolean;
 }
 
-const fallback: LojaUI[] = [
-  { id: "f1", name: "Restaurante Valen", category: "Alimentação", short_description: "Pratos caseiros e self-service todos os dias.", hours: "06h às 22h", phone: "(98) 0000-0000", whatsapp: "", location: "", block: "Bloco A", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
-  { id: "f2", name: "Conveniência Valen", category: "Conveniência", short_description: "Tudo para a sua jornada em um só lugar.", hours: "24h", phone: "(98) 0000-0002", whatsapp: "", location: "Posto", block: "", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
-  { id: "f3", name: "AutoPeças Rota", category: "Autopeças", short_description: "Peças, acessórios e produtos automotivos.", hours: "08h às 18h", phone: "(98) 0000-0003", whatsapp: "", location: "Truck Center", block: "", logo_url: "", cta_text: "WhatsApp", cta_url: "", featured: false },
-];
 
 function toUI(s: PublicStoreRow): LojaUI {
   return {
@@ -104,9 +99,9 @@ function Lojas() {
     void (async () => {
       try {
         const rows = await listActiveStores();
-        setItems(rows.length ? rows.map(toUI) : fallback);
+        setItems(rows.map(toUI));
       } catch {
-        setItems(fallback);
+        setItems([]);
       } finally {
         setLoaded(true);
       }
@@ -190,11 +185,13 @@ function Lojas() {
                     {(l.block || l.location) && <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {[l.block, l.location].filter(Boolean).join(" • ")}</p>}
                   </div>
                   <div className="mt-5 flex gap-2">
-                    <a href={waHref(l)} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-gradient-orange px-4 py-2.5 text-sm font-bold text-primary-foreground">
-                      <MessageCircle className="h-4 w-4" /> WhatsApp
-                    </a>
+                    {(l.whatsapp || l.cta_url) && (
+                      <a href={waHref(l)} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-gradient-orange px-4 py-2.5 text-sm font-bold text-primary-foreground">
+                        <MessageCircle className="h-4 w-4" /> WhatsApp
+                      </a>
+                    )}
                     {l.slug && (
-                      <Link to="/lojas/$slug" params={{ slug: l.slug }} className="inline-flex items-center justify-center rounded-full border border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted">
+                      <Link to="/lojas/$slug" params={{ slug: l.slug }} className="flex-1 inline-flex items-center justify-center rounded-full border border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted">
                         Ver detalhes
                       </Link>
                     )}
@@ -202,7 +199,9 @@ function Lojas() {
                 </article>
               ))}
               {filtradas.length === 0 && (
-                <p className="col-span-full text-center text-muted-foreground py-12">Nenhuma loja encontrada.</p>
+                <p className="col-span-full text-center text-muted-foreground py-12">
+                  {items.length === 0 ? "Nenhuma loja cadastrada no momento." : "Nenhuma loja encontrada."}
+                </p>
               )}
             </div>
           )}
