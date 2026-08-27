@@ -80,28 +80,22 @@ function normalize(s: string) {
 
 function PromoHero() {
   return (
-    <section className="relative overflow-hidden bg-surface">
-      {/* formas da marca — mantidas fora da área de texto para não prejudicar a leitura */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[34%] top-0 hidden h-full w-[42%] -skew-x-12 bg-gradient-orange opacity-90 lg:block" />
-        <div className="absolute right-0 top-0 hidden h-full w-[30%] -skew-x-12 bg-secondary lg:block" />
-      </div>
-
+    <section className="relative overflow-hidden">
       <div className="container-valen relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="relative max-w-xl rounded-[2rem] bg-background/85 p-6 backdrop-blur-sm md:p-8 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
-            <Sparkles className="h-3.5 w-3.5" /> Campanhas ativas
+        <div className="relative max-w-xl">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary shadow-sm">
+            <Sparkles className="h-3.5 w-3.5 text-primary" /> Campanhas imperdíveis
           </span>
-          <h1 className="mt-5 text-4xl font-display font-extrabold leading-[1.05] tracking-tight text-secondary md:text-6xl">
-            Promoções e ofertas <span className="text-primary">Valen</span> para você aproveitar!
+          <h1 className="mt-5 text-4xl font-display font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl">
+            Promoções e ofertas Valen para você aproveitar!
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-secondary/80">
+          <p className="mt-5 text-lg leading-relaxed text-white/95">
             Encontre campanhas, vantagens e oportunidades especiais em abastecimento, conveniência, alimentação, serviços e muito mais.
           </p>
           <div className="mt-8">
             <a
               href="#promocoes"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-secondary/90 hover:shadow-xl"
             >
               Ver promoções <ArrowRight className="h-4 w-4" />
             </a>
@@ -110,7 +104,7 @@ function PromoHero() {
 
         {/* composição da imagem */}
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-glow ring-8 ring-white/40">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-glow ring-8 ring-white/30">
             <img
               src={caminhoneiroAsset.url}
               alt="Caminhoneiro sorrindo ao ver uma promoção do Valen no celular"
@@ -133,6 +127,7 @@ function PromoHero() {
     </section>
   );
 }
+
 
 /* ---------------- VITRINE ---------------- */
 
@@ -210,12 +205,12 @@ function Vitrine({ items }: { items: PromoItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="bg-background pt-12 md:pt-16">
+    <section className="pb-14 pt-12 md:pb-20 md:pt-16">
       <div className="container-valen">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-primary">Vitrine de oportunidades</p>
-            <h2 className="mt-1 text-2xl font-display font-extrabold text-secondary md:text-4xl">Destaques da vez</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-white/80">Vitrine de oportunidades</p>
+            <h2 className="mt-1 text-2xl font-display font-extrabold text-white md:text-4xl">Destaques da vez</h2>
           </div>
         </div>
 
@@ -384,12 +379,13 @@ function Promocoes() {
 
   return (
     <>
+      <div className="bg-gradient-orange">
       <PromoHero />
 
       {/* BUSCA E FILTROS */}
-      <section id="promocoes" className="scroll-mt-24 bg-background pt-12 md:pt-16">
+      <section id="promocoes" className="scroll-mt-24 pt-4 md:pt-6">
         <div className="container-valen">
-          <h2 className="text-2xl font-display font-extrabold text-secondary md:text-4xl">
+          <h2 className="text-2xl font-display font-extrabold text-white md:text-4xl">
             Promoções e ofertas completas para você
           </h2>
 
@@ -442,6 +438,7 @@ function Promocoes() {
       </section>
 
       <Vitrine items={destaques} />
+      </div>
 
       {/* GRID */}
       <section className="bg-background py-14 md:py-20">
