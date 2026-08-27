@@ -168,6 +168,16 @@ export function StoreForm({ initial, submitting, onSubmit, onCancel }: Props) {
           Exibir na Home
         </label>
 
+        <Field label="Ordem de exibição">
+          <input
+            type="number"
+            value={orderIndex}
+            onChange={(e) => setOrderIndex(parseInt(e.target.value, 10) || 0)}
+            className={inputCls}
+          />
+          <p className="text-xs text-muted-foreground mt-1">Menor número aparece primeiro.</p>
+        </Field>
+
         <Field label="Meta title (SEO)">
           <input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} className={inputCls} />
         </Field>
