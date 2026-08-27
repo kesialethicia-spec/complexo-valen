@@ -11,7 +11,6 @@ import {
   PartyPopper,
   Wallet,
   Coffee,
-  QrCode,
   ArrowRight,
 } from "lucide-react";
 import {
@@ -21,8 +20,8 @@ import {
   DEFAULT_CLUBE_SETTINGS,
   type BenefitRow,
 } from "@/lib/clube-valen-api";
-import logoClube from "@/assets/clube/logo.png.asset.json";
 import celularClube from "@/assets/clube/celular.png.asset.json";
+import appTelas from "@/assets/clube/app-telas.png.asset.json";
 import tinosClube from "@/assets/clube/tinos.png.asset.json";
 import heroFallback from "@/assets/posto/hero.jpg.asset.json";
 import experienciaFoto from "@/assets/o-valen/patio.jpg.asset.json";
@@ -49,14 +48,6 @@ export const Route = createFileRoute("/clube-valen-fidelidade")({
   component: ClubeValenPage,
 });
 
-const anchors = [
-  ["Como funciona", "#como-funciona"],
-  ["Benefícios", "#beneficios"],
-  ["Prêmios", "#premios"],
-  ["Combos", "#combos"],
-  ["Dúvidas", "#duvidas"],
-] as const;
-
 function ClubeValenPage() {
   const { data: settings = DEFAULT_CLUBE_SETTINGS } = useQuery({
     queryKey: ["clube-settings"],
@@ -73,8 +64,8 @@ function ClubeValenPage() {
 
   return (
     <div className="overflow-x-hidden bg-background">
-      <ClubeNav settings={settings} />
       <Hero settings={settings} />
+
       <ComoFunciona />
       <TinosCena benefits={benefits} />
       <Premios items={premios} />
@@ -83,36 +74,6 @@ function ClubeValenPage() {
       <Vantagens />
       <CtaFinal settings={settings} />
       <Faq faqs={faqs} />
-    </div>
-  );
-}
-
-/* ---------------- NAV ---------------- */
-
-function ClubeNav({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
-  return (
-    <div className="sticky top-20 z-40 border-b border-border/60 bg-background/85 backdrop-blur-xl">
-      <div className="container-valen flex h-16 items-center justify-between gap-4">
-        <img src={logoClube.url} alt="Clube Valen Fidelidade" className="h-9 w-auto shrink-0 object-contain" />
-        <nav className="hidden items-center gap-1 lg:flex">
-          {anchors.map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-primary"
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
-        <a
-          href={settings.cta_url || "#baixe-o-app"}
-          {...(settings.cta_url ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-orange px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-glow transition hover:scale-105"
-        >
-          {settings.cta_text || "Baixe o aplicativo"}
-        </a>
-      </div>
     </div>
   );
 }
@@ -183,59 +144,33 @@ function Hero({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
         <path d="M-50 520 C 250 420, 400 250, 750 210 S 1150 120, 1300 40" fill="none" stroke="white" strokeWidth="4" strokeDasharray="26 26" opacity="0.8" />
       </svg>
 
-      <div className="container-valen relative grid items-center gap-10 py-16 md:py-24 lg:grid-cols-2">
+      <div className="container-valen relative grid items-center gap-8 py-12 md:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-secondary shadow">
             {settings.hero_badge}
           </span>
-          <h1 className="mt-5 font-display text-4xl font-extrabold uppercase leading-[1.05] text-white md:text-6xl">
+          <h1 className="mt-4 font-display text-3xl font-extrabold uppercase leading-[1.08] text-white md:text-5xl">
             {parts[0]}
             {highlight && <span className="text-secondary">{highlight}</span>}
             {parts[1]}
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-white/90">{settings.hero_subtitle}</p>
+          <p className="mt-4 max-w-lg text-base text-white/90 md:text-lg">{settings.hero_subtitle}</p>
 
-          <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center">
-            <a
-              href={settings.cta_url || settings.google_play_url || "#premios"}
-              {...(settings.cta_url || settings.google_play_url
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-8 py-4 text-base font-bold text-secondary-foreground shadow-xl transition hover:scale-[1.03]"
-            >
-              {settings.cta_text || "Baixe o aplicativo"} <ArrowRight className="h-4 w-4" />
-            </a>
-            {settings.qr_code_url ? (
-              <div className="flex items-center gap-3 rounded-2xl bg-white/95 p-3 shadow-lg">
-                <img src={settings.qr_code_url} alt="QR Code para baixar o aplicativo" className="h-20 w-20 rounded-lg object-contain" />
-                <p className="max-w-[9rem] text-xs font-semibold leading-tight text-secondary">
-                  Aponte a câmera e baixe o app
-                </p>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3 rounded-2xl bg-white/20 p-3 text-white">
-                <QrCode className="h-10 w-10" />
-                <p className="max-w-[10rem] text-xs font-semibold leading-tight">
-                  QR Code em breve — baixe pelas lojas
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div className="mt-6">
+          <div className="mt-7">
             <StoreButtons google={settings.google_play_url} apple={settings.app_store_url} />
           </div>
         </div>
 
         <div className="relative flex justify-center lg:justify-end">
-          <div className="absolute -right-10 top-10 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
+          <div className="absolute -right-6 top-6 h-56 w-56 rounded-full bg-white/20 blur-3xl" />
           <img
             src={phone}
             alt="Aplicativo Clube Valen Fidelidade no celular"
-            className="relative w-full max-w-md -rotate-3 object-contain drop-shadow-2xl transition-transform duration-700 hover:-rotate-1"
+            className="relative w-full max-w-[16rem] object-contain drop-shadow-2xl md:max-w-[19rem]"
           />
         </div>
       </div>
+
 
       <div className="relative h-16 bg-background [clip-path:ellipse(75%_100%_at_50%_100%)]" />
     </section>
@@ -373,19 +308,26 @@ function Premios({ items }: { items: BenefitRow[] }) {
         <div id="premios" className="mt-10 grid scroll-mt-40 gap-6 lg:grid-cols-3">
           {destaque && (
             <article className="group relative overflow-hidden rounded-3xl bg-secondary text-secondary-foreground shadow-xl lg:col-span-3">
-              <div className="grid md:grid-cols-2">
-                <div className="relative h-56 md:h-full">
+              <div className="grid items-center gap-2 md:grid-cols-2">
+                <div className="flex items-center justify-center p-6 md:p-10">
                   {destaque.image_url ? (
-                    <img src={destaque.image_url} alt={destaque.name} className="h-full w-full object-cover" loading="lazy" />
+                    <img
+                      src={destaque.image_url}
+                      alt={destaque.name}
+                      className="max-h-64 w-full rounded-2xl object-contain md:max-h-72"
+                      loading="lazy"
+                    />
                   ) : (
-                    <Placeholder label={destaque.name} />
+                    <div className="h-56 w-full overflow-hidden rounded-2xl">
+                      <Placeholder label={destaque.name} />
+                    </div>
                   )}
                 </div>
-                <div className="p-8 md:p-12">
+                <div className="p-8 md:py-12 md:pr-12">
                   <span className="text-xs font-extrabold uppercase tracking-widest text-primary">{destaque.category}</span>
-                  <h3 className="mt-3 font-display text-3xl font-extrabold leading-tight md:text-4xl">{destaque.name}</h3>
-                  <p className="mt-3 text-white/80">{destaque.short_description}</p>
-                  <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <h3 className="mt-3 max-w-md font-display text-2xl font-extrabold leading-tight md:text-4xl">{destaque.name}</h3>
+                  <p className="mt-4 max-w-md text-white/80">{destaque.short_description}</p>
+                  <div className="mt-7 flex flex-wrap items-center gap-4">
                     <Points points={destaque.points} />
                     <a
                       href="#baixe-o-app"
@@ -397,6 +339,7 @@ function Premios({ items }: { items: BenefitRow[] }) {
                 </div>
               </div>
             </article>
+
           )}
 
           {outros.map((b) => (
@@ -550,49 +493,29 @@ function Vantagens() {
 /* ---------------- CTA FINAL ---------------- */
 
 function CtaFinal({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
-  const phone = settings.phone_mockup_url || celularClube.url;
   return (
-    <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground">
-      <svg aria-hidden viewBox="0 0 1200 400" preserveAspectRatio="none" className="absolute inset-0 h-full w-full opacity-30">
+    <section className="relative overflow-hidden bg-secondary py-16 text-secondary-foreground md:py-20">
+      <svg aria-hidden viewBox="0 0 1200 400" preserveAspectRatio="none" className="absolute inset-0 h-full w-full opacity-25">
         <path d="M-50 300 C 300 200, 600 340, 1250 120" fill="none" stroke="var(--primary)" strokeWidth="8" />
         <path d="M-50 360 C 350 260, 700 380, 1250 180" fill="none" stroke="var(--primary)" strokeWidth="3" strokeDasharray="20 18" />
       </svg>
-      <div className="container-valen relative grid items-center gap-10 lg:grid-cols-2">
+      <div className="container-valen relative grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
         <div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight md:text-5xl">
+          <h2 className="font-display text-3xl font-extrabold leading-tight md:text-4xl">
             Sua próxima parada pode valer <span className="text-primary">muito mais.</span>
           </h2>
-          <p className="mt-4 max-w-lg text-lg text-white/80">
+          <p className="mt-4 max-w-md text-lg text-white/80">
             Baixe o Clube Valen Fidelidade e comece agora a pontuar.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a
-              href={settings.cta_url || settings.google_play_url || "#baixe-o-app"}
-              {...(settings.cta_url || settings.google_play_url
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-8 py-4 text-base font-bold text-primary-foreground shadow-glow transition hover:scale-105"
-            >
-              {settings.cta_text || "Baixe o aplicativo"} <ArrowRight className="h-4 w-4" />
-            </a>
-            {settings.qr_code_url && (
-              <img
-                src={settings.qr_code_url}
-                alt="QR Code para baixar o aplicativo Clube Valen Fidelidade"
-                className="h-24 w-24 rounded-2xl bg-white p-2"
-              />
-            )}
-          </div>
-          <div className="mt-6">
+          <div className="mt-7">
             <StoreButtons google={settings.google_play_url} apple={settings.app_store_url} tone="light" />
           </div>
         </div>
-        <div className="relative flex items-end justify-center gap-2">
-          <img src={tinosClube.url} alt="" aria-hidden className="hidden w-1/2 max-w-[16rem] object-contain md:block" />
+        <div className="flex justify-center lg:justify-end">
           <img
-            src={phone}
-            alt="Aplicativo Clube Valen Fidelidade"
-            className="w-1/2 max-w-[16rem] rotate-3 object-contain drop-shadow-2xl"
+            src={appTelas.url}
+            alt="Telas do aplicativo Clube Valen Fidelidade"
+            className="w-full max-w-[34rem] object-contain drop-shadow-2xl"
             loading="lazy"
           />
         </div>
@@ -600,6 +523,7 @@ function CtaFinal({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
     </section>
   );
 }
+
 
 /* ---------------- FAQ ---------------- */
 
