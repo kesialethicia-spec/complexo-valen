@@ -35,6 +35,7 @@ export function StoreForm({ initial, submitting, onSubmit, onCancel }: Props) {
   const [status, setStatus] = useState<StoreStatus>(initial?.status ?? "rascunho");
   const [featured, setFeatured] = useState(initial?.featured ?? false);
   const [showOnHome, setShowOnHome] = useState(initial?.show_on_home ?? false);
+  const [orderIndex, setOrderIndex] = useState<number>(initial?.order_index ?? 0);
   const [metaTitle, setMetaTitle] = useState(initial?.meta_title ?? "");
   const [metaDescription, setMetaDescription] = useState(initial?.meta_description ?? "");
 
