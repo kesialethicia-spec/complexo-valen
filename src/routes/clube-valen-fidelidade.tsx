@@ -21,8 +21,8 @@ import {
   DEFAULT_CLUBE_SETTINGS,
   type BenefitRow,
 } from "@/lib/clube-valen-api";
-import logoClube from "@/assets/clube/logo.png.asset.json";
 import celularClube from "@/assets/clube/celular.png.asset.json";
+import appTelas from "@/assets/clube/app-telas.png.asset.json";
 import tinosClube from "@/assets/clube/tinos.png.asset.json";
 import heroFallback from "@/assets/posto/hero.jpg.asset.json";
 import experienciaFoto from "@/assets/o-valen/patio.jpg.asset.json";
