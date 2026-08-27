@@ -77,6 +77,144 @@ export type Database = {
         }
         Relationships: []
       }
+      clube_valen_benefits: {
+        Row: {
+          category: string
+          created_at: string
+          featured: boolean
+          full_description: string
+          id: string
+          image_url: string
+          name: string
+          order_index: number
+          points: number | null
+          short_description: string
+          slug: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          featured?: boolean
+          full_description?: string
+          id?: string
+          image_url?: string
+          name: string
+          order_index?: number
+          points?: number | null
+          short_description?: string
+          slug: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          featured?: boolean
+          full_description?: string
+          id?: string
+          image_url?: string
+          name?: string
+          order_index?: number
+          points?: number | null
+          short_description?: string
+          slug?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      clube_valen_faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          order_index: number
+          question: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          order_index?: number
+          question: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          order_index?: number
+          question?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      clube_valen_settings: {
+        Row: {
+          app_store_url: string
+          created_at: string
+          cta_text: string
+          cta_url: string
+          google_play_url: string
+          hero_badge: string
+          hero_bg_image_url: string
+          hero_highlight: string
+          hero_subtitle: string
+          hero_title: string
+          id: boolean
+          page_status: string
+          phone_mockup_url: string
+          qr_code_url: string
+          seo_description: string
+          seo_title: string
+          updated_at: string
+        }
+        Insert: {
+          app_store_url?: string
+          created_at?: string
+          cta_text?: string
+          cta_url?: string
+          google_play_url?: string
+          hero_badge?: string
+          hero_bg_image_url?: string
+          hero_highlight?: string
+          hero_subtitle?: string
+          hero_title?: string
+          id?: boolean
+          page_status?: string
+          phone_mockup_url?: string
+          qr_code_url?: string
+          seo_description?: string
+          seo_title?: string
+          updated_at?: string
+        }
+        Update: {
+          app_store_url?: string
+          created_at?: string
+          cta_text?: string
+          cta_url?: string
+          google_play_url?: string
+          hero_badge?: string
+          hero_bg_image_url?: string
+          hero_highlight?: string
+          hero_subtitle?: string
+          hero_title?: string
+          id?: boolean
+          page_status?: string
+          phone_mockup_url?: string
+          qr_code_url?: string
+          seo_description?: string
+          seo_title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       experiencias_page_settings: {
         Row: {
           cafe_image_url: string
