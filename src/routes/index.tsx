@@ -411,13 +411,16 @@ function Home() {
             hash={c.hash}
             className="group relative block h-full overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1"
           >
-            <SmartImage
-              src={c.img}
-              alt={c.t}
-              rounded="rounded-none"
-              className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-secondary/10" />
+            <div className="absolute inset-0">
+              <SmartImage
+                src={c.img}
+                alt={c.t}
+                rounded="rounded-none"
+                className="h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/10" />
+
             <div
               className={`relative flex h-full flex-col justify-end text-white ${
                 size === "lg" ? "p-8 lg:p-10" : "p-6"
