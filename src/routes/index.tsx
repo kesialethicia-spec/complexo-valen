@@ -626,63 +626,91 @@ function Home() {
         </div>
       </section>
 
-      {/* NOTÍCIAS */}
-      <section className="py-24 bg-surface">
-        <div className="container-valen">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <SectionHeader eyebrow="Conteúdo" title="O que movimenta o Valen" subtitle="Notícias, dicas, campanhas e novidades para quem acompanha nosso complexo." />
-            <Link to="/blog-do-caminhoneiro" className="shrink-0 inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground">
-              Ver todas <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {(latestPosts.length > 0
-              ? latestPosts.map((p) => ({
-                  slug: p.slug,
-                  cat: p.category,
-                  title: p.title,
-                  excerpt: p.excerpt,
-                  img: p.cover_url || "",
-                  date: formatPublishedDate(p.published_at),
-                }))
-              : [
-                  { slug: "", cat: "Dicas", title: "Dicas para quem vive na estrada", excerpt: "", img: "", date: "" },
-                  { slug: "", cat: "Eventos", title: "Experiências em movimento no Valen", excerpt: "", img: "", date: "" },
-                  { slug: "", cat: "Novidades", title: "Novidades do complexo Valen", excerpt: "", img: "", date: "" },
-                ]
-            ).map((n) =>
-              n.slug ? (
-                <Link
-                  to="/blog-do-caminhoneiro/$slug"
-                  params={{ slug: n.slug }}
-                  key={n.slug}
-                  className="group flex flex-col overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
-                >
-                  <div className="h-48 overflow-hidden">
-                    <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="h-full w-full group-hover:scale-110 transition-transform duration-700" />
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
-                    <h3 className="mt-3 text-lg font-display font-bold text-secondary group-hover:text-primary transition-colors line-clamp-2">{n.title}</h3>
-                    {n.excerpt && <p className="mt-2 text-sm text-muted-foreground line-clamp-3">{n.excerpt}</p>}
-                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-primary">Ler mais <ArrowRight className="h-3.5 w-3.5" /></span>
-                  </div>
+      {/* NOTÍCIAS — composição editorial */}
+      {(() => {
+        const posts = latestPosts.map((p) => ({
+          slug: p.slug,
+          cat: p.category,
+          title: p.title,
+          excerpt: p.excerpt,
+          img: p.cover_url || "",
+          date: formatPublishedDate(p.published_at),
+        }));
+        const [main, ...secondary] = posts;
+        return (
+          <section className="py-24 lg:py-28 bg-surface">
+            <div className="container-valen">
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                <SectionHeader
+                  eyebrow="Conteúdo"
+                  title="O que movimenta o Valen"
+                  subtitle="Notícias, dicas, experiências e histórias para quem vive a estrada com a gente."
+                />
+                <Link to="/blog-do-caminhoneiro" className="shrink-0 inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors">
+                  Ver todas as notícias <ArrowRight className="h-4 w-4" />
                 </Link>
+              </div>
+
+              {posts.length === 0 ? (
+                <div className="mt-12 rounded-3xl border border-border bg-card p-10 text-center">
+                  <p className="text-muted-foreground">Em breve, novos conteúdos por aqui.</p>
+                </div>
               ) : (
-                <Link to="/blog-do-caminhoneiro" key={n.title} className="group overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all">
-                  <div className="h-48 overflow-hidden">
-                    <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="h-full w-full group-hover:scale-110 transition-transform duration-700" />
+                <div className="mt-12 grid gap-6 lg:grid-cols-12">
+                  {/* Matéria principal */}
+                  <Link
+                    to="/blog-do-caminhoneiro/$slug"
+                    params={{ slug: main.slug }}
+                    className="group lg:col-span-7 flex flex-col overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
+                  >
+                    <div className="relative overflow-hidden aspect-[16/10]">
+                      <SmartImage src={main.img} alt={main.title} rounded="rounded-none" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
+                      <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
+                        <Newspaper className="h-3 w-3" /> {main.cat}
+                      </span>
+                    </div>
+                    <div className="p-7 flex flex-col flex-1">
+                      {main.date && <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{main.date}</span>}
+                      <h3 className="mt-2 text-2xl md:text-3xl font-display font-extrabold text-secondary leading-tight text-balance group-hover:text-primary transition-colors">{main.title}</h3>
+                      {main.excerpt && <p className="mt-3 text-base text-muted-foreground leading-relaxed line-clamp-3">{main.excerpt}</p>}
+                      <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3.5">
+                        Ler matéria <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* Matérias secundárias */}
+                  <div className="lg:col-span-5 grid gap-6 content-start">
+                    {secondary.map((n) => (
+                      <Link
+                        key={n.slug}
+                        to="/blog-do-caminhoneiro/$slug"
+                        params={{ slug: n.slug }}
+                        className="group flex flex-col sm:flex-row overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
+                      >
+                        <div className="relative overflow-hidden sm:w-2/5 aspect-[16/10] sm:aspect-auto sm:min-h-[170px]">
+                          <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
+                        </div>
+                        <div className="p-6 flex flex-col justify-center sm:w-3/5">
+                          <span className="inline-flex self-start items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary">
+                            <Newspaper className="h-3 w-3" /> {n.cat}
+                          </span>
+                          <h3 className="mt-2.5 text-lg font-display font-bold text-secondary leading-snug line-clamp-3 group-hover:text-primary transition-colors">{n.title}</h3>
+                          {n.date && <span className="mt-2 text-xs text-muted-foreground">{n.date}</span>}
+                          <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-primary transition-all group-hover:gap-3">
+                            Ler matéria <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-                  <div className="p-6">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
-                    <h3 className="mt-3 text-lg font-display font-bold text-secondary group-hover:text-primary transition-colors">{n.title}</h3>
-                  </div>
-                </Link>
-              ),
-            )}
-          </div>
-        </div>
-      </section>
+                </div>
+              )}
+            </div>
+          </section>
+        );
+      })()}
+
 
       {/* CTA FINAL */}
       <section className="py-24 bg-background">
