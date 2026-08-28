@@ -12,7 +12,6 @@ import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
-import { getClubeSettings, DEFAULT_CLUBE_SETTINGS, type ClubeSettings } from "@/lib/clube-valen-api";
 import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 import { Img } from "@/components/Img";
@@ -46,7 +45,6 @@ function Home() {
   const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   const [latestPosts, setLatestPosts] = useState<BlogPostRow[]>([]);
   const [expSettings, setExpSettings] = useState<ExperienciasPageSettings>(DEFAULT_EXPERIENCIAS_SETTINGS);
-  const [clube, setClube] = useState<ClubeSettings>(DEFAULT_CLUBE_SETTINGS);
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -64,9 +62,6 @@ function Home() {
     })();
     void (async () => {
       try { setExpSettings(await getExperienciasPageSettings()); } catch { /* fallback */ }
-    })();
-    void (async () => {
-      try { setClube(await getClubeSettings()); } catch { /* fallback */ }
     })();
   }, []);
 
