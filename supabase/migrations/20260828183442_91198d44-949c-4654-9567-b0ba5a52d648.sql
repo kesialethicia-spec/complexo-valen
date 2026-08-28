@@ -1,0 +1,1 @@
+GRANT SELECT (phone, whatsapp, order_index) ON public.stores TO anon;
