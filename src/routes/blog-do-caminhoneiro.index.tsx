@@ -1,15 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Search, Clock, ArrowRight, Play, Mail, MapPin, X, Youtube } from "lucide-react";
+import {
+  Search,
+  Clock,
+  ArrowRight,
+  Play,
+  Mail,
+  MapPin,
+  X,
+  Youtube,
+  Route as RouteIcon,
+  Wrench,
+  Fuel,
+  ShieldCheck,
+  UtensilsCrossed,
+  Sparkles,
+  CreditCard,
+  Gift,
+  BadgeCheck,
+} from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { posts as fallbackPosts, categories, blogPromotions, type Post } from "@/data/blog";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { listPublishedVideos, youtubeThumbnail, youtubeEmbedUrl, type VideoRow } from "@/lib/videos-api";
+import { getClubeSettings, DEFAULT_CLUBE_SETTINGS, type ClubeSettings } from "@/lib/clube-valen-api";
 import { SmartImage } from "@/components/SmartImage";
 import { Img } from "@/components/Img";
-
+import celularClube from "@/assets/clube/celular.png.asset.json";
+import appTelas from "@/assets/clube/app-telas.png.asset.json";
 
 function adaptRow(row: BlogPostRow): Post {
   return {
@@ -49,6 +69,16 @@ export const Route = createFileRoute("/blog-do-caminhoneiro/")({
   component: BlogPage,
 });
 
+/* Temas da fileira "Na estrada com o Valen" */
+const THEMES: { label: string; category: string; icon: typeof RouteIcon }[] = [
+  { label: "Dicas de estrada", category: "Dicas da Estrada", icon: RouteIcon },
+  { label: "Manutenção", category: "Manutenção Preventiva", icon: Wrench },
+  { label: "Economia", category: "Economia de Diesel", icon: Fuel },
+  { label: "Segurança", category: "Segurança", icon: ShieldCheck },
+  { label: "Alimentação", category: "Alimentação e Bem-estar", icon: UtensilsCrossed },
+  { label: "Experiências Valen", category: "Experiências Valen", icon: Sparkles },
+];
+
 function BlogPage() {
   const [query, setQuery] = useState("");
   const [cat, setCat] = useState<string>("Todos");
@@ -57,7 +87,7 @@ function BlogPage() {
   const [dbPromos, setDbPromos] = useState<PromotionRow[]>([]);
   const [videos, setVideos] = useState<VideoRow[]>([]);
   const [openVideo, setOpenVideo] = useState<VideoRow | null>(null);
-
+  const [clube, setClube] = useState<ClubeSettings>(DEFAULT_CLUBE_SETTINGS);
 
   useEffect(() => {
     void (async () => {
@@ -83,17 +113,20 @@ function BlogPage() {
         setVideos([]);
       }
     })();
+    void (async () => {
+      try {
+        setClube(await getClubeSettings());
+      } catch { /* defaults */ }
+    })();
   }, []);
-
 
   const blogPromosList = useMemo(() => {
     if (dbPromos.length === 0) return null;
-    const priority = [...dbPromos].sort((a, b) => {
+    return [...dbPromos].sort((a, b) => {
       const bs = (b.show_on_blog ? 2 : 0) + (b.featured ? 1 : 0);
       const as = (a.show_on_blog ? 2 : 0) + (a.featured ? 1 : 0);
       return bs - as;
     });
-    return priority;
   }, [dbPromos]);
 
   const filtered = useMemo(() => {
@@ -108,7 +141,7 @@ function BlogPage() {
         p.tags.some((t) => t.toLowerCase().includes(q));
       return matchCat && matchQuery;
     });
-  }, [query, cat]);
+  }, [query, cat, posts]);
 
   if (!loaded || posts.length === 0) {
     return (
@@ -120,17 +153,19 @@ function BlogPage() {
 
   const main = posts.find((p) => p.mainFeatured) ?? posts[0];
   const featured = posts.filter((p) => p.featured && p.slug !== main.slug).slice(0, 4);
-  const recent = filtered.filter((p) => p.slug !== main.slug).slice(0, 9);
+  const isFiltering = query !== "" || cat !== "Todos";
+  const recent = filtered.filter((p) => (isFiltering ? true : p.slug !== main.slug)).slice(0, 9);
 
   const mainVideo = videos.find((v) => v.featured) ?? videos[0] ?? null;
-  const otherVideos = mainVideo ? videos.filter((v) => v.id !== mainVideo.id) : [];
+  const otherVideos = mainVideo ? videos.filter((v) => v.id !== mainVideo.id).slice(0, 3) : [];
 
-
-  
+  const themeCover = (category: string) =>
+    posts.find((p) => p.category === category)?.cover ?? "";
 
   return (
     <>
       <PageHero
+        compact
         eyebrow="Blog do Caminhoneiro"
         title="Blog do Caminhoneiro"
         subtitle="Fique por dentro de tudo que acontece no Complexo Valen: eventos, ações especiais, novidades, dicas da estrada e experiências que movimentam o nosso dia a dia."
@@ -138,8 +173,8 @@ function BlogPage() {
       />
 
       {/* Busca + categorias */}
-      <section className="bg-background py-10 border-b border-border">
-        <div className="container-valen space-y-6">
+      <section className="bg-background py-8 md:py-10 border-b border-border">
+        <div className="container-valen space-y-5">
           <div className="relative max-w-2xl">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <input
@@ -152,12 +187,12 @@ function BlogPage() {
             />
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap md:overflow-visible">
             {["Todos", ...categories].map((c) => (
               <button
                 key={c}
                 onClick={() => setCat(c)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
                   cat === c
                     ? "bg-gradient-orange text-primary-foreground shadow-glow"
                     : "bg-surface text-muted-foreground hover:bg-surface/70 hover:text-foreground"
@@ -170,13 +205,70 @@ function BlogPage() {
         </div>
       </section>
 
+      {/* Na estrada com o Valen */}
+      <section className="py-14 md:py-16 bg-background">
+        <div className="container-valen">
+          <SectionHeader
+            eyebrow="Conteúdos para você"
+            title="Na estrada com o Valen"
+            subtitle="Informação rápida para deixar sua viagem mais segura, econômica e tranquila."
+          />
+
+          <div className="mt-8 flex gap-5 overflow-x-auto pb-3 -mx-5 px-5 md:mx-0 md:px-0 md:overflow-visible md:justify-between">
+            {THEMES.map((t) => {
+              const Icon = t.icon;
+              const active = cat === t.category;
+              const cover = themeCover(t.category);
+              return (
+                <button
+                  key={t.label}
+                  type="button"
+                  onClick={() => {
+                    setCat(active ? "Todos" : t.category);
+                    setQuery("");
+                  }}
+                  className="group shrink-0 w-[104px] md:w-auto flex flex-col items-center gap-3 text-center"
+                >
+                  <span
+                    className={`relative grid place-items-center h-24 w-24 md:h-28 md:w-28 rounded-full p-1 transition-all ${
+                      active ? "bg-gradient-orange shadow-glow" : "bg-primary/25 group-hover:bg-gradient-orange"
+                    }`}
+                  >
+                    <span className="h-full w-full rounded-full overflow-hidden bg-surface grid place-items-center">
+                      {cover ? (
+                        <SmartImage
+                          src={cover}
+                          alt={t.label}
+                          rounded="rounded-full"
+                          className="h-full w-full"
+                          imgClassName="group-hover:scale-110 transition-transform duration-500"
+                        />
+                      ) : (
+                        <Icon className="h-8 w-8 text-secondary/50" />
+                      )}
+                    </span>
+                  </span>
+                  <span
+                    className={`text-xs md:text-sm font-semibold leading-tight ${
+                      active ? "text-primary" : "text-secondary"
+                    }`}
+                  >
+                    {t.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Destaques */}
-      {query === "" && cat === "Todos" && (
-        <section className="py-20 bg-background">
+      {!isFiltering && (
+        <section className="py-16 md:py-20 bg-surface/40">
           <div className="container-valen">
             <SectionHeader eyebrow="Em alta" title="Artigos em destaque" />
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div className="mt-10 grid gap-6 lg:grid-cols-2 items-start">
               <ArticleCardLarge post={main} />
               <div className="grid gap-6 sm:grid-cols-2">
                 {featured.map((p) => (
@@ -189,19 +281,31 @@ function BlogPage() {
       )}
 
       {/* Recentes */}
-      <section className="py-20 bg-surface/40">
+      <section className="py-16 md:py-20 bg-background">
         <div className="container-valen">
-          <SectionHeader
-            eyebrow="Conteúdos recentes"
-            title={query || cat !== "Todos" ? `Resultados (${filtered.length})` : "Mais recentes no Blog do Caminhoneiro"}
-          />
+          <div className="flex items-end justify-between flex-wrap gap-4">
+            <SectionHeader
+              eyebrow="Conteúdos recentes"
+              title={isFiltering ? `Resultados (${filtered.length})` : "Mais recentes no Blog do Caminhoneiro"}
+            />
+            {isFiltering && (
+              <button
+                type="button"
+                onClick={() => { setCat("Todos"); setQuery(""); }}
+                className="inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground hover:scale-105 transition-transform"
+              >
+                Ver todos os artigos <ArrowRight className="h-4 w-4" />
+              </button>
+            )}
+          </div>
 
           {recent.length === 0 ? (
-            <p className="mt-10 text-center text-muted-foreground">
-              Nenhum artigo encontrado. Tente outra busca ou categoria.
-            </p>
+            <div className="mt-8 rounded-2xl border border-dashed border-border bg-surface/50 px-6 py-8 text-center">
+              <p className="font-display font-bold text-secondary">Nenhum conteúdo encontrado nessa categoria.</p>
+              <p className="mt-1 text-sm text-muted-foreground">Tente selecionar outra categoria.</p>
+            </div>
           ) : (
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {recent.map((p) => (
                 <ArticleCardSmall key={p.slug} post={p} />
               ))}
@@ -210,16 +314,15 @@ function BlogPage() {
         </div>
       </section>
 
-
       {/* Vídeos */}
       {mainVideo && (
-        <section className="py-20 bg-background">
+        <section className="py-16 md:py-20 bg-surface/40">
           <div className="container-valen">
             <div className="flex items-end justify-between flex-wrap gap-4">
               <SectionHeader
                 eyebrow="Vídeos"
                 title="Vídeos para quem vive na estrada"
-                subtitle="Aprenda, atualize-se e descubra o que movimenta o complexo."
+                subtitle="Aprenda, atualize-se e descubra o que movimenta o Complexo Valen."
               />
               <a
                 href="https://www.youtube.com/@complexovalen/videos"
@@ -231,7 +334,7 @@ function BlogPage() {
               </a>
             </div>
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-5">
+            <div className="mt-10 grid gap-6 lg:grid-cols-5 items-start">
               <VideoCardLarge video={mainVideo} onPlay={() => setOpenVideo(mainVideo)} />
               <div className="lg:col-span-2 flex flex-col gap-4 self-start">
                 {otherVideos.map((v) => (
@@ -256,10 +359,11 @@ function BlogPage() {
 
       <VideoModal video={openVideo} onClose={() => setOpenVideo(null)} />
 
-
+      {/* Clube Valen */}
+      <ClubeSection settings={clube} />
 
       {/* Promoções */}
-      <section className="py-20 bg-gradient-soft">
+      <section className="py-16 md:py-20 bg-gradient-soft">
         <div className="container-valen">
           <div className="flex items-end justify-between flex-wrap gap-4">
             <SectionHeader
@@ -282,16 +386,22 @@ function BlogPage() {
                     key={p.id}
                     to="/promocoes/$slug"
                     params={{ slug: p.slug }}
-                    className="snap-start shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
+                    className="group snap-start shrink-0 w-[280px] md:w-[calc(33.333%-0.834rem)] xl:w-[calc(25%-0.94rem)] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                   >
                     <div className="h-44 overflow-hidden">
-                      <SmartImage src={p.cover_url} alt={p.title} rounded="rounded-none" className="h-full w-full" />
+                      <SmartImage
+                        src={p.cover_url}
+                        alt={p.title}
+                        rounded="rounded-none"
+                        className="h-full w-full"
+                        imgClassName="group-hover:scale-105 transition-transform duration-700"
+                      />
                     </div>
                     <div className="p-5">
                       <span className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
                       <h3 className="mt-2 font-display font-bold text-lg text-secondary line-clamp-2">{p.title}</h3>
                       <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{p.short_description}</p>
-                      <div className="mt-3 flex items-center justify-between">
+                      <div className="mt-3 flex items-center justify-between gap-3">
                         <span className="text-xs text-muted-foreground">{p.validity}</span>
                         <span className="inline-flex items-center gap-1 text-sm font-bold text-primary">
                           Ver promoção <ArrowRight className="h-3.5 w-3.5" />
@@ -303,7 +413,7 @@ function BlogPage() {
               : blogPromotions.map((p) => (
                   <article
                     key={p.id}
-                    className="snap-start shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
+                    className="snap-start shrink-0 w-[280px] md:w-[calc(33.333%-0.834rem)] xl:w-[calc(25%-0.94rem)] rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all"
                   >
                     <div className="h-44 overflow-hidden">
                       <SmartImage src={p.image} alt={p.title} rounded="rounded-none" className="h-full w-full" />
@@ -341,6 +451,141 @@ function BlogPage() {
   );
 }
 
+/* -------------------- Clube Valen -------------------- */
+
+const CLUBE_STEPS = [
+  {
+    number: "01",
+    icon: CreditCard,
+    title: "Abasteça",
+    subtitle: "Informe seu CPF na hora do pagamento.",
+    text: "Ao abastecer no Valen, informe seu CPF ao caixa para começar a acumular pontos.",
+  },
+  {
+    number: "02",
+    icon: BadgeCheck,
+    title: "Ganhe pontos",
+    subtitle: "Seus pontos entram automaticamente.",
+    text: "Assim que a venda é finalizada, seus pontos são atualizados no aplicativo.",
+  },
+  {
+    number: "03",
+    icon: Gift,
+    title: "Aproveite",
+    subtitle: "Troque seus pontos por benefícios.",
+    text: "Escolha um benefício pelo aplicativo, gere seu voucher e aproveite.",
+  },
+];
+
+function ClubeSection({ settings }: { settings: ClubeSettings }) {
+  const phone = settings.phone_mockup_url || celularClube.url;
+  const google = settings.google_play_url;
+  const apple = settings.app_store_url;
+
+  return (
+    <section className="relative overflow-hidden bg-gradient-hero text-white py-16 md:py-24">
+      <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl" />
+      <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+      <svg aria-hidden className="absolute inset-x-0 top-1/3 w-full opacity-10" viewBox="0 0 1440 200" preserveAspectRatio="none">
+        <path d="M0,160 C360,20 1080,220 1440,60" stroke="white" strokeWidth="2" fill="none" strokeDasharray="14 12" />
+      </svg>
+
+      <div className="container-valen relative grid gap-12 lg:grid-cols-2 items-center">
+        <div>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Clube Valen
+          </span>
+          <h2 className="mt-5 text-4xl md:text-5xl font-display font-extrabold leading-tight text-balance">
+            Seu abastecimento vale muito mais.
+          </h2>
+          <p className="mt-5 max-w-xl text-white/80 leading-relaxed">
+            A cada abastecimento, você acumula pontos e transforma sua passagem pelo Valen em benefícios.
+            Tudo pelo aplicativo Clube Valen Fidelidade.
+          </p>
+          <p className="mt-5 text-xl md:text-2xl font-display font-extrabold text-primary">
+            Acumule. Troque. Aproveite.
+          </p>
+
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              href={apple || "#"}
+              target={apple ? "_blank" : undefined}
+              rel={apple ? "noopener noreferrer" : undefined}
+              className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-secondary shadow-lg transition hover:-translate-y-0.5"
+            >
+              <span className="text-left leading-tight">
+                <span className="block text-[10px] font-medium uppercase tracking-wider opacity-70">Baixar na</span>
+                App Store
+              </span>
+            </a>
+            <a
+              href={google || "#"}
+              target={google ? "_blank" : undefined}
+              rel={google ? "noopener noreferrer" : undefined}
+              className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-secondary shadow-lg transition hover:-translate-y-0.5"
+            >
+              <span className="text-left leading-tight">
+                <span className="block text-[10px] font-medium uppercase tracking-wider opacity-70">Baixar no</span>
+                Google Play
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div className="relative flex justify-center lg:justify-end">
+          <div className="absolute inset-0 -z-0 m-auto h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
+          <Img
+            src={phone}
+            alt="Aplicativo Clube Valen Fidelidade"
+            sizes="(max-width: 1024px) 80vw, 40vw"
+            className="relative z-10 w-[260px] md:w-[340px] lg:w-[400px] drop-shadow-2xl"
+            loading="lazy"
+          />
+          <Img
+            src={appTelas.url}
+            alt=""
+            aria-hidden
+            sizes="(max-width: 1024px) 50vw, 25vw"
+            className="hidden md:block absolute z-20 -left-2 bottom-0 w-[210px] lg:w-[260px] drop-shadow-2xl"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div className="container-valen relative mt-14 grid gap-5 md:grid-cols-3">
+        {CLUBE_STEPS.map((s) => {
+          const Icon = s.icon;
+          return (
+            <div
+              key={s.number}
+              className="rounded-3xl bg-white/10 backdrop-blur border border-white/15 p-6 transition hover:-translate-y-1 hover:bg-white/15"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-orange">
+                  <Icon className="h-5 w-5 text-primary-foreground" />
+                </span>
+                <span className="font-display text-2xl font-extrabold text-white/40">{s.number}</span>
+              </div>
+              <h3 className="mt-4 font-display text-xl font-bold">{s.title}</h3>
+              <p className="mt-1 text-sm font-semibold text-primary">{s.subtitle}</p>
+              <p className="mt-2 text-sm text-white/75 leading-relaxed">{s.text}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="container-valen relative mt-10">
+        <Link
+          to="/clube-valen-fidelidade"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow hover:scale-[1.03] transition-transform"
+        >
+          Conheça o Clube Valen <ArrowRight className="h-5 w-5" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 /* -------------------- Cards -------------------- */
 
 function ArticleCardLarge({ post }: { post: Post }) {
@@ -355,21 +600,24 @@ function ArticleCardLarge({ post }: { post: Post }) {
           src={post.cover}
           alt={post.title}
           rounded="rounded-none"
-          className="h-full w-full group-hover:scale-105 transition-transform duration-700"
+          className="h-full w-full"
+          imgClassName="group-hover:scale-105 transition-transform duration-700"
         />
       </div>
-      <div className="p-7">
-        <div className="flex items-center gap-3 text-xs">
+      <div className="p-6 md:p-7">
+        <div className="flex items-center gap-3 text-xs flex-wrap">
           <span className="rounded-full bg-primary/10 px-3 py-1 font-bold text-primary">{post.category}</span>
           <span className="text-muted-foreground">{post.publishedAt}</span>
           <span className="text-muted-foreground inline-flex items-center gap-1">
             <Clock className="h-3 w-3" /> {post.readingTime}
           </span>
         </div>
-        <h3 className="mt-4 text-3xl font-display font-extrabold text-secondary leading-tight">{post.title}</h3>
+        <h3 className="mt-4 text-2xl md:text-3xl font-display font-extrabold text-secondary leading-tight">
+          {post.title}
+        </h3>
         <p className="mt-3 text-muted-foreground line-clamp-3">{post.excerpt}</p>
         <span className="mt-5 inline-flex items-center gap-2 font-bold text-primary">
-          Ler mais <ArrowRight className="h-4 w-4" />
+          Ler artigo <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </span>
       </div>
     </Link>
@@ -388,7 +636,8 @@ function ArticleCardSmall({ post }: { post: Post }) {
           src={post.cover}
           alt={post.title}
           rounded="rounded-none"
-          className="h-full w-full group-hover:scale-105 transition-transform duration-700"
+          className="h-full w-full"
+          imgClassName="group-hover:scale-105 transition-transform duration-700"
         />
       </div>
       <div className="p-5 flex flex-col flex-1">
@@ -402,17 +651,16 @@ function ArticleCardSmall({ post }: { post: Post }) {
           {post.title}
         </h3>
         <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>
-        <div className="mt-4 flex items-center justify-between text-xs">
+        <div className="mt-4 pt-3 border-t border-border flex items-center justify-between text-xs">
           <span className="text-muted-foreground">{post.publishedAt}</span>
           <span className="inline-flex items-center gap-1 font-bold text-primary">
-            Ler mais <ArrowRight className="h-3.5 w-3.5" />
+            Ler mais <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
           </span>
         </div>
       </div>
     </Link>
   );
 }
-
 
 /* -------------------- Vídeos -------------------- */
 
@@ -442,7 +690,7 @@ function VideoCardLarge({ video, onPlay }: { video: VideoRow; onPlay: () => void
         <span className="text-xs font-bold uppercase tracking-wider text-primary">{video.category}</span>
         <h3 className="mt-2 text-2xl font-display font-bold text-secondary">{video.title}</h3>
         {video.short_description && (
-          <p className="mt-2 text-muted-foreground">{video.short_description}</p>
+          <p className="mt-2 text-muted-foreground line-clamp-2">{video.short_description}</p>
         )}
       </div>
     </button>
@@ -454,7 +702,7 @@ function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void
     <button
       type="button"
       onClick={onPlay}
-      className="group flex items-center gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
+      className="group flex items-center gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft hover:-translate-y-0.5 transition-all p-3 text-left w-full"
     >
       <div className="relative w-[140px] shrink-0 aspect-video overflow-hidden rounded-xl">
         <Img
@@ -527,12 +775,11 @@ function VideoModal({ video, onClose }: { video: VideoRow | null; onClose: () =>
   );
 }
 
-
 /* -------------------- Newsletter -------------------- */
 
 function Newsletter() {
   return (
-    <section className="py-20 bg-secondary text-white relative overflow-hidden">
+    <section className="py-16 md:py-20 bg-secondary text-white relative overflow-hidden">
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-96 w-[120%] rounded-full bg-primary/20 blur-3xl" />
       <div className="container-valen relative grid lg:grid-cols-2 gap-10 items-center">
         <div>
@@ -540,10 +787,10 @@ function Newsletter() {
             <Mail className="h-3.5 w-3.5" /> Newsletter
           </span>
           <h3 className="mt-4 text-4xl md:text-5xl font-display font-extrabold leading-tight text-balance">
-            Receba novidades do Valen
+            Não perca a próxima parada.
           </h3>
           <p className="mt-4 text-white/80 max-w-md leading-relaxed">
-            Promoções, dicas da estrada e conteúdos úteis para quem vive em movimento.
+            Receba promoções, novidades, conteúdos de estrada e experiências do Valen direto no seu WhatsApp ou e-mail.
           </p>
           <p className="mt-2 text-xs text-white/50 inline-flex items-center gap-1">
             <MapPin className="h-3 w-3" /> Complexo Valen — São Luís/MA
