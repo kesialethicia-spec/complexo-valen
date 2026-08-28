@@ -66,6 +66,9 @@ function Home() {
     void (async () => {
       try { setExpSettings(await getExperienciasPageSettings()); } catch { /* fallback */ }
     })();
+    void (async () => {
+      try { setClube(await getClubeSettings()); } catch { /* fallback */ }
+    })();
   }, []);
 
   const homePromos = useMemo(() => {
