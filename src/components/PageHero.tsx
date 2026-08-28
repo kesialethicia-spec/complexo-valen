@@ -6,11 +6,13 @@ export function PageHero({
   title,
   subtitle,
   image,
+  compact = false,
 }: {
   eyebrow?: string;
   title: string;
   subtitle?: string;
   image?: string;
+  compact?: boolean;
 }) {
   return (
     <section className="relative overflow-hidden bg-gradient-hero text-white">
@@ -22,7 +24,8 @@ export function PageHero({
       <div className="absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-primary/40 blur-3xl" />
       <div className="absolute top-10 left-10 h-64 w-64 rounded-full bg-gold/10 blur-3xl" />
 
-      <div className="container-valen relative py-24 md:py-32">
+      <div className={`container-valen relative ${compact ? "py-16 md:py-20" : "py-24 md:py-32"}`}>
+
         <nav className="text-xs text-white/70 mb-6">
           <Link to="/" className="hover:text-white">Home</Link>
           {eyebrow && <> <span className="mx-2">/</span> <span>{eyebrow}</span></>}
