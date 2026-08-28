@@ -47,6 +47,7 @@ function Home() {
   const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   const [latestPosts, setLatestPosts] = useState<BlogPostRow[]>([]);
   const [expSettings, setExpSettings] = useState<ExperienciasPageSettings>(DEFAULT_EXPERIENCIAS_SETTINGS);
+  const [clube, setClube] = useState<ClubeSettings>(DEFAULT_CLUBE_SETTINGS);
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
