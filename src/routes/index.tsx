@@ -524,34 +524,7 @@ function Home() {
                 Abasteceu? Pontuou.
               </span>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {[
-                  { n: "01", t: "Abasteça", d: "Informe seu CPF no caixa ao abastecer.", icon: Fuel },
-                  { n: "02", t: "Acumule", d: "Seus abastecimentos viram pontos automaticamente.", icon: CreditCard },
-                  { n: "03", t: "Aproveite", d: "Troque seus pontos por benefícios pelo aplicativo.", icon: Gift },
-                ].map((s) => (
-                  <div key={s.n} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm">
-                    <div className="flex items-center gap-2 text-primary">
-                      <s.icon className="h-4 w-4" />
-                      <span className="text-xs font-extrabold tracking-widest">{s.n}</span>
-                    </div>
-                    <h3 className="mt-3 text-base font-display font-bold">{s.t}</h3>
-                    <p className="mt-1.5 text-sm text-white/70 leading-relaxed">{s.d}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                {clube.google_play_url && (
-                  <a href={clube.google_play_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-secondary hover:scale-105 transition-transform">
-                    <Smartphone className="h-4 w-4" /> Google Play
-                  </a>
-                )}
-                {clube.app_store_url && (
-                  <a href={clube.app_store_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-secondary hover:scale-105 transition-transform">
-                    <Smartphone className="h-4 w-4" /> App Store
-                  </a>
-                )}
+              <div className="mt-10">
                 <Link to="/clube-valen-fidelidade" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold backdrop-blur hover:bg-white/20 transition-colors">
                   Conheça o Clube Valen <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -562,22 +535,15 @@ function Home() {
             <div className="relative order-first lg:order-last">
               <div className="relative mx-auto max-w-md">
                 <div className="absolute inset-0 m-auto h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-gradient-orange opacity-90 blur-[2px]" aria-hidden />
-                <div className="relative flex items-end justify-center gap-0">
-                  <Img
-                    src={appTelasAsset.url}
-                    alt="Telas do aplicativo Clube Valen Fidelidade"
-                    sizes="(max-width: 1024px) 60vw, 340px"
-                    className="w-[58%] translate-y-4 -rotate-6 drop-shadow-2xl"
-                  />
-                  <Img
-                    src={celularAsset.url}
-                    alt="Aplicativo Clube Valen Fidelidade no celular"
-                    sizes="(max-width: 1024px) 55vw, 300px"
-                    className="w-[52%] -ml-8 drop-shadow-2xl"
-                  />
-                </div>
+                <Img
+                  src={appTelasAsset.url}
+                  alt="Telas do aplicativo Clube Valen Fidelidade"
+                  sizes="(max-width: 1024px) 70vw, 420px"
+                  className="relative mx-auto w-[82%] drop-shadow-2xl"
+                />
               </div>
             </div>
+
           </div>
         </div>
       </section>
