@@ -356,15 +356,15 @@ function Home() {
         const cards = [
           {
             t: "Café da Manhã de Sábado",
-            d: "Todo sábado, um momento de acolhimento para quem passa pelo Valen.",
+            d: "Todo sábado, um momento de acolhimento para quem está na estrada.",
             hash: "cafe-da-manha",
-            tag: "Toda semana",
+            tag: "Tradição",
             icon: Coffee,
             img: expSettings.cafe_image_url || "",
           },
           {
             t: "Ações de Saúde",
-            d: "Vacinação, aferição de pressão, orientação e cuidado para quem vive em movimento.",
+            d: "Iniciativas pensadas para promover bem-estar e atenção a quem passa pelo Valen.",
             hash: "acoes-de-saude",
             tag: "Cuidado",
             icon: Heart,
@@ -372,38 +372,38 @@ function Home() {
           },
           {
             t: "Clube do Caminhoneiro",
-            d: "Espaço de descanso, convivência e lazer para quem está na estrada.",
+            d: "Um espaço criado para valorizar quem move o Brasil todos os dias.",
             hash: "clube-do-caminhoneiro",
-            tag: "Convivência",
+            tag: "Comunidade",
             icon: Users,
             img: expSettings.clube_image_url || "",
           },
           {
             t: "Espaço Valentina",
-            d: "Acolhimento para mulheres e crianças no Pátio 01 e Pátio 05.",
+            d: "Um ambiente pensado para trazer leveza, carinho e conexão para toda a família.",
             hash: "espaco-valentina",
-            tag: "Acolhimento",
+            tag: "Família",
             icon: Baby,
             img: expSettings.valentina_image_urls.filter(Boolean)[0] || "",
           },
           {
             t: "Studio Valen",
-            d: "Conteúdos, entrevistas e episódios do PodValen.",
+            d: "Um espaço voltado para cuidado, autoestima e experiências que vão além da estrada.",
             hash: "studio-valen",
-            tag: "Conteúdo",
+            tag: "Bem-estar",
             icon: Mic,
             img: expSettings.studio_image_url || "",
           },
           {
             t: "Eventos Valen",
-            d: "Momentos especiais que aproximam caminhoneiros, clientes, parceiros e equipe.",
+            d: "Ações especiais, campanhas e encontros que tornam a experiência no Valen ainda mais marcante.",
             hash: "eventos",
             tag: "Eventos",
             icon: Calendar,
             img: firstEventImg || expSettings.festa_image_url || "",
           },
         ];
-        const [featured, second, third, ...rest] = cards;
+        const [featured, side, ...rest] = cards;
 
         const ExpCard = ({
           c,
@@ -415,38 +415,39 @@ function Home() {
           <Link
             to="/experiencias"
             hash={c.hash}
-            className={`group relative overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1.5 ${
-              size === "lg"
-                ? "min-h-[420px] lg:min-h-[600px]"
-                : size === "md"
-                  ? "min-h-[240px] lg:min-h-[288px]"
-                  : "min-h-[230px] lg:min-h-[260px]"
-            }`}
+            className="group relative block h-full overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1"
           >
             <SmartImage
               src={c.img}
               alt={c.t}
               rounded="rounded-none"
-              className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.06]"
+              className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/55 to-transparent" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-secondary to-secondary/10" />
-            <div className={`relative h-full flex flex-col justify-end text-white ${size === "lg" ? "p-8 lg:p-10" : "p-6"}`}>
-              <span className={`inline-flex self-start items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
-                size === "lg"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-white/15 backdrop-blur text-white"
-              }`}>
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-secondary/10" />
+            <div
+              className={`relative flex h-full flex-col justify-end text-white ${
+                size === "lg" ? "p-8 lg:p-10" : "p-6"
+              }`}
+            >
+              <span
+                className={`inline-flex self-start items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                  size === "lg" ? "bg-primary text-primary-foreground" : "bg-white/15 backdrop-blur text-white"
+                }`}
+              >
                 <c.icon className={`h-3 w-3 ${size === "lg" ? "" : "text-primary"}`} /> {c.tag}
               </span>
-              <h3 className={`mt-4 font-display font-extrabold text-balance leading-tight ${
-                size === "lg" ? "text-3xl lg:text-[2.6rem]" : size === "md" ? "text-2xl" : "text-xl"
-              }`}>
+              <h3
+                className={`mt-4 font-display font-extrabold text-balance leading-tight ${
+                  size === "lg" ? "text-3xl lg:text-[2.4rem]" : size === "md" ? "text-2xl" : "text-xl"
+                }`}
+              >
                 {c.t}
               </h3>
-              <p className={`mt-2.5 text-white/85 leading-relaxed ${
-                size === "lg" ? "text-base max-w-md" : "text-sm line-clamp-2"
-              }`}>
+              <p
+                className={`mt-2.5 text-white/85 leading-relaxed ${
+                  size === "lg" ? "text-base max-w-md" : "text-sm line-clamp-2"
+                }`}
+              >
                 {c.d}
               </p>
               <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3.5">
@@ -462,22 +463,25 @@ function Home() {
               <SectionHeader
                 eyebrow="Experiências"
                 title="Mais do que uma parada. Uma experiência em movimento."
-                subtitle="No Valen, cada jornada também é feita de cuidado, convivência, conteúdo e momentos que aproximam pessoas."
+                subtitle="No Valen, cada parada também é feita de cuidado, convivência, conteúdo e momentos que aproximam pessoas."
               />
 
-              {/* Mosaico editorial assimétrico */}
-              <div className="mt-14 grid gap-5 lg:grid-cols-12">
-                <div className="lg:col-span-7">
+              {/* Destaque + card lateral */}
+              <div className="mt-14 grid gap-6 lg:grid-cols-12">
+                <div className="lg:col-span-8 h-[380px] sm:h-[440px] lg:h-[520px]">
                   <ExpCard c={featured} size="lg" />
                 </div>
-                <div className="lg:col-span-5 grid gap-5">
-                  <ExpCard c={second} size="md" />
-                  <ExpCard c={third} size="md" />
+                <div className="lg:col-span-4 h-[300px] lg:h-[520px]">
+                  <ExpCard c={side} size="md" />
                 </div>
               </div>
-              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+              {/* Cards complementares */}
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {rest.map((c) => (
-                  <ExpCard key={c.t} c={c} size="sm" />
+                  <div key={c.t} className="h-[260px]">
+                    <ExpCard c={c} size="sm" />
+                  </div>
                 ))}
               </div>
 
@@ -493,6 +497,7 @@ function Home() {
           </section>
         );
       })()}
+
 
       {/* CLUBE VALEN FIDELIDADE */}
       <section className="relative overflow-hidden bg-secondary text-white py-24 lg:py-28">
