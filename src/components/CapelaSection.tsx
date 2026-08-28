@@ -5,6 +5,7 @@ import fachada from "@/assets/capela/fachada.jpg.asset.json";
 import frente from "@/assets/capela/frente.png.asset.json";
 import interior from "@/assets/capela/interior.png.asset.json";
 import altar from "@/assets/capela/altar.png.asset.json";
+import { Img } from "@/components/Img";
 
 const SLIDES = [
   { url: fachada.url, alt: "Fachada externa da Capela Valen" },
@@ -16,11 +17,23 @@ const SLIDES = [
 export function CapelaSection() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([0]));
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const go = useCallback((dir: number) => {
     setIndex((i) => (i + dir + SLIDES.length) % SLIDES.length);
   }, []);
+
+  // Só monta a imagem depois que o slide é (ou será) exibido — evita baixar as 4 de uma vez.
+  useEffect(() => {
+    setSeen((prev) => {
+      if (prev.has(index)) return prev;
+      const next = new Set(prev);
+      next.add(index);
+      return next;
+    });
+  }, [index]);
+
 
   useEffect(() => {
     if (paused) return;
@@ -74,17 +87,20 @@ export function CapelaSection() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            {SLIDES.map((s, i) => (
-              <img
-                key={s.url}
-                src={s.url}
-                alt={s.alt}
-                loading="lazy"
-                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-                  i === index ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
+            {SLIDES.map((s, i) =>
+              seen.has(i) ? (
+                <Img
+                  key={s.url}
+                  src={s.url}
+                  alt={s.alt}
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 600px"
+                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                    i === index ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ) : null,
+            )}
 
             <button
               type="button"

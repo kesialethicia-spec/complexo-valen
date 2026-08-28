@@ -34,6 +34,7 @@ import { extractYoutubeId, youtubeThumbnail } from "@/lib/videos-api";
 import { X } from "lucide-react";
 import { SmartImage } from "@/components/SmartImage";
 import { CapelaSection } from "@/components/CapelaSection";
+import { Img } from "@/components/Img";
 
 
 export const Route = createFileRoute("/experiencias")({
@@ -497,7 +498,7 @@ function InstagramCard({
       <div className="relative aspect-square bg-gradient-to-br from-pink-500 via-purple-500 to-orange-400 grid place-items-center text-white overflow-hidden">
         {thumbnail ? (
           <>
-            <img
+            <Img
               src={thumbnail}
               alt={title}
               className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform"
@@ -534,7 +535,7 @@ function YoutubeCard({ url }: { url: string }) {
       className="group flex flex-col rounded-2xl overflow-hidden bg-white text-secondary hover:shadow-xl transition-shadow"
     >
       <div className="relative aspect-video">
-        <img
+        <Img
           src={youtubeThumbnail(id, "hq")}
           alt=""
           className="h-full w-full object-cover"

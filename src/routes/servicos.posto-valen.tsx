@@ -6,6 +6,7 @@ import heroFallback from "@/assets/posto/hero.jpg.asset.json";
 import abastecimentoFallback from "@/assets/posto/abastecimento.jpg.asset.json";
 import atendimentoFallback from "@/assets/posto/atendimento.jpg.asset.json";
 import paymentStripFallback from "@/assets/posto/formas-de-pagamento.png.asset.json";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/servicos/posto-valen")({
   head: () => ({
@@ -50,7 +51,7 @@ function PostoValenPage() {
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
-          <img src={hero} alt="" className="h-full w-full object-cover" />
+          <Img src={hero} alt="" fetchPriority="high" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-secondary/80 to-secondary/70" />
         </div>
         <div className="container-valen relative py-24 md:py-32">
@@ -62,7 +63,7 @@ function PostoValenPage() {
             <span>Posto Valen</span>
           </nav>
           {data.logo_url && (
-            <img src={data.logo_url} alt="Posto Valen" className="h-16 md:h-20 mb-6 object-contain object-left" />
+            <Img src={data.logo_url} alt="Posto Valen" className="h-16 md:h-20 mb-6 object-contain object-left" />
           )}
           <span className="inline-flex items-center gap-2 rounded-full bg-primary/20 border border-primary/40 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
             <Clock className="h-3.5 w-3.5" /> Abastecimento 24h
@@ -98,7 +99,7 @@ function PostoValenPage() {
       <section className="py-20 md:py-24 bg-background">
         <div className="container-valen grid gap-12 lg:grid-cols-2 items-center">
           <div>
-            <img src={posto} alt="Posto Valen" className="w-full aspect-[4/3] object-cover rounded-3xl shadow-glow" loading="lazy" />
+            <Img src={posto} alt="Posto Valen" className="w-full aspect-[4/3] object-cover rounded-3xl shadow-glow" loading="lazy" />
           </div>
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
@@ -169,7 +170,7 @@ function PostoValenPage() {
         <div className="container-valen">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="lg:order-2">
-              <img src={conveniencia} alt="Conveniência Valen" className="w-full aspect-[4/3] object-cover rounded-3xl shadow-glow" loading="lazy" />
+              <Img src={conveniencia} alt="Conveniência Valen" className="w-full aspect-[4/3] object-cover rounded-3xl shadow-glow" loading="lazy" />
             </div>
             <div className="lg:order-1">
               <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
@@ -231,12 +232,12 @@ function PostoValenPage() {
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
                 {data.payment_logos.filter(Boolean).map((url, i) => (
                   <div key={i} className="aspect-[3/2] grid place-items-center rounded-xl border bg-white p-3">
-                    <img src={url} alt="" className="max-h-full max-w-full object-contain" loading="lazy" />
+                    <Img src={url} alt="" className="max-h-full max-w-full object-contain" loading="lazy" />
                   </div>
                 ))}
               </div>
             ) : (
-              <img src={paymentStrip} alt="Formas de pagamento aceitas" className="w-full h-auto object-contain" loading="lazy" />
+              <Img src={paymentStrip} alt="Formas de pagamento aceitas" className="w-full h-auto object-contain" loading="lazy" />
             )}
             <div className="mt-6 flex flex-wrap gap-2">
               {PAYMENT_METHODS.map((m) => (

@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { ArrowRight, ImageIcon } from "lucide-react";
 import { listPublishedServices, type ServiceRow } from "@/lib/services-api";
 import { getServiceIcon } from "@/lib/service-icons";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/servicos/")({
   head: () => ({
@@ -56,7 +57,7 @@ function ServiceCard({ service }: { service: ServiceRow }) {
     <div className="group h-full overflow-hidden rounded-3xl bg-card border border-border hover:shadow-glow hover:-translate-y-1 transition-all">
       <div className="relative h-56 overflow-hidden bg-muted">
         {service.image_url ? (
-          <img
+          <Img
             src={service.image_url}
             alt={service.name}
             className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"

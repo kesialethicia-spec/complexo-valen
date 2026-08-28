@@ -8,6 +8,7 @@ import {
   VIDEO_CATEGORIES,
   type VideoRow,
 } from "@/lib/videos-api";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/admin/videos/")({
   component: AdminVideosList,
@@ -140,7 +141,7 @@ function AdminVideosList() {
                 <tr key={v.id} className="border-t">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <img src={youtubeThumbnail(v.youtube_id, "mq")} alt="" className="h-12 w-20 rounded object-cover" />
+                      <Img src={youtubeThumbnail(v.youtube_id, "mq")} alt="" className="h-12 w-20 rounded object-cover" />
                       <div>
                         <div className="font-medium">{v.title}</div>
                         <a

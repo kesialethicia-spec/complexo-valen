@@ -7,6 +7,7 @@ import caminhoneiroAsset from "@/assets/promocoes/caminhoneiro-promo.png.asset.j
 import tinosClubeAsset from "@/assets/promocoes/tinos-clube.png.asset.json";
 import { listActivePromotions, PROMOTION_CATEGORIES, type PromotionRow } from "@/lib/promotions-api";
 import { SmartImage } from "@/components/SmartImage";
+import { Img } from "@/components/Img";
 
 
 
@@ -100,7 +101,7 @@ function PromoHero() {
         {/* composição da imagem */}
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-glow ring-8 ring-white/30">
-            <img
+            <Img
               src={caminhoneiroAsset.url}
               alt="Caminhoneiro sorrindo ao ver uma promoção do Valen no celular"
               className="h-full w-full object-cover object-center"
@@ -317,7 +318,7 @@ function ClubeValen() {
             </div>
             <div className="relative flex items-end justify-center">
               <div className="absolute bottom-0 h-56 w-56 rounded-full bg-gradient-orange opacity-90 blur-[2px] md:h-72 md:w-72" />
-              <img
+              <Img
                 src={tinosClubeAsset.url}
                 alt="Mascotes Tino e Tina apresentando o app do Clube Valen Fidelidade"
                 className="relative w-full max-w-sm object-contain drop-shadow-2xl"

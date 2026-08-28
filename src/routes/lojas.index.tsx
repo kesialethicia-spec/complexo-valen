@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { PageHero } from "@/components/PageHero";
 import { Search, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { listActiveStores, STORE_CATEGORIES, type PublicStoreRow } from "@/lib/stores-api";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/lojas/")({
   validateSearch: (search: Record<string, unknown>): { categoria?: string } =>
@@ -169,7 +170,7 @@ function Lojas() {
                     <span className="text-xs font-bold uppercase tracking-wider text-primary pt-1">{l.category}</span>
                     <div className="h-16 w-16 shrink-0 rounded-2xl bg-white border border-border shadow-sm flex items-center justify-center overflow-hidden">
                       {l.logo_url ? (
-                        <img src={l.logo_url} alt={`Logo ${l.name}`} className="h-full w-full object-contain p-2" />
+                        <Img src={l.logo_url} alt={`Logo ${l.name}`} className="h-full w-full object-contain p-2" />
                       ) : (
                         <span className="font-display font-bold text-secondary text-lg">
                           {l.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}

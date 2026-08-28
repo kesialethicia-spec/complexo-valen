@@ -4,6 +4,7 @@ import { MapPin, Clock, MessageCircle, ArrowLeft, Phone, Tag, Building2 } from "
 import { supabase } from "@/integrations/supabase/client";
 import { getStoreBySlug, PUBLIC_STORE_COLUMNS, type PublicStoreRow } from "@/lib/stores-api";
 import { SmartImage } from "@/components/SmartImage";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/lojas/$slug")({
   loader: async ({ params }) => {
@@ -166,7 +167,7 @@ function StoreDetail() {
               ) : (
                 <div className="w-full aspect-[4/3] rounded-3xl bg-white/10 flex items-center justify-center">
                   {store.logo_url ? (
-                    <img
+                    <Img
                       src={store.logo_url}
                       alt={`Logo ${store.name}`}
                       className="max-h-40 max-w-[70%] object-contain"
@@ -180,7 +181,7 @@ function StoreDetail() {
               )}
               {store.cover_url && store.logo_url && (
                 <div className="absolute -bottom-6 left-6 h-20 w-20 rounded-2xl bg-white border border-border shadow-lg flex items-center justify-center overflow-hidden">
-                  <img src={store.logo_url} alt={`Logo ${store.name}`} className="h-full w-full object-contain p-2" />
+                  <Img src={store.logo_url} alt={`Logo ${store.name}`} className="h-full w-full object-contain p-2" />
                 </div>
               )}
             </div>

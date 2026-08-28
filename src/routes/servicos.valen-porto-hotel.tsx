@@ -7,6 +7,7 @@ import quartoAsset from "@/assets/hotel/quarto.jpg.asset.json";
 import cafeAsset from "@/assets/hotel/cafe.jpg.asset.json";
 import auditorioAsset from "@/assets/hotel/auditorio.jpg.asset.json";
 import logoAsset from "@/assets/hotel/logo-valen-porto-hotel.png.asset.json";
+import { Img } from "@/components/Img";
 
 const FALLBACK_HERO = fachadaAsset.url;
 const FALLBACK_PRESENTATION = quartoAsset.url;
@@ -58,7 +59,7 @@ function HotelPage() {
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Valen Porto Hotel" className="h-full w-full object-cover" />
+          <Img src={heroImage} alt="Valen Porto Hotel" fetchPriority="high" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/95 via-secondary/85 to-secondary/70" />
         </div>
 
@@ -72,7 +73,7 @@ function HotelPage() {
           </nav>
 
           <div className="inline-flex items-center gap-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 mb-6">
-            <img src={logo} alt="Logo Valen Porto Hotel" className="h-9 w-auto" />
+            <Img src={logo} alt="Logo Valen Porto Hotel" className="h-9 w-auto" />
           </div>
 
           <h1 className="max-w-3xl text-5xl md:text-6xl font-display font-extrabold tracking-tight text-balance">
@@ -110,7 +111,7 @@ function HotelPage() {
       <section className="py-24 bg-background">
         <div className="container-valen grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <img
+            <Img
               src={logo}
               alt="Valen Porto Hotel"
               className="h-14 w-auto mb-6"
@@ -127,7 +128,7 @@ function HotelPage() {
           </div>
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2rem] bg-gradient-orange opacity-20 blur-2xl" />
-            <img
+            <Img
               src={presentationImage}
               alt="Ambiente do Valen Porto Hotel"
               className="relative w-full aspect-[4/3] object-cover rounded-3xl shadow-glow"
@@ -200,7 +201,7 @@ function HotelPage() {
                 key={`${src}-${i}`}
                 className="group relative overflow-hidden rounded-3xl aspect-[4/5] bg-muted"
               >
-                <img
+                <Img
                   src={src}
                   alt={`Foto ${i + 1} do Valen Porto Hotel`}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"

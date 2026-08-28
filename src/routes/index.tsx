@@ -13,6 +13,8 @@ import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
 import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
+import { Img } from "@/components/Img";
+import { RESPONSIVE_IMAGES } from "@/lib/images.generated";
 
 
 export const Route = createFileRoute("/")({
@@ -20,6 +22,16 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Complexo Valen — Somos feitos de movimento | São Luís/MA" },
       { name: "description", content: "Parada completa em São Luís: posto, truck center, hotel, alimentação, lojas, eventos e experiências para quem vive em movimento." },
+    ],
+    links: [
+      {
+        rel: "preload",
+        as: "image",
+        href: mascotesAsset.url,
+        imagesrcset: RESPONSIVE_IMAGES["tinos-novos.png"]?.srcSet,
+        imagesizes: "(max-width: 1024px) 90vw, 520px",
+        fetchpriority: "high",
+      },
     ],
   }),
   component: Home,
@@ -93,10 +105,11 @@ function Home() {
                 {heroBgMobile && (
                   <source media="(max-width: 767px)" srcSet={heroBgMobile} />
                 )}
-                <img
+                <Img
                   src={heroBgDesktop || heroBgMobile}
                   alt=""
                   aria-hidden="true"
+                  fetchPriority="high"
                   className="h-full w-full object-cover"
                   width={1920}
                   height={1080}
@@ -139,9 +152,11 @@ function Home() {
                 <div className="absolute inset-[-14%] rounded-full border border-primary/20" />
                 <div className="absolute inset-[-22%] rounded-full border border-primary/10" />
                 <div className="absolute inset-[6%] rounded-full bg-gradient-to-br from-primary to-primary/70 shadow-glow" />
-                <img
+                <Img
                   src={mascotesAsset.url}
                   alt="Tino e Tina, mascotes do Complexo Valen"
+                  fetchPriority="high"
+                  sizes="(max-width: 1024px) 90vw, 520px"
                   className="absolute inset-0 h-full w-full object-contain object-center drop-shadow-2xl animate-fade-up p-2"
                   width={1320}
                   height={1380}
@@ -160,10 +175,10 @@ function Home() {
               aria-label={`Ver promoção: ${p.title}`}
               className="relative block w-full min-h-[520px] md:min-h-[640px] lg:min-h-[720px] bg-secondary overflow-hidden"
             >
-              <img
+              <Img
                 src={p.cover_url}
                 alt={p.title}
-                loading="eager"
+                loading={i === 0 ? "eager" : "lazy"}
                 className="absolute inset-0 h-full w-full object-cover [object-position:center_top] md:[object-position:center_center]"
               />
             </Link>

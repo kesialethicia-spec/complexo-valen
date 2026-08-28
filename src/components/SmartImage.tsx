@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ImageIcon } from "lucide-react";
+import { Img } from "@/components/Img";
 
 /**
  * Imagem com skeleton neutro, fade-in suave e fallback com identidade Valen.
@@ -19,7 +20,7 @@ export function SmartImage({
   alt?: string;
   /** classes do wrapper (aspect-ratio, tamanho, etc.) */
   className?: string;
-  /** classes extras aplicadas ao <img> */
+  /** classes extras aplicadas ao <Img> */
   imgClassName?: string;
   rounded?: string;
   objectFit?: "cover" | "contain";
@@ -42,7 +43,7 @@ export function SmartImage({
         </div>
       )}
       {src && status !== "error" && (
-        <img
+        <Img
           src={src}
           alt={alt}
           loading={loading}

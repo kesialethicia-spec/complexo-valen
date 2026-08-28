@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Img } from "@/components/Img";
 
 export function PageHero({
   eyebrow,
@@ -15,7 +16,7 @@ export function PageHero({
     <section className="relative overflow-hidden bg-gradient-hero text-white">
       <div className="absolute inset-0 opacity-30">
         {image && (
-          <img src={image} alt="" className="h-full w-full object-cover mix-blend-overlay" />
+          <Img src={image} alt="" fetchPriority="high" sizes="100vw" className="h-full w-full object-cover mix-blend-overlay" />
         )}
       </div>
       <div className="absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-primary/40 blur-3xl" />

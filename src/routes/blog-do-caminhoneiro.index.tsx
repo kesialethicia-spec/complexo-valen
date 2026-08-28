@@ -8,6 +8,7 @@ import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { listPublishedVideos, youtubeThumbnail, youtubeEmbedUrl, type VideoRow } from "@/lib/videos-api";
 import { SmartImage } from "@/components/SmartImage";
+import { Img } from "@/components/Img";
 
 
 function adaptRow(row: BlogPostRow): Post {
@@ -423,7 +424,7 @@ function VideoCardLarge({ video, onPlay }: { video: VideoRow; onPlay: () => void
       className="lg:col-span-3 group text-left block rounded-3xl overflow-hidden bg-card border border-border hover:shadow-glow transition-all"
     >
       <div className="relative aspect-video overflow-hidden">
-        <img
+        <Img
           src={youtubeThumbnail(video.youtube_id, "max")}
           onError={(e) => { (e.currentTarget as HTMLImageElement).src = youtubeThumbnail(video.youtube_id, "hq"); }}
           alt={video.title}
@@ -456,7 +457,7 @@ function VideoCardSmall({ video, onPlay }: { video: VideoRow; onPlay: () => void
       className="group flex items-center gap-4 rounded-2xl overflow-hidden bg-card border border-border hover:shadow-soft transition-all p-3 text-left w-full"
     >
       <div className="relative w-[140px] shrink-0 aspect-video overflow-hidden rounded-xl">
-        <img
+        <Img
           src={youtubeThumbnail(video.youtube_id, "mq")}
           alt={video.title}
           className="h-full w-full object-cover"
