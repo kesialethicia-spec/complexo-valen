@@ -3,18 +3,22 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
-  Heart, Users, Baby, Mic, Calendar,
+  Heart, Users, Baby, Mic, Calendar, Smartphone, Gift, CreditCard,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SmartImage } from "@/components/SmartImage";
 import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
+import celularAsset from "@/assets/clube/celular.png.asset.json";
+import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
+import { getClubeSettings, DEFAULT_CLUBE_SETTINGS, type ClubeSettings } from "@/lib/clube-valen-api";
 import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 import { Img } from "@/components/Img";
 import { RESPONSIVE_IMAGES } from "@/lib/images.generated";
+
 
 
 export const Route = createFileRoute("/")({
@@ -43,6 +47,7 @@ function Home() {
   const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   const [latestPosts, setLatestPosts] = useState<BlogPostRow[]>([]);
   const [expSettings, setExpSettings] = useState<ExperienciasPageSettings>(DEFAULT_EXPERIENCIAS_SETTINGS);
+  const [clube, setClube] = useState<ClubeSettings>(DEFAULT_CLUBE_SETTINGS);
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -60,6 +65,9 @@ function Home() {
     })();
     void (async () => {
       try { setExpSettings(await getExperienciasPageSettings()); } catch { /* fallback */ }
+    })();
+    void (async () => {
+      try { setClube(await getClubeSettings()); } catch { /* fallback */ }
     })();
   }, []);
 
@@ -395,9 +403,61 @@ function Home() {
             img: firstEventImg || expSettings.festa_image_url || "",
           },
         ];
-        const [featured, ...rest] = cards;
+        const [featured, second, third, ...rest] = cards;
+
+        const ExpCard = ({
+          c,
+          size,
+        }: {
+          c: (typeof cards)[number];
+          size: "lg" | "md" | "sm";
+        }) => (
+          <Link
+            to="/experiencias"
+            hash={c.hash}
+            className={`group relative overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1.5 ${
+              size === "lg"
+                ? "min-h-[420px] lg:min-h-[600px]"
+                : size === "md"
+                  ? "min-h-[240px] lg:min-h-[288px]"
+                  : "min-h-[230px] lg:min-h-[260px]"
+            }`}
+          >
+            <SmartImage
+              src={c.img}
+              alt={c.t}
+              rounded="rounded-none"
+              className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.06]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/55 to-transparent" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-secondary to-secondary/10" />
+            <div className={`relative h-full flex flex-col justify-end text-white ${size === "lg" ? "p-8 lg:p-10" : "p-6"}`}>
+              <span className={`inline-flex self-start items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                size === "lg"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-white/15 backdrop-blur text-white"
+              }`}>
+                <c.icon className={`h-3 w-3 ${size === "lg" ? "" : "text-primary"}`} /> {c.tag}
+              </span>
+              <h3 className={`mt-4 font-display font-extrabold text-balance leading-tight ${
+                size === "lg" ? "text-3xl lg:text-[2.6rem]" : size === "md" ? "text-2xl" : "text-xl"
+              }`}>
+                {c.t}
+              </h3>
+              <p className={`mt-2.5 text-white/85 leading-relaxed ${
+                size === "lg" ? "text-base max-w-md" : "text-sm line-clamp-2"
+              }`}>
+                {c.d}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3.5">
+                Ver mais <ArrowRight className="h-4 w-4" />
+              </span>
+            </div>
+          </Link>
+        );
+
         return (
-          <section className="py-24 bg-surface">
+          <section className="py-24 lg:py-28 bg-surface">
             <div className="container-valen">
               <SectionHeader
                 eyebrow="Experiências"
@@ -405,75 +465,26 @@ function Home() {
                 subtitle="No Valen, cada jornada também é feita de cuidado, convivência, conteúdo e momentos que aproximam pessoas."
               />
 
-              <div className="mt-14 grid gap-5 lg:grid-cols-3">
-                {/* Card grande em destaque */}
-                <Link
-                  to="/experiencias"
-                  hash={featured.hash}
-                  className="group relative overflow-hidden rounded-3xl lg:row-span-2 lg:col-span-1 min-h-[380px] lg:min-h-[560px]"
-                >
-                  <SmartImage
-                    src={featured.img}
-                    alt={featured.t}
-                    rounded="rounded-none"
-                    className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/10" />
-                  <div className="relative h-full flex flex-col justify-end p-7 text-white">
-                    <span className="inline-flex self-start items-center gap-1.5 rounded-full bg-primary/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
-                      <featured.icon className="h-3.5 w-3.5" /> {featured.tag}
-                    </span>
-                    <h3 className="mt-4 text-3xl md:text-4xl font-display font-extrabold text-balance leading-tight">
-                      {featured.t}
-                    </h3>
-                    <p className="mt-3 text-base text-white/85 leading-relaxed max-w-md">
-                      {featured.d}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all">
-                      Ver mais <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </div>
-                </Link>
-
-                {/* Cards menores */}
-                <div className="grid gap-5 sm:grid-cols-2 lg:col-span-2">
-                  {rest.map((c) => (
-                    <Link
-                      key={c.t}
-                      to="/experiencias"
-                      hash={c.hash}
-                      className="group relative overflow-hidden rounded-3xl min-h-[240px] lg:min-h-[270px]"
-                    >
-                      <SmartImage
-                        src={c.img}
-                        alt={c.t}
-                        rounded="rounded-none"
-                        className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/60 to-secondary/10 group-hover:from-secondary group-hover:via-secondary/70 transition-colors" />
-                      <div className="relative h-full flex flex-col justify-end p-5 text-white">
-                        <span className="inline-flex self-start items-center gap-1.5 rounded-full bg-white/15 backdrop-blur px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-                          <c.icon className="h-3 w-3 text-primary" /> {c.tag}
-                        </span>
-                        <h3 className="mt-3 text-xl font-display font-bold text-balance leading-tight">
-                          {c.t}
-                        </h3>
-                        <p className="mt-1.5 text-sm text-white/80 leading-relaxed line-clamp-2">
-                          {c.d}
-                        </p>
-                        <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-primary group-hover:gap-2.5 transition-all">
-                          Ver mais <ArrowRight className="h-3.5 w-3.5" />
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
+              {/* Mosaico editorial assimétrico */}
+              <div className="mt-14 grid gap-5 lg:grid-cols-12">
+                <div className="lg:col-span-7">
+                  <ExpCard c={featured} size="lg" />
+                </div>
+                <div className="lg:col-span-5 grid gap-5">
+                  <ExpCard c={second} size="md" />
+                  <ExpCard c={third} size="md" />
                 </div>
               </div>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {rest.map((c) => (
+                  <ExpCard key={c.t} c={c} size="sm" />
+                ))}
+              </div>
 
-              <div className="mt-12 text-center">
+              <div className="mt-14 text-center">
                 <Link
                   to="/experiencias"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow hover:scale-105 transition-transform"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-8 py-4 text-base font-bold text-primary-foreground shadow-glow hover:scale-105 transition-transform"
                 >
                   Conheça nossas experiências <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -482,6 +493,91 @@ function Home() {
           </section>
         );
       })()}
+
+      {/* CLUBE VALEN FIDELIDADE */}
+      <section className="relative overflow-hidden bg-secondary text-white py-24 lg:py-28">
+        <div className="absolute -top-40 -left-24 h-[28rem] w-[28rem] rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -bottom-40 right-0 h-[26rem] w-[26rem] rounded-full bg-white/5 blur-3xl" />
+        <svg className="absolute inset-x-0 top-10 w-full h-40 opacity-[0.12]" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden>
+          <path d="M0,120 Q360,20 720,120 T1440,120" fill="none" stroke="white" strokeWidth="2" />
+          <path d="M0,160 Q360,60 720,160 T1440,160" fill="none" stroke="white" strokeWidth="2" />
+        </svg>
+
+        <div className="container-valen relative">
+          <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+                <Smartphone className="h-3.5 w-3.5 text-primary" /> Clube Valen Fidelidade
+              </span>
+              <h2 className="mt-5 text-4xl md:text-5xl font-display font-extrabold tracking-tight text-balance leading-[1.05]">
+                Sua parada vale mais.
+              </h2>
+              <p className="mt-5 text-lg text-white/85 leading-relaxed max-w-xl">
+                Abasteça, acumule pontos e troque por benefícios direto pelo aplicativo Clube Valen Fidelidade.
+              </p>
+              <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-4 py-2 text-sm font-extrabold uppercase tracking-wide text-primary-foreground">
+                Abasteceu? Pontuou.
+              </span>
+
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                {[
+                  { n: "01", t: "Abasteça", d: "Informe seu CPF no caixa ao abastecer.", icon: Fuel },
+                  { n: "02", t: "Acumule", d: "Seus abastecimentos viram pontos automaticamente.", icon: CreditCard },
+                  { n: "03", t: "Aproveite", d: "Troque seus pontos por benefícios pelo aplicativo.", icon: Gift },
+                ].map((s) => (
+                  <div key={s.n} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm">
+                    <div className="flex items-center gap-2 text-primary">
+                      <s.icon className="h-4 w-4" />
+                      <span className="text-xs font-extrabold tracking-widest">{s.n}</span>
+                    </div>
+                    <h3 className="mt-3 text-base font-display font-bold">{s.t}</h3>
+                    <p className="mt-1.5 text-sm text-white/70 leading-relaxed">{s.d}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                {clube.google_play_url && (
+                  <a href={clube.google_play_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-secondary hover:scale-105 transition-transform">
+                    <Smartphone className="h-4 w-4" /> Google Play
+                  </a>
+                )}
+                {clube.app_store_url && (
+                  <a href={clube.app_store_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-secondary hover:scale-105 transition-transform">
+                    <Smartphone className="h-4 w-4" /> App Store
+                  </a>
+                )}
+                <Link to="/clube-valen-fidelidade" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold backdrop-blur hover:bg-white/20 transition-colors">
+                  Conheça o Clube Valen <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Mockup */}
+            <div className="relative order-first lg:order-last">
+              <div className="relative mx-auto max-w-md">
+                <div className="absolute inset-0 m-auto h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-gradient-orange opacity-90 blur-[2px]" aria-hidden />
+                <div className="relative flex items-end justify-center gap-0">
+                  <Img
+                    src={appTelasAsset.url}
+                    alt="Telas do aplicativo Clube Valen Fidelidade"
+                    sizes="(max-width: 1024px) 60vw, 340px"
+                    className="w-[58%] translate-y-4 -rotate-6 drop-shadow-2xl"
+                  />
+                  <Img
+                    src={celularAsset.url}
+                    alt="Aplicativo Clube Valen Fidelidade no celular"
+                    sizes="(max-width: 1024px) 55vw, 300px"
+                    className="w-[52%] -ml-8 drop-shadow-2xl"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 
 
 
@@ -530,63 +626,91 @@ function Home() {
         </div>
       </section>
 
-      {/* NOTÍCIAS */}
-      <section className="py-24 bg-surface">
-        <div className="container-valen">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <SectionHeader eyebrow="Conteúdo" title="O que movimenta o Valen" subtitle="Notícias, dicas, campanhas e novidades para quem acompanha nosso complexo." />
-            <Link to="/blog-do-caminhoneiro" className="shrink-0 inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground">
-              Ver todas <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {(latestPosts.length > 0
-              ? latestPosts.map((p) => ({
-                  slug: p.slug,
-                  cat: p.category,
-                  title: p.title,
-                  excerpt: p.excerpt,
-                  img: p.cover_url || "",
-                  date: formatPublishedDate(p.published_at),
-                }))
-              : [
-                  { slug: "", cat: "Dicas", title: "Dicas para quem vive na estrada", excerpt: "", img: "", date: "" },
-                  { slug: "", cat: "Eventos", title: "Experiências em movimento no Valen", excerpt: "", img: "", date: "" },
-                  { slug: "", cat: "Novidades", title: "Novidades do complexo Valen", excerpt: "", img: "", date: "" },
-                ]
-            ).map((n) =>
-              n.slug ? (
-                <Link
-                  to="/blog-do-caminhoneiro/$slug"
-                  params={{ slug: n.slug }}
-                  key={n.slug}
-                  className="group flex flex-col overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
-                >
-                  <div className="h-48 overflow-hidden">
-                    <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="h-full w-full group-hover:scale-110 transition-transform duration-700" />
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
-                    <h3 className="mt-3 text-lg font-display font-bold text-secondary group-hover:text-primary transition-colors line-clamp-2">{n.title}</h3>
-                    {n.excerpt && <p className="mt-2 text-sm text-muted-foreground line-clamp-3">{n.excerpt}</p>}
-                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-primary">Ler mais <ArrowRight className="h-3.5 w-3.5" /></span>
-                  </div>
+      {/* NOTÍCIAS — composição editorial */}
+      {(() => {
+        const posts = latestPosts.map((p) => ({
+          slug: p.slug,
+          cat: p.category,
+          title: p.title,
+          excerpt: p.excerpt,
+          img: p.cover_url || "",
+          date: formatPublishedDate(p.published_at),
+        }));
+        const [main, ...secondary] = posts;
+        return (
+          <section className="py-24 lg:py-28 bg-surface">
+            <div className="container-valen">
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                <SectionHeader
+                  eyebrow="Conteúdo"
+                  title="O que movimenta o Valen"
+                  subtitle="Notícias, dicas, experiências e histórias para quem vive a estrada com a gente."
+                />
+                <Link to="/blog-do-caminhoneiro" className="shrink-0 inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors">
+                  Ver todas as notícias <ArrowRight className="h-4 w-4" />
                 </Link>
+              </div>
+
+              {posts.length === 0 ? (
+                <div className="mt-12 rounded-3xl border border-border bg-card p-10 text-center">
+                  <p className="text-muted-foreground">Em breve, novos conteúdos por aqui.</p>
+                </div>
               ) : (
-                <Link to="/blog-do-caminhoneiro" key={n.title} className="group overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all">
-                  <div className="h-48 overflow-hidden">
-                    <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="h-full w-full group-hover:scale-110 transition-transform duration-700" />
+                <div className="mt-12 grid gap-6 lg:grid-cols-12">
+                  {/* Matéria principal */}
+                  <Link
+                    to="/blog-do-caminhoneiro/$slug"
+                    params={{ slug: main.slug }}
+                    className="group lg:col-span-7 flex flex-col overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
+                  >
+                    <div className="relative overflow-hidden aspect-[16/10]">
+                      <SmartImage src={main.img} alt={main.title} rounded="rounded-none" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
+                      <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
+                        <Newspaper className="h-3 w-3" /> {main.cat}
+                      </span>
+                    </div>
+                    <div className="p-7 flex flex-col flex-1">
+                      {main.date && <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{main.date}</span>}
+                      <h3 className="mt-2 text-2xl md:text-3xl font-display font-extrabold text-secondary leading-tight text-balance group-hover:text-primary transition-colors">{main.title}</h3>
+                      {main.excerpt && <p className="mt-3 text-base text-muted-foreground leading-relaxed line-clamp-3">{main.excerpt}</p>}
+                      <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3.5">
+                        Ler matéria <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* Matérias secundárias */}
+                  <div className="lg:col-span-5 grid gap-6 content-start">
+                    {secondary.map((n) => (
+                      <Link
+                        key={n.slug}
+                        to="/blog-do-caminhoneiro/$slug"
+                        params={{ slug: n.slug }}
+                        className="group flex flex-col sm:flex-row overflow-hidden rounded-3xl bg-card border border-border hover:-translate-y-1 hover:shadow-glow transition-all"
+                      >
+                        <div className="relative overflow-hidden sm:w-2/5 aspect-[16/10] sm:aspect-auto sm:min-h-[170px]">
+                          <SmartImage src={n.img} alt={n.title} rounded="rounded-none" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
+                        </div>
+                        <div className="p-6 flex flex-col justify-center sm:w-3/5">
+                          <span className="inline-flex self-start items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary">
+                            <Newspaper className="h-3 w-3" /> {n.cat}
+                          </span>
+                          <h3 className="mt-2.5 text-lg font-display font-bold text-secondary leading-snug line-clamp-3 group-hover:text-primary transition-colors">{n.title}</h3>
+                          {n.date && <span className="mt-2 text-xs text-muted-foreground">{n.date}</span>}
+                          <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-primary transition-all group-hover:gap-3">
+                            Ler matéria <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-                  <div className="p-6">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"><Newspaper className="h-3 w-3" /> {n.cat}</span>
-                    <h3 className="mt-3 text-lg font-display font-bold text-secondary group-hover:text-primary transition-colors">{n.title}</h3>
-                  </div>
-                </Link>
-              ),
-            )}
-          </div>
-        </div>
-      </section>
+                </div>
+              )}
+            </div>
+          </section>
+        );
+      })()}
+
 
       {/* CTA FINAL */}
       <section className="py-24 bg-background">
