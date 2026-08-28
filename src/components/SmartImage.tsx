@@ -28,6 +28,12 @@ export function SmartImage({
 } & Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src" | "alt" | "className" | "loading">) {
   const [status, setStatus] = useState<"loading" | "loaded" | "error">(src ? "loading" : "error");
 
+  // Reseta o estado quando a URL muda (ex.: imagem chega depois do fetch do painel),
+  // evitando ficar preso no placeholder de erro.
+  useEffect(() => {
+    setStatus(src ? "loading" : "error");
+  }, [src]);
+
   const showPlaceholder = !src || status !== "loaded";
 
   return (
