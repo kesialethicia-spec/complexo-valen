@@ -1,11 +1,38 @@
 import { useRef, useState } from "react";
 import { Upload, X, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Img } from "@/components/Img";
 
 const ACCEPTED = ["image/jpeg", "image/png", "image/webp"];
 const ACCEPTED_ATTR = "image/jpeg,image/png,image/webp";
 const MAX_MB = 5;
 const SIGNED_URL_TTL = 60 * 60 * 24 * 365 * 10; // 10 anos
+
+const MAX_DIMENSION = 1600;
+
+/** Reduz e converte a imagem para WebP no navegador (mantém transparência). */
+async function optimizeImage(file: File): Promise<Blob> {
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+    const w = Math.round(bitmap.width * scale);
+    const h = Math.round(bitmap.height * scale);
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return file;
+    ctx.drawImage(bitmap, 0, 0, w, h);
+    bitmap.close?.();
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/webp", 0.82),
+    );
+    if (!blob || blob.size >= file.size) return file;
+    return blob;
+  } catch {
+    return file;
+  }
+}
 
 interface Props {
   label: string;
@@ -53,12 +80,13 @@ export function ImageUploadField({
     setUploading(true);
 
     try {
-      const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+      const optimized = await optimizeImage(file);
+      const ext = optimized.type === "image/webp" ? "webp" : file.name.split(".").pop()?.toLowerCase() || "jpg";
       const path = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
 
       const { error: upErr } = await supabase.storage
         .from("store-images")
-        .upload(path, file, { contentType: file.type, upsert: false });
+        .upload(path, optimized, { contentType: optimized.type, upsert: false });
       if (upErr) throw upErr;
 
       const { data, error: signErr } = await supabase.storage
@@ -104,7 +132,7 @@ export function ImageUploadField({
 
       {previewSrc ? (
         <div className="space-y-2">
-          <img src={previewSrc} alt="" className={previewCls} />
+          <Img src={previewSrc} alt="" className={previewCls} />
           <div className="flex flex-wrap gap-2">
             <button
               type="button"

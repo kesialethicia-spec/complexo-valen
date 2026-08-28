@@ -26,6 +26,7 @@ import heroFallback from "@/assets/posto/hero.jpg.asset.json";
 import abastecimentoFallback from "@/assets/posto/abastecimento.jpg.asset.json";
 import truckFallback from "@/assets/o-valen/truck.jpg.asset.json";
 import equipeFallback from "@/assets/equipe-valen.png.asset.json";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/servicos/valenlub")({
   head: () => ({
@@ -109,7 +110,7 @@ function ValenlubPage() {
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
-          <img src={hero} alt="" className="h-full w-full object-cover" />
+          <Img src={hero} alt="" fetchPriority="high" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/95 via-secondary/85 to-secondary/70" />
         </div>
         <div className="container-valen relative py-24 md:py-32">
@@ -121,7 +122,7 @@ function ValenlubPage() {
             <span>ValenLub</span>
           </nav>
           {data.logo_url && (
-            <img src={data.logo_url} alt="ValenLub" className="h-16 md:h-20 mb-6 object-contain object-left" />
+            <Img src={data.logo_url} alt="ValenLub" className="h-16 md:h-20 mb-6 object-contain object-left" />
           )}
           <span className="inline-flex items-center gap-2 rounded-full bg-primary/20 border border-primary/40 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
             <Droplets className="h-3.5 w-3.5" /> Distribuidora de lubrificantes
@@ -158,7 +159,7 @@ function ValenlubPage() {
       <section className="py-20 md:py-24 bg-background">
         <div className="container-valen grid gap-12 lg:grid-cols-2 items-center">
           <div>
-            <img
+            <Img
               src={presentation}
               alt="ValenLub"
               className="w-full aspect-[4/3] object-cover rounded-3xl shadow-glow"
@@ -255,7 +256,7 @@ function ValenlubPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                 {brandLogos.map((url, i) => (
                   <div key={i} className="aspect-[3/2] grid place-items-center rounded-xl border bg-white p-3">
-                    <img src={url} alt="" className="max-h-full max-w-full object-contain" loading="lazy" />
+                    <Img src={url} alt="" className="max-h-full max-w-full object-contain" loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -302,8 +303,8 @@ function ValenlubPage() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <img src={team} alt="Equipe comercial" className="aspect-[4/5] w-full object-cover rounded-3xl" loading="lazy" />
-              <img src={delivery} alt="Entrega e logística" className="aspect-[4/5] w-full object-cover rounded-3xl mt-8" loading="lazy" />
+              <Img src={team} alt="Equipe comercial" className="aspect-[4/5] w-full object-cover rounded-3xl" loading="lazy" />
+              <Img src={delivery} alt="Entrega e logística" className="aspect-[4/5] w-full object-cover rounded-3xl mt-8" loading="lazy" />
             </div>
           </div>
         </div>

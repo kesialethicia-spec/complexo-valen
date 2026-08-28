@@ -2,6 +2,7 @@ import { useRef, useState, useCallback } from "react";
 import Cropper, { type Area } from "react-easy-crop";
 import { Upload, X, Loader2, Crop as CropIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Img } from "@/components/Img";
 
 const ACCEPTED = ["image/jpeg", "image/png", "image/webp"];
 const ACCEPTED_ATTR = "image/jpeg,image/png,image/webp";
@@ -49,8 +50,8 @@ async function cropToBlob(
   return new Promise((resolve, reject) =>
     canvas.toBlob(
       (b) => (b ? resolve(b) : reject(new Error("Falha ao gerar imagem"))),
-      "image/jpeg",
-      0.9,
+      "image/webp",
+      0.82,
     ),
   );
 }
@@ -110,10 +111,10 @@ export function CropImageUploadField({
     setError(null);
     try {
       const blob = await cropToBlob(rawSrc, croppedAreaPixels, outputWidth, aspect);
-      const path = `home-hero/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.jpg`;
+      const path = `home-hero/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.webp`;
       const { error: upErr } = await supabase.storage
         .from("store-images")
-        .upload(path, blob, { contentType: "image/jpeg", upsert: false });
+        .upload(path, blob, { contentType: blob.type || "image/webp", upsert: false });
       if (upErr) throw upErr;
       const { data, error: signErr } = await supabase.storage
         .from("store-images")
@@ -158,7 +159,7 @@ export function CropImageUploadField({
             className="w-full max-w-md overflow-hidden rounded-xl border bg-muted"
             style={{ aspectRatio: aspect }}
           >
-            <img src={value} alt="" className="h-full w-full object-cover" />
+            <Img src={value} alt="" className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-wrap gap-2">
             <button

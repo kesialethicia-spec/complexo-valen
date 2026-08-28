@@ -25,6 +25,7 @@ import appTelas from "@/assets/clube/app-telas.png.asset.json";
 import tinosClube from "@/assets/clube/tinos.png.asset.json";
 import heroFallback from "@/assets/posto/hero.jpg.asset.json";
 import experienciaFoto from "@/assets/o-valen/patio.jpg.asset.json";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/clube-valen-fidelidade")({
   head: () => ({
@@ -132,7 +133,7 @@ function Hero({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
 
   return (
     <section id="baixe-o-app" className="relative overflow-hidden bg-gradient-orange">
-      <img src={bg} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-20" />
+      <Img src={bg} alt="" aria-hidden fetchPriority="high" className="absolute inset-0 h-full w-full object-cover opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-br from-primary/85 via-primary/70 to-primary/90" />
       <svg
         aria-hidden
@@ -163,7 +164,7 @@ function Hero({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
 
         <div className="relative flex justify-center lg:justify-end">
           <div className="absolute -right-6 top-6 h-56 w-56 rounded-full bg-white/20 blur-3xl" />
-          <img
+          <Img
             src={phone}
             alt="Aplicativo Clube Valen Fidelidade no celular"
             className="relative w-full max-w-[16rem] object-contain drop-shadow-2xl md:max-w-[19rem]"
@@ -263,7 +264,7 @@ function TinosCena({ benefits }: { benefits: BenefitRow[] }) {
         </div>
         <div className="relative flex justify-center">
           <div className="absolute bottom-6 h-64 w-64 rounded-full bg-gradient-orange opacity-80 blur-[2px] md:h-80 md:w-80" />
-          <img
+          <Img
             src={tinosClube.url}
             alt="Mascotes do Valen apresentando o app do Clube Valen Fidelidade"
             className="relative w-full max-w-md object-contain drop-shadow-2xl"
@@ -311,7 +312,7 @@ function Premios({ items }: { items: BenefitRow[] }) {
               <div className="grid items-center gap-2 md:grid-cols-2">
                 <div className="flex items-center justify-center p-6 md:p-10">
                   {destaque.image_url ? (
-                    <img
+                    <Img
                       src={destaque.image_url}
                       alt={destaque.name}
                       className="max-h-64 w-full rounded-2xl object-contain md:max-h-72"
@@ -349,7 +350,7 @@ function Premios({ items }: { items: BenefitRow[] }) {
             >
               <div className="h-52 overflow-hidden">
                 {b.image_url ? (
-                  <img
+                  <Img
                     src={b.image_url}
                     alt={b.name}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
@@ -402,7 +403,7 @@ function Combos({ items }: { items: BenefitRow[] }) {
             >
               <div className="h-48 overflow-hidden">
                 {c.image_url ? (
-                  <img
+                  <Img
                     src={c.image_url}
                     alt={c.name}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
@@ -440,7 +441,7 @@ function ExperienciaValen() {
   ];
   return (
     <section className="relative overflow-hidden py-24">
-      <img src={experienciaFoto.url} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+      <Img src={experienciaFoto.url} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-secondary/90" />
       <div className="container-valen relative text-secondary-foreground">
         <h2 className="max-w-3xl font-display text-3xl font-extrabold leading-tight md:text-5xl">
@@ -512,7 +513,7 @@ function CtaFinal({ settings }: { settings: typeof DEFAULT_CLUBE_SETTINGS }) {
           </div>
         </div>
         <div className="flex justify-center lg:justify-end">
-          <img
+          <Img
             src={appTelas.url}
             alt="Telas do aplicativo Clube Valen Fidelidade"
             className="w-full max-w-[34rem] object-contain drop-shadow-2xl"

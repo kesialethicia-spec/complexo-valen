@@ -30,6 +30,7 @@ import patioAsset from "@/assets/o-valen/patio.jpg.asset.json";
 import truckAsset from "@/assets/o-valen/truck.jpg.asset.json";
 import cafeAsset from "@/assets/o-valen/cafe.jpg.asset.json";
 import tinoAsset from "@/assets/o-valen/tino-amigo.png.asset.json";
+import { Img } from "@/components/Img";
 
 const heroDefault = heroAsset.url;
 const fachadaDefault = fachadaAsset.url;
@@ -143,10 +144,10 @@ function OValen() {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <img src={presentationImg} alt="Fachada do Complexo Valen" className="aspect-square w-full object-cover rounded-3xl" loading="lazy" />
-            <img src={postoDefault} alt="Posto Valen" className="aspect-square w-full object-cover rounded-3xl mt-8" loading="lazy" />
-            <img src={truckDefault} alt="Truck Center" className="aspect-square w-full object-cover rounded-3xl -mt-8" loading="lazy" />
-            <img src={cafeDefault} alt="Café e alimentação" className="aspect-square w-full object-cover rounded-3xl" loading="lazy" />
+            <Img src={presentationImg} alt="Fachada do Complexo Valen" className="aspect-square w-full object-cover rounded-3xl" loading="lazy" />
+            <Img src={postoDefault} alt="Posto Valen" className="aspect-square w-full object-cover rounded-3xl mt-8" loading="lazy" />
+            <Img src={truckDefault} alt="Truck Center" className="aspect-square w-full object-cover rounded-3xl -mt-8" loading="lazy" />
+            <Img src={cafeDefault} alt="Café e alimentação" className="aspect-square w-full object-cover rounded-3xl" loading="lazy" />
           </div>
         </div>
       </section>
@@ -158,7 +159,7 @@ function OValen() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="h-72 w-72 md:h-96 md:w-96 rounded-full bg-gradient-orange/25 blur-3xl" />
             </div>
-            <img
+            <Img
               src={purposeImg}
               alt="Tino e amigo, mascotes do Valen, em pose de acolhimento"
               className="relative h-72 md:h-[28rem] w-auto object-contain drop-shadow-xl"
@@ -285,7 +286,7 @@ function OValen() {
             ].map((m) => (
               <div key={m.year} className="group rounded-3xl bg-card border border-border overflow-hidden shadow-soft hover:border-primary/50 transition-colors">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={m.img} alt={m.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <Img src={m.img} alt={m.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                 </div>
                 <div className="p-7">
                   <span className="inline-block rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground shadow-glow">
@@ -322,7 +323,7 @@ function OValen() {
               </Link>
             </div>
             <div className="relative min-h-[280px] md:min-h-[420px]">
-              <img src={experienciasImg} alt="Experiências no Complexo Valen" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+              <Img src={experienciasImg} alt="Experiências no Complexo Valen" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
             </div>
           </div>
         </div>
@@ -343,7 +344,7 @@ function OValen() {
                 key={i}
                 className={`overflow-hidden rounded-2xl group ${i % 5 === 0 ? "md:row-span-2 aspect-[3/4] md:aspect-auto" : "aspect-square"}`}
               >
-                <img src={img} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                <Img src={img} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
               </div>
             ))}
           </div>
@@ -377,7 +378,7 @@ function OValen() {
               {instagram.slice(0, 6).map((post, i) => {
                 const inner = (
                   <div className="relative aspect-square overflow-hidden rounded-2xl group bg-muted">
-                    <img src={post.image_url} alt="" className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                    <Img src={post.image_url} alt="" className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                     <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/50 transition-colors flex items-center justify-center">
                       <Instagram className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
@@ -461,7 +462,7 @@ function OValen() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="h-56 w-56 md:h-72 md:w-72 rounded-full bg-gradient-orange/20 blur-2xl" />
                 </div>
-                <img src={equipeDefault} alt="Equipe Valen uniformizada" className="relative h-56 md:h-72 w-auto object-contain drop-shadow-xl" loading="lazy" />
+                <Img src={equipeDefault} alt="Equipe Valen uniformizada" className="relative h-56 md:h-72 w-auto object-contain drop-shadow-xl" loading="lazy" />
               </div>
             </div>
           </div>

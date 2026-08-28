@@ -7,6 +7,7 @@ import {
   type VideoRow,
   type VideoStatus,
 } from "@/lib/videos-api";
+import { Img } from "@/components/Img";
 
 interface Props {
   initial?: VideoRow;
@@ -74,7 +75,7 @@ export function VideoForm({ initial, submitting, onSubmit, onCancel }: Props) {
           {urlError && <p className="mt-1 text-xs text-destructive">{urlError}</p>}
           {videoId && (
             <div className="mt-3 flex items-center gap-3">
-              <img
+              <Img
                 src={youtubeThumbnail(videoId, "mq")}
                 alt="Prévia da thumbnail"
                 className="h-20 w-36 rounded-md object-cover border"

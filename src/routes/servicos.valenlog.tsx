@@ -11,6 +11,7 @@ import patioAereoAsset from "@/assets/valenlog/patio-aereo.jpg.asset.json";
 import patioTriagemAsset from "@/assets/valenlog/patio-triagem.png.asset.json";
 import classificacaoAsset from "@/assets/valenlog/classificacao-graos.jpg.asset.json";
 import caminhoesAsset from "@/assets/valenlog/caminhoes-cobertura.jpg.asset.json";
+import { Img } from "@/components/Img";
 
 const FALLBACK_HERO = patioAereoAsset.url;
 const FALLBACK_PRESENTATION = patioTriagemAsset.url;
@@ -88,7 +89,7 @@ function ValenlogPage() {
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Pátio ValenLog" className="h-full w-full object-cover" />
+          <Img src={heroImage} alt="Pátio ValenLog" fetchPriority="high" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/95 via-secondary/85 to-secondary/70" />
         </div>
 
@@ -167,7 +168,7 @@ function ValenlogPage() {
           </div>
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2rem] bg-gradient-orange opacity-20 blur-2xl" />
-            <img
+            <Img
               src={presentationImage}
               alt="Pátio de Triagem ValenLog"
               className="relative w-full aspect-[4/3] object-cover rounded-3xl shadow-glow"
@@ -216,7 +217,7 @@ function ValenlogPage() {
         <div className="container-valen grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="relative order-2 lg:order-1">
             <div className="absolute -inset-6 rounded-[2rem] bg-primary/15 blur-2xl" />
-            <img
+            <Img
               src={classificacaoImage}
               alt="Classificação de Grãos ValenLog"
               className="relative w-full aspect-[4/3] object-cover rounded-3xl shadow-glow"
@@ -279,7 +280,7 @@ function ValenlogPage() {
           </div>
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2rem] bg-gradient-orange opacity-15 blur-2xl" />
-            <img
+            <Img
               src={inspecaoImage}
               alt="Área de Inspeção ValenLog"
               className="relative w-full aspect-[4/3] object-cover rounded-3xl shadow-glow"
@@ -338,7 +339,7 @@ function ValenlogPage() {
                     i === 0 ? "sm:col-span-2 aspect-[16/10]" : "aspect-[4/5]"
                   }`}
                 >
-                  <img
+                  <Img
                     src={src}
                     alt={`Espaço Valentina ${i + 1}`}
                     className="h-full w-full object-cover"
@@ -377,7 +378,7 @@ function ValenlogPage() {
                 key={`${src}-${i}`}
                 className="group relative overflow-hidden rounded-3xl aspect-[4/3] bg-muted"
               >
-                <img
+                <Img
                   src={src}
                   alt={`Estrutura ValenLog ${i + 1}`}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"

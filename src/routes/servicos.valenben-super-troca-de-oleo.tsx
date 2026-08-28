@@ -23,6 +23,7 @@ import atendimentoFallback from "@/assets/posto/atendimento.jpg.asset.json";
 import truckFallback from "@/assets/o-valen/truck.jpg.asset.json";
 import patioFallback from "@/assets/o-valen/patio.jpg.asset.json";
 import equipeFallback from "@/assets/equipe-valen.png.asset.json";
+import { Img } from "@/components/Img";
 
 export const Route = createFileRoute("/servicos/valenben-super-troca-de-oleo")({
   head: () => ({
@@ -122,7 +123,7 @@ function ValenbenPage() {
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
-          <img src={hero} alt="" className="h-full w-full object-cover" />
+          <Img src={hero} alt="" fetchPriority="high" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/95 via-secondary/85 to-secondary/70" />
         </div>
         <div className="container-valen relative py-24 md:py-32">
@@ -134,7 +135,7 @@ function ValenbenPage() {
             <span>ValenBen Super Troca de Óleo</span>
           </nav>
           {data.logo_url && (
-            <img src={data.logo_url} alt="ValenBen" className="h-16 md:h-20 mb-6 object-contain object-left" />
+            <Img src={data.logo_url} alt="ValenBen" className="h-16 md:h-20 mb-6 object-contain object-left" />
           )}
           <span className="inline-flex items-center gap-2 rounded-full bg-primary/20 border border-primary/40 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
             <Droplets className="h-3.5 w-3.5" /> Especializada em veículos pesados
@@ -173,7 +174,7 @@ function ValenbenPage() {
       <section className="py-20 md:py-24 bg-background">
         <div className="container-valen grid gap-12 lg:grid-cols-2 items-center">
           <div>
-            <img
+            <Img
               src={presentation}
               alt="ValenBen Super Troca de Óleo"
               className="w-full aspect-[4/3] object-cover rounded-3xl shadow-glow"
@@ -230,8 +231,8 @@ function ValenbenPage() {
         <div className="container-valen">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
             <div className="grid grid-cols-2 gap-4">
-              <img src={oilChange} alt="Área de troca de óleo" className="aspect-[4/5] w-full object-cover rounded-3xl" loading="lazy" />
-              <img src={waitingRoom} alt="Sala de espera climatizada" className="aspect-[4/5] w-full object-cover rounded-3xl mt-8" loading="lazy" />
+              <Img src={oilChange} alt="Área de troca de óleo" className="aspect-[4/5] w-full object-cover rounded-3xl" loading="lazy" />
+              <Img src={waitingRoom} alt="Sala de espera climatizada" className="aspect-[4/5] w-full object-cover rounded-3xl mt-8" loading="lazy" />
             </div>
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
@@ -278,7 +279,7 @@ function ValenbenPage() {
                   (i === 0 ? "sm:col-span-2 sm:row-span-2 aspect-[4/3] sm:aspect-auto" : "aspect-[4/3]")
                 }
               >
-                <img
+                <Img
                   src={img}
                   alt=""
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -289,7 +290,7 @@ function ValenbenPage() {
           </div>
           {team && (
             <div className="mt-8 rounded-3xl overflow-hidden">
-              <img src={team} alt="Equipe ValenBen" className="w-full h-64 md:h-80 object-cover" loading="lazy" />
+              <Img src={team} alt="Equipe ValenBen" className="w-full h-64 md:h-80 object-cover" loading="lazy" />
             </div>
           )}
         </div>
