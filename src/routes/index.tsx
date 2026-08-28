@@ -3,12 +3,11 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
-  Heart, Users, Baby, Mic, Calendar, Smartphone, Gift, CreditCard,
+  Heart, Users, Baby, Mic, Calendar, Smartphone,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SmartImage } from "@/components/SmartImage";
 import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
-import celularAsset from "@/assets/clube/celular.png.asset.json";
 import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
