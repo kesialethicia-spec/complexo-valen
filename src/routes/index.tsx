@@ -3,18 +3,22 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
-  Heart, Users, Baby, Mic, Calendar,
+  Heart, Users, Baby, Mic, Calendar, Smartphone, Gift, CreditCard,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SmartImage } from "@/components/SmartImage";
 import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
+import celularAsset from "@/assets/clube/celular.png.asset.json";
+import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
+import { getClubeSettings, DEFAULT_CLUBE_SETTINGS, type ClubeSettings } from "@/lib/clube-valen-api";
 import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 import { Img } from "@/components/Img";
 import { RESPONSIVE_IMAGES } from "@/lib/images.generated";
+
 
 
 export const Route = createFileRoute("/")({
