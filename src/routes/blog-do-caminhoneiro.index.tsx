@@ -268,14 +268,17 @@ function BlogPage() {
           <div className="container-valen">
             <SectionHeader eyebrow="Em alta" title="Artigos em destaque" />
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-2 items-start">
+            <div className={`mt-10 grid gap-6 items-start ${featured.length > 0 ? "lg:grid-cols-2" : "max-w-3xl"}`}>
               <ArticleCardLarge post={main} />
-              <div className="grid gap-6 sm:grid-cols-2">
-                {featured.map((p) => (
-                  <ArticleCardSmall key={p.slug} post={p} />
-                ))}
-              </div>
+              {featured.length > 0 && (
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {featured.map((p) => (
+                    <ArticleCardSmall key={p.slug} post={p} />
+                  ))}
+                </div>
+              )}
             </div>
+
           </div>
         </section>
       )}
