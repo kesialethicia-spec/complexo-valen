@@ -411,13 +411,16 @@ function Home() {
             hash={c.hash}
             className="group relative block h-full overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1"
           >
-            <SmartImage
-              src={c.img}
-              alt={c.t}
-              rounded="rounded-none"
-              className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-secondary/10" />
+            <div className="absolute inset-0">
+              <SmartImage
+                src={c.img}
+                alt={c.t}
+                rounded="rounded-none"
+                className="h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/10" />
+
             <div
               className={`relative flex h-full flex-col justify-end text-white ${
                 size === "lg" ? "p-8 lg:p-10" : "p-6"
@@ -565,31 +568,6 @@ function Home() {
         </div>
       </section>
 
-      {/* MAPA */}
-      <section className="py-24 bg-background">
-        <div className="container-valen">
-          <div className="grid gap-10 lg:grid-cols-2 items-center">
-            <div>
-              <SectionHeader
-                eyebrow="Localização"
-                title="No caminho de quem move o Brasil"
-                subtitle="Localizado em São Luís, o Valen é uma parada estratégica para caminhoneiros, empresas, viajantes e operações logísticas."
-              />
-              <a href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow">
-                <MapPin className="h-4 w-4" /> Abrir no Google Maps
-              </a>
-            </div>
-            <div className="relative overflow-hidden rounded-3xl border border-border shadow-glow aspect-[4/3]">
-              <iframe
-                src="https://www.google.com/maps?q=São+Luís+MA&output=embed"
-                className="absolute inset-0 h-full w-full"
-                loading="lazy"
-                title="Localização Complexo Valen"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* NOTÍCIAS — composição editorial */}
       {(() => {
@@ -700,6 +678,33 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* LOCALIZAÇÃO — última seção */}
+      <section className="py-24 bg-surface">
+        <div className="container-valen">
+          <div className="grid gap-10 lg:grid-cols-2 items-center">
+            <div>
+              <SectionHeader
+                eyebrow="Localização"
+                title="No caminho de quem move o Brasil"
+                subtitle="Localizado em São Luís, o Valen é uma parada estratégica para caminhoneiros, empresas, viajantes e operações logísticas."
+              />
+              <a href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold text-primary-foreground shadow-glow">
+                <MapPin className="h-4 w-4" /> Abrir no Google Maps
+              </a>
+            </div>
+            <div className="relative overflow-hidden rounded-3xl border border-border shadow-glow aspect-[4/3]">
+              <iframe
+                src="https://www.google.com/maps?q=São+Luís+MA&output=embed"
+                className="absolute inset-0 h-full w-full"
+                loading="lazy"
+                title="Localização Complexo Valen"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </>
+
   );
 }
