@@ -3,17 +3,15 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
-  Heart, Users, Baby, Mic, Calendar, Smartphone, Gift, CreditCard,
+  Heart, Users, Baby, Mic, Calendar, Smartphone,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SmartImage } from "@/components/SmartImage";
 import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
-import celularAsset from "@/assets/clube/celular.png.asset.json";
 import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
-import { getClubeSettings, DEFAULT_CLUBE_SETTINGS, type ClubeSettings } from "@/lib/clube-valen-api";
 import { getExperienciasPageSettings, DEFAULT_EXPERIENCIAS_SETTINGS, type ExperienciasPageSettings } from "@/lib/experiencias-settings-api";
 import { listPublishedPosts, formatPublishedDate, type BlogPostRow } from "@/lib/blog-api";
 import { Img } from "@/components/Img";
@@ -47,7 +45,6 @@ function Home() {
   const [heroBgMobile, setHeroBgMobile] = useState<string>("");
   const [latestPosts, setLatestPosts] = useState<BlogPostRow[]>([]);
   const [expSettings, setExpSettings] = useState<ExperienciasPageSettings>(DEFAULT_EXPERIENCIAS_SETTINGS);
-  const [clube, setClube] = useState<ClubeSettings>(DEFAULT_CLUBE_SETTINGS);
   useEffect(() => {
     void (async () => {
       try { setDbPromos(await listActivePromotions()); } catch { /* fallback */ }
@@ -65,9 +62,6 @@ function Home() {
     })();
     void (async () => {
       try { setExpSettings(await getExperienciasPageSettings()); } catch { /* fallback */ }
-    })();
-    void (async () => {
-      try { setClube(await getClubeSettings()); } catch { /* fallback */ }
     })();
   }, []);
 
@@ -356,15 +350,15 @@ function Home() {
         const cards = [
           {
             t: "Café da Manhã de Sábado",
-            d: "Todo sábado, um momento de acolhimento para quem passa pelo Valen.",
+            d: "Todo sábado, um momento de acolhimento para quem está na estrada.",
             hash: "cafe-da-manha",
-            tag: "Toda semana",
+            tag: "Tradição",
             icon: Coffee,
             img: expSettings.cafe_image_url || "",
           },
           {
             t: "Ações de Saúde",
-            d: "Vacinação, aferição de pressão, orientação e cuidado para quem vive em movimento.",
+            d: "Iniciativas pensadas para promover bem-estar e atenção a quem passa pelo Valen.",
             hash: "acoes-de-saude",
             tag: "Cuidado",
             icon: Heart,
@@ -372,38 +366,38 @@ function Home() {
           },
           {
             t: "Clube do Caminhoneiro",
-            d: "Espaço de descanso, convivência e lazer para quem está na estrada.",
+            d: "Um espaço criado para valorizar quem move o Brasil todos os dias.",
             hash: "clube-do-caminhoneiro",
-            tag: "Convivência",
+            tag: "Comunidade",
             icon: Users,
             img: expSettings.clube_image_url || "",
           },
           {
             t: "Espaço Valentina",
-            d: "Acolhimento para mulheres e crianças no Pátio 01 e Pátio 05.",
+            d: "Um ambiente pensado para trazer leveza, carinho e conexão para toda a família.",
             hash: "espaco-valentina",
-            tag: "Acolhimento",
+            tag: "Família",
             icon: Baby,
             img: expSettings.valentina_image_urls.filter(Boolean)[0] || "",
           },
           {
             t: "Studio Valen",
-            d: "Conteúdos, entrevistas e episódios do PodValen.",
+            d: "Um espaço voltado para cuidado, autoestima e experiências que vão além da estrada.",
             hash: "studio-valen",
-            tag: "Conteúdo",
+            tag: "Bem-estar",
             icon: Mic,
             img: expSettings.studio_image_url || "",
           },
           {
             t: "Eventos Valen",
-            d: "Momentos especiais que aproximam caminhoneiros, clientes, parceiros e equipe.",
+            d: "Ações especiais, campanhas e encontros que tornam a experiência no Valen ainda mais marcante.",
             hash: "eventos",
             tag: "Eventos",
             icon: Calendar,
             img: firstEventImg || expSettings.festa_image_url || "",
           },
         ];
-        const [featured, second, third, ...rest] = cards;
+        const [featured, side, ...rest] = cards;
 
         const ExpCard = ({
           c,
@@ -415,38 +409,39 @@ function Home() {
           <Link
             to="/experiencias"
             hash={c.hash}
-            className={`group relative overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1.5 ${
-              size === "lg"
-                ? "min-h-[420px] lg:min-h-[600px]"
-                : size === "md"
-                  ? "min-h-[240px] lg:min-h-[288px]"
-                  : "min-h-[230px] lg:min-h-[260px]"
-            }`}
+            className="group relative block h-full overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1"
           >
             <SmartImage
               src={c.img}
               alt={c.t}
               rounded="rounded-none"
-              className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.06]"
+              className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/55 to-transparent" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-secondary to-secondary/10" />
-            <div className={`relative h-full flex flex-col justify-end text-white ${size === "lg" ? "p-8 lg:p-10" : "p-6"}`}>
-              <span className={`inline-flex self-start items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
-                size === "lg"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-white/15 backdrop-blur text-white"
-              }`}>
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-secondary/10" />
+            <div
+              className={`relative flex h-full flex-col justify-end text-white ${
+                size === "lg" ? "p-8 lg:p-10" : "p-6"
+              }`}
+            >
+              <span
+                className={`inline-flex self-start items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                  size === "lg" ? "bg-primary text-primary-foreground" : "bg-white/15 backdrop-blur text-white"
+                }`}
+              >
                 <c.icon className={`h-3 w-3 ${size === "lg" ? "" : "text-primary"}`} /> {c.tag}
               </span>
-              <h3 className={`mt-4 font-display font-extrabold text-balance leading-tight ${
-                size === "lg" ? "text-3xl lg:text-[2.6rem]" : size === "md" ? "text-2xl" : "text-xl"
-              }`}>
+              <h3
+                className={`mt-4 font-display font-extrabold text-balance leading-tight ${
+                  size === "lg" ? "text-3xl lg:text-[2.4rem]" : size === "md" ? "text-2xl" : "text-xl"
+                }`}
+              >
                 {c.t}
               </h3>
-              <p className={`mt-2.5 text-white/85 leading-relaxed ${
-                size === "lg" ? "text-base max-w-md" : "text-sm line-clamp-2"
-              }`}>
+              <p
+                className={`mt-2.5 text-white/85 leading-relaxed ${
+                  size === "lg" ? "text-base max-w-md" : "text-sm line-clamp-2"
+                }`}
+              >
                 {c.d}
               </p>
               <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3.5">
@@ -462,22 +457,25 @@ function Home() {
               <SectionHeader
                 eyebrow="Experiências"
                 title="Mais do que uma parada. Uma experiência em movimento."
-                subtitle="No Valen, cada jornada também é feita de cuidado, convivência, conteúdo e momentos que aproximam pessoas."
+                subtitle="No Valen, cada parada também é feita de cuidado, convivência, conteúdo e momentos que aproximam pessoas."
               />
 
-              {/* Mosaico editorial assimétrico */}
-              <div className="mt-14 grid gap-5 lg:grid-cols-12">
-                <div className="lg:col-span-7">
+              {/* Destaque + card lateral */}
+              <div className="mt-14 grid gap-6 lg:grid-cols-12">
+                <div className="lg:col-span-8 h-[380px] sm:h-[440px] lg:h-[520px]">
                   <ExpCard c={featured} size="lg" />
                 </div>
-                <div className="lg:col-span-5 grid gap-5">
-                  <ExpCard c={second} size="md" />
-                  <ExpCard c={third} size="md" />
+                <div className="lg:col-span-4 h-[300px] lg:h-[520px]">
+                  <ExpCard c={side} size="md" />
                 </div>
               </div>
-              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+              {/* Cards complementares */}
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {rest.map((c) => (
-                  <ExpCard key={c.t} c={c} size="sm" />
+                  <div key={c.t} className="h-[260px]">
+                    <ExpCard c={c} size="sm" />
+                  </div>
                 ))}
               </div>
 
@@ -493,6 +491,7 @@ function Home() {
           </section>
         );
       })()}
+
 
       {/* CLUBE VALEN FIDELIDADE */}
       <section className="relative overflow-hidden bg-secondary text-white py-24 lg:py-28">
@@ -519,34 +518,7 @@ function Home() {
                 Abasteceu? Pontuou.
               </span>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {[
-                  { n: "01", t: "Abasteça", d: "Informe seu CPF no caixa ao abastecer.", icon: Fuel },
-                  { n: "02", t: "Acumule", d: "Seus abastecimentos viram pontos automaticamente.", icon: CreditCard },
-                  { n: "03", t: "Aproveite", d: "Troque seus pontos por benefícios pelo aplicativo.", icon: Gift },
-                ].map((s) => (
-                  <div key={s.n} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm">
-                    <div className="flex items-center gap-2 text-primary">
-                      <s.icon className="h-4 w-4" />
-                      <span className="text-xs font-extrabold tracking-widest">{s.n}</span>
-                    </div>
-                    <h3 className="mt-3 text-base font-display font-bold">{s.t}</h3>
-                    <p className="mt-1.5 text-sm text-white/70 leading-relaxed">{s.d}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                {clube.google_play_url && (
-                  <a href={clube.google_play_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-secondary hover:scale-105 transition-transform">
-                    <Smartphone className="h-4 w-4" /> Google Play
-                  </a>
-                )}
-                {clube.app_store_url && (
-                  <a href={clube.app_store_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-secondary hover:scale-105 transition-transform">
-                    <Smartphone className="h-4 w-4" /> App Store
-                  </a>
-                )}
+              <div className="mt-10">
                 <Link to="/clube-valen-fidelidade" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold backdrop-blur hover:bg-white/20 transition-colors">
                   Conheça o Clube Valen <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -557,22 +529,15 @@ function Home() {
             <div className="relative order-first lg:order-last">
               <div className="relative mx-auto max-w-md">
                 <div className="absolute inset-0 m-auto h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-gradient-orange opacity-90 blur-[2px]" aria-hidden />
-                <div className="relative flex items-end justify-center gap-0">
-                  <Img
-                    src={appTelasAsset.url}
-                    alt="Telas do aplicativo Clube Valen Fidelidade"
-                    sizes="(max-width: 1024px) 60vw, 340px"
-                    className="w-[58%] translate-y-4 -rotate-6 drop-shadow-2xl"
-                  />
-                  <Img
-                    src={celularAsset.url}
-                    alt="Aplicativo Clube Valen Fidelidade no celular"
-                    sizes="(max-width: 1024px) 55vw, 300px"
-                    className="w-[52%] -ml-8 drop-shadow-2xl"
-                  />
-                </div>
+                <Img
+                  src={appTelasAsset.url}
+                  alt="Telas do aplicativo Clube Valen Fidelidade"
+                  sizes="(max-width: 1024px) 70vw, 420px"
+                  className="relative mx-auto w-[82%] drop-shadow-2xl"
+                />
               </div>
             </div>
+
           </div>
         </div>
       </section>
