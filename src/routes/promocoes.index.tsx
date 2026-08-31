@@ -218,7 +218,10 @@ function Vitrine({ items }: { items: PromoItem[] }) {
                 {items.map((p) => (
                   <div key={p.id} className="min-w-0 flex-[0_0_100%]">
                     <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-secondary md:min-h-[520px]">
-                      <SmartImage src={p.img} alt={p.title} rounded="rounded-none" className="absolute inset-0 h-full w-full" />
+                      <div className="absolute inset-0">
+                        <SmartImage src={p.img} alt={p.title} rounded="rounded-none" className="h-full w-full" />
+                      </div>
+
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-secondary/10" />
                       <div className="relative flex h-full min-h-[420px] flex-col justify-end gap-4 p-7 text-white md:min-h-[520px] md:p-12">
                         <div className="flex flex-wrap items-center gap-2">
