@@ -86,7 +86,7 @@ export function ImageUploadField({
 
       const { error: upErr } = await supabase.storage
         .from("store-images")
-        .upload(path, optimized, { contentType: optimized.type, upsert: false });
+        .upload(path, optimized, { contentType: optimized.type, upsert: false, cacheControl: "31536000" });
       if (upErr) throw upErr;
 
       const { data, error: signErr } = await supabase.storage
