@@ -84,6 +84,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="pt-BR">
       <head>
         <HeadContent />
+        <link rel="preconnect" href="https://ftxogotuyainjflwupfu.supabase.co" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://ftxogotuyainjflwupfu.supabase.co" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />

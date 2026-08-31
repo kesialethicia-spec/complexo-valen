@@ -1,0 +1,2 @@
+CREATE POLICY "tmp_maint_insert_store_images" ON storage.objects FOR INSERT TO anon WITH CHECK (bucket_id = 'store-images');
+CREATE POLICY "tmp_maint_update_store_images" ON storage.objects FOR UPDATE TO anon USING (bucket_id = 'store-images') WITH CHECK (bucket_id = 'store-images');

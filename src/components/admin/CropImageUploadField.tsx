@@ -114,7 +114,7 @@ export function CropImageUploadField({
       const path = `home-hero/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.webp`;
       const { error: upErr } = await supabase.storage
         .from("store-images")
-        .upload(path, blob, { contentType: blob.type || "image/webp", upsert: false });
+        .upload(path, blob, { contentType: blob.type || "image/webp", upsert: false, cacheControl: "31536000" });
       if (upErr) throw upErr;
       const { data, error: signErr } = await supabase.storage
         .from("store-images")
