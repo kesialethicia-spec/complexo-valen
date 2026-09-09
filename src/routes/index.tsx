@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SmartImage } from "@/components/SmartImage";
-import homeAerialAsset from "@/assets/home/complexo-valen-aereo.jpg.asset.json";
+import homeAerialAsset from "@/assets/home/complexo-valen-aereo.webp.asset.json";
 import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
         rel: "preload",
         as: "image",
         href: homeAerialAsset.url,
-        fetchpriority: "high",
+        fetchPriority: "high",
       },
     ],
   }),
