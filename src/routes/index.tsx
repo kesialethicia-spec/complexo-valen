@@ -9,6 +9,8 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { SmartImage } from "@/components/SmartImage";
 import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
 import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
+import complexoAereoAsset from "@/assets/complexo-aereo.jpg.asset.json";
+
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
 import { getHomePageSettings } from "@/lib/home-settings-api";
