@@ -3,11 +3,11 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Fuel, Bed, UtensilsCrossed, Wrench, ShoppingBag, Sparkles,
   ParkingSquare, MapPin, ArrowRight, Tag, Newspaper, Coffee,
-  Heart, Users, Baby, Mic, Calendar, Smartphone,
+  Heart, Users, Baby, Mic, Calendar, Smartphone, Truck, Handshake,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SmartImage } from "@/components/SmartImage";
-import mascotesAsset from "@/assets/tinos-novos.png.asset.json";
+import homeAerialAsset from "@/assets/home/complexo-valen-aereo.webp.asset.json";
 import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
 
 import { listActivePromotions, type PromotionRow } from "@/lib/promotions-api";
@@ -29,10 +29,8 @@ export const Route = createFileRoute("/")({
       {
         rel: "preload",
         as: "image",
-        href: mascotesAsset.url,
-        imagesrcset: RESPONSIVE_IMAGES["tinos-novos.png"]?.srcSet,
-        imagesizes: "(max-width: 1024px) 90vw, 520px",
-        fetchpriority: "high",
+        href: homeAerialAsset.url,
+        fetchPriority: "high",
       },
     ],
   }),
@@ -100,70 +98,62 @@ function Home() {
         onMouseLeave={() => setPaused(false)}
       >
         {/* Slide institucional */}
-        <div className={slideIdx === 0 ? "block relative" : "hidden"}>
+        <div className={slideIdx === 0 ? "relative flex min-h-[650px] flex-col justify-end md:min-h-[690px] lg:min-h-[720px]" : "hidden"}>
           <div className="absolute inset-0 overflow-hidden bg-secondary">
-            {(heroBgDesktop || heroBgMobile) && (
-              <picture>
-                {heroBgMobile && (
-                  <source media="(max-width: 767px)" srcSet={heroBgMobile} />
-                )}
-                <Img
-                  src={heroBgDesktop || heroBgMobile}
-                  alt=""
-                  aria-hidden="true"
-                  fetchPriority="high"
-                  className="h-full w-full object-cover"
-                  width={1920}
-                  height={1080}
-                />
-              </picture>
-            )}
-            {/* Overlay azul escuro — mantém legibilidade e deixa a foto visível */}
-            <div className="absolute inset-0 bg-secondary/75" />
-            <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary/40 to-secondary/70" />
+            <picture>
+              {heroBgMobile && <source media="(max-width: 767px)" srcSet={heroBgMobile} />}
+              <Img
+                src={heroBgDesktop || homeAerialAsset.url}
+                alt="Vista aérea do Complexo Valen, com pátios, caminhões e estruturas de atendimento"
+                fetchPriority="high"
+                sizes="100vw"
+                className="h-full w-full object-cover object-center"
+                width={1365}
+                height={768}
+              />
+            </picture>
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-secondary/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary/65 via-transparent to-secondary/20" />
           </div>
-          <div className="absolute -bottom-32 -left-20 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute top-20 right-10 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
 
+          <div className="container-valen relative z-10 flex flex-1 items-center py-14 md:py-16 lg:py-20">
+            <div className="max-w-4xl pt-3 md:pt-0">
+              <div className="mb-6 h-1 w-16 bg-primary md:mb-8" />
+              <h1 className="font-display text-[2.5rem] font-extrabold uppercase leading-[1.05] text-secondary-foreground sm:text-5xl md:text-6xl lg:text-7xl animate-fade-up">
+                <span className="block">O maior complexo</span>
+                <span className="mt-1 block text-primary">logístico da América Latina.</span>
+              </h1>
+              <div className="mt-8 flex flex-wrap gap-3 md:mt-10">
+                <Link to="/o-valen" className="inline-flex items-center gap-2 rounded-md bg-gradient-orange px-6 py-3.5 text-sm font-bold uppercase text-primary-foreground shadow-glow transition-transform hover:scale-[1.03] md:px-8 md:py-4">
+                  Conheça o complexo <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-secondary-foreground/25 bg-secondary/35 px-6 py-3.5 text-sm font-semibold text-secondary-foreground backdrop-blur-md transition-colors hover:bg-secondary/55 md:px-8 md:py-4">
+                  <MapPin className="h-4 w-4" /> Como chegar
+                </a>
+              </div>
+            </div>
+          </div>
 
-          <div className="container-valen relative py-20 md:py-28 lg:py-32">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-              <div className="relative z-10 text-center lg:text-left">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/90">
-                  <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> Complexo Valen · São Luís/MA
-                </span>
-                <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[0.95] tracking-tight text-balance animate-fade-up">
-                  Somos feitos<br />
-                  de <span className="text-primary">movimento.</span>
-                </h1>
-                <p className="mt-6 max-w-xl mx-auto lg:mx-0 text-lg md:text-xl text-white/85 leading-relaxed">
-                  Mais do que uma parada, o Valen é um ponto de apoio para quem está em movimento. Um complexo completo para caminhoneiros, empresas e pessoas que seguem em rota.
-                </p>
-                <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
-                  <Link to="/o-valen" className="inline-flex items-center gap-2 rounded-full bg-gradient-orange px-7 py-4 text-base font-bold shadow-glow hover:scale-105 transition-transform">
-                    Conheça o complexo <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <a href="https://maps.app.goo.gl/cKXrF3HYv5ypB9aU6" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-7 py-4 text-base font-semibold hover:bg-white/20">
-                    <MapPin className="h-4 w-4" /> Como chegar
-                  </a>
+          <div className="relative z-10 border-t border-secondary-foreground/15 bg-secondary/90 backdrop-blur-md">
+            <div className="container-valen grid grid-cols-2 md:grid-cols-4">
+              {[
+                { icon: Fuel, label: "Posto de abastecimento" },
+                { icon: Truck, label: "Pátios de triagens e estacionamento" },
+                { icon: Bed, label: "Hotel" },
+                { icon: Handshake, label: "Hub de negócios para o motorista" },
+              ].map((item, index) => (
+                <div
+                  key={item.label}
+                  className={`flex min-h-24 items-center gap-3 py-5 md:min-h-28 md:gap-4 md:px-6 lg:px-8 ${
+                    index % 2 === 0 ? "pr-3" : "border-l border-secondary-foreground/10 pl-3"
+                  } ${index > 1 ? "border-t border-secondary-foreground/10 md:border-t-0" : ""} ${index > 0 ? "md:border-l md:border-secondary-foreground/10" : ""}`}
+                >
+                  <item.icon className="h-7 w-7 shrink-0 text-primary md:h-8 md:w-8" strokeWidth={1.6} />
+                  <span className="text-xs font-semibold leading-snug text-secondary-foreground sm:text-sm lg:text-base">
+                    {item.label}
+                  </span>
                 </div>
-              </div>
-
-              <div className="relative mx-auto w-full max-w-[520px] aspect-square">
-                <div className="absolute inset-[-6%] rounded-full border-2 border-primary/30" />
-                <div className="absolute inset-[-14%] rounded-full border border-primary/20" />
-                <div className="absolute inset-[-22%] rounded-full border border-primary/10" />
-                <div className="absolute inset-[6%] rounded-full bg-gradient-to-br from-primary to-primary/70 shadow-glow" />
-                <Img
-                  src={mascotesAsset.url}
-                  alt="Tino e Tina, mascotes do Complexo Valen"
-                  fetchPriority="high"
-                  sizes="(max-width: 1024px) 90vw, 520px"
-                  className="absolute inset-0 h-full w-full object-contain object-center drop-shadow-2xl animate-fade-up p-2"
-                  width={1320}
-                  height={1380}
-                />
-              </div>
+              ))}
             </div>
           </div>
         </div>
