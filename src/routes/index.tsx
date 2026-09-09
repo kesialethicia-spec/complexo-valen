@@ -273,6 +273,36 @@ function Home() {
         </div>
       </section>
 
+      {/* BANNER INSTITUCIONAL — GRANDEZA DO COMPLEXO */}
+      <section className="relative isolate overflow-hidden bg-secondary text-white">
+        <Img
+          src={complexoAereoAsset.url}
+          alt="Vista aérea do Complexo Valen com posto de abastecimento, pátios de triagem, estacionamento de caminhões e hotel"
+          className="absolute inset-0 h-full w-full object-cover"
+          sizes="100vw"
+          width={1366}
+          height={768}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/80 to-secondary/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-transparent to-secondary/50" />
+        <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl" />
+
+        <div className="container-valen relative py-24 md:py-32 lg:py-40">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] backdrop-blur-sm">
+            Complexo Valen
+          </span>
+          <h2 className="mt-6 max-w-4xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-7xl">
+            O MAIOR COMPLEXO{" "}
+            <span className="text-primary">LOGÍSTICO DA AMÉRICA LATINA.</span>
+          </h2>
+          <div className="mt-8 h-1 w-24 rounded-full bg-gradient-orange" />
+          <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+            Posto de abastecimento • Pátios de triagem e estacionamento • Hotel • Hub de negócios para o motorista.
+          </p>
+        </div>
+      </section>
+
+
       {/* PROMOÇÕES carrossel */}
       <section className="py-24 bg-surface relative overflow-hidden">
         <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
