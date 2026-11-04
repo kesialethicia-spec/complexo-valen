@@ -45,7 +45,7 @@ export const Route = createFileRoute("/promocoes/$slug")({
   errorComponent: ({ error }) => (
     <div className="container-valen py-20 text-center">
       <h1 className="text-2xl font-display font-bold">Erro ao carregar promoção</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
       <Link to="/promocoes" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground">
         <ArrowLeft className="h-4 w-4" /> Voltar
       </Link>
