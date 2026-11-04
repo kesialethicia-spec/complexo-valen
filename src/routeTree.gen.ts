@@ -9,106 +9,66 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
-import { Route as OValenRouteImport } from './routes/o-valen'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as ExperienciasRouteImport } from './routes/experiencias'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as ConecteSeRouteImport } from './routes/conecte-se'
-import { Route as ClubeValenFidelidadeRouteImport } from './routes/clube-valen-fidelidade'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
-import { Route as PromocoesIndexRouteImport } from './routes/promocoes.index'
-import { Route as LojasIndexRouteImport } from './routes/lojas.index'
-import { Route as BlogDoCaminhoneiroIndexRouteImport } from './routes/blog-do-caminhoneiro.index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ClubeValenFidelidadeRouteImport } from './routes/clube-valen-fidelidade'
+import { Route as ConecteSeRouteImport } from './routes/conecte-se'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ExperienciasRouteImport } from './routes/experiencias'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as OValenRouteImport } from './routes/o-valen'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as ServicosValenlubRouteImport } from './routes/servicos.valenlub'
-import { Route as ServicosValenlogRouteImport } from './routes/servicos.valenlog'
-import { Route as ServicosValenbenSuperTrocaDeOleoRouteImport } from './routes/servicos.valenben-super-troca-de-oleo'
-import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
-import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
-import { Route as ServicosPostoValenRouteImport } from './routes/servicos.posto-valen'
-import { Route as ServicosMercadoRouteImport } from './routes/servicos.mercado'
-import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
-import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
-import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
-import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
-import { Route as BlogDoCaminhoneiroSlugRouteImport } from './routes/blog-do-caminhoneiro.$slug'
-import { Route as AdminTruckCentersRouteImport } from './routes/admin.truck-centers'
-import { Route as AdminPaginaValenlubRouteImport } from './routes/admin.pagina-valenlub'
-import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-valenlog'
-import { Route as AdminPaginaValenbenRouteImport } from './routes/admin.pagina-valenben'
-import { Route as AdminPaginaPostoRouteImport } from './routes/admin.pagina-posto'
-import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-valen'
-import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
-import { Route as AdminPaginaHomeRouteImport } from './routes/admin.pagina-home'
-import { Route as AdminPaginaExperienciasRouteImport } from './routes/admin.pagina-experiencias'
 import { Route as AdminClubeValenRouteImport } from './routes/admin.clube-valen'
-import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
-import { Route as AdminServicosIndexRouteImport } from './routes/admin.servicos.index'
-import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
-import { Route as AdminMercadosIndexRouteImport } from './routes/admin.mercados.index'
-import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
+import { Route as AdminPaginaExperienciasRouteImport } from './routes/admin.pagina-experiencias'
+import { Route as AdminPaginaHomeRouteImport } from './routes/admin.pagina-home'
+import { Route as AdminPaginaHotelRouteImport } from './routes/admin.pagina-hotel'
+import { Route as AdminPaginaOValenRouteImport } from './routes/admin.pagina-o-valen'
+import { Route as AdminPaginaPostoRouteImport } from './routes/admin.pagina-posto'
+import { Route as AdminPaginaValenbenRouteImport } from './routes/admin.pagina-valenben'
+import { Route as AdminPaginaValenlogRouteImport } from './routes/admin.pagina-valenlog'
+import { Route as AdminPaginaValenlubRouteImport } from './routes/admin.pagina-valenlub'
+import { Route as AdminTruckCentersRouteImport } from './routes/admin.truck-centers'
+import { Route as BlogDoCaminhoneiroIndexRouteImport } from './routes/blog-do-caminhoneiro.index'
+import { Route as BlogDoCaminhoneiroSlugRouteImport } from './routes/blog-do-caminhoneiro.$slug'
+import { Route as LojasIndexRouteImport } from './routes/lojas.index'
+import { Route as LojasSlugRouteImport } from './routes/lojas.$slug'
+import { Route as PromocoesIndexRouteImport } from './routes/promocoes.index'
+import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
+import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
+import { Route as ServicosAlimentacaoRouteImport } from './routes/servicos.alimentacao'
+import { Route as ServicosClubeDoCaminhoneiroRouteImport } from './routes/servicos.clube-do-caminhoneiro'
+import { Route as ServicosMercadoRouteImport } from './routes/servicos.mercado'
+import { Route as ServicosPostoValenRouteImport } from './routes/servicos.posto-valen'
+import { Route as ServicosTruckCenterRouteImport } from './routes/servicos.truck-center'
+import { Route as ServicosValenPortoHotelRouteImport } from './routes/servicos.valen-porto-hotel'
+import { Route as ServicosValenbenSuperTrocaDeOleoRouteImport } from './routes/servicos.valenben-super-troca-de-oleo'
+import { Route as ServicosValenlogRouteImport } from './routes/servicos.valenlog'
+import { Route as ServicosValenlubRouteImport } from './routes/servicos.valenlub'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin.blog.index'
-import { Route as AdminVideosNovoRouteImport } from './routes/admin.videos.novo'
-import { Route as AdminVideosIdRouteImport } from './routes/admin.videos.$id'
-import { Route as AdminServicosNovoRouteImport } from './routes/admin.servicos.novo'
-import { Route as AdminServicosIdRouteImport } from './routes/admin.servicos.$id'
-import { Route as AdminPromocoesNovoRouteImport } from './routes/admin.promocoes.novo'
-import { Route as AdminPromocoesIdRouteImport } from './routes/admin.promocoes.$id'
-import { Route as AdminMercadosNovoRouteImport } from './routes/admin.mercados.novo'
-import { Route as AdminMercadosIdRouteImport } from './routes/admin.mercados.$id'
-import { Route as AdminLojasNovoRouteImport } from './routes/admin.lojas.novo'
-import { Route as AdminLojasIdRouteImport } from './routes/admin.lojas.$id'
-import { Route as AdminBlogNovoRouteImport } from './routes/admin.blog.novo'
 import { Route as AdminBlogIdRouteImport } from './routes/admin.blog.$id'
+import { Route as AdminBlogNovoRouteImport } from './routes/admin.blog.novo'
+import { Route as AdminLojasIndexRouteImport } from './routes/admin.lojas.index'
+import { Route as AdminLojasIdRouteImport } from './routes/admin.lojas.$id'
+import { Route as AdminLojasNovoRouteImport } from './routes/admin.lojas.novo'
+import { Route as AdminMercadosIndexRouteImport } from './routes/admin.mercados.index'
+import { Route as AdminMercadosIdRouteImport } from './routes/admin.mercados.$id'
+import { Route as AdminMercadosNovoRouteImport } from './routes/admin.mercados.novo'
+import { Route as AdminPromocoesIndexRouteImport } from './routes/admin.promocoes.index'
+import { Route as AdminPromocoesIdRouteImport } from './routes/admin.promocoes.$id'
+import { Route as AdminPromocoesNovoRouteImport } from './routes/admin.promocoes.novo'
+import { Route as AdminServicosIndexRouteImport } from './routes/admin.servicos.index'
+import { Route as AdminServicosIdRouteImport } from './routes/admin.servicos.$id'
+import { Route as AdminServicosNovoRouteImport } from './routes/admin.servicos.novo'
+import { Route as AdminVideosIndexRouteImport } from './routes/admin.videos.index'
+import { Route as AdminVideosIdRouteImport } from './routes/admin.videos.$id'
+import { Route as AdminVideosNovoRouteImport } from './routes/admin.videos.novo'
 
-const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
-  id: '/termos-de-uso',
-  path: '/termos-de-uso',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
-  id: '/politica-de-privacidade',
-  path: '/politica-de-privacidade',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OValenRoute = OValenRouteImport.update({
-  id: '/o-valen',
-  path: '/o-valen',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExperienciasRoute = ExperienciasRouteImport.update({
-  id: '/experiencias',
-  path: '/experiencias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConecteSeRoute = ConecteSeRouteImport.update({
-  id: '/conecte-se',
-  path: '/conecte-se',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ClubeValenFidelidadeRoute = ClubeValenFidelidadeRouteImport.update({
-  id: '/clube-valen-fidelidade',
-  path: '/clube-valen-fidelidade',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -116,29 +76,49 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ClubeValenFidelidadeRoute = ClubeValenFidelidadeRouteImport.update({
+  id: '/clube-valen-fidelidade',
+  path: '/clube-valen-fidelidade',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicosIndexRoute = ServicosIndexRouteImport.update({
-  id: '/servicos/',
-  path: '/servicos/',
+const ConecteSeRoute = ConecteSeRouteImport.update({
+  id: '/conecte-se',
+  path: '/conecte-se',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PromocoesIndexRoute = PromocoesIndexRouteImport.update({
-  id: '/promocoes/',
-  path: '/promocoes/',
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LojasIndexRoute = LojasIndexRouteImport.update({
-  id: '/lojas/',
-  path: '/lojas/',
+const ExperienciasRoute = ExperienciasRouteImport.update({
+  id: '/experiencias',
+  path: '/experiencias',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogDoCaminhoneiroIndexRoute = BlogDoCaminhoneiroIndexRouteImport.update({
-  id: '/blog-do-caminhoneiro/',
-  path: '/blog-do-caminhoneiro/',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OValenRoute = OValenRouteImport.update({
+  id: '/o-valen',
+  path: '/o-valen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
+  id: '/termos-de-uso',
+  path: '/termos-de-uso',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -146,40 +126,94 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const ServicosValenlubRoute = ServicosValenlubRouteImport.update({
-  id: '/servicos/valenlub',
-  path: '/servicos/valenlub',
+const AdminClubeValenRoute = AdminClubeValenRouteImport.update({
+  id: '/clube-valen',
+  path: '/clube-valen',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaExperienciasRoute = AdminPaginaExperienciasRouteImport.update({
+  id: '/pagina-experiencias',
+  path: '/pagina-experiencias',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaHomeRoute = AdminPaginaHomeRouteImport.update({
+  id: '/pagina-home',
+  path: '/pagina-home',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaHotelRoute = AdminPaginaHotelRouteImport.update({
+  id: '/pagina-hotel',
+  path: '/pagina-hotel',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaOValenRoute = AdminPaginaOValenRouteImport.update({
+  id: '/pagina-o-valen',
+  path: '/pagina-o-valen',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaPostoRoute = AdminPaginaPostoRouteImport.update({
+  id: '/pagina-posto',
+  path: '/pagina-posto',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaValenbenRoute = AdminPaginaValenbenRouteImport.update({
+  id: '/pagina-valenben',
+  path: '/pagina-valenben',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaValenlogRoute = AdminPaginaValenlogRouteImport.update({
+  id: '/pagina-valenlog',
+  path: '/pagina-valenlog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginaValenlubRoute = AdminPaginaValenlubRouteImport.update({
+  id: '/pagina-valenlub',
+  path: '/pagina-valenlub',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTruckCentersRoute = AdminTruckCentersRouteImport.update({
+  id: '/truck-centers',
+  path: '/truck-centers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const BlogDoCaminhoneiroIndexRoute = BlogDoCaminhoneiroIndexRouteImport.update({
+  id: '/blog-do-caminhoneiro/',
+  path: '/blog-do-caminhoneiro/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicosValenlogRoute = ServicosValenlogRouteImport.update({
-  id: '/servicos/valenlog',
-  path: '/servicos/valenlog',
+const BlogDoCaminhoneiroSlugRoute = BlogDoCaminhoneiroSlugRouteImport.update({
+  id: '/blog-do-caminhoneiro/$slug',
+  path: '/blog-do-caminhoneiro/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicosValenbenSuperTrocaDeOleoRoute =
-  ServicosValenbenSuperTrocaDeOleoRouteImport.update({
-    id: '/servicos/valenben-super-troca-de-oleo',
-    path: '/servicos/valenben-super-troca-de-oleo',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicosValenPortoHotelRoute = ServicosValenPortoHotelRouteImport.update({
-  id: '/servicos/valen-porto-hotel',
-  path: '/servicos/valen-porto-hotel',
+const LojasIndexRoute = LojasIndexRouteImport.update({
+  id: '/lojas/',
+  path: '/lojas/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
-  id: '/servicos/truck-center',
-  path: '/servicos/truck-center',
+const LojasSlugRoute = LojasSlugRouteImport.update({
+  id: '/lojas/$slug',
+  path: '/lojas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicosPostoValenRoute = ServicosPostoValenRouteImport.update({
-  id: '/servicos/posto-valen',
-  path: '/servicos/posto-valen',
+const PromocoesIndexRoute = PromocoesIndexRouteImport.update({
+  id: '/promocoes/',
+  path: '/promocoes/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicosMercadoRoute = ServicosMercadoRouteImport.update({
-  id: '/servicos/mercado',
-  path: '/servicos/mercado',
+const PromocoesSlugRoute = PromocoesSlugRouteImport.update({
+  id: '/promocoes/$slug',
+  path: '/promocoes/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/servicos/',
+  path: '/servicos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosAlimentacaoRoute = ServicosAlimentacaoRouteImport.update({
+  id: '/servicos/alimentacao',
+  path: '/servicos/alimentacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosClubeDoCaminhoneiroRoute =
@@ -188,154 +222,50 @@ const ServicosClubeDoCaminhoneiroRoute =
     path: '/servicos/clube-do-caminhoneiro',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ServicosAlimentacaoRoute = ServicosAlimentacaoRouteImport.update({
-  id: '/servicos/alimentacao',
-  path: '/servicos/alimentacao',
+const ServicosMercadoRoute = ServicosMercadoRouteImport.update({
+  id: '/servicos/mercado',
+  path: '/servicos/mercado',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PromocoesSlugRoute = PromocoesSlugRouteImport.update({
-  id: '/promocoes/$slug',
-  path: '/promocoes/$slug',
+const ServicosPostoValenRoute = ServicosPostoValenRouteImport.update({
+  id: '/servicos/posto-valen',
+  path: '/servicos/posto-valen',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LojasSlugRoute = LojasSlugRouteImport.update({
-  id: '/lojas/$slug',
-  path: '/lojas/$slug',
+const ServicosTruckCenterRoute = ServicosTruckCenterRouteImport.update({
+  id: '/servicos/truck-center',
+  path: '/servicos/truck-center',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogDoCaminhoneiroSlugRoute = BlogDoCaminhoneiroSlugRouteImport.update({
-  id: '/blog-do-caminhoneiro/$slug',
-  path: '/blog-do-caminhoneiro/$slug',
+const ServicosValenPortoHotelRoute = ServicosValenPortoHotelRouteImport.update({
+  id: '/servicos/valen-porto-hotel',
+  path: '/servicos/valen-porto-hotel',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminTruckCentersRoute = AdminTruckCentersRouteImport.update({
-  id: '/truck-centers',
-  path: '/truck-centers',
-  getParentRoute: () => AdminRoute,
+const ServicosValenbenSuperTrocaDeOleoRoute =
+  ServicosValenbenSuperTrocaDeOleoRouteImport.update({
+    id: '/servicos/valenben-super-troca-de-oleo',
+    path: '/servicos/valenben-super-troca-de-oleo',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicosValenlogRoute = ServicosValenlogRouteImport.update({
+  id: '/servicos/valenlog',
+  path: '/servicos/valenlog',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AdminPaginaValenlubRoute = AdminPaginaValenlubRouteImport.update({
-  id: '/pagina-valenlub',
-  path: '/pagina-valenlub',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginaValenlogRoute = AdminPaginaValenlogRouteImport.update({
-  id: '/pagina-valenlog',
-  path: '/pagina-valenlog',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginaValenbenRoute = AdminPaginaValenbenRouteImport.update({
-  id: '/pagina-valenben',
-  path: '/pagina-valenben',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginaPostoRoute = AdminPaginaPostoRouteImport.update({
-  id: '/pagina-posto',
-  path: '/pagina-posto',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginaOValenRoute = AdminPaginaOValenRouteImport.update({
-  id: '/pagina-o-valen',
-  path: '/pagina-o-valen',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginaHotelRoute = AdminPaginaHotelRouteImport.update({
-  id: '/pagina-hotel',
-  path: '/pagina-hotel',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginaHomeRoute = AdminPaginaHomeRouteImport.update({
-  id: '/pagina-home',
-  path: '/pagina-home',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginaExperienciasRoute = AdminPaginaExperienciasRouteImport.update({
-  id: '/pagina-experiencias',
-  path: '/pagina-experiencias',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminClubeValenRoute = AdminClubeValenRouteImport.update({
-  id: '/clube-valen',
-  path: '/clube-valen',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
-  id: '/videos/',
-  path: '/videos/',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminServicosIndexRoute = AdminServicosIndexRouteImport.update({
-  id: '/servicos/',
-  path: '/servicos/',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPromocoesIndexRoute = AdminPromocoesIndexRouteImport.update({
-  id: '/promocoes/',
-  path: '/promocoes/',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMercadosIndexRoute = AdminMercadosIndexRouteImport.update({
-  id: '/mercados/',
-  path: '/mercados/',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLojasIndexRoute = AdminLojasIndexRouteImport.update({
-  id: '/lojas/',
-  path: '/lojas/',
-  getParentRoute: () => AdminRoute,
+const ServicosValenlubRoute = ServicosValenlubRouteImport.update({
+  id: '/servicos/valenlub',
+  path: '/servicos/valenlub',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminBlogIndexRoute = AdminBlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminVideosNovoRoute = AdminVideosNovoRouteImport.update({
-  id: '/videos/novo',
-  path: '/videos/novo',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminVideosIdRoute = AdminVideosIdRouteImport.update({
-  id: '/videos/$id',
-  path: '/videos/$id',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminServicosNovoRoute = AdminServicosNovoRouteImport.update({
-  id: '/servicos/novo',
-  path: '/servicos/novo',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminServicosIdRoute = AdminServicosIdRouteImport.update({
-  id: '/servicos/$id',
-  path: '/servicos/$id',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPromocoesNovoRoute = AdminPromocoesNovoRouteImport.update({
-  id: '/promocoes/novo',
-  path: '/promocoes/novo',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPromocoesIdRoute = AdminPromocoesIdRouteImport.update({
-  id: '/promocoes/$id',
-  path: '/promocoes/$id',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMercadosNovoRoute = AdminMercadosNovoRouteImport.update({
-  id: '/mercados/novo',
-  path: '/mercados/novo',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMercadosIdRoute = AdminMercadosIdRouteImport.update({
-  id: '/mercados/$id',
-  path: '/mercados/$id',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLojasNovoRoute = AdminLojasNovoRouteImport.update({
-  id: '/lojas/novo',
-  path: '/lojas/novo',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLojasIdRoute = AdminLojasIdRouteImport.update({
-  id: '/lojas/$id',
-  path: '/lojas/$id',
+const AdminBlogIdRoute = AdminBlogIdRouteImport.update({
+  id: '/blog/$id',
+  path: '/blog/$id',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminBlogNovoRoute = AdminBlogNovoRouteImport.update({
@@ -343,9 +273,79 @@ const AdminBlogNovoRoute = AdminBlogNovoRouteImport.update({
   path: '/blog/novo',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminBlogIdRoute = AdminBlogIdRouteImport.update({
-  id: '/blog/$id',
-  path: '/blog/$id',
+const AdminLojasIndexRoute = AdminLojasIndexRouteImport.update({
+  id: '/lojas/',
+  path: '/lojas/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLojasIdRoute = AdminLojasIdRouteImport.update({
+  id: '/lojas/$id',
+  path: '/lojas/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLojasNovoRoute = AdminLojasNovoRouteImport.update({
+  id: '/lojas/novo',
+  path: '/lojas/novo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMercadosIndexRoute = AdminMercadosIndexRouteImport.update({
+  id: '/mercados/',
+  path: '/mercados/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMercadosIdRoute = AdminMercadosIdRouteImport.update({
+  id: '/mercados/$id',
+  path: '/mercados/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMercadosNovoRoute = AdminMercadosNovoRouteImport.update({
+  id: '/mercados/novo',
+  path: '/mercados/novo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPromocoesIndexRoute = AdminPromocoesIndexRouteImport.update({
+  id: '/promocoes/',
+  path: '/promocoes/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPromocoesIdRoute = AdminPromocoesIdRouteImport.update({
+  id: '/promocoes/$id',
+  path: '/promocoes/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPromocoesNovoRoute = AdminPromocoesNovoRouteImport.update({
+  id: '/promocoes/novo',
+  path: '/promocoes/novo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicosIndexRoute = AdminServicosIndexRouteImport.update({
+  id: '/servicos/',
+  path: '/servicos/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicosIdRoute = AdminServicosIdRouteImport.update({
+  id: '/servicos/$id',
+  path: '/servicos/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicosNovoRoute = AdminServicosNovoRouteImport.update({
+  id: '/servicos/novo',
+  path: '/servicos/novo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminVideosIndexRoute = AdminVideosIndexRouteImport.update({
+  id: '/videos/',
+  path: '/videos/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminVideosIdRoute = AdminVideosIdRouteImport.update({
+  id: '/videos/$id',
+  path: '/videos/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminVideosNovoRoute = AdminVideosNovoRouteImport.update({
+  id: '/videos/novo',
+  path: '/videos/novo',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -731,67 +731,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/termos-de-uso': {
-      id: '/termos-de-uso'
-      path: '/termos-de-uso'
-      fullPath: '/termos-de-uso'
-      preLoaderRoute: typeof TermosDeUsoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/politica-de-privacidade': {
-      id: '/politica-de-privacidade'
-      path: '/politica-de-privacidade'
-      fullPath: '/politica-de-privacidade'
-      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/o-valen': {
-      id: '/o-valen'
-      path: '/o-valen'
-      fullPath: '/o-valen'
-      preLoaderRoute: typeof OValenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/experiencias': {
-      id: '/experiencias'
-      path: '/experiencias'
-      fullPath: '/experiencias'
-      preLoaderRoute: typeof ExperienciasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/conecte-se': {
-      id: '/conecte-se'
-      path: '/conecte-se'
-      fullPath: '/conecte-se'
-      preLoaderRoute: typeof ConecteSeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/clube-valen-fidelidade': {
-      id: '/clube-valen-fidelidade'
-      path: '/clube-valen-fidelidade'
-      fullPath: '/clube-valen-fidelidade'
-      preLoaderRoute: typeof ClubeValenFidelidadeRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -801,39 +745,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/clube-valen-fidelidade': {
+      id: '/clube-valen-fidelidade'
+      path: '/clube-valen-fidelidade'
+      fullPath: '/clube-valen-fidelidade'
+      preLoaderRoute: typeof ClubeValenFidelidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/servicos/': {
-      id: '/servicos/'
-      path: '/servicos'
-      fullPath: '/servicos/'
-      preLoaderRoute: typeof ServicosIndexRouteImport
+    '/conecte-se': {
+      id: '/conecte-se'
+      path: '/conecte-se'
+      fullPath: '/conecte-se'
+      preLoaderRoute: typeof ConecteSeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/promocoes/': {
-      id: '/promocoes/'
-      path: '/promocoes'
-      fullPath: '/promocoes/'
-      preLoaderRoute: typeof PromocoesIndexRouteImport
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lojas/': {
-      id: '/lojas/'
-      path: '/lojas'
-      fullPath: '/lojas/'
-      preLoaderRoute: typeof LojasIndexRouteImport
+    '/experiencias': {
+      id: '/experiencias'
+      path: '/experiencias'
+      fullPath: '/experiencias'
+      preLoaderRoute: typeof ExperienciasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog-do-caminhoneiro/': {
-      id: '/blog-do-caminhoneiro/'
-      path: '/blog-do-caminhoneiro'
-      fullPath: '/blog-do-caminhoneiro/'
-      preLoaderRoute: typeof BlogDoCaminhoneiroIndexRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/o-valen': {
+      id: '/o-valen'
+      path: '/o-valen'
+      fullPath: '/o-valen'
+      preLoaderRoute: typeof OValenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos-de-uso': {
+      id: '/termos-de-uso'
+      path: '/termos-de-uso'
+      fullPath: '/termos-de-uso'
+      preLoaderRoute: typeof TermosDeUsoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -843,144 +815,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/servicos/valenlub': {
-      id: '/servicos/valenlub'
-      path: '/servicos/valenlub'
-      fullPath: '/servicos/valenlub'
-      preLoaderRoute: typeof ServicosValenlubRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/valenlog': {
-      id: '/servicos/valenlog'
-      path: '/servicos/valenlog'
-      fullPath: '/servicos/valenlog'
-      preLoaderRoute: typeof ServicosValenlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/valenben-super-troca-de-oleo': {
-      id: '/servicos/valenben-super-troca-de-oleo'
-      path: '/servicos/valenben-super-troca-de-oleo'
-      fullPath: '/servicos/valenben-super-troca-de-oleo'
-      preLoaderRoute: typeof ServicosValenbenSuperTrocaDeOleoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/valen-porto-hotel': {
-      id: '/servicos/valen-porto-hotel'
-      path: '/servicos/valen-porto-hotel'
-      fullPath: '/servicos/valen-porto-hotel'
-      preLoaderRoute: typeof ServicosValenPortoHotelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/truck-center': {
-      id: '/servicos/truck-center'
-      path: '/servicos/truck-center'
-      fullPath: '/servicos/truck-center'
-      preLoaderRoute: typeof ServicosTruckCenterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/posto-valen': {
-      id: '/servicos/posto-valen'
-      path: '/servicos/posto-valen'
-      fullPath: '/servicos/posto-valen'
-      preLoaderRoute: typeof ServicosPostoValenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/mercado': {
-      id: '/servicos/mercado'
-      path: '/servicos/mercado'
-      fullPath: '/servicos/mercado'
-      preLoaderRoute: typeof ServicosMercadoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/clube-do-caminhoneiro': {
-      id: '/servicos/clube-do-caminhoneiro'
-      path: '/servicos/clube-do-caminhoneiro'
-      fullPath: '/servicos/clube-do-caminhoneiro'
-      preLoaderRoute: typeof ServicosClubeDoCaminhoneiroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos/alimentacao': {
-      id: '/servicos/alimentacao'
-      path: '/servicos/alimentacao'
-      fullPath: '/servicos/alimentacao'
-      preLoaderRoute: typeof ServicosAlimentacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/promocoes/$slug': {
-      id: '/promocoes/$slug'
-      path: '/promocoes/$slug'
-      fullPath: '/promocoes/$slug'
-      preLoaderRoute: typeof PromocoesSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lojas/$slug': {
-      id: '/lojas/$slug'
-      path: '/lojas/$slug'
-      fullPath: '/lojas/$slug'
-      preLoaderRoute: typeof LojasSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog-do-caminhoneiro/$slug': {
-      id: '/blog-do-caminhoneiro/$slug'
-      path: '/blog-do-caminhoneiro/$slug'
-      fullPath: '/blog-do-caminhoneiro/$slug'
-      preLoaderRoute: typeof BlogDoCaminhoneiroSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/truck-centers': {
-      id: '/admin/truck-centers'
-      path: '/truck-centers'
-      fullPath: '/admin/truck-centers'
-      preLoaderRoute: typeof AdminTruckCentersRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pagina-valenlub': {
-      id: '/admin/pagina-valenlub'
-      path: '/pagina-valenlub'
-      fullPath: '/admin/pagina-valenlub'
-      preLoaderRoute: typeof AdminPaginaValenlubRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pagina-valenlog': {
-      id: '/admin/pagina-valenlog'
-      path: '/pagina-valenlog'
-      fullPath: '/admin/pagina-valenlog'
-      preLoaderRoute: typeof AdminPaginaValenlogRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pagina-valenben': {
-      id: '/admin/pagina-valenben'
-      path: '/pagina-valenben'
-      fullPath: '/admin/pagina-valenben'
-      preLoaderRoute: typeof AdminPaginaValenbenRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pagina-posto': {
-      id: '/admin/pagina-posto'
-      path: '/pagina-posto'
-      fullPath: '/admin/pagina-posto'
-      preLoaderRoute: typeof AdminPaginaPostoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pagina-o-valen': {
-      id: '/admin/pagina-o-valen'
-      path: '/pagina-o-valen'
-      fullPath: '/admin/pagina-o-valen'
-      preLoaderRoute: typeof AdminPaginaOValenRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pagina-hotel': {
-      id: '/admin/pagina-hotel'
-      path: '/pagina-hotel'
-      fullPath: '/admin/pagina-hotel'
-      preLoaderRoute: typeof AdminPaginaHotelRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pagina-home': {
-      id: '/admin/pagina-home'
-      path: '/pagina-home'
-      fullPath: '/admin/pagina-home'
-      preLoaderRoute: typeof AdminPaginaHomeRouteImport
+    '/admin/clube-valen': {
+      id: '/admin/clube-valen'
+      path: '/clube-valen'
+      fullPath: '/admin/clube-valen'
+      preLoaderRoute: typeof AdminClubeValenRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/pagina-experiencias': {
@@ -990,47 +829,173 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPaginaExperienciasRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/clube-valen': {
-      id: '/admin/clube-valen'
-      path: '/clube-valen'
-      fullPath: '/admin/clube-valen'
-      preLoaderRoute: typeof AdminClubeValenRouteImport
+    '/admin/pagina-home': {
+      id: '/admin/pagina-home'
+      path: '/pagina-home'
+      fullPath: '/admin/pagina-home'
+      preLoaderRoute: typeof AdminPaginaHomeRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/videos/': {
-      id: '/admin/videos/'
-      path: '/videos'
-      fullPath: '/admin/videos/'
-      preLoaderRoute: typeof AdminVideosIndexRouteImport
+    '/admin/pagina-hotel': {
+      id: '/admin/pagina-hotel'
+      path: '/pagina-hotel'
+      fullPath: '/admin/pagina-hotel'
+      preLoaderRoute: typeof AdminPaginaHotelRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/servicos/': {
-      id: '/admin/servicos/'
-      path: '/servicos'
-      fullPath: '/admin/servicos/'
-      preLoaderRoute: typeof AdminServicosIndexRouteImport
+    '/admin/pagina-o-valen': {
+      id: '/admin/pagina-o-valen'
+      path: '/pagina-o-valen'
+      fullPath: '/admin/pagina-o-valen'
+      preLoaderRoute: typeof AdminPaginaOValenRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/promocoes/': {
-      id: '/admin/promocoes/'
-      path: '/promocoes'
-      fullPath: '/admin/promocoes/'
-      preLoaderRoute: typeof AdminPromocoesIndexRouteImport
+    '/admin/pagina-posto': {
+      id: '/admin/pagina-posto'
+      path: '/pagina-posto'
+      fullPath: '/admin/pagina-posto'
+      preLoaderRoute: typeof AdminPaginaPostoRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/mercados/': {
-      id: '/admin/mercados/'
-      path: '/mercados'
-      fullPath: '/admin/mercados/'
-      preLoaderRoute: typeof AdminMercadosIndexRouteImport
+    '/admin/pagina-valenben': {
+      id: '/admin/pagina-valenben'
+      path: '/pagina-valenben'
+      fullPath: '/admin/pagina-valenben'
+      preLoaderRoute: typeof AdminPaginaValenbenRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/lojas/': {
-      id: '/admin/lojas/'
+    '/admin/pagina-valenlog': {
+      id: '/admin/pagina-valenlog'
+      path: '/pagina-valenlog'
+      fullPath: '/admin/pagina-valenlog'
+      preLoaderRoute: typeof AdminPaginaValenlogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pagina-valenlub': {
+      id: '/admin/pagina-valenlub'
+      path: '/pagina-valenlub'
+      fullPath: '/admin/pagina-valenlub'
+      preLoaderRoute: typeof AdminPaginaValenlubRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/truck-centers': {
+      id: '/admin/truck-centers'
+      path: '/truck-centers'
+      fullPath: '/admin/truck-centers'
+      preLoaderRoute: typeof AdminTruckCentersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/blog-do-caminhoneiro/': {
+      id: '/blog-do-caminhoneiro/'
+      path: '/blog-do-caminhoneiro'
+      fullPath: '/blog-do-caminhoneiro/'
+      preLoaderRoute: typeof BlogDoCaminhoneiroIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog-do-caminhoneiro/$slug': {
+      id: '/blog-do-caminhoneiro/$slug'
+      path: '/blog-do-caminhoneiro/$slug'
+      fullPath: '/blog-do-caminhoneiro/$slug'
+      preLoaderRoute: typeof BlogDoCaminhoneiroSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lojas/': {
+      id: '/lojas/'
       path: '/lojas'
-      fullPath: '/admin/lojas/'
-      preLoaderRoute: typeof AdminLojasIndexRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/lojas/'
+      preLoaderRoute: typeof LojasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lojas/$slug': {
+      id: '/lojas/$slug'
+      path: '/lojas/$slug'
+      fullPath: '/lojas/$slug'
+      preLoaderRoute: typeof LojasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/promocoes/': {
+      id: '/promocoes/'
+      path: '/promocoes'
+      fullPath: '/promocoes/'
+      preLoaderRoute: typeof PromocoesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/promocoes/$slug': {
+      id: '/promocoes/$slug'
+      path: '/promocoes/$slug'
+      fullPath: '/promocoes/$slug'
+      preLoaderRoute: typeof PromocoesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/servicos'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/alimentacao': {
+      id: '/servicos/alimentacao'
+      path: '/servicos/alimentacao'
+      fullPath: '/servicos/alimentacao'
+      preLoaderRoute: typeof ServicosAlimentacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/clube-do-caminhoneiro': {
+      id: '/servicos/clube-do-caminhoneiro'
+      path: '/servicos/clube-do-caminhoneiro'
+      fullPath: '/servicos/clube-do-caminhoneiro'
+      preLoaderRoute: typeof ServicosClubeDoCaminhoneiroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/mercado': {
+      id: '/servicos/mercado'
+      path: '/servicos/mercado'
+      fullPath: '/servicos/mercado'
+      preLoaderRoute: typeof ServicosMercadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/posto-valen': {
+      id: '/servicos/posto-valen'
+      path: '/servicos/posto-valen'
+      fullPath: '/servicos/posto-valen'
+      preLoaderRoute: typeof ServicosPostoValenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/truck-center': {
+      id: '/servicos/truck-center'
+      path: '/servicos/truck-center'
+      fullPath: '/servicos/truck-center'
+      preLoaderRoute: typeof ServicosTruckCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/valen-porto-hotel': {
+      id: '/servicos/valen-porto-hotel'
+      path: '/servicos/valen-porto-hotel'
+      fullPath: '/servicos/valen-porto-hotel'
+      preLoaderRoute: typeof ServicosValenPortoHotelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/valenben-super-troca-de-oleo': {
+      id: '/servicos/valenben-super-troca-de-oleo'
+      path: '/servicos/valenben-super-troca-de-oleo'
+      fullPath: '/servicos/valenben-super-troca-de-oleo'
+      preLoaderRoute: typeof ServicosValenbenSuperTrocaDeOleoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/valenlog': {
+      id: '/servicos/valenlog'
+      path: '/servicos/valenlog'
+      fullPath: '/servicos/valenlog'
+      preLoaderRoute: typeof ServicosValenlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/valenlub': {
+      id: '/servicos/valenlub'
+      path: '/servicos/valenlub'
+      fullPath: '/servicos/valenlub'
+      preLoaderRoute: typeof ServicosValenlubRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/blog/': {
       id: '/admin/blog/'
@@ -1039,74 +1004,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBlogIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/videos/novo': {
-      id: '/admin/videos/novo'
-      path: '/videos/novo'
-      fullPath: '/admin/videos/novo'
-      preLoaderRoute: typeof AdminVideosNovoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/videos/$id': {
-      id: '/admin/videos/$id'
-      path: '/videos/$id'
-      fullPath: '/admin/videos/$id'
-      preLoaderRoute: typeof AdminVideosIdRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/servicos/novo': {
-      id: '/admin/servicos/novo'
-      path: '/servicos/novo'
-      fullPath: '/admin/servicos/novo'
-      preLoaderRoute: typeof AdminServicosNovoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/servicos/$id': {
-      id: '/admin/servicos/$id'
-      path: '/servicos/$id'
-      fullPath: '/admin/servicos/$id'
-      preLoaderRoute: typeof AdminServicosIdRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/promocoes/novo': {
-      id: '/admin/promocoes/novo'
-      path: '/promocoes/novo'
-      fullPath: '/admin/promocoes/novo'
-      preLoaderRoute: typeof AdminPromocoesNovoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/promocoes/$id': {
-      id: '/admin/promocoes/$id'
-      path: '/promocoes/$id'
-      fullPath: '/admin/promocoes/$id'
-      preLoaderRoute: typeof AdminPromocoesIdRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/mercados/novo': {
-      id: '/admin/mercados/novo'
-      path: '/mercados/novo'
-      fullPath: '/admin/mercados/novo'
-      preLoaderRoute: typeof AdminMercadosNovoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/mercados/$id': {
-      id: '/admin/mercados/$id'
-      path: '/mercados/$id'
-      fullPath: '/admin/mercados/$id'
-      preLoaderRoute: typeof AdminMercadosIdRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/lojas/novo': {
-      id: '/admin/lojas/novo'
-      path: '/lojas/novo'
-      fullPath: '/admin/lojas/novo'
-      preLoaderRoute: typeof AdminLojasNovoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/lojas/$id': {
-      id: '/admin/lojas/$id'
-      path: '/lojas/$id'
-      fullPath: '/admin/lojas/$id'
-      preLoaderRoute: typeof AdminLojasIdRouteImport
+    '/admin/blog/$id': {
+      id: '/admin/blog/$id'
+      path: '/blog/$id'
+      fullPath: '/admin/blog/$id'
+      preLoaderRoute: typeof AdminBlogIdRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/blog/novo': {
@@ -1116,11 +1018,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBlogNovoRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/blog/$id': {
-      id: '/admin/blog/$id'
-      path: '/blog/$id'
-      fullPath: '/admin/blog/$id'
-      preLoaderRoute: typeof AdminBlogIdRouteImport
+    '/admin/lojas/': {
+      id: '/admin/lojas/'
+      path: '/lojas'
+      fullPath: '/admin/lojas/'
+      preLoaderRoute: typeof AdminLojasIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/lojas/$id': {
+      id: '/admin/lojas/$id'
+      path: '/lojas/$id'
+      fullPath: '/admin/lojas/$id'
+      preLoaderRoute: typeof AdminLojasIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/lojas/novo': {
+      id: '/admin/lojas/novo'
+      path: '/lojas/novo'
+      fullPath: '/admin/lojas/novo'
+      preLoaderRoute: typeof AdminLojasNovoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/mercados/': {
+      id: '/admin/mercados/'
+      path: '/mercados'
+      fullPath: '/admin/mercados/'
+      preLoaderRoute: typeof AdminMercadosIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/mercados/$id': {
+      id: '/admin/mercados/$id'
+      path: '/mercados/$id'
+      fullPath: '/admin/mercados/$id'
+      preLoaderRoute: typeof AdminMercadosIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/mercados/novo': {
+      id: '/admin/mercados/novo'
+      path: '/mercados/novo'
+      fullPath: '/admin/mercados/novo'
+      preLoaderRoute: typeof AdminMercadosNovoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/promocoes/': {
+      id: '/admin/promocoes/'
+      path: '/promocoes'
+      fullPath: '/admin/promocoes/'
+      preLoaderRoute: typeof AdminPromocoesIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/promocoes/$id': {
+      id: '/admin/promocoes/$id'
+      path: '/promocoes/$id'
+      fullPath: '/admin/promocoes/$id'
+      preLoaderRoute: typeof AdminPromocoesIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/promocoes/novo': {
+      id: '/admin/promocoes/novo'
+      path: '/promocoes/novo'
+      fullPath: '/admin/promocoes/novo'
+      preLoaderRoute: typeof AdminPromocoesNovoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/servicos/': {
+      id: '/admin/servicos/'
+      path: '/servicos'
+      fullPath: '/admin/servicos/'
+      preLoaderRoute: typeof AdminServicosIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/servicos/$id': {
+      id: '/admin/servicos/$id'
+      path: '/servicos/$id'
+      fullPath: '/admin/servicos/$id'
+      preLoaderRoute: typeof AdminServicosIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/servicos/novo': {
+      id: '/admin/servicos/novo'
+      path: '/servicos/novo'
+      fullPath: '/admin/servicos/novo'
+      preLoaderRoute: typeof AdminServicosNovoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/videos/': {
+      id: '/admin/videos/'
+      path: '/videos'
+      fullPath: '/admin/videos/'
+      preLoaderRoute: typeof AdminVideosIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/videos/$id': {
+      id: '/admin/videos/$id'
+      path: '/videos/$id'
+      fullPath: '/admin/videos/$id'
+      preLoaderRoute: typeof AdminVideosIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/videos/novo': {
+      id: '/admin/videos/novo'
+      path: '/videos/novo'
+      fullPath: '/admin/videos/novo'
+      preLoaderRoute: typeof AdminVideosNovoRouteImport
       parentRoute: typeof AdminRoute
     }
   }
