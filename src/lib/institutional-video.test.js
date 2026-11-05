@@ -8,20 +8,20 @@ describe("institutional video tracking", () => {
     expect(videoEventParameters("o_valen").pagina).toBe("o_valen");
   });
   test("does not fire for loading, thumbnail, pause or buffering", () => {
-    const calls: unknown[][] = [];
+    const calls = [];
     const track = createVideoPlayTracker("home", () => true, (...args) => calls.push(args));
     [-1, 0, 2, 3, 5].forEach(track);
     expect(calls.length).toBe(0);
   });
   test("fires once on effective play, not again after pause and resume", () => {
-    const calls: unknown[][] = [];
+    const calls = [];
     const track = createVideoPlayTracker("home", () => true, (...args) => calls.push(args));
     [1, 2, 1, 3, 1].forEach(track);
     expect(calls).toEqual([["event", "play_video_institucional", videoEventParameters("home")]]);
   });
   test("denied analytics never emits even if consent changes during the same playback", () => {
     let allowed = false;
-    const calls: unknown[][] = [];
+    const calls = [];
     const track = createVideoPlayTracker("o_valen", () => allowed, (...args) => calls.push(args));
     track(1); allowed = true; track(2); track(1);
     expect(calls.length).toBe(0);
