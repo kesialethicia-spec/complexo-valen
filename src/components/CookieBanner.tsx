@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { CONSENT_CHANGED_EVENT } from "@/lib/video-consent";
 
 const STORAGE_KEY = "valen-cookie-consent-v1";
 
@@ -58,6 +59,7 @@ export function CookieBanner() {
       marketing: m,
       timestamp: new Date().toISOString(),
     });
+    window.dispatchEvent(new Event(CONSENT_CHANGED_EVENT));
     setVisible(false);
     setSettingsOpen(false);
   };
