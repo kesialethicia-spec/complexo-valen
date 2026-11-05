@@ -6,6 +6,7 @@ import {
   Heart, Users, Baby, Mic, Calendar, Smartphone, Truck, Handshake,
 } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
+import { InstitutionalVideo } from "@/components/InstitutionalVideo";
 import { SmartImage } from "@/components/SmartImage";
 import homeAerialAsset from "@/assets/home/complexo-valen-aereo.webp.asset.json";
 import appTelasAsset from "@/assets/clube/app-telas.png.asset.json";
@@ -24,6 +25,10 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Complexo Valen — Somos feitos de movimento | São Luís/MA" },
       { name: "description", content: "Parada completa em São Luís: posto, truck center, hotel, alimentação, lojas, eventos e experiências para quem vive em movimento." },
+      { property: "og:title", content: "Complexo Valen — Somos feitos de movimento | São Luís/MA" },
+      { property: "og:description", content: "Conheça o Complexo Valen, sua estrutura e história no vídeo institucional oficial." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
@@ -262,6 +267,8 @@ function Home() {
 
         </div>
       </section>
+
+      <InstitutionalVideo pagina="home" />
 
       {/* PROMOÇÕES carrossel */}
       <section className="py-24 bg-surface relative overflow-hidden">

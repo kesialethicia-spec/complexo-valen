@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
+import { InstitutionalVideo } from "@/components/InstitutionalVideo";
 import {
   Lightbulb,
   ShieldCheck,
@@ -50,6 +51,10 @@ export const Route = createFileRoute("/o-valen")({
         content:
           "Conheça o Complexo Valen: estrutura, propósito, história, experiências e o cuidado com quem vive na estrada.",
       },
+      { property: "og:title", content: "O Valen — Complexo em movimento | São Luís/MA" },
+      { property: "og:description", content: "Conheça a estrutura, o propósito e a história do Complexo Valen no vídeo institucional oficial." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: OValen,
@@ -151,6 +156,8 @@ function OValen() {
           </div>
         </div>
       </section>
+
+      <InstitutionalVideo pagina="o_valen" />
 
       {/* Nosso propósito maior */}
       <section className="py-24 bg-surface">

@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { VideoAnalytics } from "@/components/VideoAnalytics";
 import { AuthProvider } from "@/hooks/use-auth";
 
 function NotFoundComponent() {
@@ -62,8 +63,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Complexo Valen — Somos feitos de movimento | São Luís/MA" },
       { name: "twitter:description", content: "Parada completa em São Luís: posto, truck center, hotel, alimentação, lojas, eventos e experiências para quem vive em movimento." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5f381d6c-5ebd-42a4-8d94-e6c08da8fbff" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5f381d6c-5ebd-42a4-8d94-e6c08da8fbff" },
       { name: "google-site-verification", content: "R5LVizppFghDDyG45ZwEMtZK4GnqeY0PAJPqYDezBWw" },
     ],
     links: [
@@ -112,6 +111,7 @@ function RootComponent() {
           <Footer />
         </div>
         <CookieBanner />
+        <VideoAnalytics />
       </AuthProvider>
     </QueryClientProvider>
   );
